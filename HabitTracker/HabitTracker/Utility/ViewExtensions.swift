@@ -1,0 +1,112 @@
+//
+//  ViewExtensions.swift
+//  HabitTracker
+//
+//  Created by 施炎培 on 2023/5/16.
+//
+
+import Foundation
+import SwiftUI
+
+extension View {
+    func glow(color: Color = .orange, radius: CGFloat = 20) -> some View {
+        self
+            .shadow(color: color, radius: radius)
+            //.shadow(color: color, radius: radius / 3)
+            //.shadow(color: color, radius: radius / 3)
+    }
+    func innerShadow<S: Shape>(using shape: S, angle: Angle = .degrees(45), color: Color = .black, width: CGFloat = 3, blur: CGFloat = 1) -> some View {
+        let finalX = CGFloat(cos(angle.radians - .pi / 2))
+        let finalY = CGFloat(sin(angle.radians - .pi / 2))
+        return self
+            .overlay(
+                shape
+                    .stroke(color, lineWidth: width)
+                    .offset(x: finalX * width * 0.6, y: finalY * width * 0.6)
+                    .blur(radius: blur)
+                    .mask(shape)
+            )
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+}
+
+struct RoundedCorner: Shape {
+
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
+/*
+extension UIColor {
+    /**
+     Create a ligher color
+     */
+    func lighter(by percentage: CGFloat = 30.0) -> UIColor {
+        return self.adjustBrightness(by: abs(percentage))
+    }
+    
+    /**
+     Create a darker color
+     */
+    func darker(by percentage: CGFloat = 30.0) -> UIColor {
+        return self.adjustBrightness(by: -abs(percentage))
+    }
+    
+    /**
+     Try to increase brightness or decrease saturation
+     */
+
+     func adjustBrightness(by percentage: CGFloat = 30.0) -> UIColor {
+     var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+     if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
+     if b < 1.0 {
+     /**
+      Below is the new part, which makes the code work with black as well as colors
+      */
+     let newB: CGFloat
+     if b == 0.0 {
+     newB = max(min(b + percentage/100, 1.0), 0.0)
+     } else {
+     newB = max(min(b + (percentage/100.0)*b, 1.0), 0,0)
+     }
+     return UIColor(hue: h, saturation: s, brightness: newB, alpha: a)
+     } else {
+     let newS: CGFloat = min(max(s - (percentage/100.0)*s, 0.0), 1.0)
+     return UIColor(hue: h, saturation: newS, brightness: b, alpha: a)
+     }
+     }
+     return self
+     }
+     }
+     */
+extension UIColor {
+
+    func lighter(by percentage: CGFloat = 30.0) -> UIColor {
+        return self.adjust(by: abs(percentage) )
+    }
+
+    func darker(by percentage: CGFloat = 30.0) -> UIColor {
+        return self.adjust(by: -1 * abs(percentage) )
+    }
+
+    func adjust(by percentage: CGFloat = 30.0) -> UIColor {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            return UIColor(red: min(red + percentage/100, 1.0),
+                           green: min(green + percentage/100, 1.0),
+                           blue: min(blue + percentage/100, 1.0),
+                           alpha: alpha)
+        } else {
+            return UIColor()
+        }
+    }
+}
