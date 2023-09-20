@@ -1,0 +1,219 @@
+//
+//  TopDateSwipeBarView.swift
+//  HabitTracker
+//
+//  Created by 施炎培 on 2023/5/13.
+//
+
+import SwiftUI
+
+
+class dateListManager: ObservableObject {
+    static var shared = dateListManager()
+    let viewModel: HabitTrackerViewModel
+    var dates: [Date]
+    
+    init() {
+        self.viewModel = HabitTrackerViewModel.shared
+        let date = viewModel.getStartDate()
+        dates = [viewModel.getStartDate()]
+        for i in 1...400 {
+            dates.append((Calendar.current.date(byAdding: .day, value: i, to: date)!))
+        }
+        print("restarted here")
+    }
+    
+    func forceUpdate() {
+        objectWillChange.send()
+    }
+    func addMoreDates() {
+        let date = dates.last!
+        for i in 1...7 {
+            dates.append((Calendar.current.date(byAdding: .day, value: i, to: date)!))
+        }
+        print(dates)
+        forceUpdate()
+    }
+    
+}
+
+
+
+struct DateSwipeBar : View {
+    @StateObject var viewModel : HabitTrackerViewModel = HabitTrackerViewModel.shared
+    @StateObject var dateListMgr = dateListManager.shared
+    @State var chosenDate = HabitTrackerViewModel.shared.getTodayDate()
+    @State var loaded = false
+    
+    
+   
+   /*
+    init(viewModel: habitTrackerViewModel) {
+        self.viewModel = viewModel
+        if dates.isEmpty {
+            var res = [Date]()
+            var date = viewModel.getStartDate() // first date
+            let endDate = Calendar.current.date(byAdding: .day, value: 4, to: viewModel.getTodayDate())! // last date
+            while date <= endDate {
+                date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+                res.append(date)
+            }
+            dates = res
+            
+        }
+    }
+*/
+    
+    private func isToday(_ date: Date) -> Bool {
+        fmt.string(from: viewModel.getTodayDate()) == fmt.string(from: date)
+    }
+    
+    private func isYesterday(_ date: Date) -> Bool {
+        if let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: viewModel.getTodayDate()) {
+            return fmt.string(from: yesterday) == fmt.string(from: date)
+        }
+        return false
+    }
+    
+    private func isTomorrow(_ date: Date) -> Bool {
+        if let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: viewModel.getTodayDate()) {
+            return fmt.string(from: tomorrow) == fmt.string(from: date)
+        }
+        return false
+    }
+   
+    private func isThisYear(_ date: Date) -> Bool {
+        return fmt3.string(from: viewModel.getTodayDate()) == fmt3.string(from: date)
+    }
+    
+    private func getTopDateText(_ date: Date) -> String {
+        if(isToday(date)) {
+            return "Today"
+        }
+        if(isYesterday(date)) {
+            return "Yesterday"
+        }
+        if(isTomorrow(date)) {
+            return "Tomorrow"
+        }
+        if(isThisYear(date)) {
+            return fmt4.string(from: date)
+        }
+        return fmt5.string(from: date)
+    }
+        
+    var body : some View {
+            VStack{
+                HStack{
+                    Button(action: {viewModel.showCreateForm.toggle()}) {
+                        Text("-").font(.system(size: 16, weight: .heavy, design: .rounded))
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 6.0)
+                    .background(.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                    .shadow(color: Color("Shadow"), radius: 2, x: 0, y: 0)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15).stroke(.white.opacity(0.6), lineWidth: 1).offset(y :1).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 15))
+                    )
+                    .padding(.horizontal)
+                    Spacer()
+                    Text("\(getTopDateText(chosenDate))").font(.system(size: 16, weight: .heavy, design: .rounded))
+                    Spacer()
+                    Button(action: {viewModel.showCreateForm.toggle()}) {
+                        Text("+").font(.system(size: 16, weight: .heavy, design: .rounded))
+                            .padding(.horizontal)
+                            .padding(.vertical, 6.0)
+                            .background(.regularMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                            .shadow(color: Color("Shadow"), radius: 2, x: 0, y: 0)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15).stroke(.white.opacity(1), lineWidth: 1).offset(y :1).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 15))
+                            )
+                            .padding(.horizontal)
+                    }
+                    .sheet(isPresented: $viewModel.showCreateForm){
+                        BottomSheetView{CreateHabitForm(viewModel: viewModel)}
+                    }
+                }.foregroundColor(.primary.opacity(0.6))
+                if loaded {
+                    ScrollViewReader { v in
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            LazyHStack(spacing: -7) {
+                                ForEach(dateListMgr.dates, id: \.self) {date in
+                                    let isToday = fmt.string(from: date) == fmt.string(from: viewModel.getTodayDate())
+                                    VStack(spacing: 0.0){
+                                        Text("\(fmt1.string(from: date))").font(.system(size: 16, weight: isToday ? .heavy : .bold, design: .rounded))
+                                        Text("\(fmt2.string(from: date))").font(.system(size: 16, weight: isToday ? .regular : .light, design: .rounded))
+                                    }.foregroundColor(isToday ? .primary.opacity(0.6) : .secondary)
+                                    .padding()
+                                    .background {
+                                        /*
+                                         fmt.string(from: date) == fmt.string(from: viewModel.getTodayDate())
+                                         */
+                                        if fmt.string(from: date) == fmt.string(from: chosenDate) {
+                                            withAnimation(){
+                                                RoundedRectangle(cornerRadius: 20, style: .circular).fill(.pink.opacity(0.15)).shadow(color: .black.opacity(0.5), radius: 5)
+                                            }
+                                        }
+                                    }
+                                    .frame(height: 50)
+                                    .onAppear(){
+                                        let idx: Int = dateListMgr.dates.count - 2
+                                        if idx >= 0 {
+                                            let last = dateListMgr.dates[idx]
+                                            if(fmt.string(from: last) == fmt.string(from: date)) {
+                                                dateListMgr.addMoreDates()
+                                             }
+                                        } else if let last = dateListMgr.dates.last {
+                                            print("this is last\(last)")
+                                            print("this is last\(date)")
+                                            if(fmt.string(from: last) == fmt.string(from: date)) {
+                                                dateListMgr.addMoreDates()
+                                             }
+                                        }
+                                    }
+                                    .onTapGesture {
+                                        let x = date.startOfWeek()
+                                        let y = date.endOfWeek()
+                                        print("dsdsddsede\(fmt5.string(from: x))")
+                                        print("dsdsddsede\(fmt6.string(from: x))")
+                                        print("dsdsddsede\(fmt5.string(from: y))")
+                                        print("dsdsddsede\(fmt6.string(from: y))")
+                                        //print("animation2")
+                                        withAnimation(){
+                                            v.scrollTo(date, anchor: .center)
+                                            chosenDate = date
+                                            viewModel.selectDate(date: date)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .frame(maxHeight: 90)
+                        .onAppear{
+                            v.scrollTo(viewModel.getTodayDate(), anchor: .center)
+                            print("sypppfdfsfsfdfdfs1")
+                        }
+                        .onDisappear{
+                            print("kdskfmslkfslkfsmklfmms")
+                        }
+                    }
+                }
+                else {
+                    HStack{}.frame(height: 90).task {
+                        loaded = true
+                    }
+                }
+            }
+    }
+    
+}
+
+struct DateSwipeView_Previews: PreviewProvider {
+    static let overalViewModel = HabitTrackerViewModel()
+    static var previews: some View {
+        //let overalViewModel = habitTrackerViewModel()
+        RootView(viewModel : overalViewModel).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
+}

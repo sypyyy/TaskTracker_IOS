@@ -9,7 +9,8 @@ import SwiftUI
 import CoreData
 
 
-struct ContentView: View {
+
+struct RootView: View {
     //@Environment(\.managedObjectContext) private var viewContext
 /*
     @FetchRequest(
@@ -18,27 +19,34 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
  */
     //custom added code
+    
+    init(viewModel: habitTrackerViewModel){
+        self.viewModel = viewModel
+        print("fjksjfjs")
+    }
     @ObservedObject var viewModel : habitTrackerViewModel
-    @Environment(\.scenePhase) var scenePhase
-    @State private var tabIndex : Int = 1
+    //@Environment(\.scenePhase) var scenePhase
+    @State private var tabIndex: Int = 1
+    @State private var zoomBg: Bool = true
+    @State private var blurEverything: Bool = false
     //Controls the create form
     let pub = NotificationCenter.default
         .publisher(for: NSNotification.Name.NSCalendarDayChanged)
-    
     //static let gradientStart = Color(red: 251.0 / 255, green: 231.0 / 255, blue: 223.0 / 255)
     //static let gradientEnd = Color(red: 239.0 / 255, green: 120.0 / 255, blue: 160.0 / 255)
     var body: some View {
+        ZStack{
             ZStack{
-                SwiftUIViewForDrawTest(tabIndex: $tabIndex)
+                DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg)
                     //.ignoresSafeArea(edges: [.bottom,.top])
                     .zIndex(0)
                 
                 VStack(spacing: 0){
                     VStack{
+                        DateSwipeBar(viewModel: viewModel)
                         if tabIndex == 1 {
-                                DateSwipeBar(viewModel: viewModel)
                                 //.transition(.slide)
-                                TaskListView(viewModel: viewModel)
+                            TaskListView(viewModel: viewModel)
                                 //.transition(.slide)
                         }
                         if tabIndex == 2 {
@@ -55,19 +63,22 @@ struct ContentView: View {
                     Divider()
                     //Bottom Tab View
                     HStack{
-                        Button{tabIndex = 1} label: {Text("habits")}
+                        Button{tabIndex = 1
+                            zoomBg = true} label: {Text("habits")}
                         Button{tabIndex = 2
-                            print("fjkhrdjks")
+                            zoomBg = false
                         } label: {Text("check in")}
                     }
                     .frame(idealWidth: .infinity, maxWidth: .infinity)
                     .padding()
                     .frame(height: 88)
-                    .background(Color(red: 230 / 255, green: 230 / 255, blue: 230.0 / 255).opacity(0.2))
+                    .background(tabIndex == 1 ? Color(red: 239.0 / 255, green: 172.0 / 255, blue: 120.0 / 255).opacity(0.6) : Color(red: 235.0 / 255, green: 235.0 / 255, blue: 235.0 / 255).opacity(0.6))
                     
-                    //.background(.ultraThinMaterial)
-                    //.cornerRadius(34, corners: [.topLeft, .topRight])
+                    .background(.ultraThinMaterial)
                     .frame(alignment: .bottom)
+                    .animation(.easeInOut(duration: 1.0), value: tabIndex)
+                    //.cornerRadius(40, corners: [.topLeft, .topRight])
+                    //.shadow(color: Color("Shadow"), radius: 5, x: 0, y: 1)
                     
                 }.zIndex(1)
                 .ignoresSafeArea(edges: [.bottom])
@@ -75,9 +86,10 @@ struct ContentView: View {
                     print("received")
                     viewModel.refreshDate()
                 }
-                     
-            }
-            /*.onChange(of: scenePhase) { scenePhase in
+            }.blur(radius: blurEverything ? 3.0 : 0.0)
+            PopupView().zIndex(2)
+        }.animation(.easeInOut(duration: 0.4), value: tabIndex)
+                        /*.onChange(of: scenePhase) { scenePhase in
         switch scenePhase {
             case .active: print("ScenePhase: active")
             case .background: print("ScenePhase: background")
@@ -123,10 +135,14 @@ struct ContentView: View {
 
 
 
+
+
+
 struct ContentView_Previews: PreviewProvider {
     static let overalViewModel = habitTrackerViewModel()
     static var previews: some View {
         //let overalViewModel = habitTrackerViewModel()
-        ContentView(viewModel : overalViewModel)//.environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        RootView(viewModel : overalViewModel)//.environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+
