@@ -88,25 +88,76 @@ extension UIColor {
      }
      }
      */
-extension UIColor {
 
-    func lighter(by percentage: CGFloat = 30.0) -> UIColor {
-        return self.adjust(by: abs(percentage) )
-    }
 
-    func darker(by percentage: CGFloat = 30.0) -> UIColor {
-        return self.adjust(by: -1 * abs(percentage) )
-    }
 
-    func adjust(by percentage: CGFloat = 30.0) -> UIColor {
-        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
-        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
-            return UIColor(red: min(red + percentage/100, 1.0),
-                           green: min(green + percentage/100, 1.0),
-                           blue: min(blue + percentage/100, 1.0),
-                           alpha: alpha)
-        } else {
-            return UIColor()
-        }
+extension Button {
+    func buttonHorizontal() -> some View {
+        return self.padding()
+            //.background(Color(UIColor(gradientStart1).darker(by: 0)))
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+            .shadow(color: Color("Shadow").opacity(0.3), radius: 2, x: 0, y: 0)
+            .padding(.horizontal, 4.0)
+            
     }
 }
+/*
+extension HStack {
+    func buttonHorizontal() -> some View {
+        return self.padding()
+            .background(Color(UIColor(gradientStart1).darker(by: 0)))
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+            .shadow(color: Color("Shadow").opacity(0.3), radius: 2, x: 0, y: 0)
+            .padding(.horizontal, 4.0)
+    }
+}
+*/
+
+enum ButtonColor {
+    case main, gray
+}
+
+struct CommonButtonProto<Content: View>: View {
+    var content: () -> Content
+    var body: some View {
+        content()
+    }
+}
+
+//常用按钮， main为主题颜色，gray为模糊白色
+extension View {
+    func buttonHorizontal(color: ButtonColor = .main) -> some View {
+        var bgColor: Color
+        var bgMaterial: Material
+        switch color {
+        case .main:
+            bgColor = backgroundGradientStart
+            bgMaterial = .ultraThinMaterial
+        case .gray:
+            bgColor = .clear
+            bgMaterial = .thickMaterial
+        }
+        return self.padding()
+                .background(bgColor)
+                .background(bgMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 33, style: .continuous))
+                .shadow(color: Color("Shadow").opacity(0.3), radius: 2, x: 0, y: 0)
+                .padding(.horizontal, 4.0)
+    }
+}
+
+extension View {
+    func smallerButtonHorizontal() -> some View {
+        return self//.padding(.horizontal, 4.0)
+            .background(Color(UIColor(backgroundGradientStart).darker(by: 0)))
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+            .shadow(color: Color("Shadow").opacity(0.3), radius: 2, x: 0, y: 0)
+            .padding(.horizontal, 4.0)
+    }
+}
+
+
+

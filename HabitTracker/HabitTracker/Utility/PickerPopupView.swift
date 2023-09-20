@@ -9,86 +9,92 @@ import Foundation
 import SwiftUI
 
 struct numberPickerPopupView: View {
+    let title: String
+    let minimum: Int
     @Binding var number: Int
     @State var disableSavebtn = false
     var onDoneDidTap: (Int) -> Void
     var body: some View {
         ZStack {
-            VStack {
-                Picker("", selection: $number){
-                    ForEach(1...999, id: \.self) { i in
-                        Text("\(i)").tag(i)
+                VStack(spacing: 0) {
+                    Text("\(title)").padding(.top, 20).font(.system(size: 20, weight: .medium, design: .rounded))
+                    Picker("", selection: $number){
+                        ForEach(minimum...999, id: \.self) { i in
+                            Text("\(i)").tag(i)
+                        }
                     }
-                }
-                .clipped()
-                .pickerStyle(WheelPickerStyle())
-                Divider()
-                HStack{
-                    Spacer()
-                    Text("Done")
-                    Spacer()
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    if !disableSavebtn {
+                    .clipped()
+                    .pickerStyle(WheelPickerStyle())
+                    Divider()
+                    Button (action:{if !disableSavebtn {
                         onDoneDidTap(number)
                         disableSavebtn = true
-                    }
+                    }}){
+                            HStack(alignment: .center){
+                                Spacer()
+                                Text("Done").fontWeight(.medium)
+                                Spacer()
+                            }
+                            .padding(.top, 12)
+                            .padding(.bottom, 15)
+                        }
                 }
-                //.frame(width: 200)
-                .padding(.bottom)
+                .background(.thinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                .padding(.horizontal, 30)
             }
-            .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
-            .padding(.horizontal)
-        }
     }
 }
 
 struct timePickerPopupView: View {
+    let title: String
     @Binding var hour: Int
     @Binding var minute: Int
     @State var disableSavebtn = false
     var onDoneDidTap: (Int, Int) -> Void
     var body: some View {
-        VStack {
-            HStack{
-                Picker("", selection: $hour){
-                    ForEach(0..<24, id: \.self) { i in
-                        Text("\(i) hours").tag(i)
-                            
+        VStack(spacing: 0) {
+            VStack(spacing: 0) {
+                Text("\(title)").padding(.top, 20).font(.system(size: 20, weight: .medium, design: .rounded))
+                HStack{
+                    Picker("", selection: $hour){
+                        ForEach(0..<24, id: \.self) { i in
+                            Text("\(i) hours").tag(i)
+                        }
                     }
-                }
-                .frame(width: 120)
-                //.compositingGroup()
-                .clipped()
-                .pickerStyle(WheelPickerStyle())
-                Picker("", selection: $minute){
-                    ForEach(0..<60, id: \.self) { i in
-                        Text("\(i) min").tag(i)
+                    .frame(width: 120)
+                    //.compositingGroup()
+                    .clipped()
+                    .pickerStyle(WheelPickerStyle())
+                    Picker("", selection: $minute){
+                        ForEach(0..<60, id: \.self) { i in
+                            Text("\(i) min").tag(i)
+                        }
                     }
+                    .frame(width: 120)
+                    //.compositingGroup()
+                    .clipped()
+                    .pickerStyle(WheelPickerStyle())
                 }
-                .frame(width: 120)
-                //.compositingGroup()
-                .clipped()
-                .pickerStyle(WheelPickerStyle())
             }
+            .frame(maxWidth: .infinity)
             Divider()
-            HStack{
-                Spacer()
-                Text("Done")
-                Spacer()
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                if !disableSavebtn {
-                    onDoneDidTap(hour, minute)
-                    disableSavebtn = true
+        Button (action:{if !disableSavebtn {
+                onDoneDidTap(hour, minute)
+                disableSavebtn = true
+            }}){
+                HStack(alignment: .center){
+                    Spacer()
+                    Text("Done").fontWeight(.medium)
+                    Spacer()
                 }
-            }.padding(.bottom)
+                .padding(.top, 12)
+                .padding(.bottom, 15)
+            }
         }
-        .background(.ultraThinMaterial)
+        .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
-        .padding(.horizontal)
+        
+        .padding(.horizontal, 30)
     }
 }

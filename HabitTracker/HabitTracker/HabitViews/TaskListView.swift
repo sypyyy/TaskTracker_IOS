@@ -10,13 +10,13 @@ import SwiftUI
 
 
 struct TaskListView : View {
-    @StateObject var viewModel: habitTrackerViewModel = habitTrackerViewModel.shared
-    let cardIdealHeight = 80
-    let cardMaxHeight = 160
+    @StateObject var viewModel: HabitTrackerViewModel = HabitTrackerViewModel.shared
+    let cardIdealHeight = 230
+    let cardMaxHeight = 230
     @State var tappedOne: Int64?
     //@State var thisDayRecords: [Record] = habitTrackerViewModel.shared.get
     
-    init(viewModel: habitTrackerViewModel) {
+    init(viewModel: HabitTrackerViewModel) {
         print("init11111")
         print("syppp\(Date())")
         print("syppp\(Date().startOfWeek())")
@@ -54,7 +54,7 @@ struct TaskListView : View {
                                         //.fixedSize()
                                         
                                         HStack{
-                                            Text("\(habit.cycle)")
+                                            Text("\(habit.cycle.rawValue)")
                                             if habit.type == .number {
                                                 Text("|").font(.system(size: 18, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.6))
                                                 Text("\(habit.numberProgress ?? 0)\(habit.numberTarget == nil ? "" : " / \(habit.numberTarget ?? 0)") \(habit.unit)").font(.system(size: 18, weight: .regular, design: .rounded)).foregroundColor(.primary.opacity(0.6))
@@ -98,8 +98,11 @@ struct TaskListView : View {
                                 
                             }
                                 .padding()
-                                .background(.white.opacity(0.4))
-                                .background(.ultraThinMaterial)
+                                //.background(.white.opacity(0.6))
+                            
+                                .background(
+                                    Color.clear.background(.regularMaterial).environment(\.colorScheme, .light))
+                             
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                                 //.shadow(color: Color("Shadow"), radius: 2, x: 0, y: 1)
                                 .overlay(
@@ -108,7 +111,7 @@ struct TaskListView : View {
                                 .padding()
                                 
                         }
-                    }
+                    }.padding(.bottom, 88)
                     
                 }
             }
@@ -125,7 +128,7 @@ struct editNumberView: View {
  */
 
 struct ContentView_Previews1: PreviewProvider {
-    static let overalViewModel = habitTrackerViewModel()
+    static let overalViewModel = HabitTrackerViewModel()
     
     static var previews: some View {
         //let overalViewModel = habitTrackerViewModel()

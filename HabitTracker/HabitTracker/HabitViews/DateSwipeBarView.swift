@@ -38,11 +38,10 @@ class dateListManager: ObservableObject {
 }
 
 
-
 struct DateSwipeBar : View {
     @StateObject var viewModel : HabitTrackerViewModel = HabitTrackerViewModel.shared
     @StateObject var dateListMgr = dateListManager.shared
-    @State var chosenDate = HabitTrackerViewModel.shared.getTodayDate()
+    @State var chosenDate = HabitTrackerViewModel.shared.selectedDate
     @State var loaded = false
     
     
@@ -106,7 +105,7 @@ struct DateSwipeBar : View {
             VStack{
                 HStack{
                     Button(action: {viewModel.showCreateForm.toggle()}) {
-                        Text("-").font(.system(size: 16, weight: .heavy, design: .rounded))
+                        Text("+").font(.system(size: 16, weight: .heavy, design: .rounded))
                     }
                     .padding(.horizontal)
                     .padding(.vertical, 6.0)
@@ -121,7 +120,7 @@ struct DateSwipeBar : View {
                     Text("\(getTopDateText(chosenDate))").font(.system(size: 16, weight: .heavy, design: .rounded))
                     Spacer()
                     Button(action: {viewModel.showCreateForm.toggle()}) {
-                        Text("+").font(.system(size: 16, weight: .heavy, design: .rounded))
+                        Text("...").font(.system(size: 16, weight: .heavy, design: .rounded))
                             .padding(.horizontal)
                             .padding(.vertical, 6.0)
                             .background(.regularMaterial)
@@ -146,16 +145,21 @@ struct DateSwipeBar : View {
                                         Text("\(fmt1.string(from: date))").font(.system(size: 16, weight: isToday ? .heavy : .bold, design: .rounded))
                                         Text("\(fmt2.string(from: date))").font(.system(size: 16, weight: isToday ? .regular : .light, design: .rounded))
                                     }.foregroundColor(isToday ? .primary.opacity(0.6) : .secondary)
-                                    .padding()
+                                        .padding()
+                                        
                                     .background {
                                         /*
                                          fmt.string(from: date) == fmt.string(from: viewModel.getTodayDate())
                                          */
                                         if fmt.string(from: date) == fmt.string(from: chosenDate) {
-                                            withAnimation(){
-                                                RoundedRectangle(cornerRadius: 20, style: .circular).fill(.pink.opacity(0.15)).shadow(color: .black.opacity(0.5), radius: 5)
-                                            }
+                                            
+                                                RoundedRectangle(cornerRadius: 20, style: .circular)
+                                                .fill(backgroundGradientStart.darker(by: 6))
+                                                    .saturation(1.2)
+                                                    
+                                            
                                         }
+                                        
                                     }
                                     .frame(height: 50)
                                     .onAppear(){
@@ -202,18 +206,81 @@ struct DateSwipeBar : View {
                 }
                 else {
                     HStack{}.frame(height: 90).task {
-                        loaded = true
+                        await loadDates()
                     }
                 }
+                HStack {
+                    /*
+                    HStack{
+                        Text("Habits").foregroundColor(.primary.opacity(0.8)).font(.system(size: 18, weight: .medium, design: .rounded)).padding(.leading)
+                        Text("|")
+                        Text("To-do").padding(.trailing)
+                    }
+                    .frame(height: 40)
+                    .background(.thinMaterial)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                    Spacer()
+                     */
+                    InitialViewCustomSegmentedControl(preselectedIndex: 0, options: ["Habits","Plan"])
+                }
+                
+                
+                
+                .foregroundColor(.primary.opacity(0.4)).font(.system(size: 16, weight: .regular, design: .rounded))
             }
     }
     
 }
+
+
+extension DateSwipeBar {
+    func loadDates() async {
+        Task.detached(priority: .background) { @MainActor in
+            //try await Task.sleep(for: .milliseconds(100))
+            loaded = true
+        }
+    }
+}
+
 
 struct DateSwipeView_Previews: PreviewProvider {
     static let overalViewModel = HabitTrackerViewModel()
     static var previews: some View {
         //let overalViewModel = habitTrackerViewModel()
         RootView(viewModel : overalViewModel).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
+}
+
+struct InitialViewCustomSegmentedControl: View {
+    @State var preselectedIndex: Int = 0
+    var options: [String]
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(options.indices, id:\.self) { index in
+                ZStack {
+                    Rectangle()
+                        .fill(.white.opacity(0.01))
+                        .onTapGesture {
+                            withAnimation(.easeIn(duration: 0.4)) {
+                                preselectedIndex = index
+                            }
+                        }
+                    Rectangle()
+                        .fill(backgroundGradientStart.darker(by: 6).opacity(index == preselectedIndex ? 1 : 0.0))
+                        .saturation(1.2)
+                        .overlay(
+                            Text(options[index]).foregroundColor(.primary.opacity(index == preselectedIndex ? 0.7 : 0.2))
+                        )
+                    
+                }
+            }
+        }
+        .background(.thinMaterial)
+        //.foregroundColor(.primary.opacity(0.4))
+        .fontWeight(.medium)
+        .frame(height: 40)
+        .cornerRadius(10)
+        .padding(.horizontal)
     }
 }

@@ -14,63 +14,94 @@ struct HabitDetailView: View{
         }
     }
     let spacing: CGFloat = 10
-    let viewModel: habitTrackerViewModel = habitTrackerViewModel.shared
+    let viewModel: HabitTrackerViewModel = HabitTrackerViewModel.shared
     var body: some View {
-        VStack{
-            Spacer().frame(height: spacing)
-            Divider()
-            Spacer().frame(height: spacing)
-            if habit.detail != "" {
-                HStack{
-                    Image(systemName: "note.text")
-                    Text("\(habit.detail)").font(.system(size: 18, weight: .regular, design: .rounded))
-                    Spacer()
-                }
-            }
-            Spacer().frame(height: spacing)
-            HStack(spacing: 20.0){
-                if habit.type != .simple {
-                    (modifyButton(systemName: "minus", size: .smaller, color: .gray) ).onTapGesture {
-                        displayPopup(operation: .minus)
-                    }
-                    HabitProgressCircleView(habit: habit).padding(.bottom, 10)
-                    modifyButton(systemName: "plus", size: .smaller, color: .gray).onTapGesture {
-                        displayPopup(operation: .plus)
+        
+            VStack{
+                Spacer().frame(height: spacing)
+                Divider()
+                Spacer().frame(height: spacing)
+                if habit.detail != "" {
+                    HStack{
+                        Image(systemName: "note.text")
+                        Text("\(habit.detail)").font(.system(size: 18, weight: .regular, design: .rounded))
+                        Spacer()
                     }
                 }
-            }.font(.system(size: 15, weight: .bold, design: .rounded))
-            HStack(spacing: 5.0){
-                if habit.type != .simple {
-                    modifyButton(systemName: "checkmark", size: .medium).onTapGesture {
-                        if habit.type == .number, let p = habit.numberProgress, let t = habit.numberTarget, p > t {
-                            return
+                Spacer().frame(height: spacing)
+                HStack(){
+                    if habit.type != .simple {
+                        (modifyButton(systemName: "minus", size: .smaller, color: .gray) ).onTapGesture {
+                            displayPopup(operation: .minus)
                         }
-                        if habit.type == .time, let p = habit.timeProgress, let t = habit.timeTarget, p.timeToMinutes() > t.timeToMinutes() {
-                            return
+                        HabitProgressCircleView(habit: habit).onTapGesture {
+                            displayPopup(operation: .setTo)
                         }
-                        viewModel.createRecord(habitID: habit.id, habitType: habit.type, numberProgress: habit.numberTarget ?? 0, timeProgress: habit.timeTarget ?? "0:00")
+                        modifyButton(systemName: "plus", size: .smaller, color: .gray).onTapGesture {
+                            displayPopup(operation: .plus)
+                        }
+                    }
+                }.font(.system(size: 15, weight: .bold, design: .rounded))
+                HStack(spacing: 10.0){
+                    
+                    if habit.type != .simple {
+                        RoundedRectangle(cornerRadius: 15).fill(.green.opacity(0.4)).frame(height: 45).overlay {
+                            Image(systemName: "checkmark").font(.system(size: 17, weight: .bold, design: .rounded))
+                        }
+                        .onTapGesture {
+                            if habit.type == .number, let p = habit.numberProgress, let t = habit.numberTarget, p > t {
+                                return
+                            }
+                            if habit.type == .time, let p = habit.timeProgress, let t = habit.timeTarget, p.timeToMinutes() > t.timeToMinutes() {
+                                return
+                            }
+                            viewModel.createRecord(habitID: habit.id, habitType: habit.type, habitCycle: habit.cycle, numberProgress: habit.numberTarget ?? 0, timeProgress: habit.timeTarget ?? "0:00")
+                        }
+                        
+                        
+                        if habit.type == .time {
+                            RoundedRectangle(cornerRadius: 15).fill(.yellow.opacity(0.4)).frame(width: 45, height: 45).overlay {
+                                Image(systemName: "alarm").font(.system(size: 17, weight: .bold, design: .rounded))
+                            }.onTapGesture {
+                                
+                            }
+                        }
+                        
+                        RoundedRectangle(cornerRadius: 15).fill(.red.opacity(0.4)).frame(height: 45).overlay {
+                            Image(systemName: "gobackward").font(.system(size: 17, weight: .bold, design: .rounded))
+                        }.onTapGesture {
+                            viewModel.createRecord(habitID: habit.id, habitType: habit.type, habitCycle: habit.cycle, numberProgress: 0, timeProgress: "0:00")
+                        }
+                    }
+                    else {
+                        /*
+                         modifyButton(systemName: "checkmark", size: .medium).onTapGesture {
+                         viewModel.createRecord(habitID: habit.id, habitType: habit.type, habitCycle: habit.cycle, done: true)
+                         }
+                         modifyButton(systemName: "gobackward", size: .medium).onTapGesture {
+                         viewModel.createRecord(habitID: habit.id, habitType: habit.type, habitCycle: habit.cycle, done: false)
+                         }
+                         */
+                        
+                        RoundedRectangle(cornerRadius: 15).fill(.green.opacity(0.4)).frame(height: 45).overlay {
+                            Image(systemName: "checkmark").font(.system(size: 17, weight: .bold, design: .rounded))
+                        }.onTapGesture {
+                            viewModel.createRecord(habitID: habit.id, habitType: habit.type, habitCycle: habit.cycle, done: true)
+                            }
+                        
+                        RoundedRectangle(cornerRadius: 15).fill(.red.opacity(0.4)).frame(height: 45).overlay {
+                            Image(systemName: "gobackward").font(.system(size: 17, weight: .bold, design: .rounded))
+                        }.onTapGesture {
+                            viewModel.createRecord(habitID: habit.id, habitType: habit.type, habitCycle: habit.cycle, done: false)
+                            }
+                        
                     }
                     
-                    modifyButton(systemName: "pencil.line", size: .larger).onTapGesture {
-                        displayPopup(operation: .setTo)
-                    }
-                    if habit.type == .time {
-                        modifyButton(systemName: "alarm", size: .larger).onTapGesture {
-                            
-                        }
-                    }
-                   
-                    modifyButton(systemName: "gobackward", size: .medium).onTapGesture {
-                        viewModel.createRecord(habitID: habit.id, habitType: habit.type, numberProgress: 0, timeProgress: "0:00")
-                    }
+                    
                 }
-                else {
-                    modifyButton(systemName: "checkmark", size: .medium)
-                    modifyButton(systemName: "gobackward", size: .medium)
-                }
-            }
-        }.font(.system(size: 18, weight: .regular, design: .rounded))
-            .foregroundColor(.primary.opacity(0.6))
+            }.font(.system(size: 18, weight: .regular, design: .rounded))
+                .foregroundColor(.primary.opacity(0.6))
+        
     }
 }
 
@@ -83,8 +114,19 @@ extension HabitDetailView {
     
     private func displayPopup(operation: OperationType) {
         let habitType = habit.type
+        var title = ""
+        switch operation {
+        case .minus:
+            title = "Reduce progress by"
+        case .plus:
+            title = "Add progress by"
+        case .setTo:
+            title = "Set progress to"
+        case .timer:
+            title = "Timer"
+        }
         if habitType == .number {
-            PopupManager.shared.displayPopup(showType: .habitDetailNumberModify, callback: PopupManager.habitDetailNumberModify_CallBack(saveFunc: {numberInput in
+            PopupManager.shared.displayPopup(showType: .habitDetailNumberModify, title: title, callback: PopupManager.habitDetailNumberModify_CallBack(saveFunc: {numberInput in
                 var progress: Int16 = 0
                 if let number = habit.numberProgress {
                     progress = number
@@ -101,11 +143,11 @@ extension HabitDetailView {
                 case .timer:
                     return
                 }
-                viewModel.createRecord(habitID: habit.id, habitType: .number, numberProgress: newProgress)
+                viewModel.createRecord(habitID: habit.id, habitType: .number, habitCycle: habit.cycle, numberProgress: newProgress)
             }))
         }
         else if habitType == .time {
-            PopupManager.shared.displayPopup(showType: .habitDetailTimeModify, callback: PopupManager.habitDetailTimeModify_CallBack(saveFunc: {hourInput, minuteInput in
+            PopupManager.shared.displayPopup(showType: .habitDetailTimeModify, title: title, callback: PopupManager.habitDetailTimeModify_CallBack(saveFunc: {hourInput, minuteInput in
                 var progress = 0
                 if let time = habit.timeProgress {
                     progress = time.timeToMinutes()
@@ -123,7 +165,7 @@ extension HabitDetailView {
                 case .timer:
                     return
                 }
-                viewModel.createRecord(habitID: habit.id, habitType: .time, timeProgress: newProgress.minutesToTime())
+                viewModel.createRecord(habitID: habit.id, habitType: .time, habitCycle: habit.cycle, timeProgress: newProgress.minutesToTime())
             }))
         }
     }
@@ -139,40 +181,81 @@ extension HabitDetailView {
     private func modifyButton(systemName: String, size: ModifyButtonSize, color: ButtonColor = .main) -> some View {
         var buttonFunc = buttonHorizontal
         switch size {
-        case .larger:
-            return Image(systemName: systemName).frame(width: 12, height: 8).font(.system(size: 18, weight: .bold, design: .rounded)).buttonHorizontal(color: color)
-        case .smaller:
-            return Image(systemName: systemName).frame(width: 8, height: 3).font(.system(size: 10, weight: .bold, design: .rounded)).buttonHorizontal(color: color)
-        case .medium:
-            return Image(systemName: systemName).frame(width: 10, height: 5).font(.system(size: 13, weight: .bold, design: .rounded)).buttonHorizontal(color: color)
+            /*
+             case .larger:
+             return Image(systemName: systemName).frame(width: 12, height: 8).font(.system(size: 18, weight: .bold, design: .rounded)).buttonHorizontal(color: color)
+             case .smaller:
+             return Image(systemName: systemName).frame(width: 8, height: 8).font(.system(size: 10, weight: .bold, design: .rounded)).buttonHorizontal(color: color)
+             case .medium:
+             return Image(systemName: systemName).frame(width: 10, height: 5).font(.system(size: 13, weight: .bold, design: .rounded)).buttonHorizontal(color: color)
+             }
+             */
+        default:
+            return Image(systemName: systemName)
+                .frame(width: 50)
+                .frame(height: 50)
+                .background(
+                    Color.clear.background(.ultraThinMaterial).environment(\.colorScheme, .light))
+            
+                .clipShape(RoundedRectangle(cornerRadius: 35, style: .continuous))
+                .shadow(color: Color("Shadow"), radius: 2, x: 0, y: 1)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 35, style: .continuous).stroke(.white.opacity(0.6), lineWidth: 2).offset(y :0.5).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 35))
+                )
+            
         }
-        
     }
-}
-
-//圆圈进度条
-struct HabitProgressCircleView: View{
-    let habit: habitViewModel
-    var body: some View {
-        ZStack {
-            let progressInPercent = habit.getProgressPercent()
-            Circle().stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .miter)).fill(.regularMaterial).frame(width: 100.0, height: 100.0, alignment: .center).rotationEffect(Angle(degrees: -90))
-            Circle().trim(from: 0, to: progressInPercent).stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .miter)).fill(backgroundGradientStart).frame(width: 100.0, height: 100.0, alignment: .center).rotationEffect(Angle(degrees: -90))
-            if habit.type == .number {
-                Text("\(habit.numberProgress ?? 0) / \(habit.numberTarget ?? 0)")
+    
+    
+    //圆圈进度条
+    struct HabitProgressCircleView: View{
+        let habit: habitViewModel
+        let viewModel: HabitTrackerViewModel = HabitTrackerViewModel.shared
+        var body: some View {
+            ZStack {
+                let progressInPercent = habit.getProgressPercent()
+                /*
+                 Circle().stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .miter)).fill(Color("Background").opacity(0.8)).frame(width: 100.0, height: 100.0, alignment: .center).rotationEffect(Angle(degrees: -90))
+                 Circle().trim(from: 0, to: progressInPercent)
+                 .stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .miter)).fill(backgroundGradientStart).frame(width: 100.0, height: 100.0, alignment: .center).rotationEffect(Angle(degrees: -90))
+                 */
+                
+                VStack{
+                    if habit.type == .number {
+                        Text("\(habit.numberProgress ?? 0)").font(.system(size: 21, weight: .medium, design: Font.Design.rounded))
+                    }
+                    if habit.type == .time {
+                        Text("\(habit.timeProgress ?? "0:00")").font(.system(size: 21, weight: .medium, design: Font.Design.rounded))
+                    }
+                }
+                .padding(.vertical)
+                .frame(width: 100)
+                
+                .background(
+                    Color.clear.background(.ultraThinMaterial).environment(\.colorScheme, .light))
+                
+                .clipShape(RoundedRectangle(cornerRadius: 35, style: .continuous))
+                .shadow(color: Color("Shadow"), radius: 2, x: 0, y: 1)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 35, style: .continuous).stroke(.white.opacity(0.6), lineWidth: 2).offset(y :0.5).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 35))
+                )
+                .padding()
+                
             }
-            if habit.type == .time {
-                Text("\(habit.timeProgress ?? "0:00") / \(habit.timeTarget ?? "0:00")").frame(maxWidth: 70)
-            }
-        }.animation(.easeInOut(duration: 1.0), value: habit.numberProgress)
-        .animation(.easeInOut(duration: 1.0), value: habit.timeProgress)
-        .animation(.easeInOut(duration: 1.0), value: habit.numberTarget)
-        .animation(.easeInOut(duration: 1.0), value: habit.timeTarget)
+            .animation(.default, value: viewModel.selectedDate)
+            .animation(.easeInOut(duration: 0.3), value: habit.numberProgress)
+            .animation(.easeInOut(duration: 0.3), value: habit.timeProgress)
+            .animation(.easeInOut(duration: 0.3), value: habit.numberTarget)
+            .animation(.easeInOut(duration: 0.3), value: habit.timeTarget)
+        }
     }
 }
+    
+   
+    
+    struct HabitDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            RootView(viewModel: HabitTrackerViewModel.shared)
+        }
+    }
 
-struct HabitDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView(viewModel: habitTrackerViewModel.shared)
-    }
-}

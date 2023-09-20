@@ -7,16 +7,59 @@
 
 import CoreData
 
-struct habitController {
-    static let shared = habitController()
-    static var preview: habitController = {
-        let result = habitController(inMemory: false)
+struct HabitController {
+    static let shared = HabitController()
+    static var preview: HabitController = {
+        var result = HabitController(inMemory: false)
         let viewContext = result.container.viewContext
-        for i in 1...100 {
-            let newItem1 = Habit(context: viewContext)
-            newItem1.name = "Drink water\(i)"
-            newItem1.createdDate = Date()
+        var habits = result.getAllHabits()
+        
+        
+        for habit in habits {
+            viewContext.delete(habit)
         }
+        saveChanges(viewContext: viewContext)
+       
+        print("deleted")
+        for i in 1...120 {
+            if(i == 1) {
+                result.createHabit(name: "Drink water", detail: "blablabla", habitType: .number, cycle: "Daily", targetNumber: 10, numberUnit: "cups", targetHour: 0, targetMinute: 0, setTarget: true)
+            }
+            if(i == 2) {
+                result.createHabit(name: "Drink water but weekly", detail: "blablabla", habitType: .number, cycle: "Weekly", targetNumber: 10, numberUnit: "cups", targetHour: 0, targetMinute: 0, setTarget: true)
+            }
+            if(i == 3) {
+                result.createHabit(name: "Drink water but monthly", detail: "blablabla", habitType: .number, cycle: "Monthly", targetNumber: 10, numberUnit: "cups", targetHour: 0, targetMinute: 0, setTarget: true)
+            }
+
+            if(i == 4) {
+                result.createHabit(name: "Study", detail: "blablabla", habitType: .time, cycle: "Daily", targetNumber: 0, numberUnit: "cup", targetHour: 1, targetMinute: 30, setTarget: true)
+            }
+            if(i == 5) {
+                result.createHabit(name: "Study but weekly", detail: "blablabla", habitType: .time, cycle: "Weekly", targetNumber: 0, numberUnit: "cup", targetHour: 1, targetMinute: 30, setTarget: true)
+            }
+            if(i == 6) {
+                result.createHabit(name: "Study but monthly", detail: "blablabla", habitType: .time, cycle: "Monthly", targetNumber: 0, numberUnit: "cup", targetHour: 1, targetMinute: 30, setTarget: true)
+            }
+            if(i == 7) {
+                result.createHabit(name: "Eat breakfast", detail: "blablabla", habitType: .simple, cycle: "Daily", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)
+            }
+            if(i == 8) {
+                result.createHabit(name: "Eat breakfast but weekly", detail: "blablabla", habitType: .simple, cycle: "Weekly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)
+            }
+            if(i == 9) {
+                result.createHabit(name: "Eat breakfast but monthly", detail: "blablabla", habitType: .simple, cycle: "Monthly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)
+            }
+            
+            else {
+                result.createHabit(name: "Eat breakfast t monthly", detail: "blablabla", habitType: .simple, cycle: "Monthly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)
+            }
+            
+            print("saved")
+            //saveChanges(viewContext: viewContext)
+        }
+        
+        
         /*
         let newItem2 = Habit(context: viewContext)
         newItem2.name = "Play basketball"
@@ -28,15 +71,19 @@ struct habitController {
         saveChanges(viewContext: viewContext)
         return result
     }()
-    //delete this in production!!!!
+    
+    internal var numberOfHabits: Int64 = 0
+    
+    
+    
+    //MARK: delete this in production!!!!
     static func saveChanges(viewContext: NSManagedObjectContext) {
         do {
             try viewContext.save()
             print("*******************saved******************")
-    
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //Replace this implementation with code to handle the error appropriately.
+            //fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
@@ -53,18 +100,22 @@ struct habitController {
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
-    private var numberOfHabits: Int64 = 0
     
-    func createHabit(name: String, detail: String, habitType: String, cycle: String, targetNumber: String, targetUnit: String,
-                     targetHour: Int, targetMinute: Int) {
+    //MARK: for test delete when done
+    //private static var numberOfHabits: Int64 = 0
+    /*
+    func createHabit(name: String, detail: String, habitType: String, cycle: String, targetNumber: Int, targetUnit: String,
+                     targetHour: Int, targetMinute: Int, setTarget: Bool) {
         let viewContext = self.container.viewContext
         let newHabit = Habit(context: viewContext)
+        newHabit.type = habitType
         newHabit.name = name
         newHabit.cycle = cycle
         newHabit.index = numberOfHabits + 1
         newHabit.createdDate = Date()
         newHabit.ended = false
         newHabit.detail = detail
+        newHabit.isTargetSet = setTarget
         newHabit.habitID = name + String(newHabit.index)
         saveChanges(viewContext: viewContext)
         if(habitType == "Time") {
@@ -73,27 +124,18 @@ struct habitController {
             newTimeHabit.habit = newHabit
             
         }
-        else {
+        else if habitType == "Number" {
             let newNumberHabit = NumberBasedHabit(context: viewContext)
-            newNumberHabit.target = Int64(targetNumber)!
+            newNumberHabit.target = Int64(exactly: targetNumber) ?? 1
             newNumberHabit.unit = targetUnit
             newNumberHabit.habit = newHabit
         }
+        else {
+            
+        }
         saveChanges(viewContext: viewContext)
     }
-    
-    
-    mutating func getAllHabits() -> [Habit] {
-        let request: NSFetchRequest<Habit> = Habit.fetchRequest()
-        do {
-            let res = try container.viewContext.fetch(request)
-            numberOfHabits = Int64(res.count)
-            return res
-        }
-        catch {
-            return []
-        }
-    }
+     */
     
     let container: NSPersistentCloudKitContainer
     

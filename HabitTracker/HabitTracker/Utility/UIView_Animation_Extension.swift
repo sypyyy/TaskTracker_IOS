@@ -6,3 +6,18 @@
 //
 
 import Foundation
+import UIKit
+
+extension UIView {
+    func transitionView(hidden: Bool,  completion : (() -> Void)? = nil) {
+        let view = self
+        guard let parent = view.superview else { return }
+        let target: UIView = !hidden ? view : parent
+        UIView.transition(with: target, duration: 0.2, options: [.transitionCrossDissolve], animations: {
+            view.isHidden = hidden
+        }, completion: {res in
+            print("appearComplete\(hidden)")
+            completion?()
+        })
+    }
+}

@@ -10,9 +10,7 @@ struct habitTrackerModel {
     //keep track of the date today
     var today : Date = Date()
     var startDate : Date {
-        
-        print("restarted here")
-        return Calendar.current.date(byAdding: .day, value: -7, to: today)!
+        return Calendar.current.date(byAdding: .day, value: -399, to: today)!
     }
     var habits : [String] {
         return ["Read books","Drink water","Do homework ee450 and 570"]
@@ -20,5 +18,4 @@ struct habitTrackerModel {
     mutating func refreshDate() {
         today = Date()
     }
-    
 }

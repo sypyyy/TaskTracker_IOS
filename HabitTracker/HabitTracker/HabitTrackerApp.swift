@@ -14,8 +14,8 @@ struct HabitTrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            let overalViewModel = habitTrackerViewModel()
-            ContentView(viewModel : overalViewModel)
+            let overalViewModel = HabitTrackerViewModel.shared
+            RootView(viewModel : overalViewModel)
                 //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

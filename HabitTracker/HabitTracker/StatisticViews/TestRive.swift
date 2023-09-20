@@ -7,14 +7,19 @@
 
 import SwiftUI
 
-struct TestRive: View {
+struct RiveView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            //RiveViewModel(fileName: "f22").view()
+        }
+        .disabled(false)
+        .padding()
+        //.drawingGroup()
     }
 }
 
-struct TestRive_Previews: PreviewProvider {
+struct RiveView_pre: PreviewProvider {
     static var previews: some View {
-        TestRive()
+        RiveView()
     }
 }

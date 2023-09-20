@@ -15,20 +15,27 @@ enum HabitStatisticShowType: String {
 }
 */
 
+
+//这个类为了确保线程安全尝试用非单例的方式实现
 class HabitTrackerStatisticDetailViewModel : ObservableObject {
-    static var shared = HabitTrackerStatisticDetailViewModel()
-    var currentHabitID: Int64?
-    var habitInfo: habitViewModel?
-    weak private var masterViewModel = HabitTrackerViewModel.shared
-    public var markDate: Date? = Date()
-    private var persistenceModel : HabitController = HabitController.preview
     
-    public var regularChartType: HabitStatisticShowType = .weekly {
+    init(habit: habitViewModel, markDate: Date, chartType: HabitStatisticShowType) {
+        self.habit = habit
+        self.markDate = markDate
+        self.regularChartType = chartType
+    }
+    //var currentHabitID: Int64?
+    var habit: habitViewModel?
+    public var markDate: Date? = Date()
+    public var regularChartType: HabitStatisticShowType {
         didSet {
             firedUpdate = false
-            cachedRegularChartData = [:]
+            cachedRegularChartData = []
         }
     }
+    
+    weak private var masterViewModel = HabitTrackerViewModel.shared
+    private var persistenceModel : HabitController = HabitController.preview
     public var regularChartSelectedInterval: (str: String, start: Date, end: Date) {
         var start: Date
         var end: Date
@@ -66,28 +73,29 @@ class HabitTrackerStatisticDetailViewModel : ObservableObject {
     public var firedUpdate = false
     
     //MARK: Cache
-    public var cachedRegularChartData: [String: (Int, Int)] = [:]
+    public var cachedRegularChartData: [(String, Int, Int)] = []
     
 }
 
 extension HabitTrackerStatisticDetailViewModel {
-    private func getDataList(habit: habitViewModel) {
+    public func getDataList() {
+        let habit = self.habit ?? habitViewModel(habit: Habit())
         let masterModel = HabitTrackerViewModel.shared
-        var res = [(Date, Double, Bool, Bool)]()
-        var tempInfo = (date: Date(), rate: 0.0, isOut: false, isStopped: false)
+        var res = [(Date, finished: Int, target: Int, isOut: Bool, isStopped: Bool)]()
+        var tempInfo = (date: Date(), finished: 0, target: 0, isOut: false, isStopped: false)
         let targetSeries = masterModel.getTargetSeries(habitID: habit.id)
         let stopSeries = masterModel.getStopCheckPoints(habitID: habit.id)
-        let recordSeries = viewModel.getIntervalRecords(startDate: nil, endDate: nil, habitID: habit.id)
+        let recordSeries = self.getIntervalRecords(startDate: nil, endDate: nil, habitID: habit.id)
         var targetPointIdx = 0
         var stopPointIdx = 0
         var recordPointIdx = 0
         
-        for date in viewModel.selectedIntervalDateList {
+        for date in self.regularChartSelectedIntervalDateList {
             appendIfNeeded(date: date)
         }
         
-        viewModel.cachedData[habit.id] = res.enumerated().map{ idx, info in
-            (idx, getFillColor(info: info))
+        self.cachedRegularChartData = res.enumerated().map{ idx, info in
+            ("\(idx)", info.finished, info.target)
         }
         
         func appendIfNeeded(date: Date) {
@@ -96,26 +104,26 @@ extension HabitTrackerStatisticDetailViewModel {
         }
         
         func filterOutofInterval(date: Date) {
-            tempInfo = (date: date, rate: 0.0, isOut: false, isStopped: false)
-            switch viewModel.statisticalChartType {
+            tempInfo = (date: Date(), finished: 0, target: 0, isOut: false, isStopped: false)
+            switch self.regularChartType {
             case .annually:
                 
                 switch habit.cycle {
                 case .daily:
-                    if !date.isSameYear(viewModel.markDate ?? Date()) {
+                    if !date.isSameYear(self.markDate ?? Date()) {
                         tempInfo.isOut = true
                     }
                 case .weekly:
-                    if !date.isSameYear(viewModel.markDate ?? Date()) {
+                    if !date.isSameYear(self.markDate ?? Date()) {
                         tempInfo.isOut = true
                     }
                 case .monthly:
-                    if !date.isSameYear(viewModel.markDate ?? Date()) {
+                    if !date.isSameYear(self.markDate ?? Date()) {
                         tempInfo.isOut = true
                     }
                 }
             case .monthly:
-                if !date.isSameMonth(viewModel.markDate ?? Date()) {
+                if !date.isSameMonth(self.markDate ?? Date()) {
                     tempInfo.isOut = true
                 }
             case .weekly:
@@ -129,38 +137,46 @@ extension HabitTrackerStatisticDetailViewModel {
             if isStopped {
                 tempInfo.isStopped = true
             }
-            calculateAndAppendRate(date: date)
+            calculateAndAppendData(date: date)
         }
         
-        func calculateAndAppendRate(date: Date) {
-            let target = getTarget(date: date)
+        func calculateAndAppendData(date: Date) {
+            
             switch habit.cycle {
             case .daily:
-                let rate = Double(getProgress(date: date)) / Double(target)
-                tempInfo.rate = rate
-                if viewModel.statisticalChartType != .annually && res.last?.2 == true {
+                let finished = getProgress(date: date)
+                tempInfo.finished = finished
+                let target = getTarget(date: date)
+                tempInfo.target = target
+                if self.regularChartType != .annually && res.last?.isOut == true {
                     res = []
                 }
                 res.append(tempInfo)
             case .weekly:
                 if date.compareToByDay(date.startOfWeek()) == 0 {
-                    let rate = Double(getProgress(date: date)) / Double(target)
-                    tempInfo.rate = rate
+                    let finished = getProgress(date: date)
+                    tempInfo.finished = finished
+                    let target = getTarget(date: date)
+                    tempInfo.target = target
                 } else {
-                    tempInfo.rate = res.last?.1 ?? 0
+                    tempInfo.finished = res.last?.finished ?? 0
+                    tempInfo.target = res.last?.target ?? 0
                 }
-                if viewModel.statisticalChartType != .annually && res.last?.2 == true {
+                if self.regularChartType != .annually && res.last?.isOut == true {
                     res = []
                 }
                 res.append(tempInfo)
             case .monthly:
                 if date.compareToByDay(date.startOfMonth()) == 0 {
-                    let rate = Double(getProgress(date: date)) / Double(target)
-                    tempInfo.rate = rate
+                    let finished = getProgress(date: date)
+                    tempInfo.finished = finished
+                    let target = getTarget(date: date)
+                    tempInfo.target = target
                 } else {
-                    tempInfo.rate = res.last?.1 ?? 0
+                    tempInfo.finished = res.last?.finished ?? 0
+                    tempInfo.target = res.last?.target ?? 0
                 }
-                if viewModel.statisticalChartType != .annually && res.last?.2 == true {
+                if self.regularChartType != .annually && res.last?.isOut == true {
                     res = []
                 }
                 res.append(tempInfo)
@@ -182,6 +198,7 @@ extension HabitTrackerStatisticDetailViewModel {
                 return true
             }
             return stopSeries[stopPointIdx].type != StopPointType.go.rawValue
+            
         }
         
         //返回在某一个日期的目标，如果是时间就转换成分钟形式的Int
@@ -268,5 +285,6 @@ extension HabitTrackerStatisticDetailViewModel {
         return persistenceModel.getIntervalRecords(startDate: startDate ?? regularChartSelectedInterval.start, endDate: endDate ?? regularChartSelectedInterval.end, habitID: habitID)
     }
 }
+
 
 

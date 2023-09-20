@@ -1,44 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G72" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Habit" representedClassName="Habit" syncable="YES" codeGenerationType="class">
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="cycle" optional="YES" attributeType="String"/>
         <attribute name="detail" optional="YES" attributeType="String"/>
-        <attribute name="ended" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="endedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="habitID" optional="YES" attributeType="String"/>
+        <attribute name="habitID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isTargetSet" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="numberHabit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NumberBasedHabit" inverseName="habit" inverseEntity="NumberBasedHabit"/>
-        <relationship name="timeHabit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TimeBasedHabit" inverseName="habit" inverseEntity="TimeBasedHabit"/>
+        <attribute name="numberUnit" optional="YES" attributeType="String"/>
+        <attribute name="stoppedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="HabitRecord" representedClassName="HabitRecord" syncable="YES" codeGenerationType="class">
+        <attribute name="cycle" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="finishRate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="habitID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberProgress" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timeProgress" optional="YES" attributeType="String"/>
+        <fetchIndex name="byDateIndex">
+            <fetchIndexElement property="date" type="Binary" order="ascending"/>
+            <fetchIndexElement property="habitID" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <entity name="NumberBasedHabit" representedClassName="NumberBasedHabit" syncable="YES" codeGenerationType="class">
-        <attribute name="target" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="unit" optional="YES" attributeType="String"/>
-        <relationship name="habit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="numberHabit" inverseEntity="Habit"/>
-    </entity>
-    <entity name="NumberBasedRecord" representedClassName="NumberBasedRecord" syncable="YES" codeGenerationType="class">
+    <entity name="StopCheckPoint" representedClassName="StopCheckPoint" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="habitID" optional="YES" attributeType="String"/>
-        <attribute name="number" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="target" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="unit" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <fetchIndex name="byDateIndex">
+        <attribute name="habitID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <fetchIndex name="byHabitIdDateIndex">
+            <fetchIndexElement property="habitID" type="Binary" order="ascending"/>
             <fetchIndexElement property="date" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <entity name="TimeBasedHabit" representedClassName="TimeBasedHabit" syncable="YES" codeGenerationType="class">
-        <attribute name="target" optional="YES" attributeType="String"/>
-        <relationship name="habit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="timeHabit" inverseEntity="Habit"/>
-    </entity>
-    <entity name="TimeBasedRecord" representedClassName="TimeBasedRecord" syncable="YES" codeGenerationType="class">
+    <entity name="TargetCheckPoint" representedClassName="TargetCheckPoint" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="target" optional="YES" attributeType="String"/>
-        <attribute name="time" optional="YES" attributeType="String"/>
-        <fetchIndex name="byDateIndex">
+        <attribute name="habitID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberTarget" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timeTarget" optional="YES" attributeType="String"/>
+        <fetchIndex name="byHabitIdDateIndex">
+            <fetchIndexElement property="habitID" type="Binary" order="ascending"/>
             <fetchIndexElement property="date" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>

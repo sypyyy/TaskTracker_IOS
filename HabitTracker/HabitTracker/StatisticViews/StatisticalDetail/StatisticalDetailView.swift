@@ -9,6 +9,10 @@ import SwiftUI
 import Charts
 
 struct StatisticalDetailView: View {
+    
+    let habit: habitViewModel
+    let enteringChartCycle: HabitStatisticShowType
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [backgroundGradientStart, backgroundGradientEnd], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
@@ -25,7 +29,7 @@ struct StatisticalDetailView: View {
                 }
                 .padding(.bottom)
                 .background(.regularMaterial)
-                StatDetailContent()
+                StatDetailContent(habit: habit, enteringChartCycle: enteringChartCycle)
                 
                 Spacer()
             }.frame(maxWidth: .infinity, maxHeight: .infinity).background(.thinMaterial)
@@ -44,6 +48,10 @@ struct StatisticalDetailView: View {
 }
 
 struct StatDetailContent: View {
+    
+    let habit: habitViewModel
+    let enteringChartCycle: HabitStatisticShowType
+    
     var body: some View {
         ScrollView {
             HStack {
@@ -101,52 +109,44 @@ struct StatDetailContent: View {
                 //.background(.red)
             
             Text("Yearly Stats")
-            BarChart()
+            BarChart(viewModel: HabitTrackerStatisticDetailViewModel(habit: habit, markDate: Date(), chartType: enteringChartCycle))
                 .padding(.vertical)
                 .padding(.horizontal)
                 .background(.regularMaterial)
                 .cornerRadius(12)
                 .padding(.horizontal)
-            
             }
-           
-       
+        
     }
 }
 
-
-struct BarChart: View {
-    struct ToyShape: Identifiable {
-        var type: String
-        var count: Double
-        var id = UUID()
-    }
+extension StatDetailContent {
     
-    var body: some View {
-        var data: [ToyShape] = [
-            .init(type: "Cube", count: 5),
-            .init(type: "Sphere", count: 4),
-            .init(type: "Pyramid", count: 4)
-        ]
-        Chart {
-            BarMark(
-                    x: .value("Shape Type", data[0].type),
-                    y: .value("Total Count", data[0].count)
-                )
-                BarMark(
-                     x: .value("Shape Type", data[1].type),
-                     y: .value("Total Count", data[1].count)
-                )
-                BarMark(
-                     x: .value("Shape Type", data[2].type),
-                     y: .value("Total Count", data[2].count)
-                )
+    struct BarChart: View {
+        @StateObject var viewModel: HabitTrackerStatisticDetailViewModel
+        
+        var body: some View {
+            let data: [(String, Int, Int)] = viewModel.cachedRegularChartData
+            Chart {
+                ForEach(data, id: \.0) { dot in
+                   LineMark(
+                            x: .value("Shape Type", dot.0),
+                            y: .value("Total Count", dot.1)
+                        )
+                }
+            }
+            .task {
+                await viewModel.getDataList()
+                await MainActor.run{
+                    viewModel.objectWillChange.send()
+                }
+            }
         }
     }
 }
 
 struct StatisticalDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        StatisticalDetailView()
+        RootView(viewModel: HabitTrackerViewModel.shared)
     }
 }

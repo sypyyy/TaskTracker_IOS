@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct BottomSheetView<V: View>: View {
     @ViewBuilder var content: V
     var body: some View {
@@ -14,29 +16,31 @@ struct BottomSheetView<V: View>: View {
             content
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("Background"))
-        .ignoresSafeArea(edges: .bottom)
+        //.ignoresSafeArea(edges: .bottom)
     }
-    
 }
 
 struct BottomSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        BottomSheetView{
+        BottomSheetView(content:{
             VStack{
-                DumView().contextMenu{
-                    Text("sssnnsn")
-                    Text("sssghhgh")
-                }
+                DumView()
             }
-        }
+        })
     }
 }
 
 
 struct DumView: View {
     var body: some View {
-        Text("dummy")
+        GeometryReader{ metric in
+            ScrollView {
+                Text("dummy").border(.red)
+            }.border(.red)
+            
+               
+        } .border(.red)
+        
     }
     
     func contextMenu<MenuItems: View>(

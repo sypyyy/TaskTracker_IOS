@@ -7,42 +7,81 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
-enum HabitStatisticShowType {
-    case weekly, monthly, annually
+enum HabitStatisticShowType: String {
+    case weekly = "weekly", monthly = "monthly", annually = "yearly"
 }
 
 class HabitTrackerStatisticViewModel : ObservableObject{
     static var shared = HabitTrackerStatisticViewModel()
     weak private var masterViewModel = HabitTrackerViewModel.shared
     private var persistenceModel : HabitController = HabitController.preview
-    private var preferredDate: Date? = Date()
-    public var statisticalChartType: HabitStatisticShowType = .weekly
+    public var markDate: Date? = Date()
+    public var statisticalChartType: HabitStatisticShowType = .weekly {
+        didSet {
+            firedUpdate = false
+            cachedData = [:]
+            objectWillChange.send()
+        }
+    }
     public var selectedInterval: (str: String, start: Date, end: Date) {
         var start: Date
         var end: Date
         var intervalStrRepresentation: String
         switch statisticalChartType {
         case .weekly:
-            start = preferredDate?.startOfWeek() ?? Date()
-            end = preferredDate?.endOfWeek() ?? Date()
-            intervalStrRepresentation = "\(fmt5.string(from: start))~\(fmt5.string(from: end))"
+            start = markDate?.startOfWeek() ?? Date()
+            end = markDate?.endOfWeek() ?? Date()
+            let prensentedStart = start.addByHour(12)
+            let prensentedEnd = end.addByHour(-12)
+            intervalStrRepresentation = "\(fmt5.string(from: prensentedStart))~\(fmt5.string(from: prensentedEnd))"
         case .monthly:
-            start = preferredDate?.startOfMonth() ?? Date()
-            end = preferredDate?.endOfMonth() ?? Date()
-            intervalStrRepresentation = "\(fmt3.string(from: start)) \(fmt8.string(from: start))"
+            start = markDate?.startOfMonth().startOfWeek() ?? Date()
+            end = markDate?.endOfMonth() ?? Date()
+            let prensentedStart = (markDate?.startOfMonth() ?? Date()).addByHour(12)
+            intervalStrRepresentation = "\(fmt3.string(from: prensentedStart)) \(fmt8.string(from: prensentedStart))"
         case .annually:
-            start = preferredDate?.startOfYear() ?? Date()
-            end = preferredDate?.endOfYear() ?? Date()
-            intervalStrRepresentation = "\(fmt3.string(from: start))"
+            start = markDate?.startOfYear().startOfWeek() ?? Date()
+            end = markDate?.endOfYear() ?? Date()
+            let prensentedStart = (markDate?.startOfYear() ?? Date()).addByHour(12)
+            //end = start.addByDay(1) ?? Date()
+            intervalStrRepresentation = "\(fmt3.string(from: prensentedStart))"
         }
+        
         return (intervalStrRepresentation, start, end)
     }
+    public var selectedIntervalDateList: [Date] {
+        let interval = selectedInterval
+        let start = interval.start
+        let end = interval.end
+        var ptr = start.addByHour(12)
+        var res = [Date]()
+        while ptr.compareTo(end) < 0 {
+            res.append(ptr)
+            ptr = ptr.addByDay(1)
+        }
+        return res
+    }
+    
+    public var firedUpdate = false
+    
     //MARK: Cache
+
+    public var cachedData: [Int64: [(Int, Color)]] = [:]
+    
 }
 
 extension HabitTrackerStatisticViewModel {
     public func getIntervalRecords(startDate: Date?, endDate: Date?, habitID: Int64) -> [HabitRecord] {
         return persistenceModel.getIntervalRecords(startDate: startDate ?? selectedInterval.start, endDate: endDate ?? selectedInterval.end, habitID: habitID)
+    }
+}
+
+extension HabitTrackerStatisticViewModel {
+    func respondToDataChange() {
+        firedUpdate = false
+        HabitTrackerViewModel.shared.statDataChanged = false
+        //cachedData = [:]
     }
 }
