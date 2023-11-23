@@ -35,9 +35,7 @@ class HabitTrackerViewModel : ObservableObject{
     public var statDataChanged = false {
         didSet {
             if statDataChanged {
-                
                 HabitTrackerStatisticViewModel.shared.respondToDataChange()
-                    
             }
         }
     }
@@ -112,14 +110,10 @@ extension HabitTrackerViewModel {
     }
     
     func getTargetSeries(habitID: Int64) -> [TargetCheckPoint] {
-        /*
-        if let points = targetSeries[habitID] {
-            return points
-        }
-         */
-        let res = persistenceModel.getTargetSeries(habitID: habitID)
-        //targetSeries[habitID] = res
-        return res
+        //syppp test
+        //let res = persistenceModel.getTargetSeries(habitID: habitID)
+        //return res
+        return []
     }
     
     func getStopCheckPoints(habitID: Int64) -> [StopCheckPoint] {

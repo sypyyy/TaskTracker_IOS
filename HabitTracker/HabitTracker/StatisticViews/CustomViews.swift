@@ -30,8 +30,14 @@ struct StatisticalCustomSegmentedControl: View {
                                 else if preselectedIndex == 2 {
                                     type = .annually
                                 }
-                                HabitTrackerStatisticViewModel.shared.statisticalChartType = type
+                                HabitTrackerStatisticViewModel.shared.digestChartCycle = type
                                 HabitTrackerStatisticViewModel.shared.markDate = Date()
+                                Task.detached(priority: .userInitiated) {
+                                    await StatDigestImgCacheActor.shared.invalidateAllCache()
+                                    await MainActor.run {
+                                        HabitTrackerStatisticViewModel.shared.objectWillChange.send()
+                                    }
+                                }
                             }
                         }
                     Rectangle()

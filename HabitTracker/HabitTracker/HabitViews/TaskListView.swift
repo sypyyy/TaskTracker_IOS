@@ -14,6 +14,7 @@ struct TaskListView : View {
     let cardIdealHeight = 230
     let cardMaxHeight = 230
     @State var tappedOne: Int64?
+    @State var scaleRatio: CGFloat = 1.0
     //@State var thisDayRecords: [Record] = habitTrackerViewModel.shared.get
     
     init(viewModel: HabitTrackerViewModel) {
@@ -26,9 +27,10 @@ struct TaskListView : View {
         VStack{
             GeometryReader{ metric in
                 ScrollView(showsIndicators : false) {
-                    LazyVStack{
+                    VStack{
                         ForEach(viewModel.getOngoingHabitViewModels(), id: \.self.id) { habit in
                             VStack{
+                                
                                 HStack {
                                     VStack {
                                         HStack(alignment: .center){
@@ -51,6 +53,7 @@ struct TaskListView : View {
                                             
                                             Spacer()
                                         }.frame(maxHeight: tappedOne != habit.id ? CGFloat(cardMaxHeight): CGFloat(cardIdealHeight))
+                                            
                                         //.fixedSize()
                                         
                                         HStack{
@@ -64,23 +67,14 @@ struct TaskListView : View {
                                                 Text("|").font(.system(size: 18, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.6))
                                                 Text("\(habit.timeProgress ?? "0:00")\(habit.timeTarget == nil ? "" : " / \(habit.timeTarget ?? "0:00")")").font(.system(size: 18, weight: .regular, design: .rounded)).foregroundColor(.primary.opacity(0.6))
                                             }
-                                            /*
-                                            if let target = habit.timeHabit?.target {
-                                                Text("|")
-                                                Text("0:00/\(target)").font(.system(size: 18, weight: .regular, design: .rounded)).foregroundColor(.primary.opacity(0.6))
-                                            }
-                                            if let target = habit.numberHabit?.target {
-                                                Text("|")
-                                                Text("0/\(target)").font(.system(size: 18, weight: .regular, design: .rounded)).foregroundColor(.primary.opacity(0.6))
-                                            }
-                                             */
+                                           
                                         Spacer()
                                         }.font(.system(size: 18, weight: .regular, design: .rounded)).foregroundColor(.primary.opacity(0.6))
                                     }
                                 }
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-                                    withAnimation(.easeOut){
+                                    withAnimation(.spring){
                                         if tappedOne == habit.id {
                                             tappedOne = nil
                                         } else {
@@ -88,6 +82,7 @@ struct TaskListView : View {
                                         }
                                     }
                                 }
+                                
                                 //MARK: the detail view
                                 //
                                 if(tappedOne == habit.id) {
@@ -97,6 +92,7 @@ struct TaskListView : View {
                                 //Spacer()
                                 
                             }
+                            
                                 .padding()
                                 //.background(.white.opacity(0.6))
                             
@@ -110,11 +106,15 @@ struct TaskListView : View {
                                 )
                                 .padding()
                                 
+                                
+                                
                         }
                     }.padding(.bottom, 88)
+                        
                     
                 }
             }
+           
         }.font(.title)
     }
 }

@@ -25,7 +25,7 @@ struct CheckMarkShape: Shape {
     }
 }
 
-struct CheckMark: View, ShapeStyle {
+struct CheckMark: View {
     let size: Int
     var body: some View {
         CheckMarkShape().fill(.gray).frame(width: CGFloat(size), height: CGFloat(size))

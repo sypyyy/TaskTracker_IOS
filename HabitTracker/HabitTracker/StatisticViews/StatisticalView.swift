@@ -17,35 +17,18 @@ import SwiftUI
 
 import SwiftUI
 
-var test = 0
+
 
 struct StatisticalView: View, Sendable {
-    
-    
     @State var tabIndex: HabitTabShowType = .checkIn
     
     var habits: [habitViewModel?] = HabitTrackerViewModel.shared.getAllHabits().map(habitViewModel.init)
-    @StateObject var viewModel: HabitTrackerStatisticViewModel = HabitTrackerStatisticViewModel.shared
-    
+    @StateObject var statsViewModel: HabitTrackerStatisticViewModel = HabitTrackerStatisticViewModel.shared
     var masterModel: HabitTrackerViewModel = HabitTrackerViewModel.shared
-    func blockParameters(metricWidth: CGFloat, metricHeight: CGFloat) -> (width: CGFloat, height: CGFloat, spacing: CGFloat) {
-        switch viewModel.statisticalChartType {
-        case .weekly:
-            return (width: (metricWidth - 10) * 0.65 / 8, height: (metricWidth - 10) * 0.65 / 8, spacing: (metricWidth - 10) * 0.35 / 8)
-        case .monthly:
-            
-            return (width: (metricWidth) * 0.65 / 31, height: (metricWidth) * 0.65 / 31, spacing: (metricWidth) * 0.35 / 31)
-        case .annually:
-            return (width: (metricWidth) * 0.85 / 53, height: (metricWidth) / 70, spacing: (metricWidth) * 0.15 / 53)
-        }
-    }
-    
     // 这个状态用来表示显示加载以及禁止触控， viewModel的firedUpdate表示需要更新图表
-    @State var dataOld = true
+    @State var dataOld = false
     
     var body: some View {
-       
-        
             VStack {
             ZStack {
                 GeometryReader { m in
@@ -56,9 +39,9 @@ struct StatisticalView: View, Sendable {
                         .foregroundColor(.primary.opacity(0.7)).padding(.bottom, 2)
                         HStack {
                             Button{intervalChange(goback: true)} label: {Image(systemName: "arrowtriangle.backward.fill")}
-                            Text("\(viewModel.selectedInterval.str)")
+                            Text("\(statsViewModel.selectedInterval.str)")
                             Button{intervalChange(goback: false)} label: {Image(systemName: "arrowtriangle.forward.fill")}
-                        }.disabled(dataOld)
+                        }
                             .transaction { transaction in
                             transaction.animation = nil
                         }.padding(.bottom)
@@ -81,36 +64,21 @@ struct StatisticalView: View, Sendable {
                         
                         
                         
-                        switch viewModel.statisticalChartType {
+                        switch statsViewModel.digestChartCycle {
                         case .weekly:
                             List() {
-                                
                                 Section {
-                                    
                                     ForEach(filterHabits().compactMap{$0},  id:\.id) {habit in
                                         
                                         NavigationLink{Text("dbesj").onTapGesture {
                                             statisticalView_hostingNavigationController.popViewController(animated: true)
                                         }} label: {
-                                            
-                                            HStack(alignment: .center, spacing: 0) {
-                                                Text("\(habit.name)").frame(width: m.size.width * 0.3, alignment: .leading)
-                                                
-                                                GeometryReader { metric in
-                                                    HabitStatisticCell(habit: habit, blockParameters: blockParameters(metricWidth: metric.size.width, metricHeight: metric.size.height))
-                                                }.frame(minHeight: m.size.width * 0.7 / 8)
-                                            }.listRowSeparator(.hidden)
-                                                .listRowBackground(Color.white)
-                                            
-                                            
+                                            HabitStatisticalCell(digestCycle: .weekly, habit: habit, m: m)
+                                            .listRowSeparator(.hidden)
+                                                .listRowBackground(Color.clear)
                                         }
-                                        
-                                        
-                                        
-                                        
-                                        
                                     }
-                                } header: {
+                                } /* header: {
                                     HStack {
                                         Text("0%")
                                         RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
@@ -124,6 +92,7 @@ struct StatisticalView: View, Sendable {
                                         Text("Inactive").textCase(.none)
                                     }
                                 }
+                                */
                                 Section{VStack{}}.frame(height: 20).listRowBackground(Color.clear)
                             }
                             
@@ -132,18 +101,10 @@ struct StatisticalView: View, Sendable {
                             .scrollContentBackground(.hidden)
                             .id(UUID())
                             .task {
-                                
-                                if !viewModel.firedUpdate {
-                                    if !dataOld {
-                                        await MainActor.run {
-                                            dataOld = true
-                                        }
-                                    }
-                                    let testMode = viewModel.statisticalChartType
-                                    await updateData()
-                                    viewModel.firedUpdate = true
-                                }
-                            }                          .disabled(dataOld)
+                    
+                                 
+                            }
+                            
                             //.navigationTitle("")
                             .toolbar(.hidden)
                             //.navigationBarHidden(true)
@@ -153,17 +114,9 @@ struct StatisticalView: View, Sendable {
                                     NavigationLink{Text("dbesj").onTapGesture {
                                         statisticalView_hostingNavigationController.popViewController(animated: true)
                                     }} label: {
-                                        VStack(alignment: .leading) {
-                                            
-                                            Text("\(habit.name)").padding(.top, 7)
-                                            
-                                            GeometryReader { m in
-                                                HabitStatisticCell(habit: habit, blockParameters: blockParameters(metricWidth: m.size.width, metricHeight: m.size.height))
-                                            }.frame(height: m.size.width / 31 * 1.1)
-                                            
-                                            //
-                                            
-                                        }
+                                        HabitStatisticalCell(digestCycle: .monthly,habit: habit, m: m)
+                                        .listRowSeparator(.hidden)
+                                            .listRowBackground(Color.clear)
                                     }
                                 }
                                 Section{VStack{}}.frame(height: 20).listRowBackground(Color.clear)
@@ -174,62 +127,42 @@ struct StatisticalView: View, Sendable {
                             .id(UUID())
                             .task {
                                 
-                                if !viewModel.firedUpdate {
-                                    if !dataOld {
-                                        await MainActor.run {
-                                            dataOld = true
-                                        }
-                                    }
-                                    await updateData()
-                                    viewModel.firedUpdate = true
-                                }
                             }
-                            .disabled(dataOld)
+                            
                             
                         case .annually:
                             
-                            List {
-                                ForEach(filterHabits().compactMap{$0},  id:\.id) {habit in
-                                        VStack(alignment: .leading) {
-                                            NavigationLink{StatisticalDetailView(habit: habit, enteringChartCycle: viewModel.statisticalChartType).onTapGesture {
-                                                statisticalView_hostingNavigationController.popViewController(animated: true)
-                                            }} label: {
-                                                Text("\(habit.name)").padding(.top, 7)
-                                            }
-                                            GeometryReader { m in
-                                                HabitStatisticCell(habit: habit, blockParameters: blockParameters(metricWidth: m.size.width, metricHeight: m.size.height))
-                                            }.frame(height: m.size.width / 65 * 7)
-                                            
-                                            //
-                                            
-                                        }
-                                    
-                                        
-                                    
-                                        
-                                    
-                                }
-                                Section{VStack{}}.frame(height: 20).listRowBackground(Color.clear)
+                           List {
+                                   ForEach(filterHabits().compactMap{$0}, id:\.id) {habit in
+                                       let s = print("cfdsccfdrf")
+                                       Section{
+                                           VStack(alignment: .leading) {
+                                               
+                                               NavigationLink{StatisticalDetailView(habit: habit, enteringChartCycle: .annually).onTapGesture {
+                                                   statisticalView_hostingNavigationController.popViewController(animated: true)
+                                               }} label: {
+                                                   Text("\(habit.name)").padding(.top, 7)
+                                               }
+                                               
+                                                   HabitStatisticalCell(digestCycle: .annually,habit: habit, m: m)
+                                                       .listRowSeparator(.hidden)
+                                                       .listRowBackground(Color.clear)
+                                                       
+                                           }
+                                       }
+                                   }
+                                   Section{VStack{}}.frame(height: 20).listRowBackground(Color.clear)
+                               
                             }
-                            
                             .foregroundColor(.primary.opacity(0.5))
                             .fontWeight(.bold)
                             .scrollContentBackground(.hidden)
+                            //
                             .id(UUID())
                             .task {
                                 
-                                if !viewModel.firedUpdate {
-                                    if !dataOld {
-                                        await MainActor.run {
-                                            dataOld = true
-                                        }
-                                    }
-                                    let testMode = viewModel.statisticalChartType
-                                    await updateData()
-                                    viewModel.firedUpdate = true
-                                }
                             }
-                            .disabled(dataOld)
+                            
                             .onDisappear {
                                 print("dns")
                             }
@@ -259,23 +192,24 @@ struct StatisticalView: View, Sendable {
 extension StatisticalView {
     private func intervalChange(goback: Bool) {
         var newMarkDate: Date?
-        switch viewModel.statisticalChartType {
+        switch statsViewModel.digestChartCycle {
         case .weekly:
-            newMarkDate = viewModel.markDate?.addByDay(goback ? -7 : 7)
+            newMarkDate = statsViewModel.markDate?.addByDay(goback ? -7 : 7)
         case .monthly:
-            newMarkDate = viewModel.markDate?.addByMonth(goback ? -1 : 1)
+            newMarkDate = statsViewModel.markDate?.addByMonth(goback ? -1 : 1)
         case .annually:
-            newMarkDate = viewModel.markDate?.addByYear(goback ? -1 : 1)
+            newMarkDate = statsViewModel.markDate?.addByYear(goback ? -1 : 1)
         }
-        viewModel.markDate = newMarkDate
-        dataOld = true
-        
+        statsViewModel.markDate = newMarkDate
         Task.detached {
-            await updateData()
-           
+            await StatDigestImgCacheActor.shared.invalidateAllCache()
+            await MainActor.run {
+                statsViewModel.objectWillChange.send()
+            }
         }
     }
 }
+    
 
 extension StatisticalView {
     private func filterHabits() -> [habitViewModel?] {
@@ -283,8 +217,8 @@ extension StatisticalView {
         res.enumerated().forEach() { index, habit in
             switch habit?.cycle {
             case .monthly:
-                if viewModel.statisticalChartType == .weekly {
-                    //res[index] = nil
+                if statsViewModel.digestChartCycle == .weekly {
+                    res[index] = nil
                 }
             default:
                 break
@@ -294,18 +228,36 @@ extension StatisticalView {
     }
 }
 
-
+/*
 extension StatisticalView {
     typealias blockInfo = (Date, Double, Bool, Bool)
     
-    private func updateData() async {
+    
+    func blockParameters(metricWidth: CGFloat, metricHeight: CGFloat) -> (width: CGFloat, height: CGFloat, spacing: CGFloat) {
+        switch statsViewModel.digestChartCycle {
+        case .weekly:
+            return (width: (metricWidth - 10) * 0.65 / 8, height: (metricWidth - 10) * 0.65 / 8, spacing: (metricWidth - 10) * 0.35 / 8)
+        case .monthly:
+            
+            return (width: (metricWidth) * 0.65 / 31, height: (metricWidth) * 0.65 / 31, spacing: (metricWidth) * 0.35 / 31)
+        case .annually:
+            return (width: (metricWidth) * 0.85 / 53, height: (metricWidth) / 70, spacing: (metricWidth) * 0.15 / 53)
+        }
+    }
+    
+    private func updateData(m: GeometryProxy) async {
         Task.detached(priority: .background) {
             for habit in await filterHabits().compactMap({$0}) {
                 await getDataList(habit: habit)
+                let render = await ImageRenderer(content: HabitStatisticFrequencyGraph(habit: habit, blockParameters: blockParameters(metricWidth: m.size.width - 60, metricHeight: 144)))
+                await MainActor.run{
+                    render.scale = 3.0
+                }
+                imageCache[habit.id] =  await render.uiImage
             }
             await MainActor.run {
                 dataOld = false
-                viewModel.objectWillChange.send()
+                statsViewModel.objectWillChange.send()
             }
         }
     }
@@ -337,7 +289,7 @@ extension StatisticalView {
         
         func filterOutofInterval(date: Date) {
             tempInfo = (date: date, rate: 0.0, isOut: false, isStopped: false)
-            switch viewModel.statisticalChartType {
+            switch viewModel.digestChartCycle {
             case .annually:
                 
                 switch habit.cycle {
@@ -378,7 +330,7 @@ extension StatisticalView {
             case .daily:
                 let rate = Double(getProgress(date: date)) / Double(target)
                 tempInfo.rate = rate
-                if viewModel.statisticalChartType != .annually && res.last?.2 == true {
+                if viewModel.digestChartCycle != .annually && res.last?.2 == true {
                     res = []
                 }
                 res.append(tempInfo)
@@ -389,7 +341,7 @@ extension StatisticalView {
                 } else {
                     tempInfo.rate = res.last?.1 ?? 0
                 }
-                if viewModel.statisticalChartType != .annually && res.last?.2 == true {
+                if viewModel.digestChartCycle != .annually && res.last?.2 == true {
                     res = []
                 }
                 res.append(tempInfo)
@@ -400,7 +352,7 @@ extension StatisticalView {
                 } else {
                     tempInfo.rate = res.last?.1 ?? 0
                 }
-                if viewModel.statisticalChartType != .annually && res.last?.2 == true {
+                if viewModel.digestChartCycle != .annually && res.last?.2 == true {
                     res = []
                 }
                 res.append(tempInfo)
@@ -474,7 +426,7 @@ extension StatisticalView {
         }
     }
 }
-
+*/
 extension StatisticalView {
     private func getFillColor(info: ((Date, Double, isOut: Bool, isStopped: Bool))) -> Color {
         let rate = info.1

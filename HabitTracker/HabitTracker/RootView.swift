@@ -144,6 +144,8 @@ struct RootView: View {
     
     
     var body: some View {
+       
+        
        VStack {
             ZStack{
                 ZStack{
@@ -223,6 +225,7 @@ struct RootView: View {
                 
             }.animation(.easeInOut(duration: 1.0), value: tabIndex)
                 .animation(.easeInOut(duration: POPUP_ANIMATION_DURATION), value: viewModel.blurEverything)
+        
         }
     
                         /*.onChange(of: scenePhase) { scenePhase in

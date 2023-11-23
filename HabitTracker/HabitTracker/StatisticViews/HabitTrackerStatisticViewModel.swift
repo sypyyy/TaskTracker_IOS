@@ -18,18 +18,16 @@ class HabitTrackerStatisticViewModel : ObservableObject{
     weak private var masterViewModel = HabitTrackerViewModel.shared
     private var persistenceModel : HabitController = HabitController.preview
     public var markDate: Date? = Date()
-    public var statisticalChartType: HabitStatisticShowType = .weekly {
+    public var digestChartCycle: HabitStatisticShowType = .weekly {
         didSet {
             firedUpdate = false
-            cachedData = [:]
-            objectWillChange.send()
         }
     }
     public var selectedInterval: (str: String, start: Date, end: Date) {
         var start: Date
         var end: Date
         var intervalStrRepresentation: String
-        switch statisticalChartType {
+        switch digestChartCycle {
         case .weekly:
             start = markDate?.startOfWeek() ?? Date()
             end = markDate?.endOfWeek() ?? Date()

@@ -127,6 +127,7 @@ extension StatDetailContent {
         
         var body: some View {
             let data: [(String, Int, Int)] = viewModel.cachedRegularChartData
+            
             Chart {
                 ForEach(data, id: \.0) { dot in
                    LineMark(
