@@ -7,20 +7,17 @@
 
 import SwiftUI
 
-struct HabitStatisticCell: View {
-    @State var tabIndex: HabitTabShowType = .checkIn
-    @State var zoomBg = true
-    @State var dataList:[(Date, Double, Bool, Bool)]  = [] 
+struct HabitStatisticFrequencyGraph: View {
+    
+    var data : [(Int, Color)]
     var habit: habitViewModel
     var blockParameters: (width: CGFloat, height: CGFloat, spacing: CGFloat)
         //let spacing = 0.0
     //row height
-    
-    
     var viewModel: HabitTrackerStatisticViewModel = HabitTrackerStatisticViewModel.shared
     var masterModel: HabitTrackerViewModel = HabitTrackerViewModel.shared
     private var rows: [GridItem] {
-        switch viewModel.statisticalChartType {
+        switch viewModel.digestChartCycle {
         case .weekly:
             return [GridItem(.fixed(blockParameters.height), spacing: blockParameters.spacing)]
         case .monthly:
@@ -56,13 +53,12 @@ struct HabitStatisticCell: View {
                 VStack(alignment: .center) {
                     VStack {
                         LazyHGrid(rows: rows, spacing: blockParameters.spacing) {
-                            ForEach(viewModel.cachedData[habit.id] ?? [], id: \.0) {tuple in
+                            ForEach(data, id: \.0) {tuple in
                                 RoundedRectangle(cornerRadius: blockParameters.width / 8).fill(tuple.1).frame(width: blockParameters.width,height: blockParameters.height)
                             }
                         }
                         //.frame(maxWidth: .infinity, alignment: .leading)
                     }
-                   
                 }
             
         
@@ -70,7 +66,7 @@ struct HabitStatisticCell: View {
 }
 
 
-extension HabitStatisticCell {
+extension HabitStatisticFrequencyGraph {
     private func getFillColor(info: ((Date, Double, isOut: Bool, isStopped: Bool))) -> Color {
         let rate = info.1
         if info.isOut {
@@ -97,8 +93,6 @@ extension HabitStatisticCell {
         return backgroundGradientStart.lighter(by: 30)
     }
 }
-
-
 
 struct HabitCalendarCell_Previews: PreviewProvider {
     static var previews: some View {
