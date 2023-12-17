@@ -32,6 +32,7 @@
 		2F63AE242A1FC39600BFBD5F /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F63AE232A1FC39600BFBD5F /* Shapes.swift */; };
 		2F7072192A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7072182A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift */; };
 		2F70F27D2A5467AC002C4A17 /* HabitRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F27C2A5467AC002C4A17 /* HabitRecord.swift */; };
+		2F7551552B2D9EEA00DC0C19 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7551542B2D9EEA00DC0C19 /* ViewModifiers.swift */; };
 		2F8418A02A46CB2100F20BD0 /* Habits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F84189F2A46CB2100F20BD0 /* Habits.swift */; };
 		2F8418A22A472F3B00F20BD0 /* HabitTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8418A12A472F3B00F20BD0 /* HabitTarget.swift */; };
 		2F9141B42A837DE100E53509 /* ViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9141B32A837DE100E53509 /* ViewControllerWrapper.swift */; };
@@ -40,6 +41,7 @@
 		2FB317062A117EB300B0D7DE /* HabitTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB317052A117EB300B0D7DE /* HabitTrackerViewModel.swift */; };
 		2FB384212A1692CC00822E46 /* TestAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB384202A1692CC00822E46 /* TestAnimation.swift */; };
 		2FBC52EA2A1468DF00C4992E /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBC52E92A1468DF00C4992E /* ViewExtensions.swift */; };
+		2FC7F2A02B2F3C9300B76A5A /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = 2FC7F29F2B2F3C9300B76A5A /* Neumorphic */; };
 		2FCA285F2A1375B9006AAD9B /* drawTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA285E2A1375B9006AAD9B /* drawTest.swift */; };
 		2FCA28612A1378A9006AAD9B /* DefaultIslandBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA28602A1378A9006AAD9B /* DefaultIslandBackgroundView.swift */; };
 		2FCB0FCC2A3EFDFE007DBA4E /* StopCheckPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB0FCB2A3EFDFE007DBA4E /* StopCheckPoint.swift */; };
@@ -83,6 +85,7 @@
 		2F63AE232A1FC39600BFBD5F /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		2F7072182A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerStatisticalDetailViewModel.swift; sourceTree = "<group>"; };
 		2F70F27C2A5467AC002C4A17 /* HabitRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRecord.swift; sourceTree = "<group>"; };
+		2F7551542B2D9EEA00DC0C19 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		2F84189F2A46CB2100F20BD0 /* Habits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habits.swift; sourceTree = "<group>"; };
 		2F8418A12A472F3B00F20BD0 /* HabitTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTarget.swift; sourceTree = "<group>"; };
 		2F9141B32A837DE100E53509 /* ViewControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapper.swift; sourceTree = "<group>"; };
@@ -107,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FC7F2A02B2F3C9300B76A5A /* Neumorphic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +272,7 @@
 				2F61D46B2A5888A200535919 /* timeExtension.swift */,
 				2F3936B72A5EA42B0092264E /* ColorExtension.swift */,
 				2F39E0702A84C9C500161B23 /* UIView_Animation_Extension.swift */,
+				2F7551542B2D9EEA00DC0C19 /* ViewModifiers.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 			);
 			name = HabitTracker;
 			packageProductDependencies = (
+				2FC7F29F2B2F3C9300B76A5A /* Neumorphic */,
 			);
 			productName = HabitTracker;
 			productReference = 2F5298FB29F20E0A0018B8CA /* HabitTracker.app */;
@@ -342,6 +348,7 @@
 			);
 			mainGroup = 2F5298F229F20E0A0018B8CA;
 			packageReferences = (
+				2FC7F29E2B2F3C9300B76A5A /* XCRemoteSwiftPackageReference "neumorphic" */,
 			);
 			productRefGroup = 2F5298FC29F20E0A0018B8CA /* Products */;
 			projectDirPath = "";
@@ -400,6 +407,7 @@
 				2FDAFFED2A0CCD75002AEA85 /* HabitController.swift in Sources */,
 				2F5651C42AE973B50025FF14 /* HabitStatisticalCell.swift in Sources */,
 				2F3936B82A5EA42B0092264E /* ColorExtension.swift in Sources */,
+				2F7551552B2D9EEA00DC0C19 /* ViewModifiers.swift in Sources */,
 				2FDA257729F47678005466AE /* HabitTrackerModel.swift in Sources */,
 				2F7072192A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift in Sources */,
 				2FBC52EA2A1468DF00C4992E /* ViewExtensions.swift in Sources */,
@@ -625,6 +633,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2FC7F29E2B2F3C9300B76A5A /* XCRemoteSwiftPackageReference "neumorphic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/costachung/neumorphic/";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2FC7F29F2B2F3C9300B76A5A /* Neumorphic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2FC7F29E2B2F3C9300B76A5A /* XCRemoteSwiftPackageReference "neumorphic" */;
+			productName = Neumorphic;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2F52990929F20E0E0018B8CA /* HabitTrackerDataModel.xcdatamodeld */ = {

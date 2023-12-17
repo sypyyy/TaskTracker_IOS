@@ -27,37 +27,43 @@ struct StatisticalView: View, Sendable {
     var masterModel: HabitTrackerViewModel = HabitTrackerViewModel.shared
     // 这个状态用来表示显示加载以及禁止触控， viewModel的firedUpdate表示需要更新图表
     @State var dataOld = false
-    
+    @State var navigationPushed = false
+    @State var detailHabit: habitViewModel? = nil
+    @State var detailListRowFrame: CGRect? = nil
+    var shouldShowDetailHabit: Bool {
+        detailHabit != nil && detailListRowFrame != nil
+    }
     var body: some View {
-            VStack {
-            ZStack {
-                GeometryReader { m in
+        VStack {
+            GeometryReader { m in
+                ZStack {
+                    
                     VStack {
                         
                         Text("Digest")
-                        .font(.system(size: 25, weight: .bold, design: .rounded))
-                        .foregroundColor(.primary.opacity(0.7)).padding(.bottom, 2)
+                            .font(.system(size: 25, weight: .bold, design: .rounded))
+                            .foregroundColor(.primary.opacity(0.7)).padding(.bottom, 2)
                         HStack {
                             Button{intervalChange(goback: true)} label: {Image(systemName: "arrowtriangle.backward.fill")}
                             Text("\(statsViewModel.selectedInterval.str)")
                             Button{intervalChange(goback: false)} label: {Image(systemName: "arrowtriangle.forward.fill")}
                         }
-                            .transaction { transaction in
+                        .transaction { transaction in
                             transaction.animation = nil
                         }.padding(.bottom)
-                            
-    
+                        
+                        
                         HStack {
                             /*
-                                Picker("Statistic period", selection: $viewModel.statisticalChartType) {
-                                    Text("Weekly").tag(HabitStatisticShowType.weekly)
-                                    Text("Monthly").tag(HabitStatisticShowType.monthly)
-                                    Text("Yearly").foregroundColor(.red).tag(HabitStatisticShowType.annually)
-                                }
-                                .pickerStyle(.segmented)
-                                
-                                .frame(width: 250)
-                            */
+                             Picker("Statistic period", selection: $viewModel.statisticalChartType) {
+                             Text("Weekly").tag(HabitStatisticShowType.weekly)
+                             Text("Monthly").tag(HabitStatisticShowType.monthly)
+                             Text("Yearly").foregroundColor(.red).tag(HabitStatisticShowType.annually)
+                             }
+                             .pickerStyle(.segmented)
+                             
+                             .frame(width: 250)
+                             */
                             StatisticalCustomSegmentedControl( options:  ["Weekly", "Monthly", "Yearly"])
                             
                         }.padding(.horizontal)
@@ -73,26 +79,26 @@ struct StatisticalView: View, Sendable {
                                         NavigationLink{Text("dbesj").onTapGesture {
                                             statisticalView_hostingNavigationController.popViewController(animated: true)
                                         }} label: {
-                                            HabitStatisticalCell(digestCycle: .weekly, habit: habit, m: m)
-                                            .listRowSeparator(.hidden)
+                                            HabitStatisticalCell(digestCycle: .weekly, habit: habit, m: m, isShowProgress: true)
+                                                .listRowSeparator(.hidden)
                                                 .listRowBackground(Color.clear)
                                         }
                                     }
                                 } /* header: {
-                                    HStack {
-                                        Text("0%")
-                                        RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
-                                        RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
-                                        RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
-                                        RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
-                                        RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
-                                        Text("100%   ")
-                                        
-                                        RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
-                                        Text("Inactive").textCase(.none)
-                                    }
-                                }
-                                */
+                                   HStack {
+                                   Text("0%")
+                                   RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
+                                   RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
+                                   RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
+                                   RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
+                                   RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
+                                   Text("100%   ")
+                                   
+                                   RoundedRectangle(cornerRadius: 4).fill(.gray).frame(width: 13,height: 13)
+                                   Text("Inactive").textCase(.none)
+                                   }
+                                   }
+                                   */
                                 Section{VStack{}}.frame(height: 20).listRowBackground(Color.clear)
                             }
                             
@@ -101,13 +107,14 @@ struct StatisticalView: View, Sendable {
                             .scrollContentBackground(.hidden)
                             .id(UUID())
                             .task {
-                    
-                                 
+                                
+                                
                             }
                             
                             //.navigationTitle("")
                             .toolbar(.hidden)
                             //.navigationBarHidden(true)
+                            
                         case .monthly:
                             List {
                                 ForEach(filterHabits().compactMap{$0},  id:\.id) {habit in
@@ -115,7 +122,7 @@ struct StatisticalView: View, Sendable {
                                         statisticalView_hostingNavigationController.popViewController(animated: true)
                                     }} label: {
                                         HabitStatisticalCell(digestCycle: .monthly,habit: habit, m: m)
-                                        .listRowSeparator(.hidden)
+                                            .listRowSeparator(.hidden)
                                             .listRowBackground(Color.clear)
                                     }
                                 }
@@ -130,64 +137,124 @@ struct StatisticalView: View, Sendable {
                             }
                             
                             
-                        case .annually:
+                        default:
                             
-                           List {
-                                   ForEach(filterHabits().compactMap{$0}, id:\.id) {habit in
-                                       let s = print("cfdsccfdrf")
-                                       Section{
-                                           VStack(alignment: .leading) {
-                                               
-                                               NavigationLink{StatisticalDetailView(habit: habit, enteringChartCycle: .annually).onTapGesture {
-                                                   statisticalView_hostingNavigationController.popViewController(animated: true)
-                                               }} label: {
-                                                   Text("\(habit.name)").padding(.top, 7)
-                                               }
-                                               
-                                                   HabitStatisticalCell(digestCycle: .annually,habit: habit, m: m)
-                                                       .listRowSeparator(.hidden)
-                                                       .listRowBackground(Color.clear)
-                                                       
-                                           }
-                                       }
-                                   }
-                                   Section{VStack{}}.frame(height: 20).listRowBackground(Color.clear)
-                               
+                            List {
+                                ForEach(filterHabits().compactMap{$0}, id:\.id) {habit in
+                                    let s = print("cfdsccfdrf")
+                                    
+                                    Section{
+                                        
+                                        Button {
+                                            /*
+                                             navigationPushed = true
+                                             var vc = CustomHostingViewController(rootView: StatisticalDetailView(habit: habit, enteringChartCycle: .annually).onTapGesture {
+                                             statisticalView_hostingNavigationController.popViewController(animated: false)
+                                             })
+                                             let parent = statisticalView_hostingController
+                                             
+                                             parent.view.addSubview(vc.view)
+                                             let screen = parent.view.window?.screen
+                                             vc.view.frame.size.height = screen?.bounds.size.height ?? 0
+                                             vc.view.frame.size.width = screen?.bounds.size.width ?? 0
+                                             
+                                             vc.view.backgroundColor = UIColor(Color.clear)
+                                             parent.addChild(vc)
+                                             vc.didMove(toParent: parent)
+                                             //statisticalView_hostingNavigationController.present(vc, animated: true)
+                                             */
+                                            detailHabit = habit
+                                        } label: {
+                                            VStack {
+                                                VStack(alignment: .leading) {
+                                                    NavigationLink{} label: {
+                                                        
+                                                            Text("\(habit.name)")
+                                                                .padding(.top, 7).disabled(true)
+                                                                
+                                                        
+                                                    }
+                                                    
+                                                    HabitStatisticalCell(digestCycle: .annually,habit: habit, m: m)
+                                                        .listRowSeparator(.hidden)
+                                                        .listRowBackground(Color.clear)
+                                                    
+                                                    
+                                                }.padding()
+                                                    
+                                            }.contentShape(Rectangle())
+                                                
+                                        }
+                                        .buttonStyle(ListButtonStyle())
+                                        .overlay{
+                                            GeometryReader{reader in
+                                                
+                                                if let detailId = detailHabit?.id, detailId == habit.id {
+                                                    VStack{}.onAppear{
+                                                        detailListRowFrame = reader.frame(in: .global)
+                                                    }
+                                                    
+                                                }
+                                                
+                                                
+                                            }
+                                            
+                                        }
+                                    }
+                                    
+                                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                    //.background(.regularMaterial)
+                                    .background(Color.white.opacity(0.5))
+                                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                                    .listRowBackground(Color.clear)
+                                    .opacity(shouldShowDetailHabit && detailHabit?.id == habit.id ? 0 : 1)
+                                }
+                                Section{VStack{}}.frame(height: 20).listRowBackground(Color.clear)
+                                
                             }
                             .foregroundColor(.primary.opacity(0.5))
                             .fontWeight(.bold)
                             .scrollContentBackground(.hidden)
-                            //
-                            .id(UUID())
-                            .task {
-                                
-                            }
-                            
+                            //syppp test
+                            .id(1)
                             .onDisappear {
                                 print("dns")
                             }
+                            
                         }
                     }
-                }
-                if(dataOld) {
-                    ProgressView().padding(8).background(backgroundGradientStart.opacity(0.7)).cornerRadius(6)
+                    
+                    if let habit = detailHabit, let startRect = detailListRowFrame {
+                        
+                        StatisticalDetailView(habit: habit, enteringChartCycle: .annually, shrinkedRect: startRect, screenWidth: m.size.width, screenHeight: m.size.height).onTapGesture{
+                            detailHabit = nil
+                            detailListRowFrame = nil
+                        }
+                        
+                    }
+                    
                 }
             }
-            }
-            
-        
-        
-        
-        //DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg)
-        
-        //.background(.gray.opacity(0.05))
-        //.background(.regularMaterial)
-        
-        //.background(.red)
-            
-        
+        }.overlay {
+            Rectangle().fill(.gray.opacity(navigationPushed ? 0.6 : 0))
+        }
+        .animation(.easeInOut(duration: 0.3), value: navigationPushed)
     }
 }
+
+
+
+struct ListButtonStyle: ButtonStyle {
+
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .background(configuration.isPressed ? Color.gray.opacity(0.1) : Color.clear)
+            //.scaleEffect(configuration.isPressed ? 1.05 : 1)
+            .animation(.snappy(duration: 0), value: configuration.isPressed)
+    }
+}
+
+
 
 extension StatisticalView {
     private func intervalChange(goback: Bool) {
@@ -202,7 +269,7 @@ extension StatisticalView {
         }
         statsViewModel.markDate = newMarkDate
         Task.detached {
-            await StatDigestImgCacheActor.shared.invalidateAllCache()
+            await StatDigestImgCache.shared.invalidateAllCache()
             await MainActor.run {
                 statsViewModel.objectWillChange.send()
             }

@@ -10,8 +10,11 @@ import CoreData
 import UIKit
 
 
-let backgroundGradientStart = Color(hex: 0xba5370).lighter(by: 30)
-let backgroundGradientEnd = Color(hex: 0xf4e2d8)
+//let backgroundGradientStart = Color(hex: 0xba5370).lighter(by: 30)
+//let backgroundGradientEnd = Color(hex: 0xf4e2d8)
+
+let backgroundGradientStart = Color(red: 242.0 / 255, green: 173.0 / 255, blue: 182.0 / 255)
+let backgroundGradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 120.0 / 255).lighter(by: 15)
     
     let emptyView = Text("dskfs")
     @MainActor
@@ -149,9 +152,11 @@ struct RootView: View {
        VStack {
             ZStack{
                 ZStack{
-                    DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg).zIndex(0)
+                    DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg).drawingGroup().ignoresSafeArea()
+                    
                     
                     VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().background(.regularMaterial).opacity(tabIndex == .statistical ? 1.0 : 0.0).animation(.easeIn(duration: 0.2), value: tabIndex)
+                     
                     
                     
                     //backgroundGradientStart.darker(by: 30).ignoresSafeArea()

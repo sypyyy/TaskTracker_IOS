@@ -54,7 +54,7 @@ struct HabitStatisticFrequencyGraph: View {
                     VStack {
                         LazyHGrid(rows: rows, spacing: blockParameters.spacing) {
                             ForEach(data, id: \.0) {tuple in
-                                RoundedRectangle(cornerRadius: blockParameters.width / 8).fill(tuple.1).frame(width: blockParameters.width,height: blockParameters.height)
+                                RoundedRectangle(cornerRadius: blockParameters.width / 5).fill(tuple.1).frame(width: blockParameters.width,height: blockParameters.height)
                             }
                         }
                         //.frame(maxWidth: .infinity, alignment: .leading)

@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+private struct MainWindowSizeKey: EnvironmentKey {
+    static let defaultValue: CGSize = .zero
+}
+
+extension EnvironmentValues {
+    var mainWindowSize: CGSize {
+        get { self[MainWindowSizeKey.self] }
+        set { self[MainWindowSizeKey.self] = newValue }
+    }
+}
 
 @main
 struct HabitTrackerApp: App {
@@ -16,7 +26,9 @@ struct HabitTrackerApp: App {
         WindowGroup {
             let overalViewModel = HabitTrackerViewModel.shared
             //Text("djeshdfhke WTF????")
+            
                 RootView(viewModel : overalViewModel)
+            
                 //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

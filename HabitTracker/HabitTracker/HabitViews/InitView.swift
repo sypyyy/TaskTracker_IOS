@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct InitView: View {
+    @State var shown = false
     var body: some View {
         VStack {
-            DateSwipeBar()//.id(UUID())
-            TaskListView(viewModel: HabitTrackerViewModel.shared)
+            DateSwipeBar().offset(x: 0, y: shown ? 0 : 20)
+                .opacity(shown ? 1.0 : 0.3)
+            TaskListView(viewModel: HabitTrackerViewModel.shared).offset(x: 0, y: shown ? 0 : 50)
+                .opacity(shown ? 1.0 : 0.3)
+        }.onAppear {
+            shown = true
         }
+        .animation(.default, value: shown)
     }
 }
 

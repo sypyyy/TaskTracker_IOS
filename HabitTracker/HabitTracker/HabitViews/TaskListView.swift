@@ -27,7 +27,7 @@ struct TaskListView : View {
         VStack{
             GeometryReader{ metric in
                 ScrollView(showsIndicators : false) {
-                    VStack{
+                    LazyVStack{
                         ForEach(viewModel.getOngoingHabitViewModels(), id: \.self.id) { habit in
                             VStack{
                                 
@@ -36,7 +36,8 @@ struct TaskListView : View {
                                         HStack(alignment: .center){
                                             HStack{
                                                 ZStack {
-                                                    Circle().fill(.white)
+                                                    Circle().stroke(lineWidth: 2).fill(.white)
+                                                        
                                                         .frame(width: 28, height: 28)
                                                         .onTapGesture {
                                                             

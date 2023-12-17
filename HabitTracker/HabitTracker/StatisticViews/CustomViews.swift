@@ -33,7 +33,7 @@ struct StatisticalCustomSegmentedControl: View {
                                 HabitTrackerStatisticViewModel.shared.digestChartCycle = type
                                 HabitTrackerStatisticViewModel.shared.markDate = Date()
                                 Task.detached(priority: .userInitiated) {
-                                    await StatDigestImgCacheActor.shared.invalidateAllCache()
+                                    await StatDigestImgCache.shared.invalidateAllCache()
                                     await MainActor.run {
                                         HabitTrackerStatisticViewModel.shared.objectWillChange.send()
                                     }

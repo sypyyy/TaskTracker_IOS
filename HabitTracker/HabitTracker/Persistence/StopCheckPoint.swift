@@ -15,6 +15,9 @@ enum StopPointType: Int16 {
 extension HabitController {
     
     internal func getStopCheckPoints(habitID: Int64) -> [StopCheckPoint] {
+        if(!Thread.isMainThread) {
+            print("Bad thread for coreData!!!!!!!!!!!! getStopCheckPoints")
+        }
         let request: NSFetchRequest<StopCheckPoint> = StopCheckPoint.fetchRequest()
         var sortByTime = NSSortDescriptor(key:"date", ascending:true)
         request.sortDescriptors = [sortByTime]
@@ -30,6 +33,9 @@ extension HabitController {
     }
     
     internal func setStopCheckPoint(habitID: Int64, date: Date, stopPointType: StopPointType) {
+        if(!Thread.isMainThread) {
+            print("Bad thread for coreData!!!!!!!!!!!! setStopCheckPoint")
+        }
         let viewContext = self.container.viewContext
         let newStopPoint = StopCheckPoint(context: viewContext)
         newStopPoint.date = date

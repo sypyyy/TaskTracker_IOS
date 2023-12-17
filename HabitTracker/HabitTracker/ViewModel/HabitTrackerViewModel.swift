@@ -17,6 +17,7 @@ class HabitTrackerViewModel : ObservableObject{
    
     static var shared = HabitTrackerViewModel()
     //sypppppp
+    var array = [1, 2, 3, 4, 6, 4, 1]
     private var overalModel : habitTrackerModel = habitTrackerModel()
     private var persistenceModel : HabitController = HabitController.preview
     private var showCreateHabitForm : Bool = false
@@ -111,9 +112,8 @@ extension HabitTrackerViewModel {
     
     func getTargetSeries(habitID: Int64) -> [TargetCheckPoint] {
         //syppp test
-        //let res = persistenceModel.getTargetSeries(habitID: habitID)
-        //return res
-        return []
+        let res = persistenceModel.getTargetSeries(habitID: habitID)
+        return res
     }
     
     func getStopCheckPoints(habitID: Int64) -> [StopCheckPoint] {

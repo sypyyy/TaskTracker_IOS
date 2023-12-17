@@ -12,6 +12,9 @@ extension HabitController {
     
     //get all the records of that day and also of the start of the week and month of that day
     func getDayRecords(date: Date, habitID: Int64?) -> [HabitRecord] {
+        if(!Thread.isMainThread) {
+            print("Bad thread for coreData!!!!!!!!!!!!")
+        }
         var records = [HabitRecord]()
         records += getSpecificDayRecords(date: date, habitID: habitID, cycle: .daily)
         let startOfWeek = date.startOfWeek().addByHour(12)
@@ -23,6 +26,9 @@ extension HabitController {
     }
     
     func getSpecificDayRecords(date: Date, habitID: Int64?, cycle: HabitCycle) -> [HabitRecord] {
+        if(!Thread.isMainThread) {
+            print("Bad thread for coreData!!!!!!!!!!!!")
+        }
         let request: NSFetchRequest<HabitRecord> = HabitRecord.fetchRequest()
         if let id = habitID {
             request.predicate = NSPredicate(format: "date >= %@ && date < %@ && habitID == \(id) && cycle == %@", date.startOfDay() as CVarArg, date.endOfDay() as CVarArg, cycle.rawValue as CVarArg)
@@ -41,6 +47,9 @@ extension HabitController {
     }
     
     func getIntervalRecords(startDate: Date, endDate: Date, habitID: Int64? = nil) -> [HabitRecord] {
+        if(!Thread.isMainThread) {
+            print("Bad thread for coreData!!!!!!!!!!!!")
+        }
         var records = [HabitRecord]()
         let startOfWeek = startDate.startOfWeek()
         let request: NSFetchRequest<HabitRecord> = HabitRecord.fetchRequest()
@@ -61,6 +70,9 @@ extension HabitController {
     }
     
     func createAndUpdateRecord(date: Date, habitID: Int64, habitType: HabitType, habitCycle: HabitCycle, numberProgress: Int16 = 0, timeProgress: String = "", done: Bool = false) {
+        if(!Thread.isMainThread) {
+            print("Bad thread for coreData!!!!!!!!!!!!")
+        }
         var dateToDelete: Date
         switch habitCycle {
         case .daily:

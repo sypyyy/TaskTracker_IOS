@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-actor StatDigestImgCacheActor {
-    static var shared = StatDigestImgCacheActor()
+@MainActor
+class StatDigestImgCache {
+    static var shared = StatDigestImgCache()
     
     var taskBatchId = UUID()
     
@@ -46,6 +47,7 @@ struct HabitStatisticalCell: View {
     var digestCycle: HabitStatisticShowType
     var habit: habitViewModel
     var m: GeometryProxy
+    @State var isShowProgress: Bool = false
     @State var firedUpdate = false
     @State var graphImg: UIImage? = nil
     @State var dataOld = true
@@ -58,22 +60,32 @@ struct HabitStatisticalCell: View {
             
             return (width: (metricWidth) * 0.65 / 31, height: (metricWidth) * 0.65 / 31, spacing: (metricWidth) * 0.35 / 31)
         case .annually:
-            return (width: (metricWidth) * 0.85 / 53, height: (metricWidth) / 70, spacing: (metricWidth) * 0.15 / 53)
+            return (width: (metricWidth) * 0.85 / 53, height: (metricWidth) * 0.85 / 53, spacing: (metricWidth) * 0.15 / 53)
         }
     }
     var body: some View {
         ZStack{
             switch digestCycle {
+                /*
             case .weekly:
                 HStack(alignment: .center, spacing: 0) {
                     Text("\(habit.name)").frame(width: m.size.width * 0.3, alignment: .leading)
                     
-                    GeometryReader { metric in
+                    GeometryReader { m in
                         if let image = graphImg {
-                            Image(uiImage: image)
+                            VStack {
+                                Spacer()
+                                Image(uiImage: image).resizable().aspectRatio(contentMode:.fit)
+                                Spacer()
+                            }
                         } else {
                             //HabitStatisticFrequencyGraph(habit: habit, blockParameters: blockParameters(metricWidth: m.size.width, metricHeight: m.size.height))
                             VStack{}
+                                .task {
+                                    if dataOld {
+                                        await updateData(metricWidth: m.size.width, metricHeight: m.size.height)
+                                    }
+                                }
                         }
                     }.frame(minHeight: m.size.width * 0.7 / 8)
                 }
@@ -82,70 +94,88 @@ struct HabitStatisticalCell: View {
                     Text("\(habit.name)").padding(.top, 7)
                     GeometryReader { m in
                         if let image = graphImg {
-                            Image(uiImage: image)
+                            
+                                
+                                Image(uiImage: image).resizable().aspectRatio(contentMode:.fit)
+                                
+                            
                         } else {
-                
                             VStack{}
+                                .task {
+                                    if dataOld {
+                                        await updateData(metricWidth: m.size.width, metricHeight: m.size.height)
+                                    }
+                                }
                         }
                     }.frame(height: m.size.width / 31 * 1.1)
+
                 }
-            case .annually:
+                 */
+            default:
                 GeometryReader { m in
-                    if let image = graphImg {
-                        Image(uiImage: image)
+                    if let image = StatDigestImgCache.shared.getImageCache(id: habit.id) {
+                        Image(uiImage: image).resizable().aspectRatio( contentMode: .fit)
+                    
                     } else {
-                        //HabitStatisticFrequencyGraph(habit: habit, blockParameters: blockParameters(metricWidth: m.size.width, metricHeight: m.size.height))
-                        VStack{}
+                        ProgressView().padding(8).background(backgroundGradientStart.opacity(0.7)).cornerRadius(6)
+                            .task(priority: .high) {
+                                if dataOld {
+                                    print("syppp fhdrjjkfskrhfdrhk")
+                                    await updateData(metricWidth: m.size.width, metricHeight: m.size.height)
+                                }
+                                
+                            }
                     }
                 }.frame(height: m.size.width / 65 * 7)
-            }
-            if(dataOld) {
-                ProgressView().padding(8).background(backgroundGradientStart.opacity(0.7)).cornerRadius(6)
-            }
-        }
-        .disabled(dataOld)
-        .task {
-            if dataOld {
-                print("syppp fhdrjjkfskrhfdrhk")
-                await updateData()
+                    
             }
             
+            if isShowProgress {
+                
+            }
         }
+        
     }
 }
 
 extension HabitStatisticalCell {
     typealias blockInfo = (Date, Double, Bool, Bool)
     
-    private func updateData() async {
-        let token = await StatDigestImgCacheActor.shared.getToken()
+    private func updateData(metricWidth: CGFloat, metricHeight: CGFloat) async {
+        let token = await StatDigestImgCache.shared.getToken()
         Task.detached(priority: .background) {
-            if await StatDigestImgCacheActor.shared.getImageCache(id: habit.id) == nil {
-                let data = await getDataList(habit: habit)
-                let render = await ImageRenderer(content: HabitStatisticFrequencyGraph(data: data, habit: habit, blockParameters: blockParameters(metricWidth: m.size.width - 60, metricHeight: 144)))
-                await MainActor.run{
-                    render.scale = 3.0
+            if await StatDigestImgCache.shared.getImageCache(id: habit.id) == nil {
+                let data = getDataList(habit: habit)
+                await MainActor.run {
+                    isShowProgress = true
+                    let render = ImageRenderer(content: HabitStatisticFrequencyGraph(data: data, habit: habit, blockParameters: blockParameters(metricWidth: metricWidth, metricHeight: metricHeight)))
+                    
+                    render.scale = 3
+                    Task.detached {
+                        await StatDigestImgCache.shared.insertImageCache(id: habit.id, img: await render.uiImage ?? UIImage(), token: token)
+                        await updateImage()
+                        
+                    }
                 }
-                await StatDigestImgCacheActor.shared.insertImageCache(id: habit.id, img: await render.uiImage ?? UIImage(), token: token)
+                
+            } else {
+                await updateImage()
             }
-            let img = await StatDigestImgCacheActor.shared.getImageCache(id: habit.id)
+            
+            
+        }
+        @Sendable func updateImage() async {
+            let img = await StatDigestImgCache.shared.getImageCache(id: habit.id)
             await MainActor.run {
                 dataOld = false
                 graphImg = img
-               // statsViewModel.objectWillChange.send()
+                isShowProgress = false
             }
         }
     }
     
     private func getDataList(habit: habitViewModel) -> [(Int, Color)] {
-        let serialQueue = DispatchQueue(label: ".sync.statViewModel.coredata")
-        /*
-        serialQueue.sync {
-            if statsViewModel.cachedData[habit.id] != nil {
-                return
-            }
-        }
-         */
+        let serialQueue = DispatchQueue.main
         let viewModel = HabitTrackerStatisticViewModel.shared
         let masterModel = HabitTrackerViewModel.shared
         var res = [(Date, Double, Bool, Bool)]()
@@ -215,9 +245,7 @@ extension HabitStatisticalCell {
         func calculateAndAppendRate(date: Date) {
             var target = 0
             serialQueue.sync {
-                //syppp test
-                //target = getTarget(date: date)
-                target = 10
+                target = getTarget(date: date)
             }
             switch habit.cycle {
             case .daily:

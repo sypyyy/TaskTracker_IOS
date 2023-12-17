@@ -29,6 +29,9 @@ import SwiftUI
  let backgroundGradientStart = Color(hex: 0xba5370).lighter(by: 25)
  let backgroundGradientEnd = Color(hex: 0xf4e2d8)
  
+ //let backgroundGradientStart = Color(hex: 0xba5370).lighter(by: 30)
+ //let backgroundGradientEnd = Color(hex: 0xf4e2d8)
+ 
  purple pink
  let backgroundGradientStart = Color(hex: 0xddd6f3)
  let backgroundGradientEnd = Color(hex: 0xfaaca8)
