@@ -13,7 +13,7 @@ struct InitView: View {
         VStack {
             DateSwipeBar().offset(x: 0, y: shown ? 0 : 20)
                 .opacity(shown ? 1.0 : 0.3)
-            TaskListView(viewModel: HabitTrackerViewModel.shared).offset(x: 0, y: shown ? 0 : 50)
+            TaskListView(masterViewModel: TaskMasterViewModel.shared).offset(x: 0, y: shown ? 0 : 50)
                 .opacity(shown ? 1.0 : 0.3)
         }.onAppear {
             shown = true

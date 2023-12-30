@@ -17,15 +17,16 @@ enum HabitStatisticShowType: String {
 
 
 //这个类为了确保线程安全尝试用非单例的方式实现
+
 class HabitTrackerStatisticDetailViewModel : ObservableObject {
     
-    init(habit: habitViewModel, markDate: Date, chartType: HabitStatisticShowType) {
+    init(habit: HabitModel, markDate: Date, chartType: HabitStatisticShowType) {
         self.habit = habit
         self.markDate = markDate
         self.regularChartType = chartType
     }
     //var currentHabitID: Int64?
-    var habit: habitViewModel?
+    var habit: HabitModel?
     public var markDate: Date? = Date()
     public var regularChartType: HabitStatisticShowType {
         didSet {
@@ -34,8 +35,8 @@ class HabitTrackerStatisticDetailViewModel : ObservableObject {
         }
     }
     
-    weak private var masterViewModel = HabitTrackerViewModel.shared
-    private var persistenceModel : HabitController = HabitController.preview
+    weak private var masterViewModel = TaskMasterViewModel.shared
+    private var persistenceModel : PersistenceController = PersistenceController.preview
     public var regularChartSelectedInterval: (str: String, start: Date, end: Date) {
         var start: Date
         var end: Date
@@ -79,8 +80,8 @@ class HabitTrackerStatisticDetailViewModel : ObservableObject {
 
 extension HabitTrackerStatisticDetailViewModel {
     public func getDataList() {
-        let habit = self.habit ?? habitViewModel(habit: Habit())
-        let masterModel = HabitTrackerViewModel.shared
+        let habit = self.habit ?? HabitModel(habit: Habit())
+        let masterModel = HabitViewModel.shared
         var res = [(Date, finished: Int, target: Int, isOut: Bool, isStopped: Bool)]()
         var tempInfo = (date: Date(), finished: 0, target: 0, isOut: false, isStopped: false)
         let targetSeries = masterModel.getTargetSeries(habitID: habit.id)
@@ -281,7 +282,7 @@ extension StatisticalView {
 }
 
 extension HabitTrackerStatisticDetailViewModel {
-    public func getIntervalRecords(startDate: Date?, endDate: Date?, habitID: Int64) -> [HabitRecord] {
+    public func getIntervalRecords(startDate: Date?, endDate: Date?, habitID: String) -> [HabitRecord] {
         return persistenceModel.getIntervalRecords(startDate: startDate ?? regularChartSelectedInterval.start, endDate: endDate ?? regularChartSelectedInterval.end, habitID: habitID)
     }
 }

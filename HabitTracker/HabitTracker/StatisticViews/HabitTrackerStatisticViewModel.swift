@@ -15,8 +15,8 @@ enum HabitStatisticShowType: String {
 
 class HabitTrackerStatisticViewModel : ObservableObject{
     static var shared = HabitTrackerStatisticViewModel()
-    weak private var masterViewModel = HabitTrackerViewModel.shared
-    private var persistenceModel : HabitController = HabitController.preview
+    weak private var masterViewModel = TaskMasterViewModel.shared
+    private var persistenceModel : PersistenceController = PersistenceController.preview
     public var markDate: Date? = Date()
     public var digestChartCycle: HabitStatisticShowType = .weekly {
         didSet {
@@ -71,7 +71,7 @@ class HabitTrackerStatisticViewModel : ObservableObject{
 }
 
 extension HabitTrackerStatisticViewModel {
-    public func getIntervalRecords(startDate: Date?, endDate: Date?, habitID: Int64) -> [HabitRecord] {
+    public func getIntervalRecords(startDate: Date?, endDate: Date?, habitID: String) -> [HabitRecord] {
         return persistenceModel.getIntervalRecords(startDate: startDate ?? selectedInterval.start, endDate: endDate ?? selectedInterval.end, habitID: habitID)
     }
 }
@@ -79,7 +79,7 @@ extension HabitTrackerStatisticViewModel {
 extension HabitTrackerStatisticViewModel {
     func respondToDataChange() {
         firedUpdate = false
-        HabitTrackerViewModel.shared.statDataChanged = false
+        TaskMasterViewModel.shared.statDataChanged = false
         //cachedData = [:]
     }
 }

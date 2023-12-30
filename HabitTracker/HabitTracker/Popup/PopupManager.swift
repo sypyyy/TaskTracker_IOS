@@ -13,7 +13,7 @@ class PopupManager : ObservableObject{
     static var shared = PopupManager()
     var showPopup = false {
         didSet {
-            HabitTrackerViewModel.shared.blurEverything = showPopup
+            TaskMasterViewModel.shared.blurEverything = showPopup
         }
     }
     var showType: PopupType = .habitDetailNumberModify
@@ -22,7 +22,7 @@ class PopupManager : ObservableObject{
     public func displayPopup(showType: PopupType, title: String = "", callback: PopupCallback) {
         popupTitle = title
         showPopup = true
-        HabitTrackerViewModel.shared.blurEverything = showPopup
+        TaskMasterViewModel.shared.blurEverything = showPopup
         self.showType = showType
         self.callback = callback
         objectWillChange.send()
@@ -30,7 +30,7 @@ class PopupManager : ObservableObject{
     
     public func closePopup() {
         showPopup = false
-        HabitTrackerViewModel.shared.blurEverything = showPopup
+        TaskMasterViewModel.shared.blurEverything = showPopup
         self.callback = nil
         objectWillChange.send()
     }

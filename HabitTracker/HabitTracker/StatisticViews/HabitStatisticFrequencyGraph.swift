@@ -10,12 +10,12 @@ import SwiftUI
 struct HabitStatisticFrequencyGraph: View {
     
     var data : [(Int, Color)]
-    var habit: habitViewModel
+    var habit: HabitModel
     var blockParameters: (width: CGFloat, height: CGFloat, spacing: CGFloat)
         //let spacing = 0.0
     //row height
     var viewModel: HabitTrackerStatisticViewModel = HabitTrackerStatisticViewModel.shared
-    var masterModel: HabitTrackerViewModel = HabitTrackerViewModel.shared
+    var masterModel: HabitViewModel = HabitViewModel.shared
     private var rows: [GridItem] {
         switch viewModel.digestChartCycle {
         case .weekly:

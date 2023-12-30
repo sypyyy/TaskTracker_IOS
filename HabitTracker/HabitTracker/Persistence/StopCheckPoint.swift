@@ -12,9 +12,9 @@ enum StopPointType: Int16 {
     case go = 1
 }
 
-extension HabitController {
+extension PersistenceController {
     
-    internal func getStopCheckPoints(habitID: Int64) -> [StopCheckPoint] {
+    internal func getStopCheckPoints(habitID: String) -> [StopCheckPoint] {
         if(!Thread.isMainThread) {
             print("Bad thread for coreData!!!!!!!!!!!! getStopCheckPoints")
         }
@@ -32,7 +32,7 @@ extension HabitController {
         }
     }
     
-    internal func setStopCheckPoint(habitID: Int64, date: Date, stopPointType: StopPointType) {
+    internal func setStopCheckPoint(habitID: String, date: Date, stopPointType: StopPointType) {
         if(!Thread.isMainThread) {
             print("Bad thread for coreData!!!!!!!!!!!! setStopCheckPoint")
         }

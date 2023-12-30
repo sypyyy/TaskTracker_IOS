@@ -59,6 +59,6 @@ struct StatisticalCustomSegmentedControl: View {
 struct CustomViews_Previews: PreviewProvider {
     
     static var previews: some View {
-        RootView(viewModel: HabitTrackerViewModel.shared)
+        RootView(viewModel: TaskMasterViewModel.shared)
     }
 }

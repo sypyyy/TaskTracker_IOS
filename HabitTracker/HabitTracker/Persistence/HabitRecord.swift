@@ -8,10 +8,10 @@
 import Foundation
 import CoreData
 
-extension HabitController {
+extension PersistenceController {
     
     //get all the records of that day and also of the start of the week and month of that day
-    func getDayRecords(date: Date, habitID: Int64?) -> [HabitRecord] {
+    func getDayRecords(date: Date, habitID: String?) -> [HabitRecord] {
         if(!Thread.isMainThread) {
             print("Bad thread for coreData!!!!!!!!!!!!")
         }
@@ -25,13 +25,13 @@ extension HabitController {
         return records
     }
     
-    func getSpecificDayRecords(date: Date, habitID: Int64?, cycle: HabitCycle) -> [HabitRecord] {
+    func getSpecificDayRecords(date: Date, habitID: String?, cycle: HabitCycle) -> [HabitRecord] {
         if(!Thread.isMainThread) {
             print("Bad thread for coreData!!!!!!!!!!!!")
         }
         let request: NSFetchRequest<HabitRecord> = HabitRecord.fetchRequest()
         if let id = habitID {
-            request.predicate = NSPredicate(format: "date >= %@ && date < %@ && habitID == \(id) && cycle == %@", date.startOfDay() as CVarArg, date.endOfDay() as CVarArg, cycle.rawValue as CVarArg)
+            request.predicate = NSPredicate(format: "date >= %@ && date < %@ && habitID == '\(id)' && cycle == %@", date.startOfDay() as CVarArg, date.endOfDay() as CVarArg, cycle.rawValue as CVarArg)
         } else {
             request.predicate = NSPredicate(format: "date >= %@ && date < %@ && cycle == %@", date.startOfDay() as CVarArg, date.endOfDay() as CVarArg, cycle.rawValue as CVarArg)
         }
@@ -46,7 +46,7 @@ extension HabitController {
         }
     }
     
-    func getIntervalRecords(startDate: Date, endDate: Date, habitID: Int64? = nil) -> [HabitRecord] {
+    func getIntervalRecords(startDate: Date, endDate: Date, habitID: String? = nil) -> [HabitRecord] {
         if(!Thread.isMainThread) {
             print("Bad thread for coreData!!!!!!!!!!!!")
         }
@@ -54,7 +54,7 @@ extension HabitController {
         let startOfWeek = startDate.startOfWeek()
         let request: NSFetchRequest<HabitRecord> = HabitRecord.fetchRequest()
         if let id = habitID {
-            request.predicate = NSPredicate(format: "date >= %@ && date < %@ && habitID == \(id)", startOfWeek as CVarArg, endDate as CVarArg)
+            request.predicate = NSPredicate(format: "date >= %@ && date < %@ && habitID == '\(id)'", startOfWeek as CVarArg, endDate as CVarArg)
         } else {
             request.predicate = NSPredicate(format: "date >= %@ && date < %@", startOfWeek as CVarArg, endDate as CVarArg)
         }
@@ -69,7 +69,7 @@ extension HabitController {
         return records
     }
     
-    func createAndUpdateRecord(date: Date, habitID: Int64, habitType: HabitType, habitCycle: HabitCycle, numberProgress: Int16 = 0, timeProgress: String = "", done: Bool = false) {
+    func createAndUpdateRecord(date: Date, habitID: String, habitType: HabitType, habitCycle: HabitCycle, numberProgress: Int16 = 0, timeProgress: String = "", done: Bool = false) {
         if(!Thread.isMainThread) {
             print("Bad thread for coreData!!!!!!!!!!!!")
         }

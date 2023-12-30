@@ -7,14 +7,15 @@
 
 import SwiftUI
 
+
 struct HabitDetailView: View{
-    var habit: habitViewModel {
+    var habit: HabitModel {
         didSet {
             print("syppppppppppdsdsefe\(habit)")
         }
     }
     let spacing: CGFloat = 10
-    let viewModel: HabitTrackerViewModel = HabitTrackerViewModel.shared
+    let viewModel: HabitViewModel = HabitViewModel.shared
     var body: some View {
         
             VStack{
@@ -209,8 +210,8 @@ extension HabitDetailView {
     
     //圆圈进度条
     struct HabitProgressCircleView: View{
-        let habit: habitViewModel
-        let viewModel: HabitTrackerViewModel = HabitTrackerViewModel.shared
+        let habit: HabitModel
+        let viewModel: TaskMasterViewModel = TaskMasterViewModel.shared
         var body: some View {
             ZStack {
                 let progressInPercent = habit.getProgressPercent()
@@ -255,7 +256,7 @@ extension HabitDetailView {
     
     struct HabitDetailView_Previews: PreviewProvider {
         static var previews: some View {
-            RootView(viewModel: HabitTrackerViewModel.shared)
+            RootView(viewModel: TaskMasterViewModel.shared)
         }
     }
 

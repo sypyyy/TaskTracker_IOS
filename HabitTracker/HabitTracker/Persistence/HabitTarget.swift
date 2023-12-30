@@ -7,10 +7,10 @@
 
 import CoreData
 
-extension HabitController {
+extension PersistenceController {
     
     
-    func getTargetSeries(habitID: Int64) -> [TargetCheckPoint] {
+    func getTargetSeries(habitID: String) -> [TargetCheckPoint] {
         if(!Thread.isMainThread) {
             print("Bad thread for coreData!!!!!!!!!!!! getTargetSeries")
         }
@@ -29,7 +29,7 @@ extension HabitController {
         }
     }
     
-    internal func setTargetCheckPoint(habitID: Int64, date: Date, numberTarget: Int16 = -1, timeTarget: String = "") {
+    internal func setTargetCheckPoint(habitID: String, date: Date, numberTarget: Int16 = -1, timeTarget: String = "") {
         if(!Thread.isMainThread) {
             print("Bad thread for coreData!!!!!!!!!!!! setTargetCheckPoint")
         }

@@ -28,6 +28,10 @@
 		2F5651C42AE973B50025FF14 /* HabitStatisticalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5651C32AE973B50025FF14 /* HabitStatisticalCell.swift */; };
 		2F5BBC312A8C990F00579D5D /* CustomViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5BBC302A8C990F00579D5D /* CustomViewControllers.swift */; };
 		2F5CF99D2A6B7EC000BA9826 /* StatisticalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5CF99C2A6B7EC000BA9826 /* StatisticalView.swift */; };
+		2F5F9A772B37D7D300CBCFEF /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F9A762B37D7D300CBCFEF /* DataModels.swift */; };
+		2F5F9A792B3884DA00CBCFEF /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F9A782B3884DA00CBCFEF /* Todo.swift */; };
+		2F5F9A7B2B3C6CDE00CBCFEF /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F9A7A2B3C6CDE00CBCFEF /* TodoViewModel.swift */; };
+		2F5F9A7D2B3C6F3200CBCFEF /* HabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F9A7C2B3C6F3200CBCFEF /* HabitViewModel.swift */; };
 		2F61D46C2A5888A200535919 /* timeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61D46B2A5888A200535919 /* timeExtension.swift */; };
 		2F63AE242A1FC39600BFBD5F /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F63AE232A1FC39600BFBD5F /* Shapes.swift */; };
 		2F7072192A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7072182A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift */; };
@@ -38,7 +42,7 @@
 		2F9141B42A837DE100E53509 /* ViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9141B32A837DE100E53509 /* ViewControllerWrapper.swift */; };
 		2FAFDC412A86787200AFD31E /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAFDC402A86787200AFD31E /* CustomViews.swift */; };
 		2FB317042A1021E800B0D7DE /* DateSwipeBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB317032A1021E800B0D7DE /* DateSwipeBarView.swift */; };
-		2FB317062A117EB300B0D7DE /* HabitTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB317052A117EB300B0D7DE /* HabitTrackerViewModel.swift */; };
+		2FB317062A117EB300B0D7DE /* TaskMasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB317052A117EB300B0D7DE /* TaskMasterViewModel.swift */; };
 		2FB384212A1692CC00822E46 /* TestAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB384202A1692CC00822E46 /* TestAnimation.swift */; };
 		2FBC52EA2A1468DF00C4992E /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBC52E92A1468DF00C4992E /* ViewExtensions.swift */; };
 		2FC7F2A02B2F3C9300B76A5A /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = 2FC7F29F2B2F3C9300B76A5A /* Neumorphic */; };
@@ -47,7 +51,7 @@
 		2FCB0FCC2A3EFDFE007DBA4E /* StopCheckPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB0FCB2A3EFDFE007DBA4E /* StopCheckPoint.swift */; };
 		2FCB0FCE2A3F57D5007DBA4E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB0FCD2A3F57D5007DBA4E /* DateExtension.swift */; };
 		2FDA257729F47678005466AE /* HabitTrackerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA257629F47678005466AE /* HabitTrackerModel.swift */; };
-		2FDAFFED2A0CCD75002AEA85 /* HabitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDAFFEC2A0CCD75002AEA85 /* HabitController.swift */; };
+		2FDAFFED2A0CCD75002AEA85 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDAFFEC2A0CCD75002AEA85 /* PersistenceController.swift */; };
 		2FE2BAB12ABA26560045385E /* PopupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2BAB02ABA26560045385E /* PopupManager.swift */; };
 		2FE538CF2A88D34600A03C26 /* StatisticalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE538CE2A88D34600A03C26 /* StatisticalDetailView.swift */; };
 		2FFDF16A2A7F830700027AFE /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFDF1692A7F830700027AFE /* InitView.swift */; };
@@ -81,6 +85,10 @@
 		2F5651C32AE973B50025FF14 /* HabitStatisticalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatisticalCell.swift; sourceTree = "<group>"; };
 		2F5BBC302A8C990F00579D5D /* CustomViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewControllers.swift; sourceTree = "<group>"; };
 		2F5CF99C2A6B7EC000BA9826 /* StatisticalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalView.swift; sourceTree = "<group>"; };
+		2F5F9A762B37D7D300CBCFEF /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
+		2F5F9A782B3884DA00CBCFEF /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		2F5F9A7A2B3C6CDE00CBCFEF /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
+		2F5F9A7C2B3C6F3200CBCFEF /* HabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewModel.swift; sourceTree = "<group>"; };
 		2F61D46B2A5888A200535919 /* timeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeExtension.swift; sourceTree = "<group>"; };
 		2F63AE232A1FC39600BFBD5F /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		2F7072182A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerStatisticalDetailViewModel.swift; sourceTree = "<group>"; };
@@ -91,7 +99,7 @@
 		2F9141B32A837DE100E53509 /* ViewControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapper.swift; sourceTree = "<group>"; };
 		2FAFDC402A86787200AFD31E /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		2FB317032A1021E800B0D7DE /* DateSwipeBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSwipeBarView.swift; sourceTree = "<group>"; };
-		2FB317052A117EB300B0D7DE /* HabitTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerViewModel.swift; sourceTree = "<group>"; };
+		2FB317052A117EB300B0D7DE /* TaskMasterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskMasterViewModel.swift; sourceTree = "<group>"; };
 		2FB384202A1692CC00822E46 /* TestAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAnimation.swift; sourceTree = "<group>"; };
 		2FBC52E92A1468DF00C4992E /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		2FCA285E2A1375B9006AAD9B /* drawTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawTest.swift; sourceTree = "<group>"; };
@@ -99,7 +107,7 @@
 		2FCB0FCB2A3EFDFE007DBA4E /* StopCheckPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopCheckPoint.swift; sourceTree = "<group>"; };
 		2FCB0FCD2A3F57D5007DBA4E /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		2FDA257629F47678005466AE /* HabitTrackerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerModel.swift; sourceTree = "<group>"; };
-		2FDAFFEC2A0CCD75002AEA85 /* HabitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitController.swift; sourceTree = "<group>"; };
+		2FDAFFEC2A0CCD75002AEA85 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		2FE2BAB02ABA26560045385E /* PopupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupManager.swift; sourceTree = "<group>"; };
 		2FE538CE2A88D34600A03C26 /* StatisticalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalDetailView.swift; sourceTree = "<group>"; };
 		2FFDF1692A7F830700027AFE /* InitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitView.swift; sourceTree = "<group>"; };
@@ -129,7 +137,10 @@
 		2F32C76E2A10DD54008CDF7E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				2FB317052A117EB300B0D7DE /* HabitTrackerViewModel.swift */,
+				2FB317052A117EB300B0D7DE /* TaskMasterViewModel.swift */,
+				2F5F9A7C2B3C6F3200CBCFEF /* HabitViewModel.swift */,
+				2F5F9A7A2B3C6CDE00CBCFEF /* TodoViewModel.swift */,
+				2F5F9A762B37D7D300CBCFEF /* DataModels.swift */,
 				2FDA257629F47678005466AE /* HabitTrackerModel.swift */,
 			);
 			path = ViewModel;
@@ -291,11 +302,12 @@
 			isa = PBXGroup;
 			children = (
 				2F52990929F20E0E0018B8CA /* HabitTrackerDataModel.xcdatamodeld */,
-				2FDAFFEC2A0CCD75002AEA85 /* HabitController.swift */,
+				2FDAFFEC2A0CCD75002AEA85 /* PersistenceController.swift */,
+				2F8418A12A472F3B00F20BD0 /* HabitTarget.swift */,
 				2FCB0FCB2A3EFDFE007DBA4E /* StopCheckPoint.swift */,
 				2F84189F2A46CB2100F20BD0 /* Habits.swift */,
-				2F8418A12A472F3B00F20BD0 /* HabitTarget.swift */,
 				2F70F27C2A5467AC002C4A17 /* HabitRecord.swift */,
+				2F5F9A782B3884DA00CBCFEF /* Todo.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -381,10 +393,11 @@
 				2F0DE3232A57140F00E73D47 /* HabitExtension.swift in Sources */,
 				2FCB0FCE2A3F57D5007DBA4E /* DateExtension.swift in Sources */,
 				2F2B52972A68DE2C004C904D /* AlertWrapperView.swift in Sources */,
+				2F5F9A792B3884DA00CBCFEF /* Todo.swift in Sources */,
 				2F52990829F20E0E0018B8CA /* Persistence.swift in Sources */,
 				2F5BBC312A8C990F00579D5D /* CustomViewControllers.swift in Sources */,
 				2F4F563C2A3EB33300EC144D /* HabitDetailView.swift in Sources */,
-				2FB317062A117EB300B0D7DE /* HabitTrackerViewModel.swift in Sources */,
+				2FB317062A117EB300B0D7DE /* TaskMasterViewModel.swift in Sources */,
 				2FCA285F2A1375B9006AAD9B /* drawTest.swift in Sources */,
 				2F430E5B2A500665005DC88D /* HabitTrackerStatisticViewModel.swift in Sources */,
 				2F52990B29F20E0E0018B8CA /* HabitTrackerDataModel.xcdatamodeld in Sources */,
@@ -392,9 +405,11 @@
 				2FB317042A1021E800B0D7DE /* DateSwipeBarView.swift in Sources */,
 				2F5CF99D2A6B7EC000BA9826 /* StatisticalView.swift in Sources */,
 				2F2F61252A487F1F00CE065D /* PopupView.swift in Sources */,
+				2F5F9A7D2B3C6F3200CBCFEF /* HabitViewModel.swift in Sources */,
 				2F9141B42A837DE100E53509 /* ViewControllerWrapper.swift in Sources */,
 				2FAFDC412A86787200AFD31E /* CustomViews.swift in Sources */,
 				2FB384212A1692CC00822E46 /* TestAnimation.swift in Sources */,
+				2F5F9A7B2B3C6CDE00CBCFEF /* TodoViewModel.swift in Sources */,
 				2F5298FF29F20E0A0018B8CA /* HabitTrackerApp.swift in Sources */,
 				2F61D46C2A5888A200535919 /* timeExtension.swift in Sources */,
 				2F32C7702A10DD93008CDF7E /* CreateHabitForm.swift in Sources */,
@@ -404,7 +419,7 @@
 				2F63AE242A1FC39600BFBD5F /* Shapes.swift in Sources */,
 				2F3936B62A5A6B4E0092264E /* HabitStatisticFrequencyGraph.swift in Sources */,
 				2F39E0712A84C9C500161B23 /* UIView_Animation_Extension.swift in Sources */,
-				2FDAFFED2A0CCD75002AEA85 /* HabitController.swift in Sources */,
+				2FDAFFED2A0CCD75002AEA85 /* PersistenceController.swift in Sources */,
 				2F5651C42AE973B50025FF14 /* HabitStatisticalCell.swift in Sources */,
 				2F3936B82A5EA42B0092264E /* ColorExtension.swift in Sources */,
 				2F7551552B2D9EEA00DC0C19 /* ViewModifiers.swift in Sources */,
@@ -415,6 +430,7 @@
 				2F511F2A2A0CCFD400AC5328 /* TaskListView.swift in Sources */,
 				2F8418A22A472F3B00F20BD0 /* HabitTarget.swift in Sources */,
 				2F2493242A30D4590009E651 /* PickerPopupView.swift in Sources */,
+				2F5F9A772B37D7D300CBCFEF /* DataModels.swift in Sources */,
 				2FE2BAB12ABA26560045385E /* PopupManager.swift in Sources */,
 				2F8418A02A46CB2100F20BD0 /* Habits.swift in Sources */,
 			);

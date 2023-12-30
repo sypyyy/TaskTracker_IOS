@@ -20,18 +20,18 @@ import SwiftUI
 
 
 struct StatisticalView: View, Sendable {
-    @State var tabIndex: HabitTabShowType = .checkIn
+    @State var tabIndex: AppTabShowType = .checkIn
     
-    var habits: [habitViewModel?] = HabitTrackerViewModel.shared.getAllHabits().map(habitViewModel.init)
+    var habits: [HabitModel?] = HabitViewModel.shared.getAllHabits().map(HabitModel.init)
     @StateObject var statsViewModel: HabitTrackerStatisticViewModel = HabitTrackerStatisticViewModel.shared
-    var masterModel: HabitTrackerViewModel = HabitTrackerViewModel.shared
+    var masterModel: TaskMasterViewModel = TaskMasterViewModel.shared
     // 这个状态用来表示显示加载以及禁止触控， viewModel的firedUpdate表示需要更新图表
     @State var dataOld = false
-    @State var navigationPushed = false
-    @State var detailHabit: habitViewModel? = nil
+    @State var detailHabit: HabitModel? = nil
     @State var detailListRowFrame: CGRect? = nil
+    @State var isDetailViewActive = false
     var shouldShowDetailHabit: Bool {
-        detailHabit != nil && detailListRowFrame != nil
+        detailHabit != nil && detailListRowFrame != nil && isDetailViewActive
     }
     var body: some View {
         VStack {
@@ -164,14 +164,16 @@ struct StatisticalView: View, Sendable {
                                              //statisticalView_hostingNavigationController.present(vc, animated: true)
                                              */
                                             detailHabit = habit
+                                            isDetailViewActive = true
+                                            
                                         } label: {
                                             VStack {
                                                 VStack(alignment: .leading) {
                                                     NavigationLink{} label: {
                                                         
-                                                            Text("\(habit.name)")
-                                                                .padding(.top, 7).disabled(true)
-                                                                
+                                                        Text("\(habit.name)")
+                                                            .padding(.top, 7).disabled(true)
+                                                        
                                                         
                                                     }
                                                     
@@ -181,23 +183,20 @@ struct StatisticalView: View, Sendable {
                                                     
                                                     
                                                 }.padding()
-                                                    
-                                            }.contentShape(Rectangle())
                                                 
+                                            }.contentShape(Rectangle())
+                                            
                                         }
                                         .buttonStyle(ListButtonStyle())
                                         .overlay{
                                             GeometryReader{reader in
                                                 
-                                                if let detailId = detailHabit?.id, detailId == habit.id {
+                                                if isDetailViewActive, let detailId = detailHabit?.id, detailId == habit.id {
                                                     VStack{}.onAppear{
                                                         detailListRowFrame = reader.frame(in: .global)
                                                     }
-                                                    
                                                 }
-                                                
-                                                
-                                            }
+                                            }.id(UUID())
                                             
                                         }
                                     }
@@ -217,28 +216,26 @@ struct StatisticalView: View, Sendable {
                             .scrollContentBackground(.hidden)
                             //syppp test
                             .id(1)
-                            .onDisappear {
-                                print("dns")
-                            }
+                            
                             
                         }
                     }
                     
-                    if let habit = detailHabit, let startRect = detailListRowFrame {
-                        
-                        StatisticalDetailView(habit: habit, enteringChartCycle: .annually, shrinkedRect: startRect, screenWidth: m.size.width, screenHeight: m.size.height).onTapGesture{
-                            detailHabit = nil
-                            detailListRowFrame = nil
-                        }
-                        
-                    }
                     
-                }
+                    
+                    StatisticalDetailView(isActive: $isDetailViewActive, habit: detailHabit, enteringChartCycle: .annually, shrinkedRect: detailListRowFrame, screenWidth: m.size.width, screenHeight: m.size.height).onTapGesture{
+                        isDetailViewActive = false
+                        //detailHabit = nil
+                        //detailListRowFrame = nil
+                    }
+                    //.background(.red.opacity(0.2))
+                    .disabled(!isDetailViewActive)
+                    
+                }//.animation(.easeInOut(duration: 0.6), value: isDetailViewActive)
+                    //.animation(.easeInOut(duration: 0.6), value: detailListRowFrame)
             }
-        }.overlay {
-            Rectangle().fill(.gray.opacity(navigationPushed ? 0.6 : 0))
         }
-        .animation(.easeInOut(duration: 0.3), value: navigationPushed)
+        
     }
 }
 
@@ -279,7 +276,7 @@ extension StatisticalView {
     
 
 extension StatisticalView {
-    private func filterHabits() -> [habitViewModel?] {
+    private func filterHabits() -> [HabitModel?] {
         var res = habits
         res.enumerated().forEach() { index, habit in
             switch habit?.cycle {
@@ -527,7 +524,7 @@ extension StatisticalView {
 
 struct StatisticalView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView(viewModel: HabitTrackerViewModel.shared)
+        RootView(viewModel: TaskMasterViewModel.shared)
     }
 }
 

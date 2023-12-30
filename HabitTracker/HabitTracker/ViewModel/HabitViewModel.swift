@@ -1,45 +1,19 @@
 //
-//  HabitTrackerViewModel.swift
+//  TaskMasterViewModel.swift
 //  HabitTracker
 //
-//  Created by 施炎培 on 2023/4/22.
+//  Created by 施炎培 on 2023/12/27.
 //
 
 import Foundation
-import CoreData
-import SwiftUI
 
-enum HabitTabShowType: Int {
-    case initial = 0, checkIn = 1, statistical = 2, setting = 3
-}
 
-class HabitTrackerViewModel : ObservableObject{
-   
-    static var shared = HabitTrackerViewModel()
-    //sypppppp
-    var array = [1, 2, 3, 4, 6, 4, 1]
-    private var overalModel : habitTrackerModel = habitTrackerModel()
-    private var persistenceModel : HabitController = HabitController.preview
-    private var showCreateHabitForm : Bool = false
+class HabitViewModel: ObservableObject {
+    static var shared = HabitViewModel()
+    private var parentModel = TaskMasterViewModel.shared
+    private var persistenceModel : PersistenceController = PersistenceController.preview
     
-    public var tabIndex: HabitTabShowType = .initial
-    public var selectedDate: Date = Date()
-    
-    public var nowShowing: HabitTabShowType = .initial
-    ///模糊主视图
-    public var blurEverything = false {
-        didSet {
-            objectWillChange.send()
-        }
-    }
-    ///是否有数据改变
-    public var statDataChanged = false {
-        didSet {
-            if statDataChanged {
-                HabitTrackerStatisticViewModel.shared.respondToDataChange()
-            }
-        }
-    }
+    private var selectedDate: Date = Date()
     
     //Cache
     //MARK: 注意有变动及时清缓存！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
@@ -47,57 +21,25 @@ class HabitTrackerViewModel : ObservableObject{
     private var allHabits: [Habit]?
     private var targetSeries = [Int64: [TargetCheckPoint]]()
     private var recordsOfSelectedDate: [HabitRecord]?
-    
-    
-    
-    var showCreateForm : Bool {
-        get {
-            return showCreateHabitForm
-        }
-        set {
-            showCreateHabitForm = newValue
-            objectWillChange.send()
-        }
-    }
-    
-    var test : Int {
-        //print("restarted")
-        return 1
-    }
 }
 
 //日期相关的操作
-extension HabitTrackerViewModel {
-    
-    //这三个函数需要改成从habit controller拿数据
-    func getTodayDate() -> Date {
-        //print("tttttt")
-        return overalModel.today
-    }
-    func getStartDate() -> Date {
-        overalModel.startDate
-    }
-    func refreshDate() {
-        overalModel.refreshDate()
-        //print("date refreshed")
-        objectWillChange.send()
-    }
+extension HabitViewModel {
     
     func selectDate(date: Date) {
         selectedDate = date
         recordsOfSelectedDate = nil
         objectWillChange.send()
-        print("syppppppppp")
     }
 }
 
 //获取打卡信息相关的
-extension HabitTrackerViewModel {
+extension HabitViewModel {
     
     //获取所有当前选中日期的打卡记录 （cached）
-    func getDayRecords() -> [Int64: HabitRecord] {
+    func getDayRecords() -> [String: HabitRecord] {
         var records: [HabitRecord]
-        var res = [Int64: HabitRecord]()
+        var res = [String: HabitRecord]()
         if var cachedRecords = recordsOfSelectedDate {
             records = cachedRecords
         } else {
@@ -105,18 +47,20 @@ extension HabitTrackerViewModel {
             recordsOfSelectedDate = records
         }
         for record in recordsOfSelectedDate ?? [] {
-            res[record.habitID] = record
+            if let id = record.habitID {
+                res[id] = record
+            }
         }
         return res
     }
     
-    func getTargetSeries(habitID: Int64) -> [TargetCheckPoint] {
+    func getTargetSeries(habitID: String) -> [TargetCheckPoint] {
         //syppp test
         let res = persistenceModel.getTargetSeries(habitID: habitID)
         return res
     }
     
-    func getStopCheckPoints(habitID: Int64) -> [StopCheckPoint] {
+    func getStopCheckPoints(habitID: String) -> [StopCheckPoint] {
         /*
         if let points = self.stopCheckPoints[habitID] {
             return points
@@ -140,7 +84,7 @@ extension HabitTrackerViewModel {
         let allHabits = getAllHabits()
         var res = [Habit]()
         for habit in allHabits {
-            let stopPoints = persistenceModel.getStopCheckPoints(habitID: habit.habitID)
+            let stopPoints = persistenceModel.getStopCheckPoints(habitID: habit.id ?? "")
             var latestPoint: StopCheckPoint?
             for point in stopPoints {
                 if let date = point.date, date.compareToByDay(selectedDate) == 1 {
@@ -157,8 +101,8 @@ extension HabitTrackerViewModel {
         return res
     }
     
-    func getOngoingHabitViewModels() -> [habitViewModel] {
-        var habits: [habitViewModel] = getOngoingHabitsPrimitive().map(habitViewModel.init)
+    func getOngoingHabitViewModels() -> [HabitModel] {
+        var habits: [HabitModel] = getOngoingHabitsPrimitive().map(HabitModel.init)
         let records = getDayRecords()
         for habit in habits {
             let targets = getTargetSeries(habitID: habit.id)
@@ -193,7 +137,6 @@ extension HabitTrackerViewModel {
                 }
                 habit.done = records[habit.id]?.done
                 print("\(records[habit.id])")
-                print("fnskjjfs")
             }
         }
         
@@ -202,16 +145,18 @@ extension HabitTrackerViewModel {
 }
 
 //创建新习惯
-extension HabitTrackerViewModel {
+extension HabitViewModel {
     
     func saveHabit(name: String, detail: String, habitType: HabitType, cycle: String, targetNumber: Int, targetUnit: String,
                    targetHour: Int, targetMinute: Int, setTarget: Bool) {
-        persistenceModel.createHabit(name: name, detail: detail, habitType: habitType, cycle: cycle, targetNumber: targetNumber, numberUnit: targetUnit, targetHour: targetHour, targetMinute: targetMinute, setTarget: setTarget)
-        showCreateForm = false
+        do {try persistenceModel.createHabit(name: name, detail: detail, habitType: habitType, cycle: cycle, targetNumber: targetNumber, numberUnit: targetUnit, targetHour: targetHour, targetMinute: targetMinute, setTarget: setTarget)}catch {
+            print("Duplicate Names!")
+        }
+        parentModel.showCreateForm = false
         allHabits = nil
         objectWillChange.send()
         //print("saved a new habit")
-        statDataChanged = true
+        parentModel.statDataChanged = true
     }
 
     /**
@@ -241,84 +186,14 @@ extension HabitTrackerViewModel {
 }
 
 
-extension HabitTrackerViewModel {
+extension HabitViewModel {
     
     //制造一个新的打卡记录，日期使用当前选择的日期，同时检查并且删除之前存在的记录。
-    func createRecord(habitID: Int64, habitType: HabitType, habitCycle: HabitCycle, numberProgress: Int16 = 0, timeProgress: String = "", done: Bool = false) {
+    func createRecord(habitID: String, habitType: HabitType, habitCycle: HabitCycle, numberProgress: Int16 = 0, timeProgress: String = "", done: Bool = false) {
         recordsOfSelectedDate = nil
         persistenceModel.createAndUpdateRecord(date: selectedDate, habitID: habitID, habitType: habitType, habitCycle: habitCycle, numberProgress: numberProgress, timeProgress: timeProgress, done: done)
         objectWillChange.send()
-        statDataChanged = true
+        parentModel.statDataChanged = true
     }
 }
 
-enum HabitType: String {
-    case number = "Number"
-    case time = "Time"
-    case simple = "Simple"
-}
-
-enum HabitCycle: String {
-    case daily = "Daily"
-    case weekly = "Weekly"
-    case monthly = "Monthly"
-}
-
-class habitViewModel {
-    let habit : Habit
-    
-    var name : String {
-        return habit.name ?? ""
-    }
-    
-    var id : Int64 {
-        habit.habitID
-    }
-    
-    var createdDate : Date {
-        habit.createdDate ?? Date()
-    }
-    
-    var type: HabitType {
-        HabitType(rawValue: habit.type ?? "Simple") ?? .simple
-    }
-    
-    var detail : String {
-        habit.detail ?? ""
-    }
-    
-    var cycle: HabitCycle {
-        HabitCycle(rawValue: habit.cycle ?? "Daily") ?? .daily
-    }
-    
-    var unit: String {
-        habit.numberUnit ?? ""
-    }
-    
-    var numberTarget: Int16?
-    
-    var timeTarget: String?
-    
-    var numberProgress: Int16?
-    
-    var timeProgress: String?
-    
-    var done: Bool?
-    
-    init(habit: Habit) {
-        self.habit = habit
-    }
-    
-}
-
-/*
- struct timeBasedHabitViewModel {
- let timeTarget : String
- var current : String {
- return habit.name ?? ""
- }
- var id : String {
- habit.habitID ?? ""
- }
- }
- */

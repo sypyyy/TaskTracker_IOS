@@ -17,7 +17,7 @@ extension UIPickerView {
 }
 
 struct CreateHabitForm: View {
-    @ObservedObject var viewModel : HabitTrackerViewModel
+    @StateObject var viewModel : HabitViewModel
     @State var name: String = ""
     @State var detail: String = ""
     @State var habitType: String = "Checkbox"
@@ -271,7 +271,7 @@ struct CreateHabitForm: View {
 
 struct CreateHabitForm_Previews: PreviewProvider {
     static var previews: some View {
-        CreateHabitForm(viewModel: HabitTrackerViewModel.shared)
+        CreateHabitForm(viewModel: HabitViewModel.shared)
     }
 }
 

@@ -20,11 +20,10 @@ extension EnvironmentValues {
 
 @main
 struct HabitTrackerApp: App {
-    //let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
-            let overalViewModel = HabitTrackerViewModel.shared
+            let overalViewModel = TaskMasterViewModel.shared
             //Text("djeshdfhke WTF????")
             
                 RootView(viewModel : overalViewModel)

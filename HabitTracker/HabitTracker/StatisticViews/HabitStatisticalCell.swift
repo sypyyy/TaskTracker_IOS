@@ -21,15 +21,15 @@ class StatDigestImgCache {
         return taskBatchId
     }
     
-    var imageCache = [Int64 : UIImage]()
+    var imageCache = [String : UIImage]()
     
-    func insertImageCache(id: Int64, img: UIImage, token: UUID) {
+    func insertImageCache(id: String, img: UIImage, token: UUID) {
         if token == taskBatchId {
             imageCache[id] = img
         }
     }
     
-    func invalidateSingleCache(id: Int64) {
+    func invalidateSingleCache(id: String) {
         imageCache[id] = nil
     }
     
@@ -37,7 +37,7 @@ class StatDigestImgCache {
         imageCache = [:]
     }
     
-    func getImageCache(id: Int64) -> UIImage? {
+    func getImageCache(id: String) -> UIImage? {
         return imageCache[id]
     }
 }
@@ -45,7 +45,7 @@ class StatDigestImgCache {
 struct HabitStatisticalCell: View {
     
     var digestCycle: HabitStatisticShowType
-    var habit: habitViewModel
+    var habit: HabitModel
     var m: GeometryProxy
     @State var isShowProgress: Bool = false
     @State var firedUpdate = false
@@ -174,10 +174,10 @@ extension HabitStatisticalCell {
         }
     }
     
-    private func getDataList(habit: habitViewModel) -> [(Int, Color)] {
+    private func getDataList(habit: HabitModel) -> [(Int, Color)] {
         let serialQueue = DispatchQueue.main
         let viewModel = HabitTrackerStatisticViewModel.shared
-        let masterModel = HabitTrackerViewModel.shared
+        let masterModel = HabitViewModel.shared
         var res = [(Date, Double, Bool, Bool)]()
         var tempInfo = (date: Date(), rate: 0.0, isOut: false, isStopped: false)
         var targetSeries = [TargetCheckPoint]()

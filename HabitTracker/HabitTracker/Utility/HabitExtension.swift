@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension habitViewModel {
+extension HabitModel {
     public func getProgressPercent() -> Double {
         switch self.type {
         case .simple:

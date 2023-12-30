@@ -80,9 +80,9 @@ struct RootView: View {
         animation: .default)
     private var items: FetchedResults<Item>
  */
-    @StateObject var viewModel : HabitTrackerViewModel
+    @StateObject var viewModel : TaskMasterViewModel
     //@Environment(\.scenePhase) var scenePhase
-    @State private var tabIndex: HabitTabShowType = .initial {
+    @State private var tabIndex: AppTabShowType = .initial {
         
         didSet {
             if tabIndex == .initial {
@@ -182,7 +182,7 @@ struct RootView: View {
                                 hideCurrentVCAndShowNext(target: .initial)
                                 //tabIndex = .initial
                                 zoomBg = true
-                                //viewModel.selectDate(date: viewModel.getTodayDate())
+                                
                             } label: {Text("habits")}
                             Button{
                                 hideCurrentVCAndShowNext(target: .checkIn)
@@ -275,7 +275,7 @@ struct RootView: View {
 }
 
 extension RootView {
-    func hideCurrentVCAndShowNext(target: HabitTabShowType) {
+    func hideCurrentVCAndShowNext(target: AppTabShowType) {
         if tabIndex == target {
             return
         }
@@ -307,7 +307,7 @@ extension RootView {
 
 
 struct ContentView_Previews: PreviewProvider {
-    static let overalViewModel = HabitTrackerViewModel.shared
+    static let overalViewModel = TaskMasterViewModel.shared
     static var previews: some View {
         //let overalViewModel = habitTrackerViewModel()
         RootView(viewModel : overalViewModel)//.environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

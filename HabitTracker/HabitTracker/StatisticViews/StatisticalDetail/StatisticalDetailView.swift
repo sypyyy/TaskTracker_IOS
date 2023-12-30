@@ -10,113 +10,121 @@ import Charts
 
 struct StatisticalDetailView: View {
     @Namespace var animation
-    @State var shown = false
-    let habit: habitViewModel
+    @Binding var isActive: Bool
+    @State var appeared = false
+    let habit: HabitModel?
     let enteringChartCycle: HabitStatisticShowType
-    let shrinkedRect: CGRect
+    let shrinkedRect: CGRect?
     let screenWidth: CGFloat
     let screenHeight: CGFloat
     let SPACE_SCROLL_VIEW = "HabitDetailScrollViewSpace"
     let animationDuration = 0.4
     
     var body: some View {
+        
         GeometryReader { reader in
             let safePaddingTop = reader.safeAreaInsets.top
             let safePaddingBottom = reader.safeAreaInsets.bottom
             let safePaddingVertical = safePaddingTop + safePaddingBottom
-            ZStack {
-                VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).background(.white.opacity(0.5)).ignoresSafeArea()
-                
-                
-                LinearGradient(colors: [backgroundGradientStart, backgroundGradientEnd], startPoint: .top, endPoint: .bottom).ignoresSafeArea().opacity(shown ? 1.0 : 0.0)
-                    .animation(.easeIn(duration: animationDuration), value: shown)
-                VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).background(.thinMaterial).ignoresSafeArea().opacity(shown ? 1.0 : 0.0)
-                    .animation(.easeIn(duration: animationDuration), value: shown)
-                VStack(spacing: 0){
-                    HStack{
-                        Button{} label: {
-                            Image(systemName: "arrow.backward").font(.system(size: 18, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.5)).padding(.leading)
+            if let habit = habit, let shrinkedRect = shrinkedRect {
+                ZStack {
+                    VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).background(.white.opacity(0.5)).ignoresSafeArea()
+                    
+                    
+                    LinearGradient(colors: [backgroundGradientStart, backgroundGradientEnd], startPoint: .top, endPoint: .bottom).ignoresSafeArea().opacity(appeared ? 1.0 : 0.0)
+                        .animation(.easeIn(duration: animationDuration), value: appeared)
+                    VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).background(.thinMaterial).ignoresSafeArea().opacity(appeared ? 1.0 : 0.0)
+                        .animation(.easeIn(duration: animationDuration), value: appeared)
+                    VStack(spacing: 0){
+                        HStack{
+                            Button{} label: {
+                                Image(systemName: "arrow.backward").font(.system(size: 18, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.5)).padding(.leading)
+                            }
+                            Spacer()
+                            Text("Stats").font(.system(size: 20, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.65)).padding(.leading)
+                            Spacer()
+                            Button{} label: { Image(systemName: "square.and.arrow.up").font(.system(size: 18, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.5)).padding(.trailing)
+                            }
                         }
-                        Spacer()
-                        Text("Stats").font(.system(size: 20, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.65)).padding(.leading)
-                        Spacer()
-                        Button{} label: { Image(systemName: "square.and.arrow.up").font(.system(size: 18, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.5)).padding(.trailing)
-                        }
-                    }
-                    .padding(.bottom)
-                    .background(.regularMaterial)
-                    ScrollView{
-                        
-                        HStack {
-                            Image(systemName: "drop")
+                        .padding(.bottom)
+                        .background(.regularMaterial)
+                        ScrollView{
                             
-                            if(shown) {
-                                Text("\(habit.name)")
-                                    .minimumScaleFactor(0.1)
-                                    .matchedGeometryEffect(id: "detailTitle\(habit.id)", in: animation, properties: .frame, isSource: false)
+                            HStack {
+                                Image(systemName: "drop")
+                                
+                                if(appeared) {
+                                    Text("\(habit.name)")
+                                        .minimumScaleFactor(0.1)
+                                        .matchedGeometryEffect(id: "detailTitle\(habit.id)", in: animation, properties: .frame, isSource: false)
+                                }
+                                
+                                Spacer()
                             }
                             
-                            Spacer()
-                        }
-                        
-                        .font(.system(size: 26, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.65))
+                            .font(.system(size: 26, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.65))
                             .padding(.top, 15).padding(.bottom, 10).padding(.leading)
-                        StatDetailContent(habit: habit, enteringChartCycle: enteringChartCycle).offset(x: 0, y: shown ? 0 : screenHeight).opacity(shown ? 1 : 0)
-                            .animation(.easeIn(duration: animationDuration), value: shown)
-                        Spacer()
+                            StatDetailContent(habit: habit, enteringChartCycle: enteringChartCycle).offset(x: 0, y: appeared ? 0 : screenHeight).opacity(appeared ? 1 : 0)
+                                .animation(.easeIn(duration: animationDuration), value: appeared)
+                            Spacer()
+                            
+                            
+                        }
+                    }
+                    VStack {
+                        VStack(alignment: .leading) {
+                            NavigationLink{} label: {
+                                if(!appeared) {
+                                    Text("\(habit.name)")
+                                        .matchedGeometryEffect(id: "detailTitle\(habit.id)", in: animation, properties: .frame, isSource: true)
+                                        .foregroundColor(.primary.opacity(0.5))
+                                        .fontWeight(.bold)
+                                }
+                                
+                            }.disabled(true)
+                                .padding(.top, 7)
+                            HabitStatisticalCell(digestCycle: .annually, habit: habit, m: reader, isShowProgress: false)
+                                .offset(x: 0, y: appeared ? shrinkedRect.height : 0)
+                                .animation(.easeInOut(duration: animationDuration / 2), value: appeared)
+                        }.padding()
+                    }.clipShape(RoundedRectangle(cornerRadius: 18.0))
+                        .frame(width: shrinkedRect.size.width, height: shrinkedRect.size.height).position(x: screenWidth / 2, y: shrinkedRect.midY - safePaddingTop)
+                        
                     
-                        
-                        
+                }
+                .coordinateSpace(name: SPACE_SCROLL_VIEW)
+                
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                .mask {RoundedRectangle(cornerRadius: 18.0).frame(width: appeared ? screenWidth : shrinkedRect.size.width, height: appeared ? (screenHeight + safePaddingVertical) : shrinkedRect.size.height).position(x: screenWidth / 2, y: appeared ? screenHeight / 2 - (safePaddingTop - safePaddingBottom) / 2 : shrinkedRect.midY - safePaddingTop)}
+                // ignoreSafeEdgeMidY = screenH / 2
+                // MidY = safeT + (screenH - safeT - safeB) / 2 = (safeT - safeB) / 2 + screenH / 2
+                
+                .animation(.easeInOut(duration: animationDuration), value: appeared)
+                
+                .onAppear {
+                    if(isActive) {
+                        appeared = true
                     }
                 }
-                VStack {
-                    VStack(alignment: .leading) {
-                        NavigationLink{} label: {
-                            if(!shown) {
-                                Text("\(habit.name)")
-                                    .matchedGeometryEffect(id: "detailTitle\(habit.id)", in: animation, properties: .frame, isSource: true)
-                                    .foregroundColor(.primary.opacity(0.5))
-                                    .fontWeight(.bold)
-                            }
-                            
-                        }.disabled(true)
-                            .padding(.top, 7)
-                        HabitStatisticalCell(digestCycle: .annually, habit: habit, m: reader, isShowProgress: false)
-                            .offset(x: 0, y: shown ? shrinkedRect.height : 0)
-                            .animation(.easeInOut(duration: animationDuration / 2), value: shown)
-                    }.padding()
-                }.clipShape(RoundedRectangle(cornerRadius: 18.0))
-                    .frame(width: shrinkedRect.size.width, height: shrinkedRect.size.height).position(x: screenWidth / 2, y: shrinkedRect.midY - safePaddingTop)
+                .onChangeCustom(of: isActive) {
+                        appeared = isActive
                     
-                    
-            }
-            .coordinateSpace(name: SPACE_SCROLL_VIEW)
-            
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
-            .mask {RoundedRectangle(cornerRadius: 18.0).frame(width: shown ? screenWidth : shrinkedRect.size.width, height: shown ? (screenHeight + safePaddingVertical) : shrinkedRect.size.height).position(x: screenWidth / 2, y: shown ? screenHeight / 2 - (safePaddingTop - safePaddingBottom) / 2 : shrinkedRect.midY - safePaddingTop)}
-            // ignoreSafeEdgeMidY = screenH / 2
-            // MidY = safeT + (screenH - safeT - safeB) / 2 = (safeT - safeB) / 2 + screenH / 2
-            .animation(.easeInOut(duration: animationDuration), value: shown)
-            
-            
-            .onAppear {
-                shown = true
-              
-            }
-            .onDisappear {
+                        
+                }
                 
-                    shown = false
                 
             }
         }
+        .opacity(appeared ? 1 : 0)
+        .animation(.easeInOut(duration: 0.01).delay(appeared ? 0 : animationDuration), value: appeared)
     }
 }
 
 
 struct StatDetailContent: View {
     
-    let habit: habitViewModel
+    let habit: HabitModel
     let enteringChartCycle: HabitStatisticShowType
     
     var body: some View {
@@ -218,7 +226,7 @@ struct ViewPositionKey: PreferenceKey {
 struct StatisticalDetailView_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { m in
-            StatisticalDetailView(habit: HabitTrackerViewModel.shared.getOngoingHabitViewModels()[0], enteringChartCycle: .annually, shrinkedRect: CGRect(x: 30, y: 150, width: 300, height: 50), screenWidth:m.size.width, screenHeight: m.size.height)
+            StatisticalDetailView(isActive: .constant(true), appeared: false, habit: HabitViewModel.shared.getOngoingHabitViewModels()[0], enteringChartCycle: .annually, shrinkedRect: CGRect(x: 30, y: 150, width: 300, height: 50), screenWidth:m.size.width, screenHeight: m.size.height)
         }
     }
 }

@@ -22,7 +22,7 @@ struct DefaultIslandBackgroundView: View {
     static let water = Color(red: 15.0 / 255, green: 77.0 / 255, blue: 142.0 / 255)
     //static let water = Color(red: 242.0 / 255, green: 172.0 / 255, blue: 182.0 / 255)
     static let wave = Color(red: 206.0 / 255, green: 230.0 / 255, blue: 249.0 / 255)
-    @Binding var tabIndex: HabitTabShowType
+    @Binding var tabIndex: AppTabShowType
     @Binding var zoom: Bool
     struct particle: Hashable {
         var x: Double
@@ -479,7 +479,7 @@ private func getY(_ x: Int, _ y: Int) -> Int {
 
 
 struct SwiftUIViewForDrawTest_Previews: PreviewProvider {
-    @State static var t: HabitTabShowType = .initial
+    @State static var t: AppTabShowType = .initial
     @State static var zoom: Bool = false
     static var previews: some View {
         DefaultIslandBackgroundView(tabIndex: $t, zoom: $zoom)

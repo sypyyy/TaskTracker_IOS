@@ -10,11 +10,11 @@ import SwiftUI
 
 class dateListManager: ObservableObject {
     static var shared = dateListManager()
-    let viewModel: HabitTrackerViewModel
+    let viewModel: TaskMasterViewModel
     var dates: [Date]
     
     init() {
-        self.viewModel = HabitTrackerViewModel.shared
+        self.viewModel = TaskMasterViewModel.shared
         let date = viewModel.getStartDate()
         dates = [viewModel.getStartDate()]
         for i in 1...400 {
@@ -39,9 +39,9 @@ class dateListManager: ObservableObject {
 
 
 struct DateSwipeBar : View {
-    @StateObject var viewModel : HabitTrackerViewModel = HabitTrackerViewModel.shared
+    @StateObject var viewModel : TaskMasterViewModel = TaskMasterViewModel.shared
     @StateObject var dateListMgr = dateListManager.shared
-    @State var chosenDate = HabitTrackerViewModel.shared.selectedDate
+    @State var chosenDate = TaskMasterViewModel.shared.selectedDate
     @State var loaded = false
     
     
@@ -132,7 +132,7 @@ struct DateSwipeBar : View {
                             .padding(.horizontal)
                     }
                     .sheet(isPresented: $viewModel.showCreateForm){
-                        BottomSheetView{CreateHabitForm(viewModel: viewModel)}
+                        BottomSheetView{CreateHabitForm(viewModel: HabitViewModel.shared)}
                     }
                 }.foregroundColor(.primary.opacity(0.6))
                 if loaded {
@@ -245,7 +245,7 @@ extension DateSwipeBar {
 
 
 struct DateSwipeView_Previews: PreviewProvider {
-    static let overalViewModel = HabitTrackerViewModel()
+    static let overalViewModel = TaskMasterViewModel()
     static var previews: some View {
         //let overalViewModel = habitTrackerViewModel()
         RootView(viewModel : overalViewModel).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

@@ -7,6 +7,7 @@
 //最后删除
 import CoreData
 
+/*
 struct PersistenceController {
     static let shared = PersistenceController()
     static var preview: PersistenceController = {
@@ -53,3 +54,4 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }
+*/
