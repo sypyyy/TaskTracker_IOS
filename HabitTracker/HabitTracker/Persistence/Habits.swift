@@ -19,7 +19,7 @@ extension PersistenceController {
         //let viewContext = result.container.viewContext
         let viewContext = self.container.viewContext
         let newHabit = Habit(context: viewContext)
-        let IdToBe = name
+        let IdToBe = "\(name)<#$>\(TaskType.habit.rawValue)"
         let isNameUnique = checkHabitIdIsUnique(IdToBe: name)
         if !isNameUnique {
             throw PersistenceError.duplicateId

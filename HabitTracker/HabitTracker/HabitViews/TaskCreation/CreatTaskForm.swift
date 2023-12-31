@@ -16,7 +16,7 @@ extension UIPickerView {
     }
 }
 
-struct CreateHabitForm: View {
+struct CreatTaskForm: View {
     @StateObject var viewModel : HabitViewModel
     @State var name: String = ""
     @State var detail: String = ""
@@ -31,6 +31,7 @@ struct CreateHabitForm: View {
     @State var showNumberPicker: Bool = false
     @State var showTimePicker: Bool = false
     @State var showAlert = false
+    @State var taskType: TaskType = .todo
     var body: some View {
         BottomSheetView{
             ZStack{
@@ -40,100 +41,56 @@ struct CreateHabitForm: View {
                             .frame(width:60,height:6).padding(.top, 12)
                             .foregroundColor(.primary.opacity(0.7))
                     }
+                    
                     ScrollView{
-                        VStack {
-                            VStack{
-                                HStack{
-                                    Text("Start a new habit")
-                                        .font(.system(size: 25, weight: .bold, design: .rounded))
-                                        .foregroundColor(.primary.opacity(0.7))
-                                        .padding()
-                                    Spacer()
-                                }
-                                VStack{
-                                    leadingTitle(title: "Habit name")
-                                    inputField(title: "eg: Drink water.", text: $name).padding(.bottom)
-                                    leadingTitle(title: "Detail")
-                                    inputField(title: "", text: $detail)
-                                        .padding(.bottom)
-                                    leadingTitle(title: "Track habit by")
-                                    
-                                    HStack{
-                                        Button3D(title: "Checkbox", image: "checkmark.square", activeTitle: $habitType).padding(.leading)
-                                        Button3D(title: "Time", image: "alarm", activeTitle: $habitType)
-                                        Button3D(title: "Number", image: "123.rectangle", activeTitle: $habitType)
-                                        Spacer()
-                                    }.padding(.bottom)
-                                    leadingTitle(title: "Cycle")
-                                    HStack{
-                                        Button3D(title: "Daily",image: "", activeTitle: $cycle).padding(.leading)
-                                        Button3D(title: "Weekly", image: "", activeTitle: $cycle)
-                                        Button3D(title: "Monthly", image: "", activeTitle: $cycle)
-                                        Spacer()
-                                    }.padding(.bottom)
-                                }
-                                if habitType != "Checkbox" {
-                                    VStack{
-                                        HStack{
-                                            Title(title: "Set a target")
-                                            /*
-                                            Toggle("", isOn: $setTarget)
-                                                .toggleStyle(.switch).frame(maxWidth: 60).tint(indicatorColor).scaleEffect(0.8)
-                                             */
-                                            Spacer()
-                                        }
-                                        if setTarget {
-                                            HStack{
-                                                if(habitType == "Number") {
-                                                    
-                                                    Button("\(targetNumber)", action: {showNumberPicker = true}).buttonHorizontal().padding(.leading)
-                                                    inputFieldPrototype(title: "Unit", text: $targetUnit).frame(maxWidth: 100).autocapitalization(.none)
-                                                }
-                                                else {
-                                                    Button("\((targetHour * 60 + targetMinute).minutesToTime())", action: {showTimePicker = true}).buttonHorizontal().padding(.leading)
-                                                    /*
-                                                    
-                                                    */
-                                                    
-                                                }
-                                                switch(cycle) {
-                                                case "Daily": Text("/ day")
-                                                case "Weekly": Text("/ week")
-                                                case "Monthly": Text("/ month")
-                                                default: Text("day")
-                                                }
-                                                Spacer()
-                                            }
-                                        }
-                                        //Spacer()
+                        VStack{
+                            HStack(spacing: 0){
+                                Text("Add a new ")
+                                    .padding(.vertical)
+                                    .padding(.leading)
+                                
+                                CustomSegmentedControl(options: ["to-do", "habit"]) {selectionInt in
+                                    if selectionInt == 0 {
+                                        taskType = .todo
+                                    }
+                                    if selectionInt == 1 {
+                                        taskType = .habit
                                     }
                                 }
-                            }.padding(.bottom, 30)
-                            HStack{
+                                .frame(maxWidth: 150)
+                                .padding(.trailing, 6)
+                                Image(systemName: "questionmark.circle").font(.system(size: 18))
+                                    .foregroundColor(.primary.opacity(0.3))
                                 Spacer()
-                                Text("Save")
-                                Spacer()
-                            }
-                            .buttonHorizontal()
-                            .onTapGesture {
-                                print("tapped")
-                                if name == "" {
-                                    showAlert = true
-                                    return
-                                }
-                                viewModel.saveHabit(name: name, detail: detail, habitType: HabitTracker.HabitType(rawValue: habitType) ?? .simple, cycle: cycle, targetNumber: targetNumber, targetUnit: targetUnit, targetHour: targetHour, targetMinute: targetMinute, setTarget: setTarget)
-                            }
-                            .padding(.bottom, 30)
+                                
+                            }.font(.system(size: 22, weight: .bold, design: .rounded))
+                                .foregroundColor(.primary.opacity(0.7))
+                            
+                            Spacer()
                         }
-                    }.foregroundColor(.primary.opacity(0.4))
+                        
+                        if(taskType == .habit) {
+                            CreatHabitForm(viewModel: viewModel,  targetNumber: $targetNumber, targetHour: $targetHour, targetMinute: $targetMinute, indicatorColor: $indicatorColor, showNumberPicker: $showNumberPicker,
+                                           showTimePicker: $showTimePicker,
+                                           showAlert: $showAlert)
+                        }
+                        
+                        if(taskType == .todo) {
+                            CreatTodoForm(viewModel: viewModel)
+                        }
+                        
+                    }
+                    
+                }.foregroundColor(.primary.opacity(0.4))
                     .animation(.easeOut, value: habitType)
                     .animation(.easeOut, value: setTarget)
-                    //.blur(radius: (showTimePicker || showNumberPicker) ? 2.0 : 0.0)
+                //.blur(radius: (showTimePicker || showNumberPicker) ? 2.0 : 0.0)
                     .disabled((showTimePicker || showNumberPicker))
-                    
-                }.onTapGesture {
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
-                }
+                /*
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                    }
+                 */
                 //.adaptsToKeyboard()
                 if(showNumberPicker) {
                     numberPickerPopupView(title: "Set target to", minimum: 1, number: $targetNumber, onDoneDidTap: {_ in
@@ -149,11 +106,13 @@ struct CreateHabitForm: View {
                 AlertWrapperView(show: $showAlert){
                     Text("Please enter habit's name")
                 }
-            }.animation(.easeOut, value: showNumberPicker)
-                .animation(.easeOut, value: showTimePicker)
-            
-        }
+            }
+        }.animation(.easeOut, value: showNumberPicker)
+            .animation(.easeOut, value: showTimePicker)
+            .animation(.easeOut, value: taskType)
+        
     }
+}
     
     
     
@@ -212,6 +171,7 @@ struct CreateHabitForm: View {
             .shadow(color: Color("Shadow").opacity(0.3), radius: 2, x: 0, y: 0)
             .padding(.horizontal, 4.0)
             .animation(.easeInOut, value: activeTitle)
+            
             .onTapGesture {
                 activeTitle = title
             }
@@ -219,7 +179,7 @@ struct CreateHabitForm: View {
         }
     }
     
-    struct leadingTitle : View {
+    struct leadingLongTitle : View {
         let title: String
         var body: some View {
             HStack{
@@ -230,11 +190,11 @@ struct CreateHabitForm: View {
         }
     }
     
-    struct Title : View {
+    struct leadingTitle : View {
         let title: String
         var body: some View {
             Text("\(title)").font(.system(size: 16, weight: .heavy, design: .rounded)).foregroundColor(.primary.opacity(0.6))
-            .padding(.horizontal)
+            .padding(.leading)
         }
     }
     
@@ -267,11 +227,11 @@ struct CreateHabitForm: View {
             }
         }
     }
-}
 
-struct CreateHabitForm_Previews: PreviewProvider {
+
+struct CreatTaskForm_Previews: PreviewProvider {
     static var previews: some View {
-        CreateHabitForm(viewModel: HabitViewModel.shared)
+        CreatTaskForm(viewModel: HabitViewModel.shared)
     }
 }
 

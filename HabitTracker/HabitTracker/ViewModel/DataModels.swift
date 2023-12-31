@@ -8,8 +8,19 @@
 import Foundation
 import CoreData
 
+enum TaskType: String {
+    case habit = "Habit"
+    case todo = "Todo"
+}
+
 class TaskModel {
+    var taskId: String
+    let taskType: TaskType
     
+    init(taskId: String, taskType: TaskType) {
+        self.taskId = taskId
+        self.taskType = taskType
+    }
 }
 
 enum HabitType: String {
@@ -27,7 +38,11 @@ enum HabitCycle: String {
 class HabitModel: TaskModel {
     var name : String
     
-    var id : String
+    var id : String {
+        didSet {
+            taskId = id
+        }
+    }
     
     var createdDate : Date
     
@@ -57,13 +72,30 @@ class HabitModel: TaskModel {
         self.detail = habit.detail ?? ""
         self.cycle = HabitCycle(rawValue: habit.cycle ?? "Daily") ?? .daily
         self.unit = habit.numberUnit ?? ""
+        super.init(taskId: id, taskType: .habit)
+    }
+    
+    //Empty placeHolder init
+    init() {
+        self.name = ""
+        self.id = ""
+        self.createdDate = Date()
+        self.type = .simple
+        self.detail = ""
+        self.cycle = .daily
+        self.unit = ""
+        super.init(taskId: id, taskType: .habit)
     }
     
 }
 
-class ToDoModel: TaskModel{
+class TodoModel: TaskModel{
     var name: String
-    var id: String
+    var id: String {
+        didSet {
+            taskId = id
+        }
+    }
     var priority: Int
     
     var scheduleDate: Date
@@ -88,7 +120,7 @@ class ToDoModel: TaskModel{
     var hasParent: Bool {
         parentTaskId != ""
     }
-    var subTasks: [ToDoModel] = []
+    var subTasks: [TodoModel] = []
     
     var subTaskString: String
     
@@ -115,18 +147,20 @@ class ToDoModel: TaskModel{
             self.expireDate = todo.expireDate ?? Date()
         }
         self.note = todo.note ?? ""
-        self.subTasks = ToDoModel.getTaskModels(s: todo.subTasks ?? "")
+        self.subTasks = TodoModel.getTaskModels(s: todo.subTasks ?? "")
         self.subTaskString = todo.subTasks ?? ""
         self.done = todo.done
         self.parentTaskId = todo.parentTaskId ?? ""
         self.priority = Int(todo.priority)
+        super.init(taskId: id, taskType: .todo)
     }
     
-    static func getTaskModels(s: String) -> [ToDoModel] {
+    static func getTaskModels(s: String) -> [TodoModel] {
         []
     }
     
-    override init() {
+    //Empty placeHolder init
+    init() {
         self.name = ""
         self.id = ""
         self.isTimeSpecific = true
@@ -142,6 +176,8 @@ class ToDoModel: TaskModel{
         self.completeDate = Date()
         self.parentTaskId = ""
         self.priority = 0
+        super.init(taskId: id, taskType: .todo)
     }
+    
 }
 

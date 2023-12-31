@@ -132,7 +132,7 @@ struct DateSwipeBar : View {
                             .padding(.horizontal)
                     }
                     .sheet(isPresented: $viewModel.showCreateForm){
-                        BottomSheetView{CreateHabitForm(viewModel: HabitViewModel.shared)}
+                        BottomSheetView{CreatTaskForm(viewModel: HabitViewModel.shared)}
                     }
                 }.foregroundColor(.primary.opacity(0.6))
                 if loaded {

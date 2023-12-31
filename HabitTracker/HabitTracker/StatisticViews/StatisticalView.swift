@@ -64,7 +64,25 @@ struct StatisticalView: View, Sendable {
                              
                              .frame(width: 250)
                              */
-                            StatisticalCustomSegmentedControl( options:  ["Weekly", "Monthly", "Yearly"])
+                            CustomSegmentedControl( options:  ["Weekly", "Monthly", "Yearly"]) {preselectedIndex in
+                                var type: HabitStatisticShowType = .weekly
+                                if preselectedIndex == 1 {
+                                    type = .monthly
+                                }
+                                else if preselectedIndex == 2 {
+                                    type = .annually
+                                }
+                                HabitTrackerStatisticViewModel.shared.digestChartCycle = type
+                                HabitTrackerStatisticViewModel.shared.markDate = Date()
+                                Task.detached(priority: .userInitiated) {
+                                    await StatDigestImgCache.shared.invalidateAllCache()
+                                    await MainActor.run {
+                                        HabitTrackerStatisticViewModel.shared.objectWillChange.send()
+                                    }
+                                }
+                                
+                            }.padding(.horizontal)
+                                .fontWeight(.medium)
                             
                         }.padding(.horizontal)
                         

@@ -83,9 +83,9 @@ extension TaskMasterViewModel {
 
 //Get task related info
 extension TaskMasterViewModel {
-    func getDayTasks(date: Date) -> [TaskModel] {
+    func getDayTasks(date: Date? = nil) -> [TaskModel] {
         var res = [TaskModel]()
-        res = habitViewModel.getOngoingHabitViewModels() + todoViewModel.getDaySpecificTodos(date: date)
+        res = habitViewModel.getOngoingHabitViewModels() + todoViewModel.getDaySpecificTodos(date: date ?? selectedDate)
         return res
     }
 }

@@ -118,11 +118,13 @@ extension HabitViewModel {
             switch habit.type {
             case .number:
                 habit.numberTarget = latestTarget?.numberTarget
+                //This check is because record also return dates of start of month and week.
                 if habit.cycle == .daily && records[habit.id]?.date?.compareToByDay(selectedDate) != 0 {
                     habit.numberProgress = 0
                     break
                 }
                 habit.numberProgress = records[habit.id]?.numberProgress
+                habit.done = habit.numberProgress == habit.numberTarget
             case .time:
                 habit.timeTarget = latestTarget?.timeTarget
                 if habit.cycle == .daily && records[habit.id]?.date?.compareToByDay(selectedDate) != 0 {
@@ -130,6 +132,7 @@ extension HabitViewModel {
                     break
                 }
                 habit.timeProgress = records[habit.id]?.timeProgress
+                habit.done = habit.timeProgress?.timeToMinutes() == habit.timeTarget?.timeToMinutes()
             case .simple:
                 if habit.cycle == .daily && records[habit.id]?.date?.compareToByDay(selectedDate) != 0 {
                     habit.done = false

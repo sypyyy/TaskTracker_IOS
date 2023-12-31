@@ -14,14 +14,23 @@ class PersistenceController {
         var result = PersistenceController(inMemory: false)
         let viewContext = result.container.viewContext
         var habits = result.getAllHabits()
-        
+        var todos = result.getAllTodos()
         
         for habit in habits {
             viewContext.delete(habit)
         }
+        
+        for todo in todos {
+            viewContext.delete(todo)
+        }
         saveChanges(viewContext: viewContext)
        
         print("deleted")
+        let testTodo = TodoModel()
+        testTodo.name = "Basketball with Michael"
+        
+        do {try result.createTodo(dataModel: testTodo)} catch {print("")}
+        
         for i in 1...120 {
             if(i == 1) {
                 do {try result.createHabit(name: "Drink water #\(i)", detail: "blablabla", habitType: .number, cycle: "Daily", targetNumber: 10, numberUnit: "cups", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
@@ -53,9 +62,8 @@ class PersistenceController {
             }
             
             else {
-                do {try result.createHabit(name: "Eat breakfast but monthly #\(i)", detail: "blablabla", habitType: .simple, cycle: "Monthly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
+                //do {try result.createHabit(name: "Eat breakfast but monthly #\(i)", detail: "blablabla", habitType: .simple, cycle: "Monthly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
             }
-            
             print("saved")
             //saveChanges(viewContext: viewContext)
         }

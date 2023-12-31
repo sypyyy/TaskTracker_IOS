@@ -35,13 +35,13 @@ extension TodoViewModel {
 
 //Todo CRUD
 extension TodoViewModel {
-    func getDaySpecificTodos(date: Date) -> [ToDoModel] {
+    func getDaySpecificTodos(date: Date) -> [TodoModel] {
         return persistenceModel.getTodoOfDay(day: date).map {todo in
             .init(todo: todo)
         }
     }
     
-    func createNewTodo(todo: ToDoModel) -> CreateTodoResult {
+    func createNewTodo(todo: TodoModel) -> CreateTodoResult {
         persistenceModel.createTodo(dataModel: todo)
     }
 }
