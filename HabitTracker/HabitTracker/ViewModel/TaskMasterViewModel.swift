@@ -9,6 +9,14 @@ import Foundation
 import CoreData
 import SwiftUI
 
+enum ChangeMessage {
+    case taskChanged
+}
+
+protocol ChangeListener {
+    func didUpdate(msg: ChangeMessage)
+}
+
 enum AppTabShowType: Int {
     case initial = 0, checkIn = 1, statistical = 2, setting = 3
 }
@@ -26,10 +34,16 @@ class TaskMasterViewModel: ObservableObject{
         TodoViewModel.shared
     }
     
+    //MARK: Registered Listeners
+    private var listeners =  [ChangeListener]()
+    
     private var showCreateHabitForm : Bool = false
     
     public var tabIndex: AppTabShowType = .initial
     public var selectedDate: Date = Date()
+    
+    //test syppppp test
+    public var tappedTaskId: String?
     
     ///模糊主视图
     public var blurEverything = false {
@@ -53,6 +67,22 @@ class TaskMasterViewModel: ObservableObject{
         set {
             showCreateHabitForm = newValue
             objectWillChange.send()
+        }
+    }
+}
+
+//更新有关的Listener
+extension TaskMasterViewModel {
+    public func didReceiveChangeMessage(msg: ChangeMessage) {
+        updateListeners(msg: msg)
+    }
+    public func registerListener(listener: ChangeListener) {
+        listeners.append(listener)
+    }
+    
+    public func updateListeners(msg: ChangeMessage) {
+        for listener in listeners {
+            listener.didUpdate(msg: msg)
         }
     }
 }

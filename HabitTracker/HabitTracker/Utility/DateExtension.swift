@@ -231,3 +231,17 @@ var fmt9 : DateFormatter {
     return fmt
 }
 
+//Jan 1, 2024
+var fmt10 : DateFormatter {
+    let fmt = DateFormatter()
+    fmt.dateFormat = "MMM d, yyyy"
+    return fmt
+}
+
+//10:00 AM
+var fmt11 : DateFormatter {
+    let fmt = DateFormatter()
+    fmt.dateFormat = "h:mm a"
+    return fmt
+}
+

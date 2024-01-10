@@ -34,6 +34,9 @@ struct CreatHabitForm: View {
                     leadingLongTitle(title: "Note")
                     inputField(title: "", text: $detail)
                         .padding(.bottom)
+                    
+                    CustomDivider()
+                    
                     leadingLongTitle(title: "Track habit by")
                     
                     HStack{
@@ -42,6 +45,8 @@ struct CreatHabitForm: View {
                         Button3D(title: "Number", image: "123.rectangle", activeTitle: $habitType)
                         Spacer()
                     }.padding(.bottom)
+                    
+                    CustomDivider()
                     leadingLongTitle(title: "Cycle")
                     HStack{
                         Button3D(title: "Daily",image: "", activeTitle: $cycle).padding(.leading)
@@ -49,8 +54,10 @@ struct CreatHabitForm: View {
                         Button3D(title: "Monthly", image: "", activeTitle: $cycle)
                         Spacer()
                     }.padding(.bottom)
+                    
                 }
                 if habitType != "Checkbox" {
+                    CustomDivider()
                     VStack{
                         HStack{
                             leadingTitle(title: "Set a target")
@@ -104,5 +111,11 @@ struct CreatHabitForm: View {
             }
             .padding(.bottom, 30)
         }
+    }
+}
+
+struct CreateHabitForm_Previews: PreviewProvider {
+    static var previews: some View {
+        CreatTaskForm(viewModel: HabitViewModel.shared, taskType: .habit)
     }
 }

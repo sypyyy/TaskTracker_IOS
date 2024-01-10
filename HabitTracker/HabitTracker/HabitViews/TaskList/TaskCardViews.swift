@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct HabitTaskCardView: View {
+    @StateObject var masterViewModel = TaskMasterViewModel.shared
+    
+    
     let taskType: TaskType
     let habit: HabitModel
     let todo: TodoModel
     let metric: GeometryProxy
-    @Binding var tappedOne: String?
+    var tappedOne: String? {
+        masterViewModel.tappedTaskId
+    }
     let cardMaxHeight: Int
     let cardIdealHeight: Int
     let tapFunction: () -> Void
@@ -41,7 +46,6 @@ struct HabitTaskCardView: View {
                 VStack {
                     
                     TaskCardTopView(name: getTaskName(), done: isTaskDone(), metric: metric, isExpanded: tappedOne == habit.id, cardMaxHeight: cardMaxHeight, cardIdealHeight: cardIdealHeight)
-                    //.fixedSize()
                     
                     HStack{
                         Text("\(habit.cycle.rawValue)")
@@ -60,14 +64,16 @@ struct HabitTaskCardView: View {
                 }
             }
             .contentShape(Rectangle())
-            .onTapGesture {
-                tapFunction()
-            }
+            
+            
+            
+            
             
             //MARK: the detail view
             //
             if(tappedOne == habit.id) {
-                HabitDetailView(habit: habit)
+                HabitDetailView(habit: habit).onTapGesture {
+                }
             }
             
             //Spacer()
@@ -86,11 +92,11 @@ struct HabitTaskCardView: View {
             RoundedRectangle(cornerRadius: 15).stroke(.white.opacity(0.6), lineWidth: 2).offset(y :1.5).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 15))
         )
         .padding()
+        
     }
 }
 
 struct TaskCardTopView: View {
-    
     let name: String
     let done: Bool
     let metric: GeometryProxy

@@ -120,7 +120,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "9FE62BFA-0DED-4DED-BB16-BA2EE5F7AF53"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/StatisticViews/HabitStatisticFrequencyGraph.swift"
@@ -168,7 +168,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D9272D53-D668-4204-832F-6825092B52FA"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
@@ -184,7 +184,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "EE210AA0-80FD-4CC9-904C-B5BF59E726D0"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
@@ -200,7 +200,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "AEBE224A-A6A9-4D92-A1BD-05EF65A94A7F"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
@@ -216,7 +216,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "E2953C03-A812-44E8-BB0D-7F2AC3FBDD11"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
@@ -232,7 +232,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D01B9891-7E72-4B41-A205-8841B58A4A81"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
@@ -248,7 +248,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "524C35A1-514A-4C3D-8240-8723F57B6CF0"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
@@ -264,7 +264,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B74E9786-E263-4808-BC58-3ED46C846856"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/HabitRecord.swift"
@@ -305,6 +305,21 @@
                   endingLineNumber = "57"
                   offsetFromSymbolStart = "628">
                </Location>
+               <Location
+                  uuid = "B74E9786-E263-4808-BC58-3ED46C846856 - 36cd839e433736a4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HabitTracker.PersistenceController.getIntervalRecords(startDate: Foundation.Date, endDate: Foundation.Date, habitID: Swift.Optional&lt;Swift.String&gt;) -&gt; Swift.Array&lt;HabitTracker.HabitRecord&gt;"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/HabitRecord.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "688">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -312,7 +327,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "646425D9-9890-451F-BA3F-35D9BA23B427"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/HabitController.swift"
@@ -328,7 +343,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "000659B7-8B31-4E8E-B4D8-30EDAF6DDB65"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/HabitController.swift"
@@ -344,7 +359,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "5D00CD1C-9CF4-4D77-AE05-A1F8B7157D3A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/HabitController.swift"
@@ -360,7 +375,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "CCBAFA04-0A6A-400E-BE90-0FA0782789AA"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/HabitController.swift"
@@ -376,7 +391,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B9828DDC-AB9E-4477-8C1D-FAA72EA8B4F4"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/HabitController.swift"
@@ -424,7 +439,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
             uuid = "9C70DD62-BE3C-4378-996F-E1EBF401A6B0"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             symbolName = "=---7w"
@@ -437,7 +452,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D2A6310F-2D8E-49D7-83D6-B45812BB1311"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/ViewModel/TodoViewModel.swift"
@@ -485,7 +500,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "0D37CB24-50E8-4118-AFC1-0D7CB56E0474"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/Todo.swift"
@@ -532,56 +547,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E1F532C7-68D1-47E2-9DF5-9814AFE36C2F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HabitTracker/Persistence/Todo.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "createTodo(dataModel:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "E1F532C7-68D1-47E2-9DF5-9814AFE36C2F - 497bffdad5cca86e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.createTodo(dataModel: HabitTracker.ToDoModel) -&gt; HabitTracker.CreateTodoResult"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Todo.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "232">
-               </Location>
-               <Location
-                  uuid = "E1F532C7-68D1-47E2-9DF5-9814AFE36C2F - 497bffdad5cca86e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.createTodo(dataModel: HabitTracker.TodoModel) -&gt; HabitTracker.CreateTodoResult"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Todo.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "228">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "3A9DC202-E8F8-4497-AF71-23D12D427D2A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/Todo.swift"
@@ -629,7 +596,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "6BB9DC6B-8A6D-41AB-9CE2-BA6B0B0FE8F8"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/Todo.swift"
@@ -677,7 +644,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "858E3BF4-19CC-4449-B0EC-2F7F9B62719D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/Todo.swift"
@@ -724,56 +691,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8BB8DEB4-30F7-402B-AFC4-F75F1F7D16D4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HabitTracker/Persistence/Todo.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "createTodo(dataModel:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "8BB8DEB4-30F7-402B-AFC4-F75F1F7D16D4 - 497bffdad5ccab28"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.createTodo(dataModel: HabitTracker.ToDoModel) -&gt; HabitTracker.CreateTodoResult"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Todo.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "76">
-               </Location>
-               <Location
-                  uuid = "8BB8DEB4-30F7-402B-AFC4-F75F1F7D16D4 - 497bffdad5ccab28"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.createTodo(dataModel: HabitTracker.TodoModel) -&gt; HabitTracker.CreateTodoResult"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Todo.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "3B9910FC-986D-4C62-947C-BEC077C90EB8"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/Todo.swift"
@@ -821,7 +740,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "0B9A8FEE-A170-4B8A-AE37-3D9FC28577BF"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HabitTracker/Persistence/Todo.swift"
@@ -868,33 +787,97 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2F0B307C-6C78-47E8-B4BB-CF2ECE82368D"
+            uuid = "82F68266-3E7A-4D07-B91F-0AED2D4A92FB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HabitTracker/Persistence/PersistenceController.swift"
+            filePath = "HabitTracker/HabitViews/TaskListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "PersistenceController"
-            landmarkType = "3">
+            startingLineNumber = "312"
+            endingLineNumber = "312"
+            landmarkName = "layoutSubviews()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "82F68266-3E7A-4D07-B91F-0AED2D4A92FB - f23117eb96378346"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.CGSize) -&gt; () in HabitTracker.SwiftUIHostingTableViewCell.hostSwiftUIView(task: HabitTracker.TaskModel, index: Swift.Int, tableViewDelegate: __C.UITableViewDelegate, tableView: __C.UITableView) -&gt; ()"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/HabitViews/TaskListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "312"
+                  endingLineNumber = "312"
+                  offsetFromSymbolStart = "376">
+               </Location>
+               <Location
+                  uuid = "82F68266-3E7A-4D07-B91F-0AED2D4A92FB - ffb37ecd8cd0d03e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HabitTracker.SwiftUIHostingTableViewCell.hostSwiftUIView(task: HabitTracker.TaskModel, index: Swift.Int, tableViewDelegate: __C.UITableViewDelegate, tableView: __C.UITableView) -&gt; ()"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/HabitViews/TaskListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "312"
+                  endingLineNumber = "312"
+                  offsetFromSymbolStart = "2600">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "88739E4F-C763-44FF-8A5E-5E7B479E66A7"
+            uuid = "C4319C92-6B01-46F7-840B-E1C34B35AB80"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HabitTracker/Persistence/PersistenceController.swift"
+            filePath = "HabitTracker/HabitViews/TaskListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "PersistenceController"
-            landmarkType = "3">
+            startingLineNumber = "301"
+            endingLineNumber = "301"
+            landmarkName = "hostSwiftUIView(task:tableViewDelegate:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C4319C92-6B01-46F7-840B-E1C34B35AB80 - ffb37ecd8cd0d2ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HabitTracker.SwiftUIHostingTableViewCell.hostSwiftUIView(task: HabitTracker.TaskModel, index: Swift.Int, tableViewDelegate: __C.UITableViewDelegate, tableView: __C.UITableView) -&gt; ()"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/HabitViews/TaskListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "301"
+                  endingLineNumber = "301"
+                  offsetFromSymbolStart = "2176">
+               </Location>
+               <Location
+                  uuid = "C4319C92-6B01-46F7-840B-E1C34B35AB80 - ffb37ecd8cd0d2ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HabitTracker.SwiftUIHostingTableViewCell.hostSwiftUIView(task: HabitTracker.TaskModel, index: Swift.Int, tableViewDelegate: __C.UITableViewDelegate, tableView: __C.UITableView) -&gt; ()"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/HabitViews/TaskListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "301"
+                  endingLineNumber = "301"
+                  offsetFromSymbolStart = "808">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

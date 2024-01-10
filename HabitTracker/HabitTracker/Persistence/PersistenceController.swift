@@ -62,7 +62,7 @@ class PersistenceController {
             }
             
             else {
-                //do {try result.createHabit(name: "Eat breakfast but monthly #\(i)", detail: "blablabla", habitType: .simple, cycle: "Monthly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
+                do {try result.createHabit(name: "Eat breakfast but monthly #\(i)", detail: "blablabla", habitType: .simple, cycle: "Monthly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
             }
             print("saved")
             //saveChanges(viewContext: viewContext)

@@ -195,6 +195,7 @@ extension HabitViewModel {
     func createRecord(habitID: String, habitType: HabitType, habitCycle: HabitCycle, numberProgress: Int16 = 0, timeProgress: String = "", done: Bool = false) {
         recordsOfSelectedDate = nil
         persistenceModel.createAndUpdateRecord(date: selectedDate, habitID: habitID, habitType: habitType, habitCycle: habitCycle, numberProgress: numberProgress, timeProgress: timeProgress, done: done)
+        parentModel.didReceiveChangeMessage(msg: .taskChanged)
         objectWillChange.send()
         parentModel.statDataChanged = true
     }
