@@ -230,7 +230,7 @@ struct RootView: View {
                 
             }.animation(.easeInOut(duration: 1.0), value: tabIndex)
                 .animation(.easeInOut(duration: POPUP_ANIMATION_DURATION), value: viewModel.blurEverything)
-        
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     
                         /*.onChange(of: scenePhase) { scenePhase in

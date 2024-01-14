@@ -60,6 +60,7 @@
 		2FE2BAB12ABA26560045385E /* PopupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2BAB02ABA26560045385E /* PopupManager.swift */; };
 		2FE538CF2A88D34600A03C26 /* StatisticalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE538CE2A88D34600A03C26 /* StatisticalDetailView.swift */; };
 		2FEF07132B4AD904002EB57D /* CustomViewsInForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF07122B4AD904002EB57D /* CustomViewsInForm.swift */; };
+		2FF2C2462B4F03E000A81325 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF2C2452B4F03E000A81325 /* SceneDelegate.swift */; };
 		2FFDF16A2A7F830700027AFE /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFDF1692A7F830700027AFE /* InitView.swift */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,7 @@
 		2FE2BAB02ABA26560045385E /* PopupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupManager.swift; sourceTree = "<group>"; };
 		2FE538CE2A88D34600A03C26 /* StatisticalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalDetailView.swift; sourceTree = "<group>"; };
 		2FEF07122B4AD904002EB57D /* CustomViewsInForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewsInForm.swift; sourceTree = "<group>"; };
+		2FF2C2452B4F03E000A81325 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2FFDF1692A7F830700027AFE /* InitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,6 +213,7 @@
 		2F5298FD29F20E0A0018B8CA /* HabitTracker */ = {
 			isa = PBXGroup;
 			children = (
+				2FF2C2452B4F03E000A81325 /* SceneDelegate.swift */,
 				2F5298FE29F20E0A0018B8CA /* HabitTrackerApp.swift */,
 				2F52990029F20E0A0018B8CA /* RootView.swift */,
 				2F0DE3212A570C3400E73D47 /* Popup */,
@@ -477,6 +480,7 @@
 				2F70F27D2A5467AC002C4A17 /* HabitRecord.swift in Sources */,
 				2F511F2A2A0CCFD400AC5328 /* TaskListView.swift in Sources */,
 				2F8418A22A472F3B00F20BD0 /* HabitTarget.swift in Sources */,
+				2FF2C2462B4F03E000A81325 /* SceneDelegate.swift in Sources */,
 				2F2493242A30D4590009E651 /* PickerPopupView.swift in Sources */,
 				2F5F9A772B37D7D300CBCFEF /* DataModels.swift in Sources */,
 				2FE2BAB12ABA26560045385E /* PopupManager.swift in Sources */,
