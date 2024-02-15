@@ -84,7 +84,8 @@ struct StatisticalDetailView: View {
                             }.disabled(true)
                                 .padding(.top, 7)
                             HabitStatisticalCell(digestCycle: .annually, habit: habit, m: reader, isShowProgress: false)
-                                .offset(x: 0, y: appeared ? shrinkedRect.height : 0)
+                                .opacity(appeared ? 0 : 1)
+                                //.offset(x: 0, y: appeared ? shrinkedRect.height : 0)
                                 .animation(.easeInOut(duration: animationDuration / 2), value: appeared)
                         }.padding()
                     }.clipShape(RoundedRectangle(cornerRadius: 18.0))
@@ -108,9 +109,7 @@ struct StatisticalDetailView: View {
                     }
                 }
                 .onChangeCustom(of: isActive) {
-                        appeared = isActive
-                    
-                        
+                    appeared = isActive
                 }
                 
                 

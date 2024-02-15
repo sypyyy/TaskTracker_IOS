@@ -14,6 +14,7 @@ struct HabitDetailView: View{
             print("syppppppppppdsdsefe\(habit)")
         }
     }
+    @State var testInput = ""
     let spacing: CGFloat = 10
     let viewModel: HabitViewModel = HabitViewModel.shared
     var body: some View {
@@ -32,17 +33,39 @@ struct HabitDetailView: View{
                 Spacer().frame(height: spacing)
                 HStack(){
                     if habit.type != .simple {
+                        /*
                         (modifyButton(systemName: "minus", size: .smaller, color: .gray) ).onTapGesture {
                             displayPopup(operation: .minus)
                         }
+                         */
+                        Image(systemName: "minus")
+                        
                         HabitProgressCircleView(habit: habit).onTapGesture {
                             displayPopup(operation: .setTo)
                         }
+                         
+                        
+                        /*
                         modifyButton(systemName: "plus", size: .smaller, color: .gray).onTapGesture {
                             displayPopup(operation: .plus)
                         }
+                         */
+                        MeasuredButton(action: { frame in
+                            let popMgr = GlobalPopupManager.shared
+                            if(popMgr.showPopup) {
+                                popMgr.hidePopup(reason: "touched button again")
+                                return
+                            }
+                            let view = Text("This is a popover")
+                            popMgr.showPopup(view: AnyView(view), sourceFrame: frame)
+                        }) {
+                            Image(systemName: "plus")
+                        }
+                        Image(systemName: "gobackward")
+                        
                     }
                 }.font(.system(size: 15, weight: .bold, design: .rounded))
+                /*
                 HStack(spacing: 10.0){
                     
                     if habit.type != .simple {
@@ -75,15 +98,15 @@ struct HabitDetailView: View{
                         }
                     }
                     else {
-                        /*
+                        
                          modifyButton(systemName: "checkmark", size: .medium).onTapGesture {
                          viewModel.createRecord(habitID: habit.id, habitType: habit.type, habitCycle: habit.cycle, done: true)
                          }
                          modifyButton(systemName: "gobackward", size: .medium).onTapGesture {
                          viewModel.createRecord(habitID: habit.id, habitType: habit.type, habitCycle: habit.cycle, done: false)
                          }
-                         */
                         
+                        /*
                         RoundedRectangle(cornerRadius: 15).fill(.green.opacity(0.4)).frame(height: 45).overlay {
                             Image(systemName: "checkmark").font(.system(size: 17, weight: .bold, design: .rounded))
                         }.onTapGesture {
@@ -95,11 +118,12 @@ struct HabitDetailView: View{
                         }.onTapGesture {
                             viewModel.createRecord(habitID: habit.id, habitType: habit.type, habitCycle: habit.cycle, done: false)
                             }
-                        
+                        */
                     }
                     
                     
                 }
+                */
             }.font(.system(size: 18, weight: .regular, design: .rounded))
                 .foregroundColor(.primary.opacity(0.6))
         
@@ -224,23 +248,21 @@ extension HabitDetailView {
                 VStack{
                     if habit.type == .number {
                         Text("\(habit.numberProgress ?? 0)").font(.system(size: 21, weight: .medium, design: Font.Design.rounded))
+                            .contentTransition(.numericText())
                     }
                     if habit.type == .time {
                         Text("\(habit.timeProgress ?? "0:00")").font(.system(size: 21, weight: .medium, design: Font.Design.rounded))
                     }
                 }
-                .padding(.vertical)
-                .frame(width: 100)
+                .padding()
                 
                 .background(
-                    Color.clear.background(.ultraThinMaterial).environment(\.colorScheme, .light))
+                    Color.white.opacity(0.4)
+                        .environment(\.colorScheme, .light))
                 
-                .clipShape(RoundedRectangle(cornerRadius: 35, style: .continuous))
-                .shadow(color: Color("Shadow"), radius: 2, x: 0, y: 1)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 35, style: .continuous).stroke(.white.opacity(0.6), lineWidth: 2).offset(y :0.5).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 35))
-                )
-                .padding()
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                
+                
                 
             }
             .animation(.default, value: viewModel.selectedDate)

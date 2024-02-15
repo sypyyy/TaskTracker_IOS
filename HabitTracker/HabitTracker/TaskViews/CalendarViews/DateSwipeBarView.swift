@@ -135,80 +135,90 @@ struct DateSwipeBar : View {
                         BottomSheetView{CreatTaskForm(viewModel: HabitViewModel.shared)}
                     }
                 }.foregroundColor(.primary.opacity(0.6))
-                if loaded {
-                    ScrollViewReader { v in
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            LazyHStack(spacing: -7) {
-                                ForEach(dateListMgr.dates, id: \.self) {date in
-                                    let isToday = fmt.string(from: date) == fmt.string(from: viewModel.getTodayDate())
-                                    VStack(spacing: 0.0){
-                                        Text("\(fmt1.string(from: date))").font(.system(size: 16, weight: isToday ? .heavy : .bold, design: .rounded))
-                                        Text("\(fmt2.string(from: date))").font(.system(size: 16, weight: isToday ? .regular : .light, design: .rounded))
-                                    }.foregroundColor(isToday ? .primary.opacity(0.6) : .secondary)
-                                        .padding()
-                                        
-                                    .background {
-                                        /*
-                                         fmt.string(from: date) == fmt.string(from: viewModel.getTodayDate())
-                                         */
-                                        if fmt.string(from: date) == fmt.string(from: chosenDate) {
+                HStack{
+                    if loaded {
+                        ScrollViewReader { v in
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                LazyHStack(spacing: -7) {
+                                    ForEach(dateListMgr.dates, id: \.self) {date in
+                                        let isToday = fmt.string(from: date) == fmt.string(from: viewModel.getTodayDate())
+                                        VStack(spacing: 0.0){
+                                            Text("\(fmt1.string(from: date))").font(.system(size: 16, weight: isToday ? .heavy : .bold, design: .rounded))
+                                            Text("\(fmt2.string(from: date))").font(.system(size: 16, weight: isToday ? .regular : .light, design: .rounded))
+                                        }.foregroundColor(isToday ? .primary.opacity(0.6) : .secondary)
+                                            .padding()
                                             
-                                                RoundedRectangle(cornerRadius: 20, style: .circular)
-                                                .fill(backgroundGradientStart.darker(by: 6))
-                                                    .saturation(1.2)
-                                                    
+                                        .background {
+                                            /*
+                                             fmt.string(from: date) == fmt.string(from: viewModel.getTodayDate())
+                                             */
+                                            if fmt.string(from: date) == fmt.string(from: chosenDate) {
+                                                
+                                                    RoundedRectangle(cornerRadius: 20, style: .circular)
+                                                    .fill(backgroundGradientStart.darker(by: 6))
+                                                        .saturation(1.2)
+                                                        
+                                                
+                                            }
                                             
                                         }
-                                        
-                                    }
-                                    .frame(height: 50)
-                                    .onAppear(){
-                                        let idx: Int = dateListMgr.dates.count - 2
-                                        if idx >= 0 {
-                                            let last = dateListMgr.dates[idx]
-                                            if(fmt.string(from: last) == fmt.string(from: date)) {
-                                                dateListMgr.addMoreDates()
-                                             }
-                                        } else if let last = dateListMgr.dates.last {
-                                            print("this is last\(last)")
-                                            print("this is last\(date)")
-                                            if(fmt.string(from: last) == fmt.string(from: date)) {
-                                                dateListMgr.addMoreDates()
-                                             }
+                                        .frame(height: 50)
+                                        .onAppear(){
+                                            let idx: Int = dateListMgr.dates.count - 2
+                                            if idx >= 0 {
+                                                let last = dateListMgr.dates[idx]
+                                                if(fmt.string(from: last) == fmt.string(from: date)) {
+                                                    dateListMgr.addMoreDates()
+                                                 }
+                                            } else if let last = dateListMgr.dates.last {
+                                                print("this is last\(last)")
+                                                print("this is last\(date)")
+                                                if(fmt.string(from: last) == fmt.string(from: date)) {
+                                                    dateListMgr.addMoreDates()
+                                                 }
+                                            }
                                         }
-                                    }
-                                    .onTapGesture {
-                                        let x = date.startOfWeek()
-                                        let y = date.endOfWeek()
-                                        print("dsdsddsede\(fmt5.string(from: x))")
-                                        print("dsdsddsede\(fmt6.string(from: x))")
-                                        print("dsdsddsede\(fmt5.string(from: y))")
-                                        print("dsdsddsede\(fmt6.string(from: y))")
-                                        //print("animation2")
-                                        withAnimation(){
-                                            v.scrollTo(date, anchor: .center)
-                                            chosenDate = date
-                                            viewModel.selectDate(date: date)
+                                        .onTapGesture {
+                                            let x = date.startOfWeek()
+                                            let y = date.endOfWeek()
+                                            print("dsdsddsede\(fmt5.string(from: x))")
+                                            print("dsdsddsede\(fmt6.string(from: x))")
+                                            print("dsdsddsede\(fmt5.string(from: y))")
+                                            print("dsdsddsede\(fmt6.string(from: y))")
+                                            //print("animation2")
+                                            withAnimation(){
+                                                v.scrollTo(date, anchor: .center)
+                                                chosenDate = date
+                                            }
+                                                viewModel.selectDate(date: date)
+                                            
                                         }
                                     }
                                 }
                             }
-                        }
-                        .frame(maxHeight: 90)
-                        .onAppear{
-                            v.scrollTo(viewModel.getTodayDate(), anchor: .center)
-                            print("sypppfdfsfsfdfdfs1")
-                        }
-                        .onDisappear{
-                            print("kdskfmslkfslkfsmklfmms")
+                            .frame(maxHeight: 90)
+                            .onAppear{
+                                v.scrollTo(viewModel.getTodayDate(), anchor: .center)
+                                print("sypppfdfsfsfdfdfs1")
+                            }
+                            .onDisappear{
+                                print("kdskfmslkfslkfsmklfmms")
+                            }
                         }
                     }
-                }
-                else {
-                    HStack{}.frame(height: 90).task {
-                        await loadDates()
+                    else {
+                        HStack{}.frame(height: 90).task {
+                            await loadDates()
+                        }
                     }
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "arrow.up.left.and.arrow.down.right")
+                    })
                 }
+                
+                
                 HStack {
                     /*
                     HStack{

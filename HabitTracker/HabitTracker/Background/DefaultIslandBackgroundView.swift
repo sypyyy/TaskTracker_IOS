@@ -479,7 +479,7 @@ private func getY(_ x: Int, _ y: Int) -> Int {
 
 
 struct SwiftUIViewForDrawTest_Previews: PreviewProvider {
-    @State static var t: AppTabShowType = .initial
+    @State static var t: AppTabShowType = .habits
     @State static var zoom: Bool = false
     static var previews: some View {
         DefaultIslandBackgroundView(tabIndex: $t, zoom: $zoom)

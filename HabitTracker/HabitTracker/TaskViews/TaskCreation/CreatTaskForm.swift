@@ -49,7 +49,11 @@ struct CreatTaskForm: View {
                                     .padding(.vertical)
                                     .padding(.leading)
                                 
-                                CustomSegmentedControl(options: ["to-do", "habit"]) {selectionInt in
+                                CustomSegmentedControl(optionLabels: [{ selected in
+                                    Text("to-do")
+                                }, { selected in
+                                    Text("habit")
+                                }]) {selectionInt in
                                     if selectionInt == 0 {
                                         taskType = .todo
                                     }
@@ -76,7 +80,7 @@ struct CreatTaskForm: View {
                         }
                         
                         if(taskType == .todo) {
-                            CreatTodoForm(viewModel: viewModel)
+                            CreatTodoForm()
                         }
                         
                     }.scrollIndicators(.hidden)

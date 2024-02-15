@@ -7,17 +7,34 @@
 
 import SwiftUI
 
-struct Button3D : View {
+struct Button3D<T: Equatable> : View {
     let title: String
     let image: String
-    @Binding var activeTitle: String
+    let tintColor: Color
+    @Binding var activeTitle: T
+    let tag: T
     var chosen: Bool {
-        title == activeTitle
+        tag == activeTitle
     }
+    
+    init(title: String, image: String, tintColor: Color = backgroundGradientStart, activeTitle: Binding<T>, tag: T) {
+        self.title = title
+        self.image = image
+        self.tintColor = tintColor
+        self._activeTitle = activeTitle
+        self.tag = tag
+    }
+    
     var body: some View {
         VStack{
-            Text("\(title)")
-                .font(.system(size: 14, weight: .regular, design: .rounded))
+            if image != "" {
+                Text("\(Image(systemName: image))").font(.system(size: 27, weight: .thin, design: .rounded))
+            }
+            if title != "" {
+                Text("\(title)")
+                    .font(.system(size: 14, weight: .regular, design: .rounded))
+            }
+            
                 //.padding(.horizontal)
                 //.padding(.vertical, 8.0)
                 
@@ -27,19 +44,19 @@ struct Button3D : View {
                 //)
              
                 //.innerShadow(using: RoundedRectangle(cornerRadius: 15), color: .black.opacity(0.7),width: chosen ? 1.7 : 0, blur: 1)
-            if image != "" {
-                Text("\(Image(systemName: image))").font(.system(size: 27, weight: .thin, design: .rounded))
-            }
-        }.padding()
-        .background(chosen ? Color(UIColor(backgroundGradientStart).darker(by: 0)) : .clear)
+            
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 12)
+        .frame(maxWidth: .infinity)
+        .background(chosen ? tintColor : .clear)
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
         .shadow(color: Color("Shadow").opacity(0.3), radius: 2, x: 0, y: 0)
-        .padding(.horizontal, 4.0)
         .animation(.easeInOut, value: activeTitle)
-        
+        .padding(.horizontal, 4)
         .onTapGesture {
-            activeTitle = title
+            activeTitle = tag
         }
         
     }
@@ -114,6 +131,7 @@ struct customDatePicker : View {
         let dateFormater = isHourAndMin ? fmt11 : fmt10
         
         HStack{
+            
             DatePicker(
                 selection: $date,displayedComponents: [isHourAndMin ? .hourAndMinute : .date], label: {
                     
@@ -123,13 +141,7 @@ struct customDatePicker : View {
             .datePickerStyle(.compact).fixedSize()
             .padding(.leading, -8)
             .mask(RoundedRectangle(cornerRadius: 12))
-            .overlay {
-                    Text("\(dateFormater.string(from: date))")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(RoundedRectangle(cornerRadius: 8).fill(.gray.lighter(by: 40)))
-                        .allowsHitTesting(false)
-                
-            }
+            
             Spacer()
             
         }.padding(.leading)

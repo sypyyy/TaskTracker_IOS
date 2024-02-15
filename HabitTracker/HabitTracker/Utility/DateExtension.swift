@@ -245,3 +245,36 @@ var fmt11 : DateFormatter {
     return fmt
 }
 
+//18:00
+var fmt12 : DateFormatter {
+    let fmt = DateFormatter()
+    fmt.dateFormat = "HH:mm"
+    return fmt
+}
+
+extension Date {
+    static func combineDates(date: Date, time: Date) -> Date {
+        // Assuming you have two Date objects
+        let date = Date()  // Replace this with your first Date
+        let time = Date()  // Replace this with your second Date
+
+        // Get the date components from the first Date
+        let calendar = Calendar.current
+        let date1Components = calendar.dateComponents([.year, .month, .day], from: date)
+
+        // Get the time components from the second Date
+        let date2Components = calendar.dateComponents([.hour, .minute], from: time)
+
+        // Create a new Date by combining the date from date1 and the time from date2
+        if let combinedDate = calendar.date(bySettingHour: date2Components.hour ?? 0,
+                                             minute: date2Components.minute ?? 0,
+                                             second: 0,
+                                             of: calendar.date(from: date1Components) ?? Date()) {
+            print("Combined Date: \(combinedDate)")
+            return combinedDate
+        } else {
+            print("Error creating combined date.")
+            return Date()
+        }
+    }
+}

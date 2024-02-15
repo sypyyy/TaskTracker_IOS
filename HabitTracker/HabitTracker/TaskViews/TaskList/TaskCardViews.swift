@@ -7,9 +7,10 @@
 
 import SwiftUI
 
+
+
 struct HabitTaskCardView: View {
     @StateObject var masterViewModel = TaskMasterViewModel.shared
-    
     
     let taskType: TaskType
     let habit: HabitModel
@@ -46,7 +47,7 @@ struct HabitTaskCardView: View {
                 VStack {
                     
                     TaskCardTopView(name: getTaskName(), done: isTaskDone(), metric: metric, isExpanded: tappedOne == habit.id, cardMaxHeight: cardMaxHeight, cardIdealHeight: cardIdealHeight)
-                    
+                        
                     HStack{
                         Text("\(habit.cycle.rawValue)")
                         if habit.type == .number {
@@ -61,9 +62,11 @@ struct HabitTaskCardView: View {
                         
                         Spacer()
                     }.font(.system(size: 18, weight: .regular, design: .rounded)).foregroundColor(.primary.opacity(0.6))
+                        
                 }
             }
             .contentShape(Rectangle())
+            
             
             
             
@@ -91,8 +94,9 @@ struct HabitTaskCardView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 15).stroke(.white.opacity(0.6), lineWidth: 2).offset(y :1.5).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 15))
         )
-        .padding()
         
+        .padding(.vertical, Task_Card_Vertical_Padding)
+        .padding(.horizontal, 12)
     }
 }
 
@@ -110,8 +114,9 @@ struct TaskCardTopView: View {
                     Circle()
                     //.stroke(lineWidth: 2)
                         .fill(Color(uiColor: UIColor(red: 252 / 255, green: 236 / 255, blue: 232 / 255, alpha: 1)).opacity(1))
+                    /*
                         .softOuterShadow(darkShadow: Color(uiColor: UIColor(red: 252 / 255, green: 236 / 255, blue: 232 / 255, alpha: 1)).darker(by: 8).opacity(1), lightShadow: Color(uiColor: UIColor(red: 252 / 255, green: 236 / 255, blue: 232 / 255, alpha: 1)).lighter(by: 8).opacity(1), offset: 1.2, radius: 1)
-                    
+                    */
                     
                     
                         .frame(width: 28, height: 28)
@@ -150,3 +155,5 @@ struct ContentView_Previews_TaskCard: PreviewProvider {
         RootView(viewModel : overalViewModel).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+
+

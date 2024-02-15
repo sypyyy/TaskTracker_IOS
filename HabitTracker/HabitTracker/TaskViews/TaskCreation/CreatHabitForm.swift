@@ -23,6 +23,7 @@ struct CreatHabitForm: View {
     @Binding var showTimePicker: Bool
     @Binding var showAlert: Bool
     var body: some View {
+        
         VStack{
         
             
@@ -38,23 +39,25 @@ struct CreatHabitForm: View {
                     CustomDivider()
                     
                     leadingLongTitle(title: "Track habit by")
-                    
+                    let habitTypeButtonWidth: CGFloat = 90
+                    let habitCycleButtonWidth: CGFloat = 90
                     HStack{
-                        Button3D(title: "Checkbox", image: "checkmark.square", activeTitle: $habitType).padding(.leading)
-                        Button3D(title: "Time", image: "alarm", activeTitle: $habitType)
-                        Button3D(title: "Number", image: "123.rectangle", activeTitle: $habitType)
+                        Button3D(title: "Checkbox", image: "checkmark.square", activeTitle: $habitType, tag: "Checkbox").frame(width: habitTypeButtonWidth)
+                        Button3D(title: "Time", image: "alarm", activeTitle: $habitType, tag: "Time").frame(width: habitTypeButtonWidth)
+                        Button3D(title: "Number", image: "123.rectangle", activeTitle: $habitType, tag: "Number").frame(width: habitTypeButtonWidth)
                         Spacer()
                     }.padding(.bottom)
-                    
+                        .padding(.leading)
+            
                     CustomDivider()
                     leadingLongTitle(title: "Cycle")
                     HStack{
-                        Button3D(title: "Daily",image: "", activeTitle: $cycle).padding(.leading)
-                        Button3D(title: "Weekly", image: "", activeTitle: $cycle)
-                        Button3D(title: "Monthly", image: "", activeTitle: $cycle)
+                        Button3D(title: "Daily",image: "", activeTitle: $cycle, tag: "Daily").frame(width: habitCycleButtonWidth)
+                        Button3D(title: "Weekly", image: "", activeTitle: $cycle, tag: "Weekly").frame(width: habitCycleButtonWidth)
+                        Button3D(title: "Monthly", image: "", activeTitle: $cycle, tag: "Monthly").frame(width: habitCycleButtonWidth)
                         Spacer()
                     }.padding(.bottom)
-                    
+                        .padding(.leading)
                 }
                 if habitType != "Checkbox" {
                     CustomDivider()

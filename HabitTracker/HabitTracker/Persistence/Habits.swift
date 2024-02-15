@@ -58,11 +58,11 @@ extension PersistenceController {
         }
         //setStopCheckPoint(habitID: id, date: Date(), stopPointType: .go)
         if cycle == "Daily" {
-            setStopCheckPoint(habitID: IdToBe, date: Date(), stopPointType: .go)
+            setStopCheckPoint(habitID: IdToBe, date: startDate, stopPointType: .go)
         } else if cycle == "Weekly" {
-            setStopCheckPoint(habitID: IdToBe, date: Date().startOfWeek(), stopPointType: .go)
+            setStopCheckPoint(habitID: IdToBe, date: startDate, stopPointType: .go) 
         } else if cycle == "Monthly" {
-            setStopCheckPoint(habitID: IdToBe, date: Date().startOfMonth(), stopPointType: .go)
+            setStopCheckPoint(habitID: IdToBe, date: startDate, stopPointType: .go)
         }
         saveChanges(viewContext: viewContext)
     }

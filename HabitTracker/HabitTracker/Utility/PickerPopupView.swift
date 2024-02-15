@@ -26,7 +26,8 @@ struct numberPickerPopupView: View {
                     .clipped()
                     .pickerStyle(WheelPickerStyle())
                     Divider()
-                    Button (action:{if !disableSavebtn {
+                    Button (action:{
+                        if !disableSavebtn {
                         onDoneDidTap(number)
                         disableSavebtn = true
                     }}){

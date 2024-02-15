@@ -15,8 +15,7 @@ struct InitView: View {
                 .opacity(shown ? 1.0 : 0.3)
             TaskListView(masterViewModel: TaskMasterViewModel.shared).offset(x: 0, y: shown ? 0 : 50)
                 .opacity(shown ? 1.0 : 0.3)
-        }.onAppear {
-            shown = true
+        }.onAppear {             shown = true
         }
         .animation(.default, value: shown)
     }

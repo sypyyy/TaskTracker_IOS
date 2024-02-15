@@ -10,7 +10,7 @@ import CoreData
 import SwiftUI
 
 enum ChangeMessage {
-    case taskChanged
+    case dateSelected, taskStateChanged, taskCreated
 }
 
 protocol ChangeListener {
@@ -18,7 +18,7 @@ protocol ChangeListener {
 }
 
 enum AppTabShowType: Int {
-    case initial = 0, checkIn = 1, statistical = 2, setting = 3
+    case goals = 0, habits = 1, checkIn = 2, statistical = 3, setting = 4
 }
 
 class TaskMasterViewModel: ObservableObject{
@@ -39,7 +39,7 @@ class TaskMasterViewModel: ObservableObject{
     
     private var showCreateHabitForm : Bool = false
     
-    public var tabIndex: AppTabShowType = .initial
+    public var tabIndex: AppTabShowType = .habits
     public var selectedDate: Date = Date()
     
     //test syppppp test
@@ -106,6 +106,7 @@ extension TaskMasterViewModel {
         selectedDate = date
         habitViewModel.selectDate(date: date)
         todoViewModel.selectDate(date: date)
+        didReceiveChangeMessage(msg: .dateSelected)
         //No need to send objectWillChange because child view models will do that.
     }
 }

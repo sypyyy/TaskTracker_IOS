@@ -63,8 +63,8 @@ extension PersistenceController  {
     
     func getTodoOfDay(day: Date) -> [Todo] {
         let request: NSFetchRequest<Todo> = Todo.fetchRequest()
-        //"scheduleDate >= %@ && ((willExpire && expireDate < %@) || !willExpire)"
-        request.predicate = NSPredicate(format: "scheduleDate >= %@ && scheduleDate < %@", day.startOfDay() as CVarArg, day.endOfDay() as CVarArg)
+        //"startDate >= %@ && ((willExpire && expireDate < %@) || !willExpire)"
+        request.predicate = NSPredicate(format: "startDate >= %@ && startDate < %@", day.startOfDay() as CVarArg, day.endOfDay() as CVarArg)
         do {
             let res = try container.viewContext.fetch(request)
             return res
@@ -77,7 +77,7 @@ extension PersistenceController  {
     
     func getAllTodos() -> [Todo] {
         let request: NSFetchRequest<Todo> = Todo.fetchRequest()
-        //"scheduleDate >= %@ && ((willExpire && expireDate < %@) || !willExpire)"
+        //"start >= %@ && ((willExpire && expireDate < %@) || !willExpire)"
         do {
             let res = try container.viewContext.fetch(request)
             return res
@@ -94,7 +94,7 @@ extension TodoModel {
     func convertToStorageModel(context: NSManagedObjectContext) -> Todo {
         let res = Todo.init(context: context)
         res.name = name
-        res.scheduleDate = scheduleDate
+        res.startDate = startDate
         res.priority = Int16(priority)
         res.hasReminder = hasReminder
         res.reminderDate = reminderDate
@@ -116,7 +116,7 @@ extension TodoModel {
             fmt.dateFormat = self.isTimeSpecific ? "yyyy/MM/dd/HH:mm" : "yyyy/MM/dd"
             return fmt
         }
-        let id = "\(self.name)<#$>\(formatter.string(from: self.scheduleDate))<#$>\(TaskType.todo.rawValue)"
+        let id = "\(self.name)<#$>\(formatter.string(from: self.startDate))<#$>\(TaskType.todo.rawValue)"
         return id
     }
 }

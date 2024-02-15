@@ -43,9 +43,9 @@ struct InitView_Wrapper: UIViewControllerRepresentable {
         //let hostingController = UIHostingController(rootView: swiftUIView)
         //hostingController.view.backgroundColor = .clear
         //hostingController.view.isHidden = true
-        initView_hostingController.view.backgroundColor = .clear
-        initView_hostingController.view.isHidden = false
-        return initView_hostingController
+        taskView_hostingController.view.backgroundColor = .clear
+        taskView_hostingController.view.isHidden = false
+        return taskView_hostingController
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {

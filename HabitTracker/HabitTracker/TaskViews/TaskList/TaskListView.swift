@@ -71,41 +71,11 @@ struct TaskListView : View {
              */
             
             
-            test_Wrapper()
+            taskTable_Wrapper()
            
         }.font(.title)
     }
 }
-
-struct SubView: View {
-    @State var change: Bool = false
-
-    var body: some View {
-        Rectangle()
-            .frame(width: 200)
-            .modifier(AnimatingCellHeight(height: change ? 300 : 200))
-            .foregroundColor(Color.red)
-            .onTapGesture {
-                withAnimation {
-                    self.change.toggle()
-                }
-            }
-    }
-}
-
-struct AnimatingCellHeight: AnimatableModifier {
-    var height: CGFloat = 0
-
-    var animatableData: CGFloat {
-        get { height }
-        set { height = newValue }
-    }
-
-    func body(content: Content) -> some View {
-        content.frame(height: height)
-    }
-}
-
 
 
 struct ContentView_Previews_TaskList: PreviewProvider {
@@ -122,18 +92,18 @@ import UIKit
  
 
 @MainActor
-let testVC = TaskTableViewController()
+let taskTableVC = TaskTableViewController()
 
-struct test_Wrapper: UIViewControllerRepresentable {
+struct taskTable_Wrapper: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
         //let swiftUIView = InitView()
         //let hostingController = UIHostingController(rootView: swiftUIView)
         //hostingController.view.backgroundColor = .clear
         //hostingController.view.isHidden = true
-        testVC.view.backgroundColor = .clear
-        testVC.view.isHidden = false
-        return testVC
+        taskTableVC.view.backgroundColor = .clear
+        taskTableVC.view.isHidden = false
+        return taskTableVC
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
@@ -142,7 +112,7 @@ struct test_Wrapper: UIViewControllerRepresentable {
     }
     
     static func dismantleUIViewController(_ uiViewController: UIViewController, coordinator: ()) {
-        testVC.view.isHidden = true
+        taskTableVC.view.isHidden = true
     }
     
     typealias UIViewControllerType = UIViewController

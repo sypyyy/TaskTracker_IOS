@@ -18,52 +18,6 @@ extension EnvironmentValues {
     }
 }
 
-/*
-@main
-struct HabitTrackerApp: App {
-
-    var body: some Scene {
-        WindowGroup {
-            let overalViewModel = TaskMasterViewModel.shared
-            //Text("djeshdfhke WTF????")
-            
-                RootView(viewModel : overalViewModel)
-            
-                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
-        }
-    }
-}
-*/
-
-class TouchWindow: UIWindow {
-    override func sendEvent(_ event: UIEvent) {
-        super.sendEvent(event)
-        // Handle touch events here
-        if let touches = event.allTouches {
-            for touch in touches where touch.phase == .began {
-                // Do something with the touch
-                print("Touch detected at \(touch.location(in: self))")
-            }
-        }
-    }
-}
-
-/*
-@UIApplicationMain
-// AppDelegate or SceneDelegate
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
-    let overalViewModel = TaskMasterViewModel.shared
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Use TouchWindow
-        window = TouchWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UIHostingController(rootView: RootView(viewModel: self.overalViewModel))
-        window?.makeKeyAndVisible()
-        return true
-    }
-}
-*/
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -93,7 +47,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
 
+class TouchWindow: UIWindow {
+    var isTouchBeganInsidePopup = false
+    var waitListedEvents = [UIEvent]()
+    
+    override func sendEvent(_ event: UIEvent) {
+        // Handle touch events here
+        let popupMgr = GlobalPopupManager.shared
+        if let touches = event.allTouches {
+            for touch in touches where touch.phase == .began {
+                // Do something with the touch
+                print("Touch detected at \(touch.location(in: self))")
+                if popupMgr.showPopup {
+                    guard let popupPos = popupMgr.popupPosition, let popupSize = popupMgr.popupSize else {continue}
+                    let popupOrigin = CGPoint(x: (popupPos.x - popupSize.width / 2), y: (popupPos.y - popupSize.height / 2))
+                    let popupFrame = CGRect(origin: popupOrigin, size: popupSize)
+                    let touchLocation = touch.location(in: self)
+                    isTouchBeganInsidePopup = popupFrame.contains(touchLocation)
+                    print("began inside pop \(isTouchBeganInsidePopup)")
+                }
+            }
+            
+            for touch in touches where touch.phase == .moved || touch.phase == .ended || touch.phase == .cancelled {
+                // Do something with the touch
+                print("Touch detected at \(touch.location(in: self))")
+                if popupMgr.showPopup {
+                    guard let popupPos = popupMgr.popupPosition, let popupSize = popupMgr.popupSize else {continue}
+                    let popupOrigin = CGPoint(x: (popupPos.x - popupSize.width / 2), y: (popupPos.y - popupSize.height / 2))
+                    let popupFrame = CGRect(origin: popupOrigin, size: popupSize)
+                    let touchLocation = touch.location(in: self)
+                    print("popFrame \(popupFrame)")
+                    if !popupFrame.contains(touchLocation) && !isTouchBeganInsidePopup {
+                        popupMgr.hidePopup(reason: "moved OutSide Popup")
+                    }
+                }
+                
+            }
+            
+        }
+        super.sendEvent(event)
+    }
+}

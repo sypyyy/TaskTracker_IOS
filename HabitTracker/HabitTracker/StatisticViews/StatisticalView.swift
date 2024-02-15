@@ -64,7 +64,13 @@ struct StatisticalView: View, Sendable {
                              
                              .frame(width: 250)
                              */
-                            CustomSegmentedControl( options:  ["Weekly", "Monthly", "Yearly"]) {preselectedIndex in
+                            CustomSegmentedControl( optionLabels:  [{selected in
+                                Text("Weekly")
+                            },{selected in
+                                Text("Monthly")
+                            }, {selected in
+                                Text("Yearly")
+                            }]) {preselectedIndex in
                                 var type: HabitStatisticShowType = .weekly
                                 if preselectedIndex == 1 {
                                     type = .monthly
@@ -263,7 +269,7 @@ struct ListButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .background(configuration.isPressed ? Color.gray.opacity(0.1) : Color.clear)
+            //.background(configuration.isPressed ? Color.gray.opacity(0.1) : Color.clear)
             //.scaleEffect(configuration.isPressed ? 1.05 : 1)
             .animation(.snappy(duration: 0), value: configuration.isPressed)
     }

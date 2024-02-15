@@ -15,6 +15,7 @@ class PersistenceController {
         let viewContext = result.container.viewContext
         var habits = result.getAllHabits()
         var todos = result.getAllTodos()
+        var projects = result.getAllProjects()
         
         for habit in habits {
             viewContext.delete(habit)
@@ -23,41 +24,70 @@ class PersistenceController {
         for todo in todos {
             viewContext.delete(todo)
         }
+        
+        for project in projects {
+            viewContext.delete(project)
+        }
+        
         saveChanges(viewContext: viewContext)
        
         print("deleted")
         let testTodo = TodoModel()
         testTodo.name = "Basketball with Michael"
         
-        do {try result.createTodo(dataModel: testTodo)} catch {print("")}
+        result.createTodo(dataModel: testTodo)
+        var testProject = ProjectModel()
+        for i in 1...5 {
+            if(i == 1) {
+                testProject.name = "Eat healthier"
+                result.createProject(dataModel: testProject)
+            }
+            else if(i == 2) {
+                testProject.name = "Publish app"
+                result.createProject(dataModel: testProject)
+            }
+            else if(i == 3) {
+                testProject.name = "Read books"
+                result.createProject(dataModel: testProject)    
+            }
+
+            else if(i == 4) {
+                testProject.name = "Travel"
+                result.createProject(dataModel: testProject)     
+            }
+            else if(i == 5) {
+                testProject.name = "Exercise outdoors"
+                result.createProject(dataModel: testProject)        
+            }
+        }
         
         for i in 1...120 {
             if(i == 1) {
                 do {try result.createHabit(name: "Drink water #\(i)", detail: "blablabla", habitType: .number, cycle: "Daily", targetNumber: 10, numberUnit: "cups", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
             }
-            if(i == 2) {
+            else if(i == 2) {
                 do {try result.createHabit(name: "Drink water but weekly #\(i)", detail: "blablabla", habitType: .number, cycle: "Weekly", targetNumber: 10, numberUnit: "cups", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
             }
-            if(i == 3) {
+            else if(i == 3) {
                 do {try result.createHabit(name: "Drink water but monthly #\(i)", detail: "blablabla", habitType: .number, cycle: "Monthly", targetNumber: 10, numberUnit: "cups", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
             }
 
-            if(i == 4) {
+            else if(i == 4) {
                 do {try result.createHabit(name: "Study #\(i)", detail: "blablabla", habitType: .time, cycle: "Daily", targetNumber: 0, numberUnit: "cup", targetHour: 1, targetMinute: 30, setTarget: true)} catch {print("")}
             }
-            if(i == 5) {
+            else if(i == 5) {
                 do {try result.createHabit(name: "Study but weekly #\(i)", detail: "blablabla", habitType: .time, cycle: "Weekly", targetNumber: 0, numberUnit: "cup", targetHour: 1, targetMinute: 30, setTarget: true)} catch {print("")}
             }
-            if(i == 6) {
+            else if(i == 6) {
                 do {try result.createHabit(name: "Study but monthly #\(i)", detail: "blablabla", habitType: .time, cycle: "Monthly", targetNumber: 0, numberUnit: "cup", targetHour: 1, targetMinute: 30, setTarget: true)} catch {print("")}
             }
-            if(i == 7) {
+            else if(i == 7) {
                 do {try result.createHabit(name: "Eat breakfast #\(i)", detail: "blablabla", habitType: .simple, cycle: "Daily", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
             }
-            if(i == 8) {
+            else if(i == 8) {
                 do {try result.createHabit(name: "Eat breakfast but weekly #\(i)", detail: "blablabla", habitType: .simple, cycle: "Weekly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
             }
-            if(i == 9) {
+            else if(i == 9) {
                 do {try result.createHabit(name: "Eat breakfast but monthly #\(i)", detail: "blablabla", habitType: .simple, cycle: "Monthly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
             }
             

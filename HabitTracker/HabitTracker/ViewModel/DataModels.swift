@@ -91,6 +91,8 @@ class HabitModel: TaskModel {
 
 class TodoModel: TaskModel{
     var name: String
+    var note : String
+    //The id is set during creation
     var id: String {
         didSet {
             taskId = id
@@ -98,14 +100,15 @@ class TodoModel: TaskModel{
     }
     var priority: Int
     
-    var scheduleDate: Date
+    var startDate: Date
     var isTimeSpecific: Bool
     var scheduleTime: String {
-        ""
+        //gets the hour and minute from startDate and return the "xx:xx" format
+        fmt12.string(from: startDate)
     }
     
     var hasReminder: Bool
-    var reminderDate: Date = Date()
+    var reminderDate: Date
     var reminderTime: String {
         ""
     }
@@ -113,8 +116,8 @@ class TodoModel: TaskModel{
     var willExpire: Bool
     var expireDate: Date = Date()
     
-    var note : String
     
+    //如果为空就是“”
     var parentTaskId: String
     
     var hasParent: Bool {
@@ -122,6 +125,7 @@ class TodoModel: TaskModel{
     }
     var subTasks: [TodoModel] = []
     
+    //如果为空就是“”
     var subTaskString: String
     
     var hasSubTasks: Bool {
@@ -136,12 +140,10 @@ class TodoModel: TaskModel{
         self.id = todo.id ?? ""
         
         self.isTimeSpecific = todo.isTimeSpecific
-        self.scheduleDate = todo.scheduleDate ?? Date()
+        self.startDate = todo.startDate ?? Date()
         
         self.hasReminder = todo.hasReminder
-        if(hasReminder) {
-            self.reminderDate = todo.reminderDate ?? Date()
-        }
+        self.reminderDate = todo.reminderDate ?? Date()
         self.willExpire = todo.willExpire
         if(willExpire) {
             self.expireDate = todo.expireDate ?? Date()
@@ -164,7 +166,7 @@ class TodoModel: TaskModel{
         self.name = ""
         self.id = ""
         self.isTimeSpecific = true
-        self.scheduleDate = Date()
+        self.startDate = Date()
         self.hasReminder = false
         self.reminderDate = Date()
         self.willExpire = false
@@ -180,4 +182,31 @@ class TodoModel: TaskModel{
     }
     
 }
+
+//MARK: 项目/目标
+class ProjectModel {
+    var name: String
+    var id: String
+    var isPaused: Bool = false
+    var isFinished: Bool = false
+    var startDate: Date = Date()
+    var endDate: Date = Date()
+    
+    init() {
+        self.name = ""
+        self.id = ""
+    }
+    
+    
+    init(project: Project) {
+        self.name = project.name ?? ""
+        self.id = project.id ?? UUID.init().uuidString
+        self.isPaused = project.isPaused
+        self.isFinished = project.isFinished
+        self.startDate = project.startDate ?? Date()
+        self.endDate = project.endDate ?? Date()
+    }
+    
+}
+
 

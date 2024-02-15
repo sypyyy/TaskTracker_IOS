@@ -29,7 +29,7 @@ extension HabitViewModel {
     func selectDate(date: Date) {
         selectedDate = date
         recordsOfSelectedDate = nil
-        objectWillChange.send()
+        //objectWillChange.send()
     }
 }
 
@@ -139,8 +139,9 @@ extension HabitViewModel {
                     break
                 }
                 habit.done = records[habit.id]?.done
-                print("\(records[habit.id])")
+                
             }
+            print("\(records[habit.id])")
         }
         
         return habits
@@ -195,8 +196,8 @@ extension HabitViewModel {
     func createRecord(habitID: String, habitType: HabitType, habitCycle: HabitCycle, numberProgress: Int16 = 0, timeProgress: String = "", done: Bool = false) {
         recordsOfSelectedDate = nil
         persistenceModel.createAndUpdateRecord(date: selectedDate, habitID: habitID, habitType: habitType, habitCycle: habitCycle, numberProgress: numberProgress, timeProgress: timeProgress, done: done)
-        parentModel.didReceiveChangeMessage(msg: .taskChanged)
         objectWillChange.send()
+        parentModel.didReceiveChangeMessage(msg: .taskStateChanged)
         parentModel.statDataChanged = true
     }
 }

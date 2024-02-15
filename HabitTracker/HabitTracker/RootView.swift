@@ -21,17 +21,26 @@ let backgroundGradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 12
     let tabView_hostingController = {
         let res = UITabBarController()
         
-        res.setViewControllers([initView_hostingController, checkInView_hostingController, statisticalView_hostingNavigationController,
+        res.setViewControllers([goalView_hostingController, taskView_hostingController, checkInView_hostingController, statisticalView_hostingNavigationController,
                                 settingView_hostingController], animated: true)
         res.selectedIndex = 0
         res.tabBar.isHidden = true
         return res
     } ()
 
-    let initView = InitView()
+    let projectView = ProjectViews()
     @MainActor
-    let initView_hostingController =  {
-        let res = CustomHostingViewController(rootView: initView)
+    let goalView_hostingController =  {
+        let res = CustomHostingViewController(rootView: projectView)
+        res.view.backgroundColor = .clear
+        //res.view.isHidden = false
+        return res
+    }()
+
+    let taskView = InitView()
+    @MainActor
+    let taskView_hostingController =  {
+        let res = CustomHostingViewController(rootView: taskView)
         res.view.backgroundColor = .clear
         //res.view.isHidden = false
         return res}()
@@ -82,25 +91,28 @@ struct RootView: View {
  */
     @StateObject var viewModel : TaskMasterViewModel
     //@Environment(\.scenePhase) var scenePhase
-    @State private var tabIndex: AppTabShowType = .initial {
+    @State private var tabIndex: AppTabShowType = .goals {
         
         didSet {
-            if tabIndex == .initial {
+            if tabIndex == .goals {
                 tabView_hostingController.selectedIndex = 0
             }
-            else if tabIndex == .checkIn {
-                //statisticalView_hostingNavigationController.view.transitionView(hidden: tabIndex != .statistical)
+            else if tabIndex == .habits {
                 tabView_hostingController.selectedIndex = 1
             }
-            
-            else if tabIndex == .statistical {
+            else if tabIndex == .checkIn {
                 //statisticalView_hostingNavigationController.view.transitionView(hidden: tabIndex != .statistical)
                 tabView_hostingController.selectedIndex = 2
             }
             
-            else if tabIndex == .setting {
+            else if tabIndex == .statistical {
                 //statisticalView_hostingNavigationController.view.transitionView(hidden: tabIndex != .statistical)
                 tabView_hostingController.selectedIndex = 3
+            }
+            
+            else if tabIndex == .setting {
+                //statisticalView_hostingNavigationController.view.transitionView(hidden: tabIndex != .statistical)
+                tabView_hostingController.selectedIndex = 4
             }
             //tabView_hostingController.setViewControllers([statisticalView_hostingController, initView_hostingController,], animated: true)
             viewModel.tabIndex = tabIndex
@@ -147,30 +159,19 @@ struct RootView: View {
     
     
     var body: some View {
-       
         
-       VStack {
+        
+        VStack {
             ZStack{
                 ZStack{
                     DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg).drawingGroup().ignoresSafeArea()
                     
                     
                     VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().background(.regularMaterial).opacity(tabIndex == .statistical ? 1.0 : 0.0).animation(.easeIn(duration: 0.2), value: tabIndex)
-                     
                     
                     
-                    //backgroundGradientStart.darker(by: 30).ignoresSafeArea()
-                    ZStack{
-                            //.transition(.slide)
-                        /*
-                        StatisticalView_Wrapper().ignoresSafeArea()
-                        InitView_Wrapper().disabled(tabIndex != .initial)
-                        */
-                        TabView_Wrapper().ignoresSafeArea()
-                       
-                        
-                        //.disabled(tabIndex != .statistical)
-                    }
+                
+                    TabView_Wrapper().ignoresSafeArea()
                     //.animation(.easeInOut(duration: 0.3), value: tabIndex)
                     
                     VStack(spacing: 0) {
@@ -179,7 +180,11 @@ struct RootView: View {
                         //Bottom Tab View
                         HStack{
                             Button{
-                                hideCurrentVCAndShowNext(target: .initial)
+                                hideCurrentVCAndShowNext(target: .goals)
+                                zoomBg = true
+                            } label: {Text("projects")}
+                            Button{
+                                hideCurrentVCAndShowNext(target: .habits)
                                 //tabIndex = .initial
                                 zoomBg = true
                                 
@@ -205,7 +210,7 @@ struct RootView: View {
                         .padding()
                         .frame(height: 88)
                         .frame(maxWidth: .infinity)
-                        .background(tabIndex == .initial ? backgroundGradientEnd.opacity(0.6) : Color(red: 235.0 / 255, green: 235.0 / 255, blue: 235.0 / 255).opacity(0.6))
+                        .background(tabIndex == .habits ? backgroundGradientEnd.opacity(0.6) : Color(red: 235.0 / 255, green: 235.0 / 255, blue: 235.0 / 255).opacity(0.6))
                         .background(.ultraThinMaterial)
                         .frame(alignment: .bottom)
                         .animation(.easeInOut(duration: 1.0), value: tabIndex)
@@ -215,23 +220,24 @@ struct RootView: View {
                     //.shadow(color: Color("Shadow"), radius: 5, x: 0, y: 1)
                     
                 }.zIndex(1)
-                        .ignoresSafeArea(edges: [.bottom])
-                        .onReceive(pub) { (output) in
-                            print("received")
-                            viewModel.refreshDate()
-                        }
-                        //.blur(radius: viewModel.blurEverything ? 20.0 : 0.0)
-                        .disabled(viewModel.blurEverything ? true : false)
+                    .ignoresSafeArea(edges: [.bottom])
+                    .onReceive(pub) { (output) in
+                        print("received")
+                        viewModel.refreshDate()
+                    }
+                //.blur(radius: viewModel.blurEverything ? 20.0 : 0.0)
+                    .disabled(viewModel.blurEverything ? true : false)
                 VStack {
                     PopupView()
                 }.zIndex(2)
-                    
-                }
                 
-            }.animation(.easeInOut(duration: 1.0), value: tabIndex)
-                .animation(.easeInOut(duration: POPUP_ANIMATION_DURATION), value: viewModel.blurEverything)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
+                GlobalPopupView().zIndex(3) 
+            }
+            
+        }.animation(.easeInOut(duration: 1.0), value: tabIndex)
+            .animation(.easeInOut(duration: POPUP_ANIMATION_DURATION), value: viewModel.blurEverything)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
     
                         /*.onChange(of: scenePhase) { scenePhase in
         switch scenePhase {
@@ -280,8 +286,12 @@ extension RootView {
             return
         }
         switch tabIndex {
-        case .initial:
-            initView_hostingController.view.transitionView(hidden: true, completion: {
+        case .goals:
+            goalView_hostingController.view.transitionView(hidden: true, completion: {
+                tabIndex = target
+            })
+        case .habits:
+            taskView_hostingController.view.transitionView(hidden: true, completion: {
                 tabIndex = target
             })
         case .checkIn:
@@ -296,10 +306,11 @@ extension RootView {
             settingView_hostingController.view.transitionView(hidden: true, completion: {
                 tabIndex = target
             })
+            
+            
         }
     }
 }
-
 
 
 

@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if let windowScene = scene as? UIWindowScene {
             let window = TouchWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: RootView(viewModel: self.overalViewModel)) // Replace with your SwiftUI View
+            window.rootViewController = rootViewController
             self.window = window
             window.makeKeyAndVisible()
         }
