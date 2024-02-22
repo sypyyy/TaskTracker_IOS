@@ -26,8 +26,10 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
             return [ dragItem ]
     }
     */
+    let Table_Bottom_Padding: CGFloat = 150
     var masterViewModel = TaskMasterViewModel.shared
     var taskTableView: UITableView!
+    var taskTableLeadingConstraint: NSLayoutConstraint?
     private let TASK_CELL_REGISTER_NAME = "TaskTableCell"
     
     var tasks = [TaskModel]()
@@ -36,7 +38,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //Timeline view
     let TIME_LINE_TABLE_WIDTH: CGFloat = 80
-    var timelineWidthConstraint: NSLayoutConstraint?
+    var timelineLeadingConstraint: NSLayoutConstraint?
     private let TIMELINE_CELL_REGISTER_NAME = "TimelineCell"
     var timeLineView: UITableView!
     init(frame: CGRect) {
@@ -64,6 +66,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         // Remove separators
         taskTableView.separatorStyle = .none
         taskTableView.allowsSelection = false
+        timeLineView.showsVerticalScrollIndicator = false
         // Set transparent background for the UITableView
         taskTableView.backgroundColor = UIColor.clear
         
@@ -72,9 +75,11 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         //tableView.frame.size.width = 200
         taskTableView.translatesAutoresizingMaskIntoConstraints = false
+        taskTableLeadingConstraint = taskTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: TIME_LINE_TABLE_WIDTH)
+        taskTableLeadingConstraint?.isActive = true
         NSLayoutConstraint.activate([
             taskTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            taskTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            taskTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Table_Bottom_Padding),
             taskTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
         
@@ -105,13 +110,13 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         //tableView.frame.size.height = frame.height
         self.view.addSubview(timeLineView)
         timeLineView.translatesAutoresizingMaskIntoConstraints = false
-        timelineWidthConstraint = timeLineView.widthAnchor.constraint(equalToConstant: TIME_LINE_TABLE_WIDTH)
-        timelineWidthConstraint?.isActive = true
+        timelineLeadingConstraint = timeLineView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        timelineLeadingConstraint?.isActive = true
         NSLayoutConstraint.activate([
+            timeLineView.widthAnchor.constraint(equalToConstant: TIME_LINE_TABLE_WIDTH),
             timeLineView.topAnchor.constraint(equalTo: view.topAnchor),
             timeLineView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            timeLineView.trailingAnchor.constraint(equalTo: taskTableView.leadingAnchor),
-            timeLineView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            
         ])
        
     }
@@ -193,7 +198,9 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         case .sortChanged(let sortBy):
             
             UIView.animate(withDuration: 0.3) {
-                self.timelineWidthConstraint?.constant = sortBy == .time ? self.TIME_LINE_TABLE_WIDTH : 0
+                self.taskTableLeadingConstraint?.constant = sortBy == .time ? self.TIME_LINE_TABLE_WIDTH : 0
+                self.timelineLeadingConstraint?.constant = sortBy == .time ?  0 : -self.TIME_LINE_TABLE_WIDTH
+                self.timeLineView.alpha = sortBy == .time ? 1 : 0
                 self.view.layoutIfNeeded()
             }
             
@@ -214,10 +221,17 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - TableView DataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count // Replace with your data count
+        return tasks.count + 1 //+1 for the bottom padding
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == tasks.count {
+            let cell = UITableViewCell()
+            cell.backgroundColor = UIColor.clear
+            cell.contentView.backgroundColor = UIColor.clear
+            cell.contentView.frame.size.height = Table_Bottom_Padding
+            return cell
+        }
         if tableView == timeLineView {
             let cell = tableView.dequeueReusableCell(withIdentifier: TIMELINE_CELL_REGISTER_NAME, for: indexPath) as! TimelineCell
             cell.configure(with: "10:00 AM")
@@ -237,6 +251,9 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - TableView Delegate
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == tasks.count {
+            return Table_Bottom_Padding
+        }
         let taskId = tasks[indexPath.row].taskId
         let cellView =  TaskTableCellView(tableViewDelegate: self, taskId: taskId)
         let hostingVC = UIHostingController(rootView: cellView)
