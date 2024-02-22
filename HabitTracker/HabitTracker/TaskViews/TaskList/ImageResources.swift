@@ -58,10 +58,11 @@ func renderTimerIcon() -> UIImage {
 
 struct ArchiveActionButton: View {
     var body: some View {
+        let buttonHeight = Estimated_Task_Card_Folded_Height - 2 * Task_Card_Vertical_Padding
         VStack{
             
         }
-        .frame(width: (Estimated_Task_Card_Folded_Height / 1.55), height: Estimated_Task_Card_Folded_Height / 1.1)
+        .frame(width: (buttonHeight / 1.35), height: buttonHeight)
         .background(.blue.lighter(by: 25).opacity(0.5))
         .cornerRadius(12, corners: .allCorners)
         .overlay{
@@ -78,10 +79,11 @@ struct ArchiveActionButton: View {
 
 struct DeleteActionButton: View {
     var body: some View {
+        let buttonHeight = Estimated_Task_Card_Folded_Height - 2 * Task_Card_Vertical_Padding
         VStack{
             
         }
-        .frame(width: (Estimated_Task_Card_Folded_Height / 1.55), height: Estimated_Task_Card_Folded_Height / 1.1)
+        .frame(width: (buttonHeight / 1.35), height: buttonHeight)
         .background(.red.lighter(by: 35).opacity(1))
         .cornerRadius(12, corners: .allCorners)
             .overlay{
@@ -98,10 +100,11 @@ struct DeleteActionButton: View {
 
 struct TimerActionButton: View {
     var body: some View {
+        let buttonHeight = Estimated_Task_Card_Folded_Height - 2 * Task_Card_Vertical_Padding
         VStack{
             
         }
-        .frame(width: (Estimated_Task_Card_Folded_Height / 1.55), height: Estimated_Task_Card_Folded_Height / 1.1)
+        .frame(width: (buttonHeight / 1.35), height: buttonHeight)
         //.background(Color.indigo.lighter(by: 30).saturation(1.5).opacity(0.9))
         .cornerRadius(12, corners: .allCorners)
             .overlay{

@@ -8,6 +8,8 @@
 import UIKit
 import SwiftUI
 
+@MainActor var screenSize: CGRect = .zero
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -23,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = rootViewController
             self.window = window
             window.makeKeyAndVisible()
+            screenSize = windowScene.screen.bounds
         }
     }
 

@@ -463,12 +463,11 @@ struct DefaultIslandBackgroundView: View {
             }
             
         }.ignoresSafeArea()
-            
+            //.blur(radius: zoom ? 8 : 0)
             //.fill(Self.gradientEnd)
             .animation(.easeInOut(duration: 1.0), value: tabIndex)
             .animation(.easeInOut(duration: 1.0), value: zoom)
             //.glow(color: .orange)
-        
     }
 }
 

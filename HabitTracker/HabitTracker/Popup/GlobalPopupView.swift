@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GlobalPopupView: View {
+    
     @StateObject var popupMgr = GlobalPopupManager.shared
     @State var popped = false
     var scaleAnchor: UnitPoint {
@@ -26,14 +27,15 @@ struct GlobalPopupView: View {
             if popupMgr.showPopup {
                 PopupBackground_Wrapper()
             }
+            
             VStack {
                 if let popupPosition = popupMgr.popupPosition, let srcPosition = popupMgr.sourceFrame?.origin {
                     popupMgr.popupView
-                        .padding()
-                        .background(.ultraThinMaterial)
+                        .background(.thinMaterial)
                         .clipShape(RoundedRectangle(cornerRadius: 18))
-                        .shadow(color: .gray.opacity(0.3), radius: 24)
-                        .scaleEffect(popped ? 1 : 0.3, anchor: scaleAnchor)
+                        .shadow(color: .gray.opacity(0.4), radius: 48)
+                        .scaleEffect((!popped && popupMgr.popupSide != .center) ? 0.3 : 1, anchor: scaleAnchor)
+                        .offset(x: 0, y: (!popped && popupMgr.popupSide == .center) ? 150 : 0)
                     //This position modifier should always follow scaleEffect, otherwise the anchor will be messed up.
                         .position(popupPosition)
                         .opacity(popped ? 1 : 0)
@@ -43,7 +45,7 @@ struct GlobalPopupView: View {
                         .onChangeCustom(of: popupMgr.showPopup) {
                             popped = popupMgr.showPopup
                         }
-                        .animation(.spring(duration: 0.3, bounce: 0.5), value: popped)
+                        .animation(popupMgr.popupSide == .center ? .default : .spring(duration: 0.3, bounce: 0.5), value: popped)
                         .allowsHitTesting(popupMgr.showPopup)
                 }
             }.ignoresSafeArea()
@@ -100,7 +102,11 @@ struct FramePreferenceKey: PreferenceKey {
 
 class PopupBackgroundViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        GlobalPopupManager.shared.hidePopup(reason: "touched outside")
+        let popupMgr = GlobalPopupManager.shared
+        // Centered Popup will have its own close button, so we don't need to close it here.
+        if popupMgr.popupSide != .center {
+            popupMgr.hidePopup(reason: "touched outside")
+        }
     }
 }
 

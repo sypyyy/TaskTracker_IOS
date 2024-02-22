@@ -36,6 +36,8 @@
 		2F5D9DB32B77746300399975 /* GlobalPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DB22B77746300399975 /* GlobalPopupView.swift */; };
 		2F5D9DB52B77B20F00399975 /* GlobalPopupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DB42B77B20F00399975 /* GlobalPopupManager.swift */; };
 		2F5D9DB72B7C645100399975 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DB62B7C645100399975 /* RootViewController.swift */; };
+		2F5D9DBA2B7DDBAF00399975 /* HabitProgressModifyPopups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DB92B7DDBAF00399975 /* HabitProgressModifyPopups.swift */; };
+		2F5D9DBC2B85045900399975 /* TaskCardbackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DBB2B85045900399975 /* TaskCardbackground.swift */; };
 		2F5F9A772B37D7D300CBCFEF /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F9A762B37D7D300CBCFEF /* DataModels.swift */; };
 		2F5F9A792B3884DA00CBCFEF /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F9A782B3884DA00CBCFEF /* Todo.swift */; };
 		2F5F9A7B2B3C6CDE00CBCFEF /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F9A7A2B3C6CDE00CBCFEF /* TodoViewModel.swift */; };
@@ -111,6 +113,8 @@
 		2F5D9DB22B77746300399975 /* GlobalPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPopupView.swift; sourceTree = "<group>"; };
 		2F5D9DB42B77B20F00399975 /* GlobalPopupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalPopupManager.swift; sourceTree = "<group>"; };
 		2F5D9DB62B7C645100399975 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		2F5D9DB92B7DDBAF00399975 /* HabitProgressModifyPopups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitProgressModifyPopups.swift; sourceTree = "<group>"; };
+		2F5D9DBB2B85045900399975 /* TaskCardbackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardbackground.swift; sourceTree = "<group>"; };
 		2F5F9A762B37D7D300CBCFEF /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
 		2F5F9A782B3884DA00CBCFEF /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		2F5F9A7A2B3C6CDE00CBCFEF /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
@@ -320,6 +324,14 @@
 			path = Popup;
 			sourceTree = "<group>";
 		};
+		2F5D9DB82B7DDB8E00399975 /* Popups */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D9DB92B7DDBAF00399975 /* HabitProgressModifyPopups.swift */,
+			);
+			path = Popups;
+			sourceTree = "<group>";
+		};
 		2F63AE222A1FC38400BFBD5F /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,11 +400,13 @@
 		2FCBC5C72B46BDD2003D946E /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
+				2F5D9DB82B7DDB8E00399975 /* Popups */,
 				2FEA90E52B65734C00B45650 /* ImageResources.swift */,
 				2FCBC5C82B46BE45003D946E /* TaskTableViewController+Cell+View.swift */,
 				2F4F563B2A3EB33300EC144D /* HabitDetailView.swift */,
 				2F511F292A0CCFD400AC5328 /* TaskListView.swift */,
 				2F7381622B406B34000E767A /* TaskCardViews.swift */,
+				2F5D9DBB2B85045900399975 /* TaskCardbackground.swift */,
 			);
 			path = TaskList;
 			sourceTree = "<group>";
@@ -499,6 +513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FCA28612A1378A9006AAD9B /* DefaultIslandBackgroundView.swift in Sources */,
+				2F5D9DBC2B85045900399975 /* TaskCardbackground.swift in Sources */,
 				2F7381652B411ACB000E767A /* NumberExtensions.swift in Sources */,
 				2F7381632B406B34000E767A /* TaskCardViews.swift in Sources */,
 				2FE538CF2A88D34600A03C26 /* StatisticalDetailView.swift in Sources */,
@@ -536,6 +551,7 @@
 				2F5D9DB32B77746300399975 /* GlobalPopupView.swift in Sources */,
 				2FCB0FCC2A3EFDFE007DBA4E /* StopCheckPoint.swift in Sources */,
 				2FCBC5C92B46BE45003D946E /* TaskTableViewController+Cell+View.swift in Sources */,
+				2F5D9DBA2B7DDBAF00399975 /* HabitProgressModifyPopups.swift in Sources */,
 				2F5D9DB72B7C645100399975 /* RootViewController.swift in Sources */,
 				2FEA90EB2B68006200B45650 /* WeeklyCalendarBar.swift in Sources */,
 				2F5D9DA72B6F755000399975 /* Projects.swift in Sources */,
@@ -697,8 +713,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -714,7 +730,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -734,8 +750,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -751,7 +767,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

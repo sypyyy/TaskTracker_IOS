@@ -55,6 +55,7 @@ class TouchWindow: UIWindow {
     
     override func sendEvent(_ event: UIEvent) {
         // Handle touch events here
+        /*
         let popupMgr = GlobalPopupManager.shared
         if let touches = event.allTouches {
             for touch in touches where touch.phase == .began {
@@ -87,6 +88,7 @@ class TouchWindow: UIWindow {
             }
             
         }
+         */
         super.sendEvent(event)
     }
 }

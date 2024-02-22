@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 import UIKit
 
+let TAB_BAR_HEIGHT: CGFloat = 88
 
 //let backgroundGradientStart = Color(hex: 0xba5370).lighter(by: 30)
 //let backgroundGradientEnd = Color(hex: 0xf4e2d8)
@@ -165,7 +166,7 @@ struct RootView: View {
             ZStack{
                 ZStack{
                     DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg).drawingGroup().ignoresSafeArea()
-                    
+                        
                     
                     VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().background(.regularMaterial).opacity(tabIndex == .statistical ? 1.0 : 0.0).animation(.easeIn(duration: 0.2), value: tabIndex)
                     
@@ -208,7 +209,7 @@ struct RootView: View {
                             } label: {Text("setting")}
                         }
                         .padding()
-                        .frame(height: 88)
+                        .frame(height: TAB_BAR_HEIGHT)
                         .frame(maxWidth: .infinity)
                         .background(tabIndex == .habits ? backgroundGradientEnd.opacity(0.6) : Color(red: 235.0 / 255, green: 235.0 / 255, blue: 235.0 / 255).opacity(0.6))
                         .background(.ultraThinMaterial)

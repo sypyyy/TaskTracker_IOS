@@ -14,7 +14,6 @@ struct HabitDetailView: View{
             print("syppppppppppdsdsefe\(habit)")
         }
     }
-    @State var testInput = ""
     let spacing: CGFloat = 10
     let viewModel: HabitViewModel = HabitViewModel.shared
     var body: some View {
@@ -38,10 +37,29 @@ struct HabitDetailView: View{
                             displayPopup(operation: .minus)
                         }
                          */
-                        Image(systemName: "minus")
+                        MeasuredButton(action: { frame in
+                            let popMgr = GlobalPopupManager.shared
+                            if(popMgr.showPopup) {
+                                popMgr.hidePopup(reason: "touched button again")
+                                return
+                            }
+                            let view = HabitNumberModifyPopup(habit: habit, modifyType: .minus).id(UUID())
+                            popMgr.showPopup(view: AnyView(view), sourceFrame: frame, center: true)
+                        }) {
+                            Image(systemName: "minus")
+                        }
                         
-                        HabitProgressCircleView(habit: habit).onTapGesture {
-                            displayPopup(operation: .setTo)
+                        
+                        MeasuredButton(action: { frame in
+                            let popMgr = GlobalPopupManager.shared
+                            if(popMgr.showPopup) {
+                                popMgr.hidePopup(reason: "touched button again")
+                                return
+                            }
+                            let view = HabitNumberModifyPopup(habit: habit, modifyType: .set).id(UUID())
+                            popMgr.showPopup(view: AnyView(view), sourceFrame: frame, center: true)
+                        }) {
+                            HabitProgressCircleView(habit: habit)
                         }
                          
                         
@@ -56,8 +74,8 @@ struct HabitDetailView: View{
                                 popMgr.hidePopup(reason: "touched button again")
                                 return
                             }
-                            let view = Text("This is a popover")
-                            popMgr.showPopup(view: AnyView(view), sourceFrame: frame)
+                            let view = HabitNumberModifyPopup(habit: habit, modifyType: .add).id(UUID())
+                            popMgr.showPopup(view: AnyView(view), sourceFrame: frame, center: true)
                         }) {
                             Image(systemName: "plus")
                         }

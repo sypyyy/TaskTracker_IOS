@@ -22,14 +22,19 @@ class GlobalPopupManager : ObservableObject{
 }
 
 extension GlobalPopupManager {
-    @MainActor func showPopup(view: AnyView, sourceFrame: CGRect) {
+    @MainActor func showPopup(view: AnyView, sourceFrame: CGRect, center: Bool = false) {
         print("showing pop")
         popupView = view
         self.sourceFrame = sourceFrame
-        //MARK: I added a padding here because the PopupView has this padding as well, I need to make sure the size is precise.
-        let hostingController = UIHostingController(rootView: view.padding())
-        popupSize = hostingController.view.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
-        popupPosition = getPopupPosition()
+        if(!center) {
+            //MARK: I added a padding here because the PopupView has this padding as well, I need to make sure the size is precise.
+            let hostingController = UIHostingController(rootView: view)
+            popupSize = hostingController.view.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
+            popupPosition = getPopupPosition()
+        } else {
+            popupPosition = CGPoint(x: screenSize.midX, y: screenSize.midY - screenSize.height * 0.1)
+            popupSide = .center
+        }
         showPopup = true
         objectWillChange.send()
     }

@@ -10,7 +10,7 @@ import CoreData
 import SwiftUI
 
 enum ChangeMessage {
-    case dateSelected, taskStateChanged, taskCreated
+    case dateSelected, taskStateChanged, taskCreated, sortChanged(TaskTableSortBy), taskSelected
 }
 
 protocol ChangeListener {
@@ -42,8 +42,27 @@ class TaskMasterViewModel: ObservableObject{
     public var tabIndex: AppTabShowType = .habits
     public var selectedDate: Date = Date()
     
-    //test syppppp test
     public var tappedTaskId: String?
+    
+    @MainActor func selectTask(taskId: String) {
+        if tappedTaskId == taskId {
+            tappedTaskId = nil
+        } else {
+            tappedTaskId = taskId
+        }
+        self.objectWillChange.send()
+        UIView.animate(withDuration: 0.3) {
+            self.didReceiveChangeMessage(msg: .taskSelected)
+        }
+    }
+    //MARK: sort by
+    public var sortBy = TaskTableSortBy.time
+    
+    @MainActor func sortBy(by: TaskTableSortBy) {
+        sortBy = by
+        self.didReceiveChangeMessage(msg: .sortChanged(by))
+        objectWillChange.send()
+    }
     
     ///模糊主视图
     public var blurEverything = false {

@@ -13,10 +13,6 @@ import SwiftUI
 struct TabView_Wrapper: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
-        //let swiftUIView = InitView()
-        //let hostingController = UIHostingController(rootView: swiftUIView)
-        //hostingController.view.backgroundColor = .clear
-        //hostingController.view.isHidden = true
         tabView_hostingController.view.backgroundColor = .clear
         tabView_hostingController.view.isHidden = false
         return tabView_hostingController

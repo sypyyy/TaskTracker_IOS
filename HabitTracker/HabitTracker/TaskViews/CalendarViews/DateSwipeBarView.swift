@@ -232,7 +232,21 @@ struct DateSwipeBar : View {
                         .padding(.horizontal)
                     Spacer()
                      */
-                    InitialViewCustomSegmentedControl(preselectedIndex: 0, options: ["Habits","Plan"])
+                    // takes in image system names
+                    InitialViewCustomSegmentedControl(preselectedIndex: 0, options: ["calendar.day.timeline.leading","flag","folder","square.on.circle"]) {idx in
+                        var sortBy = TaskTableSortBy.time
+                        if idx == 0 {
+                            sortBy = .time
+                        } else if idx == 1 {
+                            sortBy = .priority
+                        } else if idx == 2 {
+                            sortBy = .goal
+                        } else if idx == 3 {
+                            sortBy = .habitOrTodo
+                        }
+                        viewModel.sortBy(by: sortBy)
+                        
+                    }
                 }
                 
                 
@@ -265,6 +279,7 @@ struct DateSwipeView_Previews: PreviewProvider {
 struct InitialViewCustomSegmentedControl: View {
     @State var preselectedIndex: Int = 0
     var options: [String]
+    var selectionCallBack: (Int) -> Void
     var body: some View {
         HStack(spacing: 0) {
             ForEach(options.indices, id:\.self) { index in
@@ -274,15 +289,18 @@ struct InitialViewCustomSegmentedControl: View {
                         .onTapGesture {
                             withAnimation(.easeIn(duration: 0.4)) {
                                 preselectedIndex = index
+                                selectionCallBack(index)
                             }
                         }
                     Rectangle()
                         .fill(backgroundGradientStart.darker(by: 6).opacity(index == preselectedIndex ? 1 : 0.0))
                         .saturation(1.2)
                         .overlay(
+                            /*
                             Text(options[index]).foregroundColor(.primary.opacity(index == preselectedIndex ? 0.7 : 0.2))
+                             */
+                            Image(systemName: options[index]).foregroundColor(.primary.opacity(index == preselectedIndex ? 0.7 : 0.2))
                         )
-                    
                 }
             }
         }
