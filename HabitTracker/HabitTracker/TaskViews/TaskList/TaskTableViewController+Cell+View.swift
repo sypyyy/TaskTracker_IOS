@@ -376,7 +376,8 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         if tableView == taskTableView {
             print("bug tap quick: Asked for taskTableView row count\(tasks.count)")
         }
-        return taskHeaders[section - 1].numberOfRows
+        let taskHeader = taskHeaders[section - 1]
+        return taskHeader.isExpanded ? taskHeader.numberOfRows : 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -493,6 +494,9 @@ extension TaskTableViewController {
             headerView.layer.cornerRadius = 0
             headerView.clipsToBounds = true
             headerView.addMaterialBackground(style: .systemMaterialLight)
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(headerTapped(_:)))
+                headerView.addGestureRecognizer(tapGesture)
+                headerView.tag = section // Use the tag to identify the section
         }
         return headerView
     }
@@ -502,6 +506,23 @@ extension TaskTableViewController {
             return SEGMENTEDCONTROL_HEIGHT
         }
         return HEADER_HEIGHT// Adjust the height as needed
+    }
+    
+    @objc func headerTapped(_ gesture: UITapGestureRecognizer) {
+        guard let section = gesture.view?.tag else { return }
+        print("Section \(section) was tapped.")
+        let realSection = section - 1
+        taskHeaders[realSection].isExpanded = false
+        var indexes = [IndexPath]()
+        for i in 0..<taskHeaders[realSection].numberOfRows {
+            indexes.append(IndexPath(row: i, section: section))
+        }
+        taskTableView.performBatchUpdates {
+            taskTableView.deleteRows(at: indexes, with: .fade)
+        }
+        timeLineView.performBatchUpdates{
+            timeLineView.deleteRows(at: indexes, with: .fade)
+        }
     }
 }
 
@@ -755,6 +776,7 @@ class TaskHeaderModel {
     let headerImageString: String
     let sortType: TaskTableSortBy
     var numberOfRows: Int
+    var isExpanded: Bool = true
     init(headerString: String, headerImageString: String, sortType: TaskTableSortBy, numberOfRows: Int) {
         self.headerString = headerString
         self.headerImageString = headerImageString

@@ -51,9 +51,9 @@ class TaskMasterViewModel: ObservableObject{
             tappedTaskId = taskId
         }
         self.objectWillChange.send()
-        UIView.animate(withDuration: 0.3) {
-            self.didReceiveChangeMessage(msg: .taskSelected)
-        }
+        
+        self.didReceiveChangeMessage(msg: .taskSelected)
+        
     }
     //MARK: sort by
     public var sortBy = TaskTableSortBy.time
