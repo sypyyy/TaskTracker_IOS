@@ -95,7 +95,6 @@ extension TodoModel {
         let res = Todo.init(context: context)
         res.name = name
         res.startDate = startDate
-        res.priority = Int16(priority)
         res.hasReminder = hasReminder
         res.reminderDate = reminderDate
         res.willExpire = willExpire
@@ -104,6 +103,9 @@ extension TodoModel {
         res.parentTaskId = parentTaskId
         res.subTasks = subTaskString
         res.done = done
+        res.priority = Int16(priority)
+        res.executionTime = executionTime
+        res.project = project
         return res
     }
 }

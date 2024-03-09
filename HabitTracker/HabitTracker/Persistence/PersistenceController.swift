@@ -34,6 +34,8 @@ class PersistenceController {
         print("deleted")
         let testTodo = TodoModel()
         testTodo.name = "Basketball with Michael"
+        testTodo.priority = 1
+        testTodo.executionTime = .from(area: .morning, startEnd: nil)
         
         result.createTodo(dataModel: testTodo)
         var testProject = ProjectModel()
@@ -60,39 +62,58 @@ class PersistenceController {
                 result.createProject(dataModel: testProject)        
             }
         }
-        
-        for i in 1...120 {
+        for i in 1...12 {
             if(i == 1) {
-                do {try result.createHabit(name: "Drink water #\(i)", detail: "blablabla", habitType: .number, cycle: "Daily", targetNumber: 10, numberUnit: "cups", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
+                let p = 0
+                let habit = HabitModel(name: "Drink water #\(i)p:\(p)", id: "", createdDate: Date(), type: .number, numberTarget: 8, timeTarget:"", detail: "blablabla", cycle: .daily, unit: "cups", priority: Int16(p), project: "", executionTime: .from(area: .morning, startEnd: ("7:03","8:00")))
+                do {try result.creatNewHabit(habit: habit)} catch {print("")}
             }
             else if(i == 2) {
-                do {try result.createHabit(name: "Drink water but weekly #\(i)", detail: "blablabla", habitType: .number, cycle: "Weekly", targetNumber: 10, numberUnit: "cups", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
+                let p = 2
+                let habit = HabitModel(name: "Drink water but weekly #\(i)p:\(p)", id: "", createdDate: Date(), type: .number, numberTarget: 8, timeTarget:"",  detail: "blablabla", cycle: .weekly, unit: "cups", priority: Int16(p), project: "", executionTime: .from(area: .morning, startEnd: ("7:00","8:00")))
+                do {try result.creatNewHabit(habit: habit)} catch {print("")}
             }
             else if(i == 3) {
-                do {try result.createHabit(name: "Drink water but monthly #\(i)", detail: "blablabla", habitType: .number, cycle: "Monthly", targetNumber: 10, numberUnit: "cups", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
+                let p = 1
+                let habit = HabitModel(name: "Drink water but monthly #\(i)p:\(p)", id: "", createdDate: Date(), type: .number, numberTarget: 8, timeTarget:"",  detail: "blablabla", cycle: .monthly, unit: "cups", priority: Int16(p), project: "", executionTime: .from(area: .morning, startEnd: ("9:40","12:00")))
+                do {try result.creatNewHabit(habit: habit)} catch {print("")}
             }
 
             else if(i == 4) {
-                do {try result.createHabit(name: "Study #\(i)", detail: "blablabla", habitType: .time, cycle: "Daily", targetNumber: 0, numberUnit: "cup", targetHour: 1, targetMinute: 30, setTarget: true)} catch {print("")}
+                let p = 3
+                let habit = HabitModel(name: "Study #\(i)p:\(p)", id: "", createdDate: Date(), type: .time, numberTarget: 8, timeTarget:"3:30",  detail: "blablabla", cycle: .daily, unit: "", priority: Int16(p), project: "", executionTime: .from(area: .morning, startEnd: nil))
+                do {try result.creatNewHabit(habit: habit)} catch {print("")}
             }
             else if(i == 5) {
-                do {try result.createHabit(name: "Study but weekly #\(i)", detail: "blablabla", habitType: .time, cycle: "Weekly", targetNumber: 0, numberUnit: "cup", targetHour: 1, targetMinute: 30, setTarget: true)} catch {print("")}
+                let p = 3
+                let habit = HabitModel(name: "Study but weekly #\(i)p:\(p)", id: "", createdDate: Date(), type: .time, numberTarget: 8, timeTarget:"2:00",  detail: "blablabla", cycle: .weekly, unit: "", priority: Int16(p), project: "", executionTime: .from(area: .evening, startEnd: ("19:00","20:00")))
+                do {try result.creatNewHabit(habit: habit)} catch {print("")}
             }
             else if(i == 6) {
-                do {try result.createHabit(name: "Study but monthly #\(i)", detail: "blablabla", habitType: .time, cycle: "Monthly", targetNumber: 0, numberUnit: "cup", targetHour: 1, targetMinute: 30, setTarget: true)} catch {print("")}
+                let p = 1
+                let habit = HabitModel(name: "Study but monthly #\(i)p:\(p)", id: "", createdDate: Date(), type: .time, numberTarget: 8, timeTarget:"1:00", detail: "blablabla", cycle: .monthly, unit: "", priority: Int16(p), project: "", executionTime: .from(area: .evening, startEnd: nil))
+                do {try result.creatNewHabit(habit: habit)} catch {print("")}
             }
             else if(i == 7) {
-                do {try result.createHabit(name: "Eat breakfast #\(i)", detail: "blablabla", habitType: .simple, cycle: "Daily", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
+                let p = 2
+                let habit = HabitModel(name: "Eat breakfast #\(i)p:\(p)", id: "", createdDate: Date(), type: .simple, numberTarget: 8, timeTarget:"", detail: "blablabla", cycle: .daily, unit: "", priority: Int16(p), project: "", executionTime: .from(area: .afternoon, startEnd: ("17:00","18:00")))
+                do {try result.creatNewHabit(habit: habit)} catch {print("")}
             }
             else if(i == 8) {
-                do {try result.createHabit(name: "Eat breakfast but weekly #\(i)", detail: "blablabla", habitType: .simple, cycle: "Weekly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
+                let p = 2
+                let habit = HabitModel(name: "Eat breakfast but weekly #\(i)p:\(p)", id: "", createdDate: Date(), type: .simple, numberTarget: 8, timeTarget:"", detail: "blablabla", cycle: .weekly, unit: "", priority: Int16(p), project: "", executionTime: .from(area: .afternoon, startEnd: nil))
+                do {try result.creatNewHabit(habit: habit)} catch {print("")}
             }
             else if(i == 9) {
-                do {try result.createHabit(name: "Eat breakfast but monthly #\(i)", detail: "blablabla", habitType: .simple, cycle: "Monthly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
+                let p = 1
+                let habit = HabitModel(name: "Eat breakfast but monthly #\(i)p:\(p)", id: "", createdDate: Date(), type: .simple, numberTarget: 8, timeTarget:"", detail: "blablabla", cycle: .monthly, unit: "", priority: Int16(p), project: "", executionTime: .from(area: .afternoon, startEnd: ("18:00","19:00")))
+                do {try result.creatNewHabit(habit: habit)} catch {print("")}
             }
             
             else {
-                do {try result.createHabit(name: "Eat breakfast but monthly #\(i)", detail: "blablabla", habitType: .simple, cycle: "Monthly", targetNumber: 0, numberUnit: "", targetHour: 0, targetMinute: 0, setTarget: true)} catch {print("")}
+                let p = 3
+                let habit = HabitModel(name: "Eat breakfast but monthly #\(i)p:\(p)", id: "", createdDate: Date(), type: .simple, numberTarget: 8, timeTarget:"", detail: "blablabla", cycle: .monthly, unit: "", priority: Int16(p), project: "", executionTime: .from(area: .allDay, startEnd: nil))
+                do {try result.creatNewHabit(habit: habit)} catch {print("")}
             }
             print("saved")
             //saveChanges(viewContext: viewContext)

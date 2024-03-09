@@ -18,6 +18,7 @@ extension UIPickerView {
 
 struct CreatTaskForm: View {
     @StateObject var viewModel : HabitViewModel
+
     @State var name: String = ""
     @State var detail: String = ""
     @State var habitType: String = "Checkbox"

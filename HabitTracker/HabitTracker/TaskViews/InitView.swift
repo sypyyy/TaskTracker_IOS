@@ -15,8 +15,8 @@ struct InitView: View {
                 .opacity(shown ? 1.0 : 0.3)
             TaskListView().offset(x: 0, y: shown ? 0 : 50)
                 .opacity(shown ? 1.0 : 0.3)
-            Spacer().frame(height: TAB_BAR_HEIGHT)
-        }.onAppear {   
+            Spacer().frame(width:300, height: TAB_BAR_HEIGHT)
+        }.onAppear {
             //For now let's don't use this animation
             //shown = true
         }

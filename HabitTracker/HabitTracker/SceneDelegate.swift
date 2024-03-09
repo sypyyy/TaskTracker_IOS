@@ -22,7 +22,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if let windowScene = scene as? UIWindowScene {
             let window = TouchWindow(windowScene: windowScene)
-            window.rootViewController = rootViewController
+            //window.rootViewController = rootViewController
+            /*
+            SideMenuController.preferences.basic.menuWidth = 240
+            //SideMenuController.preferences.basic.statusBarBehavior = .hideOnMenu
+            SideMenuController.preferences.basic.position = .under
+            SideMenuController.preferences.basic.direction = .left
+            SideMenuController.preferences.basic.enablePanGesture = false
+            SideMenuController.preferences.basic.panGestureSensitivity = 0.1
+            SideMenuController.preferences.basic.supportedOrientations = .portrait
+            SideMenuController.preferences.basic.shouldRespectLanguageDirection = true
+             */
+            //window.rootViewController = SideMenuController(contentViewController: rootViewController,menuViewController: UIViewController())
+            window.rootViewController = ContainerViewComposer.makeContainer()
             self.window = window
             window.makeKeyAndVisible()
             screenSize = windowScene.screen.bounds

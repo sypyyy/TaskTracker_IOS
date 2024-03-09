@@ -151,9 +151,8 @@ extension HabitViewModel {
 //创建新习惯
 extension HabitViewModel {
     
-    func saveHabit(name: String, detail: String, habitType: HabitType, cycle: String, targetNumber: Int, targetUnit: String,
-                   targetHour: Int, targetMinute: Int, setTarget: Bool) {
-        do {try persistenceModel.createHabit(name: name, detail: detail, habitType: habitType, cycle: cycle, targetNumber: targetNumber, numberUnit: targetUnit, targetHour: targetHour, targetMinute: targetMinute, setTarget: setTarget)}catch {
+    func saveHabit(habitModel: HabitModel) {
+        do {try persistenceModel.creatNewHabit(habit: habitModel)}catch {
             print("Duplicate Names!")
         }
         parentModel.showCreateForm = false

@@ -8,6 +8,65 @@
 import Foundation
 import CoreData
 
+//Exg. "Morning/10:00~12:00"
+typealias ExecutionTime = String
+
+enum AmbiguousExecutionTime: String {
+    case morning = "Morning", afternoon = "Afternoon", evening = "Evening", allDay = "AllDay"
+    
+    var sortOrder: Int {
+            switch self {
+            case .morning:
+                return 1
+            case .afternoon:
+                return 2
+            case .evening:
+                return 3
+            case .allDay:
+                return 4
+            }
+        }
+}
+
+extension ExecutionTime {
+    func getTimeArea() -> AmbiguousExecutionTime {
+        if let timeAreaString = self.split(separator: "/").first {
+            if let res = AmbiguousExecutionTime.init(rawValue: String(timeAreaString)) {
+                return res
+            }
+        }
+        return .allDay
+    }
+    
+    func getDisplayStartString() -> String {
+        if let timeAreaString = self.split(separator: "/").last, timeAreaString.contains("~"){
+            let pair = timeAreaString.split(separator: "~")
+            if pair.count == 2 {
+                return (String(pair[0]))
+            }
+        }
+        return getTimeArea().rawValue
+    }
+        
+    func getStartEndTime() -> (String, String)? {
+        if let timeAreaString = self.split(separator: "/").last, timeAreaString.contains("~") {
+        let pair = timeAreaString.split(separator: "~")
+            if pair.count == 2 {
+                return (String(pair[0]), String(pair[1]))
+            }
+        }
+        return nil
+    }
+    
+    static func from(area: AmbiguousExecutionTime, startEnd: (String, String)?) -> String {
+        var res = area.rawValue + "/"
+        if let startEnd = startEnd {
+            res += (startEnd.0 + "~" + startEnd.1)
+        }
+        return res
+    }
+}
+
 enum TaskType: String {
     case habit = "Habit"
     case todo = "Todo"
@@ -16,10 +75,15 @@ enum TaskType: String {
 class TaskModel {
     var taskId: String
     let taskType: TaskType
-    
-    init(taskId: String, taskType: TaskType) {
+    let mPriority: Int
+    let mExecutionTime: ExecutionTime
+    let mProject: String
+    init(taskId: String, taskType: TaskType, priority: Int, executionTime: String, project: String) {
         self.taskId = taskId
         self.taskType = taskType
+        self.mPriority = priority
+        self.mExecutionTime = executionTime
+        self.mProject = project
     }
 }
 
@@ -46,6 +110,12 @@ class HabitModel: TaskModel {
     
     var createdDate : Date
     
+    var priority: Int16 = 0
+    
+    var project: String = ""
+    
+    var executionTime: String = ""
+    
     var type: HabitType
     
     var detail : String
@@ -56,7 +126,7 @@ class HabitModel: TaskModel {
     
     var numberTarget: Int16?
     
-    var timeTarget: String?
+    var timeTarget: String? = "0:00"
     
     var numberProgress: Int16?
     
@@ -72,7 +142,10 @@ class HabitModel: TaskModel {
         self.detail = habit.detail ?? ""
         self.cycle = HabitCycle(rawValue: habit.cycle ?? "Daily") ?? .daily
         self.unit = habit.numberUnit ?? ""
-        super.init(taskId: id, taskType: .habit)
+        self.executionTime = habit.executionTime ?? ""
+        self.priority = habit.priority
+        self.project = habit.project ?? ""
+        super.init(taskId: id, taskType: .habit, priority: Int(habit.priority), executionTime: habit.executionTime ?? "", project: habit.project ?? "")
     }
     
     //Empty placeHolder init
@@ -84,9 +157,25 @@ class HabitModel: TaskModel {
         self.detail = ""
         self.cycle = .daily
         self.unit = ""
-        super.init(taskId: id, taskType: .habit)
+        super.init(taskId: id, taskType: .habit, priority: Int(priority), executionTime: executionTime, project: project)
     }
     
+    //init every field
+    init(name: String, id: String, createdDate: Date, type: HabitType, numberTarget: Int16, timeTarget: String, detail: String, cycle: HabitCycle, unit: String, priority: Int16, project: String, executionTime: ExecutionTime) {
+        self.name = name
+        self.id = id
+        self.createdDate = createdDate
+        self.type = type
+        self.numberTarget = numberTarget
+        self.timeTarget = timeTarget
+        self.detail = detail
+        self.cycle = cycle
+        self.unit = unit
+        self.priority = priority
+        self.project = project
+        self.executionTime = executionTime
+        super.init(taskId: id, taskType: .habit, priority: Int(priority), executionTime: executionTime, project: project)
+    }
 }
 
 class TodoModel: TaskModel{
@@ -99,6 +188,10 @@ class TodoModel: TaskModel{
         }
     }
     var priority: Int
+    
+    var executionTime: String
+    
+    var project: String
     
     var startDate: Date
     var isTimeSpecific: Bool
@@ -154,7 +247,9 @@ class TodoModel: TaskModel{
         self.done = todo.done
         self.parentTaskId = todo.parentTaskId ?? ""
         self.priority = Int(todo.priority)
-        super.init(taskId: id, taskType: .todo)
+        self.executionTime = todo.executionTime ?? ""
+        self.project = todo.project ?? ""
+        super.init(taskId: id, taskType: .todo, priority: priority, executionTime: executionTime, project: project)
     }
     
     static func getTaskModels(s: String) -> [TodoModel] {
@@ -178,7 +273,9 @@ class TodoModel: TaskModel{
         self.completeDate = Date()
         self.parentTaskId = ""
         self.priority = 0
-        super.init(taskId: id, taskType: .todo)
+        self.executionTime = ""
+        self.project = ""
+        super.init(taskId: id, taskType: .todo, priority: priority, executionTime: executionTime, project: project)
     }
     
 }

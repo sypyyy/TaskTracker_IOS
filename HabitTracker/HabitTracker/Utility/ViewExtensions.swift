@@ -29,6 +29,16 @@ extension View {
     }
 }
 
+extension UIView {
+    func addMaterialBackground(style: UIBlurEffect.Style) {
+        let blurEffect = UIBlurEffect(style: style)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.insertSubview(blurEffectView, at: 0)
+    }
+}
+
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )

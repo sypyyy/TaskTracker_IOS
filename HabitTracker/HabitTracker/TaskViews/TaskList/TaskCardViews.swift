@@ -18,8 +18,6 @@ struct TaskCardView: View {
     var tappedOne: String? {
         masterViewModel.tappedTaskId
     }
-    let cardMaxHeight: Int
-    let cardIdealHeight: Int
     
     func getTaskName() -> String {
         switch taskType {
@@ -42,7 +40,7 @@ struct TaskCardView: View {
     var body: some View {
         
         VStack{
-            TaskCardDigestView(taskType: taskType, habit: habit, todo: todo, cardMaxHeight: cardMaxHeight, cardIdealHeight: cardIdealHeight).animation(.none, value: masterViewModel.tappedTaskId)
+            TaskCardDigestView(taskType: taskType, habit: habit, todo: todo).animation(.none, value: masterViewModel.tappedTaskId)
             
             
             //MARK: the detail view
@@ -74,8 +72,6 @@ struct TaskCardDigestView: View {
     var tappedOne: String? {
         masterViewModel.tappedTaskId
     }
-    let cardMaxHeight: Int
-    let cardIdealHeight: Int
     
     func getTaskName() -> String {
         switch taskType {
@@ -115,7 +111,7 @@ struct TaskCardDigestView: View {
             }
             VStack {
                 
-                TaskCardTopView(name: getTaskName(), done: isTaskDone(), isExpanded: tappedOne == habit.id, cardMaxHeight: cardMaxHeight, cardIdealHeight: cardIdealHeight)
+                TaskCardTopView(name: getTaskName(), done: isTaskDone(), isExpanded: tappedOne == habit.id)
                     
                 HStack{
                     Text("\(habit.cycle.rawValue)")
@@ -157,8 +153,6 @@ struct TaskCardTopView: View {
     let name: String
     let done: Bool
     let isExpanded: Bool
-    let cardMaxHeight: Int
-    let cardIdealHeight: Int
     var body: some View {
         HStack(alignment: .center){
             HStack(spacing: 0){
@@ -167,17 +161,18 @@ struct TaskCardTopView: View {
                 Text("\(name)")
                     .allowsTightening(true)
                     
-                    .lineLimit(isExpanded ? 20 : 2)
+                    .lineLimit(1)
                 //.multilineTextAlignment(TextAlignment.leading)
                 Spacer()
             }.frame(maxWidth: .infinity)
                 .font(.system(size: 20, weight: .semibold, design: .rounded))
                 .foregroundColor(.primary.opacity(0.75))
             Spacer()
-        }.frame(maxHeight: !isExpanded ? CGFloat(cardMaxHeight): CGFloat(cardIdealHeight))
+        }.frame(maxHeight: !isExpanded ? CGFloat(230): CGFloat(230))
     }
 }
 
+/*
 struct TaskCardBgView: View {
     var body: some View {
         VStack{}
@@ -194,7 +189,7 @@ struct TaskCardBgView: View {
         .padding(.horizontal, 12)
     }
 }
-
+*/
 /*
 struct editNumberView: View {
     var body: some View {

@@ -38,7 +38,7 @@ class CustomCardBackgroundView: UIView {
         // Background View
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(backgroundView)
-        backgroundView.fillSuperview() // Assuming a helper extension is used
+        backgroundView.fillSuperview()
         backgroundView.layer.cornerRadius = 15
         backgroundView.clipsToBounds = true
         if #available(iOS 13.0, *) {
@@ -64,3 +64,6 @@ extension UIView {
         ])
     }
 }
+
+
+

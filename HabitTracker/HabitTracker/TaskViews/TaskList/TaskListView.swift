@@ -27,11 +27,36 @@ struct TaskListView : View {
     }
     
     var body : some View {
-        GeometryReader{ metric in
-            taskTable_Wrapper(metric: metric.frame(in: .global))
-                
-           
-        }.font(.title)
+        ZStack {
+            GeometryReader{ metric in
+                    taskTable_Wrapper(metric: metric.frame(in: .global))
+                        
+                   
+                }.font(.title)
+            /*
+            VStack{
+                // takes in image system names
+                InitialViewCustomSegmentedControl(preselectedIndex: 0, options: ["calendar.day.timeline.leading","flag","folder","square.on.circle"]) {idx in
+                    var sortBy = TaskTableSortBy.time
+                    if idx == 0 {
+                        sortBy = .time
+                    } else if idx == 1 {
+                        sortBy = .priority
+                    } else if idx == 2 {
+                        sortBy = .goal
+                    } else if idx == 3 {
+                        sortBy = .habitOrTodo
+                    }
+                    masterViewModel
+                        .sortBy(by: sortBy)
+                    
+                }
+                Spacer()
+            }
+             */
+        }
+        
+        
     }
 }
 

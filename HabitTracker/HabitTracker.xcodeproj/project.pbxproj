@@ -27,6 +27,7 @@
 		2F52990B29F20E0E0018B8CA /* HabitTrackerDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F52990929F20E0E0018B8CA /* HabitTrackerDataModel.xcdatamodeld */; };
 		2F5651C42AE973B50025FF14 /* HabitStatisticalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5651C32AE973B50025FF14 /* HabitStatisticalCell.swift */; };
 		2F5BBC312A8C990F00579D5D /* CustomViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5BBC302A8C990F00579D5D /* CustomViewControllers.swift */; };
+		2F5CC1B42B88A7C50032F09B /* TaskViewSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5CC1B32B88A7C50032F09B /* TaskViewSegmentedControl.swift */; };
 		2F5CF99D2A6B7EC000BA9826 /* StatisticalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5CF99C2A6B7EC000BA9826 /* StatisticalView.swift */; };
 		2F5D9DA52B6E8B2700399975 /* ProjectViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DA42B6E8B2700399975 /* ProjectViews.swift */; };
 		2F5D9DA72B6F755000399975 /* Projects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DA62B6F755000399975 /* Projects.swift */; };
@@ -44,6 +45,19 @@
 		2F5F9A7D2B3C6F3200CBCFEF /* HabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F9A7C2B3C6F3200CBCFEF /* HabitViewModel.swift */; };
 		2F61D46C2A5888A200535919 /* timeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61D46B2A5888A200535919 /* timeExtension.swift */; };
 		2F63AE242A1FC39600BFBD5F /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F63AE232A1FC39600BFBD5F /* Shapes.swift */; };
+		2F6B03922B90DB6F00974518 /* LeftSideBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03912B90DB6F00974518 /* LeftSideBarViewModel.swift */; };
+		2F6B039B2B92192F00974518 /* SideMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03972B92192F00974518 /* SideMenuItem.swift */; };
+		2F6B039C2B92192F00974518 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03982B92192F00974518 /* SideMenuViewController.swift */; };
+		2F6B039D2B92192F00974518 /* SideMenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03992B92192F00974518 /* SideMenuItemCell.swift */; };
+		2F6B039E2B92192F00974518 /* SideMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B039A2B92192F00974518 /* SideMenuDelegate.swift */; };
+		2F6B03A32B921BFD00974518 /* ContentViewControllerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03A02B921BFD00974518 /* ContentViewControllerPresentation.swift */; };
+		2F6B03A42B921BFD00974518 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03A12B921BFD00974518 /* ContainerViewController.swift */; };
+		2F6B03A52B921BFD00974518 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03A22B921BFD00974518 /* ContentViewController.swift */; };
+		2F6B03AD2B921FB800974518 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03A92B921FB800974518 /* MyAccountViewController.swift */; };
+		2F6B03AE2B921FB800974518 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03AA2B921FB800974518 /* AboutViewController.swift */; };
+		2F6B03AF2B921FB800974518 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03AB2B921FB800974518 /* SettingsViewController.swift */; };
+		2F6B03B02B921FB800974518 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03AC2B921FB800974518 /* HomeViewController.swift */; };
+		2F6B03B22B921FC700974518 /* ContainerViewComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03B12B921FC700974518 /* ContainerViewComposer.swift */; };
 		2F7072192A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7072182A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift */; };
 		2F70F27D2A5467AC002C4A17 /* HabitRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F27C2A5467AC002C4A17 /* HabitRecord.swift */; };
 		2F7381632B406B34000E767A /* TaskCardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7381622B406B34000E767A /* TaskCardViews.swift */; };
@@ -104,6 +118,7 @@
 		2F52992129F20E0F0018B8CA /* HabitTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2F5651C32AE973B50025FF14 /* HabitStatisticalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatisticalCell.swift; sourceTree = "<group>"; };
 		2F5BBC302A8C990F00579D5D /* CustomViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewControllers.swift; sourceTree = "<group>"; };
+		2F5CC1B32B88A7C50032F09B /* TaskViewSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewSegmentedControl.swift; sourceTree = "<group>"; };
 		2F5CF99C2A6B7EC000BA9826 /* StatisticalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalView.swift; sourceTree = "<group>"; };
 		2F5D9DA42B6E8B2700399975 /* ProjectViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViews.swift; sourceTree = "<group>"; };
 		2F5D9DA62B6F755000399975 /* Projects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projects.swift; sourceTree = "<group>"; };
@@ -121,6 +136,19 @@
 		2F5F9A7C2B3C6F3200CBCFEF /* HabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewModel.swift; sourceTree = "<group>"; };
 		2F61D46B2A5888A200535919 /* timeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeExtension.swift; sourceTree = "<group>"; };
 		2F63AE232A1FC39600BFBD5F /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
+		2F6B03912B90DB6F00974518 /* LeftSideBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSideBarViewModel.swift; sourceTree = "<group>"; };
+		2F6B03972B92192F00974518 /* SideMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuItem.swift; sourceTree = "<group>"; };
+		2F6B03982B92192F00974518 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		2F6B03992B92192F00974518 /* SideMenuItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuItemCell.swift; sourceTree = "<group>"; };
+		2F6B039A2B92192F00974518 /* SideMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuDelegate.swift; sourceTree = "<group>"; };
+		2F6B03A02B921BFD00974518 /* ContentViewControllerPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewControllerPresentation.swift; sourceTree = "<group>"; };
+		2F6B03A12B921BFD00974518 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		2F6B03A22B921BFD00974518 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		2F6B03A92B921FB800974518 /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
+		2F6B03AA2B921FB800974518 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		2F6B03AB2B921FB800974518 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2F6B03AC2B921FB800974518 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		2F6B03B12B921FC700974518 /* ContainerViewComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewComposer.swift; sourceTree = "<group>"; };
 		2F7072182A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerStatisticalDetailViewModel.swift; sourceTree = "<group>"; };
 		2F70F27C2A5467AC002C4A17 /* HabitRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRecord.swift; sourceTree = "<group>"; };
 		2F7381622B406B34000E767A /* TaskCardViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardViews.swift; sourceTree = "<group>"; };
@@ -183,6 +211,7 @@
 				2F5F9A762B37D7D300CBCFEF /* DataModels.swift */,
 				2FDA257629F47678005466AE /* HabitTrackerModel.swift */,
 				2F5D9DA82B6FEA7400399975 /* ProjectViewModel.swift */,
+				2F6B03912B90DB6F00974518 /* LeftSideBarViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -240,6 +269,8 @@
 		2F5298FD29F20E0A0018B8CA /* HabitTracker */ = {
 			isa = PBXGroup;
 			children = (
+				2F6B03A72B921F8B00974518 /* Container */,
+				2F6B03962B9218F100974518 /* SideMenuController */,
 				2FF2C2452B4F03E000A81325 /* SceneDelegate.swift */,
 				2F5298FE29F20E0A0018B8CA /* HabitTrackerApp.swift */,
 				2F5D9DB62B7C645100399975 /* RootViewController.swift */,
@@ -340,6 +371,56 @@
 			path = Shapes;
 			sourceTree = "<group>";
 		};
+		2F6B03962B9218F100974518 /* SideMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				2F6B03A62B921F6800974518 /* SideMenuViews */,
+				2F6B039A2B92192F00974518 /* SideMenuDelegate.swift */,
+				2F6B03972B92192F00974518 /* SideMenuItem.swift */,
+				2F6B03992B92192F00974518 /* SideMenuItemCell.swift */,
+				2F6B03982B92192F00974518 /* SideMenuViewController.swift */,
+			);
+			path = SideMenuController;
+			sourceTree = "<group>";
+		};
+		2F6B039F2B921AB800974518 /* ContainerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2F6B03A12B921BFD00974518 /* ContainerViewController.swift */,
+				2F6B03A22B921BFD00974518 /* ContentViewController.swift */,
+				2F6B03A02B921BFD00974518 /* ContentViewControllerPresentation.swift */,
+			);
+			path = ContainerViewController;
+			sourceTree = "<group>";
+		};
+		2F6B03A62B921F6800974518 /* SideMenuViews */ = {
+			isa = PBXGroup;
+			children = (
+				2F6B03AA2B921FB800974518 /* AboutViewController.swift */,
+				2F6B03AC2B921FB800974518 /* HomeViewController.swift */,
+				2F6B03A92B921FB800974518 /* MyAccountViewController.swift */,
+				2F6B03AB2B921FB800974518 /* SettingsViewController.swift */,
+			);
+			path = SideMenuViews;
+			sourceTree = "<group>";
+		};
+		2F6B03A72B921F8B00974518 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				2F6B03A82B921F9800974518 /* ContainerViewComposer */,
+				2F6B039F2B921AB800974518 /* ContainerViewController */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
+		2F6B03A82B921F9800974518 /* ContainerViewComposer */ = {
+			isa = PBXGroup;
+			children = (
+				2F6B03B12B921FC700974518 /* ContainerViewComposer.swift */,
+			);
+			path = ContainerViewComposer;
+			sourceTree = "<group>";
+		};
 		2F7381662B416657000E767A /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,6 +488,7 @@
 				2F511F292A0CCFD400AC5328 /* TaskListView.swift */,
 				2F7381622B406B34000E767A /* TaskCardViews.swift */,
 				2F5D9DBB2B85045900399975 /* TaskCardbackground.swift */,
+				2F5CC1B32B88A7C50032F09B /* TaskViewSegmentedControl.swift */,
 			);
 			path = TaskList;
 			sourceTree = "<group>";
@@ -485,6 +567,7 @@
 			mainGroup = 2F5298F229F20E0A0018B8CA;
 			packageReferences = (
 				2FC7F29E2B2F3C9300B76A5A /* XCRemoteSwiftPackageReference "neumorphic" */,
+				2F6B03932B90ED5600974518 /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = 2F5298FC29F20E0A0018B8CA /* Products */;
 			projectDirPath = "";
@@ -514,34 +597,44 @@
 			files = (
 				2FCA28612A1378A9006AAD9B /* DefaultIslandBackgroundView.swift in Sources */,
 				2F5D9DBC2B85045900399975 /* TaskCardbackground.swift in Sources */,
+				2F6B03AF2B921FB800974518 /* SettingsViewController.swift in Sources */,
 				2F7381652B411ACB000E767A /* NumberExtensions.swift in Sources */,
 				2F7381632B406B34000E767A /* TaskCardViews.swift in Sources */,
+				2F6B03B22B921FC700974518 /* ContainerViewComposer.swift in Sources */,
 				2FE538CF2A88D34600A03C26 /* StatisticalDetailView.swift in Sources */,
 				2F0DE3232A57140F00E73D47 /* HabitExtension.swift in Sources */,
 				2FCB0FCE2A3F57D5007DBA4E /* DateExtension.swift in Sources */,
 				2F2B52972A68DE2C004C904D /* AlertWrapperView.swift in Sources */,
 				2F5F9A792B3884DA00CBCFEF /* Todo.swift in Sources */,
 				2FEF07132B4AD904002EB57D /* CustomViewsInForm.swift in Sources */,
+				2F6B03B02B921FB800974518 /* HomeViewController.swift in Sources */,
 				2F52990829F20E0E0018B8CA /* Persistence.swift in Sources */,
 				2F5D9DA52B6E8B2700399975 /* ProjectViews.swift in Sources */,
 				2F5BBC312A8C990F00579D5D /* CustomViewControllers.swift in Sources */,
 				2F4F563C2A3EB33300EC144D /* HabitDetailView.swift in Sources */,
+				2F6B03A52B921BFD00974518 /* ContentViewController.swift in Sources */,
 				2FB317062A117EB300B0D7DE /* TaskMasterViewModel.swift in Sources */,
 				2FCA285F2A1375B9006AAD9B /* drawTest.swift in Sources */,
 				2F430E5B2A500665005DC88D /* HabitTrackerStatisticViewModel.swift in Sources */,
 				2F52990B29F20E0E0018B8CA /* HabitTrackerDataModel.xcdatamodeld in Sources */,
 				2F52990129F20E0A0018B8CA /* RootView.swift in Sources */,
+				2F6B039C2B92192F00974518 /* SideMenuViewController.swift in Sources */,
 				2FEA90E82B66A7E300B45650 /* CustomCalendarView.swift in Sources */,
 				2FB317042A1021E800B0D7DE /* DateSwipeBarView.swift in Sources */,
 				2F5CF99D2A6B7EC000BA9826 /* StatisticalView.swift in Sources */,
 				2F2F61252A487F1F00CE065D /* PopupView.swift in Sources */,
+				2F6B03A32B921BFD00974518 /* ContentViewControllerPresentation.swift in Sources */,
 				2F5F9A7D2B3C6F3200CBCFEF /* HabitViewModel.swift in Sources */,
 				2F7381682B41AE20000E767A /* CreatHabitForm.swift in Sources */,
 				2F9141B42A837DE100E53509 /* ViewControllerWrapper.swift in Sources */,
 				2FAFDC412A86787200AFD31E /* CustomSegmentedControl.swift in Sources */,
 				2FB384212A1692CC00822E46 /* TestAnimation.swift in Sources */,
 				2F5F9A7B2B3C6CDE00CBCFEF /* TodoViewModel.swift in Sources */,
+				2F6B03AD2B921FB800974518 /* MyAccountViewController.swift in Sources */,
+				2F5CC1B42B88A7C50032F09B /* TaskViewSegmentedControl.swift in Sources */,
 				2F5298FF29F20E0A0018B8CA /* HabitTrackerApp.swift in Sources */,
+				2F6B03A42B921BFD00974518 /* ContainerViewController.swift in Sources */,
+				2F6B03922B90DB6F00974518 /* LeftSideBarViewModel.swift in Sources */,
 				2FEA90E62B65734C00B45650 /* ImageResources.swift in Sources */,
 				2F73816B2B41B649000E767A /* CreatTodoForm.swift in Sources */,
 				2F61D46C2A5888A200535919 /* timeExtension.swift in Sources */,
@@ -556,9 +649,11 @@
 				2FEA90EB2B68006200B45650 /* WeeklyCalendarBar.swift in Sources */,
 				2F5D9DA72B6F755000399975 /* Projects.swift in Sources */,
 				2F32C76D2A108F5E008CDF7E /* BottomSheetView.swift in Sources */,
+				2F6B039B2B92192F00974518 /* SideMenuItem.swift in Sources */,
 				2FFDF16A2A7F830700027AFE /* InitView.swift in Sources */,
 				2F63AE242A1FC39600BFBD5F /* Shapes.swift in Sources */,
 				2F3936B62A5A6B4E0092264E /* HabitStatisticFrequencyGraph.swift in Sources */,
+				2F6B039E2B92192F00974518 /* SideMenuDelegate.swift in Sources */,
 				2F39E0712A84C9C500161B23 /* UIView_Animation_Extension.swift in Sources */,
 				2FDAFFED2A0CCD75002AEA85 /* PersistenceController.swift in Sources */,
 				2F5651C42AE973B50025FF14 /* HabitStatisticalCell.swift in Sources */,
@@ -569,6 +664,7 @@
 				2F7072192A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift in Sources */,
 				2FBC52EA2A1468DF00C4992E /* ViewExtensions.swift in Sources */,
 				2F70F27D2A5467AC002C4A17 /* HabitRecord.swift in Sources */,
+				2F6B03AE2B921FB800974518 /* AboutViewController.swift in Sources */,
 				2F511F2A2A0CCFD400AC5328 /* TaskListView.swift in Sources */,
 				2F8418A22A472F3B00F20BD0 /* HabitTarget.swift in Sources */,
 				2F5D9DAB2B712B7E00399975 /* CreatProjectForm.swift in Sources */,
@@ -576,6 +672,7 @@
 				2F2493242A30D4590009E651 /* PickerPopupView.swift in Sources */,
 				2F5F9A772B37D7D300CBCFEF /* DataModels.swift in Sources */,
 				2FE2BAB12ABA26560045385E /* PopupManager.swift in Sources */,
+				2F6B039D2B92192F00974518 /* SideMenuItemCell.swift in Sources */,
 				2F8418A02A46CB2100F20BD0 /* Habits.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -795,6 +892,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2F6B03932B90ED5600974518 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kukushi/SideMenu";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
 		2FC7F29E2B2F3C9300B76A5A /* XCRemoteSwiftPackageReference "neumorphic" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/costachung/neumorphic/";

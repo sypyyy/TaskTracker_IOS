@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 class dateListManager: ObservableObject {
     static var shared = dateListManager()
     let viewModel: TaskMasterViewModel
@@ -104,17 +103,25 @@ struct DateSwipeBar : View {
     var body : some View {
             VStack{
                 HStack{
-                    Button(action: {viewModel.showCreateForm.toggle()}) {
-                        Text("+").font(.system(size: 16, weight: .heavy, design: .rounded))
+                    Button(action: {
+                        //viewModel.showCreateForm.toggle()
+                        //LeftSideBarViewModel.shared.isShowLeftSideBar.toggle()
+                        if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
+                            if let containerViewController: ContainerViewController = (window.rootViewController as? ContainerViewController) {
+                                containerViewController.menuButtonTapped()
+                            }
+                        }
+                    }) {
+                        Image(systemName: "line.3.horizontal").font(.system(size: 16, weight: .heavy, design: .rounded))
                     }
-                    .padding(.horizontal)
-                    .padding(.vertical, 6.0)
-                    .background(.ultraThinMaterial)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 8.0)
+                    .background(.regularMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
-                    .shadow(color: Color("Shadow"), radius: 2, x: 0, y: 0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 15).stroke(.white.opacity(0.6), lineWidth: 1).offset(y :1).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 15))
-                    )
+                    //.shadow(color: Color("Shadow"), radius: 2, x: 0, y: 0)
+                    //.overlay(
+                        //RoundedRectangle(cornerRadius: 15).stroke(.white.opacity(0.6), lineWidth: 1).offset(y :1).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 15))
+                    //)
                     .padding(.horizontal)
                     Spacer()
                     Text("\(getTopDateText(chosenDate))").font(.system(size: 16, weight: .heavy, design: .rounded))
@@ -220,6 +227,7 @@ struct DateSwipeBar : View {
                 
                 
                 HStack {
+                    
                     /*
                     HStack{
                         Text("Habits").foregroundColor(.primary.opacity(0.8)).font(.system(size: 18, weight: .medium, design: .rounded)).padding(.leading)
@@ -232,21 +240,7 @@ struct DateSwipeBar : View {
                         .padding(.horizontal)
                     Spacer()
                      */
-                    // takes in image system names
-                    InitialViewCustomSegmentedControl(preselectedIndex: 0, options: ["calendar.day.timeline.leading","flag","folder","square.on.circle"]) {idx in
-                        var sortBy = TaskTableSortBy.time
-                        if idx == 0 {
-                            sortBy = .time
-                        } else if idx == 1 {
-                            sortBy = .priority
-                        } else if idx == 2 {
-                            sortBy = .goal
-                        } else if idx == 3 {
-                            sortBy = .habitOrTodo
-                        }
-                        viewModel.sortBy(by: sortBy)
-                        
-                    }
+                    
                 }
                 
                 
@@ -277,9 +271,16 @@ struct DateSwipeView_Previews: PreviewProvider {
 }
 
 struct InitialViewCustomSegmentedControl: View {
+    @StateObject var viewModel = TaskViewSegmentedControlViewModel.shared
     @State var preselectedIndex: Int = 0
     var options: [String]
     var selectionCallBack: (Int) -> Void
+    func getOpacity() -> Double {
+        return 1.0 - viewModel.TaskContentOffset * 0.015
+    }
+    func getHeight() -> CGFloat {
+        return 40 - viewModel.TaskContentOffset * 4
+    }
     var body: some View {
         HStack(spacing: 0) {
             ForEach(options.indices, id:\.self) { index in
@@ -307,8 +308,14 @@ struct InitialViewCustomSegmentedControl: View {
         .background(.thinMaterial)
         //.foregroundColor(.primary.opacity(0.4))
         .fontWeight(.medium)
-        .frame(height: 40)
+        .frame(height: getHeight())
         .cornerRadius(10)
         .padding(.horizontal)
+        .opacity(getOpacity())
     }
+}
+
+class TaskViewSegmentedControlViewModel: ObservableObject {
+    static var shared = TaskViewSegmentedControlViewModel()
+    @Published var TaskContentOffset: CGFloat = 0
 }

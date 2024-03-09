@@ -11,6 +11,9 @@ import UIKit
 
 let TAB_BAR_HEIGHT: CGFloat = 88
 
+@MainActor
+let LEFT_SIDE_BAR_WIDTH: CGFloat = UIScreen.main.bounds.width - 70
+
 //let backgroundGradientStart = Color(hex: 0xba5370).lighter(by: 30)
 //let backgroundGradientEnd = Color(hex: 0xf4e2d8)
 
@@ -90,7 +93,8 @@ struct RootView: View {
         animation: .default)
     private var items: FetchedResults<Item>
  */
-    @StateObject var viewModel : TaskMasterViewModel
+    @StateObject var viewModel = TaskMasterViewModel.shared
+    @StateObject var leftSideBarViewModel = LeftSideBarViewModel.shared
     //@Environment(\.scenePhase) var scenePhase
     @State private var tabIndex: AppTabShowType = .goals {
         
@@ -162,7 +166,13 @@ struct RootView: View {
     var body: some View {
         
         
-        VStack {
+        ZStack {
+            HStack {
+                VStack{}.frame(maxWidth: LEFT_SIDE_BAR_WIDTH, maxHeight: .infinity)
+                    .background(backgroundGradientStart.opacity(0.4))
+                    .background(LinearGradient(colors: [.gray.darker(by: 35), .gray.darker(by: 25)], startPoint: .leading, endPoint: .trailing))
+                Spacer()
+            }.ignoresSafeArea()
             ZStack{
                 ZStack{
                     DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg).drawingGroup().ignoresSafeArea()
@@ -223,7 +233,6 @@ struct RootView: View {
                 }.zIndex(1)
                     .ignoresSafeArea(edges: [.bottom])
                     .onReceive(pub) { (output) in
-                        print("received")
                         viewModel.refreshDate()
                     }
                 //.blur(radius: viewModel.blurEverything ? 20.0 : 0.0)
@@ -232,9 +241,10 @@ struct RootView: View {
                     PopupView()
                 }.zIndex(2)
                 
-                GlobalPopupView().zIndex(3) 
+                GlobalPopupView().zIndex(3)
             }
-            
+            .offset(x: leftSideBarViewModel.isShowLeftSideBar ? LEFT_SIDE_BAR_WIDTH : 0, y: 0)
+            .animation(.linear(duration: 0.2), value: leftSideBarViewModel.isShowLeftSideBar)
         }.animation(.easeInOut(duration: 1.0), value: tabIndex)
             .animation(.easeInOut(duration: POPUP_ANIMATION_DURATION), value: viewModel.blurEverything)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

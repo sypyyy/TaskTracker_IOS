@@ -25,8 +25,8 @@ struct HabitDetailView: View{
                 if habit.detail != "" {
                     HStack{
                         Image(systemName: "note.text")
-                        Text("\(habit.detail)").font(.system(size: 18, weight: .regular, design: .rounded))
-                        Spacer()
+                        Text("\(habit.detail)").font(.system(size: 18, weight: .regular, design: .rounded)).lineLimit(30)
+                        //Spacer()
                     }
                 }
                 Spacer().frame(height: spacing)
@@ -142,6 +142,7 @@ struct HabitDetailView: View{
                     
                 }
                 */
+                
             }.font(.system(size: 18, weight: .regular, design: .rounded))
                 .foregroundColor(.primary.opacity(0.6))
         
@@ -211,6 +212,7 @@ extension HabitDetailView {
                 viewModel.createRecord(habitID: habit.id, habitType: .time, habitCycle: habit.cycle, timeProgress: newProgress.minutesToTime())
             }))
         }
+       
     }
 }
 

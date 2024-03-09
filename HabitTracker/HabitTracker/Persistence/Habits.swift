@@ -13,26 +13,71 @@ enum PersistenceError: Error {
 
 
 extension PersistenceController {
-    func createHabit(name: String, detail: String, habitType: HabitType, cycle: String, targetNumber: Int, numberUnit: String,
-                            targetHour: Int, targetMinute: Int, setTarget: Bool = true) throws {
+    
+    func creatNewHabit(habit: HabitModel) throws {
+        let viewContext = self.container.viewContext
+        let IdToBe = "\(habit.name)<#$>\(TaskType.habit.rawValue)"
+        let isNameUnique = checkHabitIdIsUnique(IdToBe: IdToBe)
+        if !isNameUnique {
+            throw PersistenceError.duplicateId
+        }
+        let newHabit = habit.convertToStorageModel(context: viewContext)
+        newHabit.id = IdToBe
+        saveChanges(viewContext: viewContext)
+        creatTargetAndStopPointForNewHabit(habit: habit, IdToBe: IdToBe, context: viewContext)
+    }
+    
+    private func creatTargetAndStopPointForNewHabit(habit: HabitModel, IdToBe: String, context: NSManagedObjectContext) {
+        var startDate = Date()
+        let cycle = habit.cycle
+        if cycle == .weekly {
+            startDate = startDate.startOfWeek()
+        } else if cycle == .monthly {
+            startDate = startDate.startOfMonth()
+        }
+        switch habit.type {
+        case .number:
+            let target: Int16 = Int16(habit.numberTarget ?? 0)
+            setTargetCheckPoint(habitID: IdToBe, date: startDate, numberTarget: target)
+        case .time:
+            let target = habit.timeTarget
+            setTargetCheckPoint(habitID: IdToBe, date: startDate, timeTarget: target ?? "00:00")
+        default:
+            break
+        }
+        //setStopCheckPoint(habitID: id, date: Date(), stopPointType: .go)
+        if cycle == .daily {
+            setStopCheckPoint(habitID: IdToBe, date: startDate, stopPointType: .go)
+        } else if cycle == .weekly {
+            setStopCheckPoint(habitID: IdToBe, date: startDate, stopPointType: .go)
+        } else if cycle == .monthly {
+            setStopCheckPoint(habitID: IdToBe, date: startDate, stopPointType: .go)
+        }
+        saveChanges(viewContext: context)
+    }
+    /*
+    
+    func createHabit(name: String, detail: String, habitType: HabitType, cycle: String, targetNumber: Int, numberUnit: String, targetHour: Int, targetMinute: Int, setTarget: Bool = true, project: String, priority: Int16, executionTime: String) throws {
         //let result = habitController(inMemory: true)
         //let viewContext = result.container.viewContext
         let viewContext = self.container.viewContext
         let newHabit = Habit(context: viewContext)
         let IdToBe = "\(name)<#$>\(TaskType.habit.rawValue)"
-        let isNameUnique = checkHabitIdIsUnique(IdToBe: name)
+        let isNameUnique = checkHabitIdIsUnique(IdToBe: IdToBe)
         if !isNameUnique {
             throw PersistenceError.duplicateId
         }
         newHabit.type = habitType.rawValue
         newHabit.name = name
         newHabit.cycle = cycle
-        newHabit.index = numberOfHabits + 1
         newHabit.createdDate = Date()
         newHabit.detail = detail
         newHabit.isTargetSet = setTarget
         newHabit.id = IdToBe
         newHabit.numberUnit = numberUnit
+        newHabit.priority = priority
+        newHabit.project = project
+        newHabit.executionTime = executionTime
         saveChanges(viewContext: viewContext)
         var startDate = Date()
         if cycle == "Weekly" {
@@ -66,6 +111,7 @@ extension PersistenceController {
         }
         saveChanges(viewContext: viewContext)
     }
+    */
     /*
     private func getUniqueHabitID() -> Int64 {
         while true {
@@ -110,6 +156,23 @@ extension PersistenceController {
             print("error")
             return []
         }
+    }
+}
+
+extension HabitModel {
+    func convertToStorageModel(context: NSManagedObjectContext) -> Habit {
+        let newHabit = Habit(context: context)
+        newHabit.type = self.type.rawValue
+        newHabit.name = name
+        newHabit.cycle = self.cycle.rawValue
+        newHabit.createdDate = Date()
+        newHabit.detail = detail
+        newHabit.isTargetSet = true
+        newHabit.numberUnit = unit
+        newHabit.priority = priority
+        newHabit.project = project
+        newHabit.executionTime = executionTime
+        return newHabit
     }
 }
 

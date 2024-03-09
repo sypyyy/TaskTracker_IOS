@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CreatHabitForm: View {
     @StateObject var viewModel : HabitViewModel
+    let masterViewModel = TaskMasterViewModel.shared
     @State var name: String = ""
     @State var detail: String = ""
     @State var habitType: String = "Checkbox"
@@ -110,7 +111,10 @@ struct CreatHabitForm: View {
                     showAlert = true
                     return
                 }
-                viewModel.saveHabit(name: name, detail: detail, habitType: HabitTracker.HabitType(rawValue: habitType) ?? .simple, cycle: cycle, targetNumber: targetNumber, targetUnit: targetUnit, targetHour: targetHour, targetMinute: targetMinute, setTarget: setTarget)
+                let targetTime = (targetHour * 60 + targetMinute).minutesToTime()
+                let habitModel = HabitModel(name: name, id: "", createdDate: Date(), type: HabitTracker.HabitType(rawValue: habitType) ?? .simple, numberTarget: Int16(targetNumber), timeTarget: targetTime,  detail: detail, cycle: HabitCycle(rawValue: cycle) ?? .daily, unit: targetUnit, priority: 0, project: "", executionTime: "")
+                viewModel.saveHabit(habitModel: habitModel)
+                masterViewModel.didReceiveChangeMessage(msg: .taskCreated)
             }
             .padding(.bottom, 30)
         }

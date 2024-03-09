@@ -9,19 +9,13 @@ import SwiftUI
 import UIKit
 
 @MainActor
-let rootViewController = RootViewController(rootView: RootView(viewModel: TaskMasterViewModel.shared))
+let rootViewController = ContentViewController(rootView: RootView())
 
-class RootViewController: UIHostingController<RootView> {
-    
+class ContentViewController: UIHostingController<RootView> {
+    weak var delegate: SideMenuDelegate?
+
     override func viewDidLoad() {
-        /*
-        let popupBgVc = PopupBackgroundViewController()
-        popupBgVc.view.frame.size = UIScreen.main.bounds.size
-        popupBgVc.view.backgroundColor = .clear
-        view.addSubview(popupBgVc.view)
-        addChild(popupBgVc)
-        popupBgVc.didMove(toParent: self)
-        */
+        super.viewDidLoad()
     }
 }
 
