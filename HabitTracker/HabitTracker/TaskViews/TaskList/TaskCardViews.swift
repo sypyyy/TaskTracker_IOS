@@ -58,7 +58,7 @@ struct TaskCardView: View {
         .padding(.horizontal, 10)
         //.background(.white.opacity(0.6))
         .padding(.vertical, Task_Card_Vertical_Padding)
-        .padding(.horizontal, 12)
+        .padding(.horizontal, Task_Card_Horizontal_Padding)
         
     }
 }

@@ -10,6 +10,9 @@ import SwiftUI
 
 @MainActor
 let Task_Card_Vertical_Padding: CGFloat = 10
+
+@MainActor
+let Task_Card_Horizontal_Padding: CGFloat = 12
 @MainActor
 var Estimated_Task_Card_Folded_Height: CGFloat = 75
 
@@ -20,12 +23,6 @@ enum TaskTableSortBy: Int {
 }
 
 class TaskTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ChangeListener {
-    /*
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-            return [ dragItem ]
-    }
-    */
     let Table_Bottom_Padding: CGFloat = 0
     var masterViewModel = TaskMasterViewModel.shared
     //SegmentedControl
@@ -104,8 +101,8 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         taskTableView = UITableView(frame: .zero, style: .plain)
         taskTableView.delegate = self
         taskTableView.dataSource = self
-        //tableView.dragDelegate = self
-        //tableView.dragInteractionEnabled = true
+        taskTableView.dragDelegate = self
+        taskTableView.dragInteractionEnabled = true
         taskTableView.contentInsetAdjustmentBehavior = .never
         taskTableView.register(TaskTableCell.self, forCellReuseIdentifier: TASK_CELL_REGISTER_NAME)
         //Remove separators
@@ -509,6 +506,7 @@ extension TaskTableViewController {
     }
     
     @objc func headerTapped(_ gesture: UITapGestureRecognizer) {
+        /*
         guard let section = gesture.view?.tag else { return }
         print("Section \(section) was tapped.")
         let realSection = section - 1
@@ -523,6 +521,7 @@ extension TaskTableViewController {
         timeLineView.performBatchUpdates{
             timeLineView.deleteRows(at: indexes, with: .fade)
         }
+         */
     }
 }
 
@@ -563,6 +562,54 @@ extension TaskTableViewController {
         self.segmentedControlHeightConstraint?.constant = segHeight
     }
 
+}
+
+//Dragging
+extension TaskTableViewController: UITableViewDragDelegate {
+
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+         let itemProvider = NSItemProvider()
+         let dragItem = UIDragItem(itemProvider: itemProvider)
+        return [dragItem]
+         // Optional: Attach the object being dragged for your own reference
+         // dragItem.localObject = yourObjectHere
+         
+         // Customize the drag preview with a custom view
+         session.localContext = indexPath
+         dragItem.previewProvider = { [weak self] in
+             guard let self = self, let cell = tableView.cellForRow(at: indexPath) else {
+                 return nil
+             }
+             
+             // Create a custom view for the preview
+             let previewView = UIView(frame: cell.frame)
+             previewView.backgroundColor = UIColor.blue // Example customization
+             let label = UILabel(frame: previewView.bounds)
+             label.text = "Custom Preview"
+             label.textAlignment = .center
+             label.textColor = .white
+             previewView.addSubview(label)
+             
+             // Create a UIDragPreview using the custom view
+             return UIDragPreview(view: previewView)
+         }
+         
+         return [dragItem]
+     }
+    
+    func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+            let previewParameters = UIDragPreviewParameters()
+            
+            // Customize the appearance of the preview.
+            // For example, to make the preview have rounded corners:
+        previewParameters.visiblePath = UIBezierPath(roundedRect: tableView.cellForRow(at: indexPath)?.bounds.insetBy(dx: Task_Card_Horizontal_Padding, dy: Task_Card_Vertical_Padding) ?? CGRect.zero, cornerRadius: 15)
+            
+            // You can also customize the background color of the preview like this:
+        previewParameters.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        
+            return previewParameters
+        }
 }
 
 

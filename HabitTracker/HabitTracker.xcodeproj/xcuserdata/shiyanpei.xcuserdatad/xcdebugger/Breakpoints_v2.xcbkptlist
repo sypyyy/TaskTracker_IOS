@@ -1259,8 +1259,8 @@
             filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1739,8 +1739,8 @@
             filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1755,8 +1755,8 @@
             filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "updateData(rowMovedDeletedInserted:sortBy:reloadDirectly:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1771,8 +1771,8 @@
             filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "updateData(rowMovedDeletedInserted:sortBy:reloadDirectly:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1787,8 +1787,8 @@
             filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "updateData(rowMovedDeletedInserted:sortBy:reloadDirectly:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1803,8 +1803,8 @@
             filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "updateData(rowMovedDeletedInserted:sortBy:reloadDirectly:)"
             landmarkType = "7">
          </BreakpointContent>
