@@ -246,7 +246,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
                 masterViewModel.tappedTaskId = nil
                 masterViewModel.objectWillChange.send()
             }
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.3) {
                 self.scrollToTop(animated: false)
             }
                 self.taskTableView.performBatchUpdates{
@@ -351,8 +351,10 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
             print("received sort change")
         case .taskSelected:
             //These two are here to make sure the cell height changes when the cell is selected or deselected
-            taskTableView.performBatchUpdates {}
-            timeLineView.performBatchUpdates {}
+            self.taskTableView.performBatchUpdates {
+                self.timeLineView.reloadData()
+            }
+            
         }
            
     }
@@ -560,6 +562,7 @@ extension TaskTableViewController {
             }
         }
         self.segmentedControlHeightConstraint?.constant = segHeight
+        self.segmentedControlView.alpha = (segHeight / SEGMENTEDCONTROL_HEIGHT)
     }
 
 }
