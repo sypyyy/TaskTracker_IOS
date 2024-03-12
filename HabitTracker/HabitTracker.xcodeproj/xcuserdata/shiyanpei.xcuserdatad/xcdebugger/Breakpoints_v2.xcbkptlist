@@ -1259,8 +1259,8 @@
             filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1743,6 +1743,38 @@
             endingLineNumber = "64"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FA56E1DE-7100-406F-8C97-F8194C150FAA - f82b8fe573319ad3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HabitTracker.TaskTableViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "320">
+               </Location>
+               <Location
+                  uuid = "FA56E1DE-7100-406F-8C97-F8194C150FAA - f82b8fe5733185b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HabitTracker.TaskTableViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "220">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1775,6 +1807,38 @@
             endingLineNumber = "199"
             landmarkName = "updateData(rowMovedDeletedInserted:sortBy:reloadDirectly:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F6CA16A6-8F7E-4CE5-B1AD-46ACF066DF3D - bcc436b7026df5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HabitTracker.TaskTableViewController.updateData(rowMovedDeletedInserted: Swift.Bool, sortBy: HabitTracker.TaskTableSortBy, reloadDirectly: Swift.Bool) -&gt; ()"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "242"
+                  endingLineNumber = "242"
+                  offsetFromSymbolStart = "5280">
+               </Location>
+               <Location
+                  uuid = "F6CA16A6-8F7E-4CE5-B1AD-46ACF066DF3D - bcc436b7026d9c2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HabitTracker.TaskTableViewController.updateData(rowMovedDeletedInserted: Swift.Bool, sortBy: HabitTracker.TaskTableSortBy, reloadDirectly: Swift.Bool) -&gt; ()"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "2604">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1791,6 +1855,38 @@
             endingLineNumber = "200"
             landmarkName = "updateData(rowMovedDeletedInserted:sortBy:reloadDirectly:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DEDF5E8F-1C3F-47B6-BD69-0FE6B1621955 - bcc436b7026df7e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HabitTracker.TaskTableViewController.updateData(rowMovedDeletedInserted: Swift.Bool, sortBy: HabitTracker.TaskTableSortBy, reloadDirectly: Swift.Bool) -&gt; ()"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "243"
+                  endingLineNumber = "243"
+                  offsetFromSymbolStart = "5452">
+               </Location>
+               <Location
+                  uuid = "DEDF5E8F-1C3F-47B6-BD69-0FE6B1621955 - bcc436b7026d9e3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HabitTracker.TaskTableViewController.updateData(rowMovedDeletedInserted: Swift.Bool, sortBy: HabitTracker.TaskTableSortBy, reloadDirectly: Swift.Bool) -&gt; ()"
+                  moduleName = "HabitTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "200"
+                  endingLineNumber = "200"
+                  offsetFromSymbolStart = "2632">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1807,6 +1903,22 @@
             endingLineNumber = "211"
             landmarkName = "updateData(rowMovedDeletedInserted:sortBy:reloadDirectly:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "515A6D1D-CE41-4A1B-A5AA-3A0158AFDF6E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "783"
+            endingLineNumber = "783"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

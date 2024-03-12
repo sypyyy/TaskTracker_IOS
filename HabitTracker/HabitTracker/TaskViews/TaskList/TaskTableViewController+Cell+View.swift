@@ -352,9 +352,8 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         case .taskSelected:
             //These two are here to make sure the cell height changes when the cell is selected or deselected
             self.taskTableView.performBatchUpdates {
-                self.timeLineView.reloadData()
             }
-            
+            self.timeLineView.performBatchUpdates{}
         }
            
     }
@@ -367,7 +366,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 0) {
-            return 0
+            return 1
         }
         if(section - 1 >= taskHeaders.count) {
             return 0
@@ -396,13 +395,18 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
                 return cell
             }
         } else {
-            return UITableViewCell()
+            let res = UITableViewCell()
+            res.backgroundColor = .clear
+            return res
         }
     }
 
     // MARK: - TableView Delegate
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(indexPath == IndexPath(row: 0, section: 0)) {
+            return SEGMENTEDCONTROL_HEIGHT / 2
+        }
         print("bug tap quick: asking for height for row \(indexPath.row), istaskView: \(tableView == taskTableView)")
         if let taskId = indexPath2TaskIdMapping[indexPath] {
             let cellView =  TaskTableCellView(tableViewDelegate: self, taskId: taskId)
@@ -502,13 +506,13 @@ extension TaskTableViewController {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if(section == 0) {
-            return SEGMENTEDCONTROL_HEIGHT
+            return SEGMENTEDCONTROL_HEIGHT / 2
         }
         return HEADER_HEIGHT// Adjust the height as needed
     }
     
     @objc func headerTapped(_ gesture: UITapGestureRecognizer) {
-        /*
+        
         guard let section = gesture.view?.tag else { return }
         print("Section \(section) was tapped.")
         let realSection = section - 1
@@ -523,7 +527,7 @@ extension TaskTableViewController {
         timeLineView.performBatchUpdates{
             timeLineView.deleteRows(at: indexes, with: .fade)
         }
-         */
+         
     }
 }
 
