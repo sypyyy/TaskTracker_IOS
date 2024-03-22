@@ -76,8 +76,6 @@ struct HabitNumberModifyPopup: View {
                 RoundedRectangle(cornerRadius: 15).fill(.red.opacity(0.4)).frame(height: 45).overlay {
                     Image(systemName: "multiply").font(.system(size: 17, weight: .regular, design: .rounded))
                 }.onTapGesture {
-                    let newProgress = habit.numberProgress ?? 0 + (Int16(number) ?? 0)
-                    viewModel.createRecord(habitID: habit.id, habitType: .number, habitCycle: habit.cycle, numberProgress: newProgress)
                     GlobalPopupManager.shared.hidePopup(reason: "user cancelled")
                     //number = ""
                     }

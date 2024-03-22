@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F0DE3232A57140F00E73D47 /* HabitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0DE3222A57140F00E73D47 /* HabitExtension.swift */; };
+		2F177BA82BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F177BA72BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift */; };
 		2F2493242A30D4590009E651 /* PickerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2493232A30D4590009E651 /* PickerPopupView.swift */; };
 		2F2B52972A68DE2C004C904D /* AlertWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2B52962A68DE2C004C904D /* AlertWrapperView.swift */; };
 		2F2F61252A487F1F00CE065D /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F61242A487F1F00CE065D /* PopupView.swift */; };
@@ -93,6 +94,7 @@
 
 /* Begin PBXFileReference section */
 		2F0DE3222A57140F00E73D47 /* HabitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitExtension.swift; sourceTree = "<group>"; };
+		2F177BA72BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreationFormFullScreen.swift; sourceTree = "<group>"; };
 		2F2493232A30D4590009E651 /* PickerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerPopupView.swift; sourceTree = "<group>"; };
 		2F2B52962A68DE2C004C904D /* AlertWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertWrapperView.swift; sourceTree = "<group>"; };
 		2F2F61242A487F1F00CE065D /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 		2F7381692B41B2FE000E767A /* TaskCreation */ = {
 			isa = PBXGroup;
 			children = (
+				2F177BA72BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift */,
 				2F32C76F2A10DD93008CDF7E /* CreatTaskForm.swift */,
 				2F7381672B41AE20000E767A /* CreatHabitForm.swift */,
 				2F73816A2B41B649000E767A /* CreatTodoForm.swift */,
@@ -653,6 +656,7 @@
 				2FFDF16A2A7F830700027AFE /* InitView.swift in Sources */,
 				2F63AE242A1FC39600BFBD5F /* Shapes.swift in Sources */,
 				2F3936B62A5A6B4E0092264E /* HabitStatisticFrequencyGraph.swift in Sources */,
+				2F177BA82BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift in Sources */,
 				2F6B039E2B92192F00974518 /* SideMenuDelegate.swift in Sources */,
 				2F39E0712A84C9C500161B23 /* UIView_Animation_Extension.swift in Sources */,
 				2FDAFFED2A0CCD75002AEA85 /* PersistenceController.swift in Sources */,
