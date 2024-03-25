@@ -1644,9 +1644,9 @@
             filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "710"
-            endingLineNumber = "710"
-            landmarkName = "updateSegmentedControlHeight(newConstant:)"
+            startingLineNumber = "714"
+            endingLineNumber = "714"
+            landmarkName = "tableView(_:dragPreviewParametersForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1660,9 +1660,9 @@
             filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "705"
-            endingLineNumber = "705"
-            landmarkName = "updateSegmentedControlHeight(newConstant:)"
+            startingLineNumber = "709"
+            endingLineNumber = "709"
+            landmarkName = "tableView(_:dragPreviewParametersForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1676,9 +1676,9 @@
             filePath = "HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "706"
-            endingLineNumber = "706"
-            landmarkName = "updateSegmentedControlHeight(newConstant:)"
+            startingLineNumber = "710"
+            endingLineNumber = "710"
+            landmarkName = "tableView(_:dragPreviewParametersForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

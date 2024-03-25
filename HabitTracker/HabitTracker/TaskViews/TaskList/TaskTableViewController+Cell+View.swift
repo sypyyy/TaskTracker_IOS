@@ -483,38 +483,42 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if(tableView == timeLineView) {return nil}
-        let task = tasks[indexPath.row]
-        if task.taskId == masterViewModel.tappedTaskId {
-            return UISwipeActionsConfiguration(actions: [])
+        if let taskId = indexPath2TaskIdMapping[indexPath] {
+            let task = taskId2TaskModelMapping[taskId]
+            if taskId == masterViewModel.tappedTaskId {
+                return UISwipeActionsConfiguration(actions: [])
+            }
+            let timerAction =  UIContextualAction(style: .normal, title: "", handler: { (action,view,completionHandler ) in
+                completionHandler(true)
+            })
+                timerAction.image = imageResources.getTimerActionButton()
+            timerAction.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.001)
+                    return UISwipeActionsConfiguration(actions: [ timerAction])
         }
-        let timerAction =  UIContextualAction(style: .normal, title: "", handler: { (action,view,completionHandler ) in
-            completionHandler(true)
-        })
-            timerAction.image = imageResources.getTimerActionButton()
-        timerAction.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.001)
-                return UISwipeActionsConfiguration(actions: [ timerAction])
-            
+        return UISwipeActionsConfiguration(actions: [])
     }
     
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if(tableView == timeLineView) {return nil}
-        let task = tasks[indexPath.row]
-        if task.taskId == masterViewModel.tappedTaskId {
-            return UISwipeActionsConfiguration(actions: [])
+        if let taskId = indexPath2TaskIdMapping[indexPath] {
+            let task = taskId2TaskModelMapping[taskId]
+            if taskId == masterViewModel.tappedTaskId {
+                return UISwipeActionsConfiguration(actions: [])
+            }
+            let archiveAction =  UIContextualAction(style: .normal, title: "", handler: { (action,view,completionHandler ) in
+                completionHandler(true)
+            })
+                archiveAction.image = imageResources.getArchiveActionButton()
+            archiveAction.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.001)
+            let deleteAction =  UIContextualAction(style: .normal, title: "", handler: { (action,view,completionHandler ) in
+                completionHandler(true)
+            })
+            deleteAction.image = imageResources.getDeleteActionButton()
+            deleteAction.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.001)
+                    return UISwipeActionsConfiguration(actions: [ deleteAction, archiveAction])
         }
-        let archiveAction =  UIContextualAction(style: .normal, title: "", handler: { (action,view,completionHandler ) in
-            completionHandler(true)
-        })
-            archiveAction.image = imageResources.getArchiveActionButton()
-        archiveAction.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.001)
-        let deleteAction =  UIContextualAction(style: .normal, title: "", handler: { (action,view,completionHandler ) in
-            completionHandler(true)
-        })
-        deleteAction.image = imageResources.getDeleteActionButton()
-        deleteAction.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.001)
-                return UISwipeActionsConfiguration(actions: [ deleteAction, archiveAction])
-            
+        return UISwipeActionsConfiguration(actions: [])
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
