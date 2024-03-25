@@ -34,6 +34,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var taskTableView: UITableView!
     var taskTableLeadingConstraint: NSLayoutConstraint?
+    var taskTableTopConstraint: NSLayoutConstraint?
     private let TASK_CELL_REGISTER_NAME = "TaskTableCell"
     
     var tasks = [TaskModel]()
@@ -118,8 +119,10 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         taskTableView.translatesAutoresizingMaskIntoConstraints = false
         taskTableLeadingConstraint = taskTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: TIME_LINE_TABLE_WIDTH)
         taskTableLeadingConstraint?.isActive = true
+        taskTableTopConstraint = taskTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: SEGMENTEDCONTROL_HEIGHT)
+        taskTableTopConstraint?.isActive = true
+        
         NSLayoutConstraint.activate([
-            taskTableView.topAnchor.constraint(equalTo: view.topAnchor),
             taskTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Table_Bottom_Padding),
             taskTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
@@ -182,30 +185,34 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         var newIndexPath2TaskIdMapping = [IndexPath: String]()
         var newTaskHeaders = [TaskHeaderModel]()
         
-        func addTaskToMapping(task: TaskModel, taskHeaderIdx: Int) {
+        func addTaskToHeaders(task: TaskModel, taskHeaderIdx: Int) {
             if(!expandAllHeaders) {
                 if(taskHeaders[taskHeaderIdx].isExpanded == false) {
                     return
                 }
             }
-            let indexPath = IndexPath(row: newTaskHeaders[taskHeaderIdx].numberOfRows , section: taskHeaderIdx + 1)
-            newIndexPath2TaskIdMapping[indexPath] = task.taskId
-            newId2IndexPathMapping[task.taskId] = indexPath
-            newTaskHeaders[taskHeaderIdx].numberOfRows += 1
+            newTaskHeaders[taskHeaderIdx].tasks.append(task)
         }
-        var reInitialzeTaskHeaders = true
+        var shouldResetExpandState = true
         if(taskHeaders.first?.sortType == sortBy && !expandAllHeaders) {
-            reInitialzeTaskHeaders = false
-            newTaskHeaders = taskHeaders
-            newTaskHeaders.forEach{h in
-                h.numberOfRows = 0
+            shouldResetExpandState = false
+        }
+        
+        let sortTypeChanged = taskHeaders.first?.sortType != sortBy
+        
+        func copyExpandState() {
+            if !shouldResetExpandState {
+                newTaskHeaders.enumerated().forEach{idx, h in
+                    h.isExpanded = taskHeaders[idx].isExpanded
+                }
             }
         }
+        
         switch sortBy {
         case .time:
-            if reInitialzeTaskHeaders {
-                newTaskHeaders = [TaskHeaderModel(headerString: "Morning", headerImageString: "", sortType: .time, numberOfRows: 0), TaskHeaderModel(headerString: "Afternoon", headerImageString: "", sortType: .time, numberOfRows: 0), TaskHeaderModel(headerString: "Evening", headerImageString: "", sortType: .time, numberOfRows: 0), TaskHeaderModel(headerString: "AllDay", headerImageString: "", sortType: .time, numberOfRows: 0)]
-            }
+            
+            newTaskHeaders = [TaskHeaderModel(headerString: "Morning", headerImageString: "", sortType: .time), TaskHeaderModel(headerString: "Afternoon", headerImageString: "", sortType: .time), TaskHeaderModel(headerString: "Evening", headerImageString: "", sortType: .time), TaskHeaderModel(headerString: "AllDay", headerImageString: "", sortType: .time)]
+            copyExpandState()
             var currentTaskHeaderIdx = 0
             let timeAreas = [AmbiguousExecutionTime.morning, AmbiguousExecutionTime.afternoon, AmbiguousExecutionTime.evening, AmbiguousExecutionTime.allDay]
             var currentTimeArea = timeAreas[currentTaskHeaderIdx]
@@ -214,13 +221,11 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
                     currentTaskHeaderIdx += 1
                     currentTimeArea = timeAreas[currentTaskHeaderIdx]
                 }
-                addTaskToMapping(task: task, taskHeaderIdx: currentTaskHeaderIdx)
+                addTaskToHeaders(task: task, taskHeaderIdx: currentTaskHeaderIdx)
             }
         case .priority:
-            if reInitialzeTaskHeaders {
-                newTaskHeaders = [TaskHeaderModel(headerString: "High Priority", headerImageString: "", sortType: .priority, numberOfRows: 0), TaskHeaderModel(headerString: "Medium Priority", headerImageString: "", sortType: .priority, numberOfRows: 0), TaskHeaderModel(headerString: "Low Priority", headerImageString: "", sortType: .priority, numberOfRows: 0), TaskHeaderModel(headerString: "No Priority", headerImageString: "", sortType: .priority, numberOfRows: 0)]
-            }
-            
+            newTaskHeaders = [TaskHeaderModel(headerString: "High Priority", headerImageString: "", sortType: .priority), TaskHeaderModel(headerString: "Medium Priority", headerImageString: "", sortType: .priority), TaskHeaderModel(headerString: "Low Priority", headerImageString: "", sortType: .priority), TaskHeaderModel(headerString: "No Priority", headerImageString: "", sortType: .priority)]
+            copyExpandState()
             var currentTaskHeaderIdx = 0
             let priorities = [1, 2, 3, 0]
             var currentPriorityGroup = priorities[currentTaskHeaderIdx]
@@ -229,11 +234,15 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
                     currentTaskHeaderIdx += 1
                     currentPriorityGroup = priorities[currentTaskHeaderIdx]
                 }
-                addTaskToMapping(task: task, taskHeaderIdx: currentTaskHeaderIdx)
+                addTaskToHeaders(task: task, taskHeaderIdx: currentTaskHeaderIdx)
             }
         case .habitOrTodo:
-            if reInitialzeTaskHeaders {
-                newTaskHeaders = [TaskHeaderModel(headerString: "Todo", headerImageString: "", sortType: .habitOrTodo, numberOfRows: 0), TaskHeaderModel(headerString: "Habit", headerImageString: "", sortType: .habitOrTodo, numberOfRows: 0)]
+            newTaskHeaders = [TaskHeaderModel(headerString: "Todo", headerImageString: "", sortType: .habitOrTodo), TaskHeaderModel(headerString: "Habit", headerImageString: "", sortType: .habitOrTodo)]
+            copyExpandState()
+            if !shouldResetExpandState {
+                newTaskHeaders.enumerated().forEach{idx, h in
+                    h.isExpanded = taskHeaders[idx].isExpanded
+                }
             }
             
             var currentTaskHeaderIdx = 0
@@ -244,12 +253,22 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
                     currentTaskHeaderIdx += 1
                     currentTaskTypeGroup = taskTypes[currentTaskHeaderIdx]
                 }
-                addTaskToMapping(task: task, taskHeaderIdx: currentTaskHeaderIdx)
+                addTaskToHeaders(task: task, taskHeaderIdx: currentTaskHeaderIdx)
             }
         case .goal:
-            if reInitialzeTaskHeaders {
-            }
+            copyExpandState()
             break
+        }
+        var rowsSum = 0
+        for headerModel in newTaskHeaders {
+            headerModel.rowIdx = rowsSum
+            rowsSum += 1
+            headerModel.tasks.enumerated().forEach { (idx, task) in
+                let indexPath = IndexPath(row: rowsSum + idx, section: 0)
+                newIndexPath2TaskIdMapping[indexPath] = task.taskId
+                newId2IndexPathMapping[task.taskId] = indexPath
+            }
+                rowsSum += headerModel.numberOfRows
         }
         for (idx, task)in newTasks.enumerated() {
             newId2TaskModelMapping[task.taskId] = task
@@ -278,9 +297,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.indexPath2TaskIdMapping = newIndexPath2TaskIdMapping
         self.timeLineView.reloadData()
         if shouldScrollToTop {
-            UIView.animate(withDuration: 0.3) {
-                self.scrollToTop(animated: false)
-            }
+            self.scrollToTop(animated: true)
         }
         if rowMovedDeletedInserted {
             
@@ -290,48 +307,59 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             
             self.taskTableView.performBatchUpdates{
+                
+                var indexesToDelete = [IndexPath: UITableView.RowAnimation]()
+                var indexesToInsert = [IndexPath: UITableView.RowAnimation]()
+                if sortTypeChanged {
+                    for i in 0..<oldTaskHeaders.count {
+                        indexesToDelete[IndexPath(row: oldTaskHeaders[i].rowIdx, section: 0)] = .fade
+                        print("to delete: \(oldTaskHeaders[i].rowIdx)")
+                    }
+                  
+                    
+                    for i in 0..<taskHeaders.count {
+                        indexesToInsert[IndexPath(row: taskHeaders[i].rowIdx, section: 0)] = .fade
+                    }
+                } else {
+                    //这一块肯定还要大改因为Project sort还没做
+                    for i in 0..<taskHeaders.count {
+                        if taskHeaders[i].rowIdx != oldTaskHeaders[i].rowIdx {
+                            self.taskTableView.moveRow(at: IndexPath(row: oldTaskHeaders[i].rowIdx, section: 0), to: IndexPath(row: taskHeaders[i].rowIdx, section: 0))
+                        }
+                    }
+                }
+                
+                
                 for pairing in oldTaskId2IndexPathMapping.enumerated() {
                     let pair = pairing.element
                     let oldTaskId = pair.key
                     
                     if newId2IndexPathMapping[oldTaskId] == nil {
-                        self.taskTableView.deleteRows(at: [pair.value], with: useFadeAnimationOnly ? .fade : .right)
-                        print("\(loggingTag) deleted row at \(pair.value)")
+                        indexesToDelete[pair.value] = useFadeAnimationOnly ? .fade : .right
+                        print("to delete: \(pair.value.row)")
                     }
                 }
                 
-                if self.taskHeaders.count > oldTaskHeaders.count {
-                    self.taskTableView.insertSections(IndexSet(integersIn: oldTaskHeaders.count + 1..<self.taskHeaders.count + 1), with: .fade)
-                }
-                if self.taskHeaders.count < oldTaskHeaders.count {
-                    self.taskTableView.deleteSections(IndexSet(integersIn: self.taskHeaders.count + 1..<oldTaskHeaders.count + 1), with: .fade)
-                }
                 for pairing in newId2IndexPathMapping.enumerated() {
                     let pair = pairing.element
                     let newIdxPath = pair.value
                     if let oldIdxPath = oldTaskId2IndexPathMapping[pair.key] {
-                        if !(oldIdxPath.section == newIdxPath.section && oldIdxPath.row == newIdxPath.row) {
-                            if(oldIdxPath.section - 1 >= self.taskHeaders.count) {
-                                self.taskTableView.insertRows(at: [newIdxPath], with: .fade)
-                                print("\(loggingTag) inserted row at \(newIdxPath)")
-                            } else if(newIdxPath.section - 1 >= oldTaskHeaders.count) {
-                                self.taskTableView.deleteRows(at: [oldIdxPath], with: .fade)
-                                self.taskTableView.insertRows(at: [newIdxPath], with: .fade)
-                                print("\(loggingTag) inserted row at \(newIdxPath)")
-                            } else {
-                                self.taskTableView.moveRow(at: oldIdxPath, to: newIdxPath)
-                                print("\(loggingTag) moved row from \(oldIdxPath) to \(newIdxPath)")
-                            }
+                        if oldIdxPath.row != newIdxPath.row {
+                            self.taskTableView.moveRow(at: oldIdxPath, to: newIdxPath)
                         }
-                        
                     } else {
-                        self.taskTableView.insertRows(at: [newIdxPath], with: useFadeAnimationOnly ? .fade : .left)
+                        indexesToInsert[newIdxPath] =  useFadeAnimationOnly ? .fade : .left
                         print("\(loggingTag) inserted row at \(newIdxPath)")
                     }
                 }
-                
-                
-                
+               
+                for pairing in indexesToInsert.enumerated() {
+                    self.taskTableView.insertRows(at: [pairing.element.key], with: pairing.element.value)
+                }
+                for pairing in indexesToDelete.enumerated() {
+                    self.taskTableView.deleteRows(at: [pairing.element.key], with: pairing.element.value)
+                    print("to delete and deleted: \(pairing.element.key.row)")
+                }
                 
             } completion: { _ in
                 print("\(loggingTag) finished moving rows")
@@ -381,23 +409,16 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - TableView DataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return taskHeaders.count + 1
+        return 1
         //return 5
         }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 0) {
-            return 1
+        var taskNum = 0
+        taskHeaders.forEach{h in
+            taskNum += h.numberOfRows
         }
-        if(section - 1 >= taskHeaders.count) {
-            return 0
-        }
-        if tableView == taskTableView {
-            print("bug tap quick: Asked for taskTableView row count\(tasks.count)")
-        }
-        let taskHeader = taskHeaders[section - 1]
-        let res = taskHeader.isExpanded ? taskHeader.numberOfRows : 0
-        return res
+        return taskHeaders.count + taskNum
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -417,18 +438,32 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
                 return cell
             }
         } else {
+            let rowIdx = indexPath.row
+            var sectionView = UIView()
+            taskHeaders.enumerated().forEach{idx, header in
+                if header.rowIdx == rowIdx {
+                    sectionView = getHeaderViewForSection(tableView: tableView, section: idx) ?? UIView()
+                }
+            }
             let res = UITableViewCell()
+            res.frame.size.height = HEADER_HEIGHT
             res.backgroundColor = .clear
+            sectionView.translatesAutoresizingMaskIntoConstraints = false
+            res.contentView.addSubview(sectionView)
+            NSLayoutConstraint.activate([
+                sectionView.topAnchor.constraint(equalTo: res.contentView.topAnchor),
+                sectionView.bottomAnchor.constraint(equalTo: res.contentView.bottomAnchor),
+                sectionView.leadingAnchor.constraint(equalTo: res.contentView.leadingAnchor),
+                sectionView.trailingAnchor.constraint(equalTo: res.contentView.trailingAnchor),
+            ])
             return res
+            
         }
     }
 
     // MARK: - TableView Delegate
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if(indexPath == IndexPath(row: 0, section: 0)) {
-            return SEGMENTEDCONTROL_HEIGHT / 2
-        }
         print("bug tap quick: asking for height for row \(indexPath.row), istaskView: \(tableView == taskTableView)")
         if let taskId = indexPath2TaskIdMapping[indexPath] {
             let cellView =  TaskTableCellView(tableViewDelegate: self, taskId: taskId)
@@ -439,7 +474,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             return res
         } else {
-            return 0
+            return HEADER_HEIGHT
         }
     }
 
@@ -483,12 +518,69 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+        func adjustTableTopConstraint(constant: CGFloat) {
+            
+            let newConstant = constant - taskTableView.contentOffset.y
+            taskTableTopConstraint?.constant = clamp(value: newConstant, minimum: 0.0001, maximum: SEGMENTEDCONTROL_HEIGHT - 0.0001)
+            taskTableView.contentOffset.y = 0
+        }
         if(scrollView == self.taskTableView) {
-            print("bug: headerJUmp: CurrentContentOFfsetis: \(taskTableView.contentOffset.y)")
+            if let constant = taskTableTopConstraint?.constant {
+                print("constant IS \(constant)")
+                if constant > 0.001 && constant < SEGMENTEDCONTROL_HEIGHT - 0.001 {
+                    adjustTableTopConstraint(constant: constant)
+                } else {
+                    if constant > SEGMENTEDCONTROL_HEIGHT / 2 && taskTableView.contentOffset.y > 0 {
+                        adjustTableTopConstraint(constant: constant)
+                    } else if constant < SEGMENTEDCONTROL_HEIGHT / 2 && taskTableView.contentOffset.y < 0 {
+                        adjustTableTopConstraint(constant: constant)
+                    }
+                }
+            }
+            
+            print("bug: taskTableTopConstraint \(taskTableTopConstraint?.constant)")
             timeLineView.contentOffset = taskTableView.contentOffset
         } else {
             taskTableView.contentOffset = timeLineView.contentOffset
+        }
+        
+       
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView,
+        willDecelerate decelerate: Bool
+    ) {
+        if !decelerate {
+            print("setting! 3")
+            if scrollView == taskTableView {
+                UIView.animate(withDuration: 0.2) {
+                    if self.taskTableTopConstraint?.constant ?? 0 > self.SEGMENTEDCONTROL_HEIGHT / 2 {
+                        print("setting! 1")
+                        self.taskTableTopConstraint?.constant = self.SEGMENTEDCONTROL_HEIGHT - 0.0001
+                    } else {
+                        print("setting! 2")
+                        self.taskTableTopConstraint?.constant = 0.0001
+                    }
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("setting! 3")
+        if scrollView == taskTableView {
+            UIView.animate(withDuration: 0.2) {
+                if self.taskTableTopConstraint?.constant ?? 0 > self.SEGMENTEDCONTROL_HEIGHT / 2 {
+                    print("setting! 1")
+                    self.taskTableTopConstraint?.constant = self.SEGMENTEDCONTROL_HEIGHT - 0.0001
+                } else {
+                    print("setting! 2")
+                    self.taskTableTopConstraint?.constant = 0.0001
+                }
+                self.view.layoutIfNeeded()
+            }
+            
         }
     }
 }
@@ -508,13 +600,12 @@ extension TaskTableViewController {
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         view.isHidden = true
     }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func getHeaderViewForSection(tableView: UITableView, section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = .clear
-        let realSectionIdx = section - 1
-        if(tableView == taskTableView && realSectionIdx < taskHeaders.count && realSectionIdx >= 0) {
+        if(tableView == taskTableView && section < taskHeaders.count && section >= 0) {
             let headerLabel = UILabel(frame: CGRect(x: 36, y: 0, width: tableView.bounds.size.width, height: HEADER_HEIGHT))
-            headerLabel.text = taskHeaders[realSectionIdx].headerString
+            headerLabel.text = taskHeaders[section].headerString
             headerLabel.textColor = .gray.withAlphaComponent(0.9)
             headerLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
             headerView.addSubview(headerLabel)
@@ -534,52 +625,29 @@ extension TaskTableViewController {
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if(section == 0) {
-            return SEGMENTEDCONTROL_HEIGHT / 2
-        }
-        return HEADER_HEIGHT// Adjust the height as needed
-    }
-    
     @objc func headerTapped(_ gesture: UITapGestureRecognizer) {
         
         guard let section = gesture.view?.tag else { return }
         print("Section \(section) was tapped.")
-        let realSection = section - 1
-        taskHeaders[realSection].isExpanded.toggle()
-        // This is ugly, but also the only way to avoid Apple's feature: when a section is collapsed(header at top, and content already scrolled up even a bit), and then its rows inserted or deleted, the tableview automatically scroll to a position where this section is completely hidden above tableview.
-        if taskHeaders[realSection].isExpanded && taskTableView.contentOffset.y >= HEADER_HEIGHT && isSectionCollapsed(sectionIdx: section) {
-            UIView.animate(withDuration: 0.1, animations: {
-                    self.taskTableView.contentOffset.y -= self.HEADER_HEIGHT
-                    self.timeLineView.contentOffset.y -= self.HEADER_HEIGHT
-            }, completion: {_ in
-            })
-        }
+        taskHeaders[section].isExpanded.toggle()
         self.updateData(rowMovedDeletedInserted: true, sortBy: self.masterViewModel.sortBy, reloadDirectly: false, expandAllHeaders: false, shouldScrollToTop: false, useFadeAnimationOnly: true)
-    }
-    
-    private func isSectionCollapsed(sectionIdx: Int) -> Bool {
-        // Check if the section header's top exceeds view's top
-        let sectionRect = taskTableView.rect(forSection: sectionIdx)
-        return (sectionRect.origin.y - SEGMENTEDCONTROL_HEIGHT) <= HEADER_HEIGHT
     }
 }
 
 extension TaskTableViewController {
     private func addContentOffsetObservers() {
-        taskTableView.addObserver(self, forKeyPath: "contentOffset", options: [.old, .new], context: nil)
+        taskTableTopConstraint?.addObserver(self, forKeyPath: "constant", options: [.old, .new], context: nil)
 
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "contentOffset", let newContentOffset = change?[.newKey] as? CGPoint {
+        if keyPath == "constant", let newConstant = change?[.newKey] as? CGFloat {
             // Handle the content offset change
-            updateSegmentedControlHeight()
+            updateSegmentedControlHeight(newConstant: newConstant)
         }
     }
     
-    private func updateSegmentedControlHeight() {
-        let offsetY = taskTableView.contentOffset.y - SEGMENTEDCONTROL_HEIGHT
-        var segHeight = -offsetY
+    private func updateSegmentedControlHeight(newConstant: CGFloat) {
+        var segHeight = newConstant
         print("segHeight: \(segHeight)")
         
         if segHeight < 0 {
@@ -587,7 +655,7 @@ extension TaskTableViewController {
         } else if segHeight > SEGMENTEDCONTROL_HEIGHT {
             segHeight = SEGMENTEDCONTROL_HEIGHT
         }
-        
+        /*
         if let oldHeight = segmentedControlHeightConstraint?.constant{
             print(":animating: \(segHeight) from \(oldHeight)")
             if abs(oldHeight - segHeight) > 10 {
@@ -599,6 +667,7 @@ extension TaskTableViewController {
                 return
             }
         }
+         */
         self.segmentedControlHeightConstraint?.constant = segHeight
         let ratio = segHeight / SEGMENTEDCONTROL_HEIGHT
         if(ratio) < 0.6 {
@@ -620,34 +689,18 @@ extension TaskTableViewController: UITableViewDragDelegate {
 
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        for h in taskHeaders {
+            if h.rowIdx == indexPath.row {
+                return []
+            }
+        }
          let itemProvider = NSItemProvider()
          let dragItem = UIDragItem(itemProvider: itemProvider)
         return [dragItem]
-         // Optional: Attach the object being dragged for your own reference
-         // dragItem.localObject = yourObjectHere
          
-         // Customize the drag preview with a custom view
-         session.localContext = indexPath
-         dragItem.previewProvider = { [weak self] in
-             guard let self = self, let cell = tableView.cellForRow(at: indexPath) else {
-                 return nil
-             }
-             
-             // Create a custom view for the preview
-             let previewView = UIView(frame: cell.frame)
-             previewView.backgroundColor = UIColor.blue // Example customization
-             let label = UILabel(frame: previewView.bounds)
-             label.text = "Custom Preview"
-             label.textAlignment = .center
-             label.textColor = .white
-             previewView.addSubview(label)
-             
-             // Create a UIDragPreview using the custom view
-             return UIDragPreview(view: previewView)
-         }
-         
-         return [dragItem]
      }
+    
+    
     
     func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
             let previewParameters = UIDragPreviewParameters()
@@ -873,13 +926,16 @@ class TaskHeaderModel {
     let headerString: String
     let headerImageString: String
     let sortType: TaskTableSortBy
-    var numberOfRows: Int
+    var numberOfRows: Int {
+        tasks.count
+    }
+    var rowIdx: Int = -1
+    var tasks = [TaskModel]()
     var isExpanded: Bool = true
-    init(headerString: String, headerImageString: String, sortType: TaskTableSortBy, numberOfRows: Int) {
+    init(headerString: String, headerImageString: String, sortType: TaskTableSortBy) {
         self.headerString = headerString
         self.headerImageString = headerImageString
         self.sortType = sortType
-        self.numberOfRows = numberOfRows
     }
 }
 
@@ -889,3 +945,6 @@ struct TaskTableViewController_Previews: PreviewProvider {
     }
 }
 
+func clamp<T: Comparable>(value: T, minimum: T, maximum: T) -> T {
+    return min(max(value, minimum), maximum)
+}
