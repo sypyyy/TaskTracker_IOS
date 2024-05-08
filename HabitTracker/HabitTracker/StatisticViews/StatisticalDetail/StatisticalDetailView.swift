@@ -26,6 +26,10 @@ struct StatisticalDetailView: View {
             let safePaddingTop = reader.safeAreaInsets.top
             let safePaddingBottom = reader.safeAreaInsets.bottom
             let safePaddingVertical = safePaddingTop + safePaddingBottom
+            let render = print("detail view rendered!!!!!!")
+            let t = print("detail view shrinkedRectMidY: \(shrinkedRect?.midY)")
+            let t1 = print("detail view isActive: \(isActive)")
+            let t2 = print("detail view appeared: \(appeared)")
             if let habit = habit, let shrinkedRect = shrinkedRect {
                 ZStack {
                     VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).background(.white.opacity(0.5)).ignoresSafeArea()
@@ -105,11 +109,16 @@ struct StatisticalDetailView: View {
                 
                 .onAppear {
                     if(isActive) {
+                        print("detail view onAppear!!!!")
                         appeared = true
                     }
                 }
                 .onChangeCustom(of: isActive) {
-                    appeared = isActive
+                    //DispatchQueue.main.async {
+                    print("detail view onchange!!!!")
+                        appeared = isActive
+                    //}
+                    
                 }
                 
                 

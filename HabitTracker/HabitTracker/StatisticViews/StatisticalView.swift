@@ -28,10 +28,11 @@ struct StatisticalView: View, Sendable {
     // 这个状态用来表示显示加载以及禁止触控， viewModel的firedUpdate表示需要更新图表
     @State var dataOld = false
     @State var detailHabit: HabitModel? = nil
+    @State var isDetailViewShowStarted = false
     @State var detailListRowFrame: CGRect? = nil
-    @State var isDetailViewActive = false
+    @State var notifyDetailViewAnimationFlag = false
     var shouldShowDetailHabit: Bool {
-        detailHabit != nil && detailListRowFrame != nil && isDetailViewActive
+        detailHabit != nil && detailListRowFrame != nil && isDetailViewShowStarted
     }
     var body: some View {
         VStack {
@@ -169,28 +170,7 @@ struct StatisticalView: View, Sendable {
                                     
                                     Section{
                                         
-                                        Button {
-                                            /*
-                                             navigationPushed = true
-                                             var vc = CustomHostingViewController(rootView: StatisticalDetailView(habit: habit, enteringChartCycle: .annually).onTapGesture {
-                                             statisticalView_hostingNavigationController.popViewController(animated: false)
-                                             })
-                                             let parent = statisticalView_hostingController
-                                             
-                                             parent.view.addSubview(vc.view)
-                                             let screen = parent.view.window?.screen
-                                             vc.view.frame.size.height = screen?.bounds.size.height ?? 0
-                                             vc.view.frame.size.width = screen?.bounds.size.width ?? 0
-                                             
-                                             vc.view.backgroundColor = UIColor(Color.clear)
-                                             parent.addChild(vc)
-                                             vc.didMove(toParent: parent)
-                                             //statisticalView_hostingNavigationController.present(vc, animated: true)
-                                             */
-                                            detailHabit = habit
-                                            isDetailViewActive = true
-                                            
-                                        } label: {
+                                        
                                             VStack {
                                                 VStack(alignment: .leading) {
                                                     NavigationLink{} label: {
@@ -209,13 +189,16 @@ struct StatisticalView: View, Sendable {
                                                 }.padding()
                                                 
                                             }.contentShape(Rectangle())
-                                            
-                                        }
-                                        .buttonStyle(ListButtonStyle())
+                                            .onTapGesture {
+                                                detailHabit = habit
+                                                isDetailViewShowStarted = true
+                                            }
+                                        
+                                        //.buttonStyle(ListButtonStyle())
                                         .overlay{
                                             GeometryReader{reader in
                                                 
-                                                if isDetailViewActive, let detailId = detailHabit?.id, detailId == habit.id {
+                                                if isDetailViewShowStarted, let detailId = detailHabit?.id, detailId == habit.id {
                                                     VStack{}.onAppear{
                                                         detailListRowFrame = reader.frame(in: .global)
                                                     }
@@ -230,7 +213,7 @@ struct StatisticalView: View, Sendable {
                                     .background(Color.white.opacity(0.5))
                                     .clipShape(RoundedRectangle(cornerRadius: 18))
                                     .listRowBackground(Color.clear)
-                                    .opacity(shouldShowDetailHabit && detailHabit?.id == habit.id ? 0 : 1)
+                                    //.opacity(shouldShowDetailHabit && detailHabit?.id == habit.id ? 0 : 1)
                                 }
                                 Section{VStack{}}.frame(height: 20).listRowBackground(Color.clear)
                                 
@@ -247,13 +230,13 @@ struct StatisticalView: View, Sendable {
                     
                     
                     
-                    StatisticalDetailView(isActive: $isDetailViewActive, habit: detailHabit, enteringChartCycle: .annually, shrinkedRect: detailListRowFrame, screenWidth: m.size.width, screenHeight: m.size.height).onTapGesture{
-                        isDetailViewActive = false
+                    StatisticalDetailView(isActive: $isDetailViewShowStarted, habit: detailHabit, enteringChartCycle: .annually, shrinkedRect: detailListRowFrame, screenWidth: m.size.width, screenHeight: m.size.height).onTapGesture{
+                        isDetailViewShowStarted = false
                         //detailHabit = nil
                         //detailListRowFrame = nil
                     }
                     //.background(.red.opacity(0.2))
-                    .disabled(!isDetailViewActive)
+                    .disabled(!isDetailViewShowStarted)
                     
                 }//.animation(.easeInOut(duration: 0.6), value: isDetailViewActive)
                     //.animation(.easeInOut(duration: 0.6), value: detailListRowFrame)
@@ -271,7 +254,7 @@ struct ListButtonStyle: ButtonStyle {
         configuration.label
             //.background(configuration.isPressed ? Color.gray.opacity(0.1) : Color.clear)
             //.scaleEffect(configuration.isPressed ? 1.05 : 1)
-            .animation(.snappy(duration: 0), value: configuration.isPressed)
+            //.animation(.snappy(duration: 0), value: configuration.isPressed)
     }
 }
 

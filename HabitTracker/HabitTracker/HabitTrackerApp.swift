@@ -50,45 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 class TouchWindow: UIWindow {
-    var isTouchBeganInsidePopup = false
-    var waitListedEvents = [UIEvent]()
-    
+   
     override func sendEvent(_ event: UIEvent) {
-        // Handle touch events here
-        /*
-        let popupMgr = GlobalPopupManager.shared
-        if let touches = event.allTouches {
-            for touch in touches where touch.phase == .began {
-                // Do something with the touch
-                print("Touch detected at \(touch.location(in: self))")
-                if popupMgr.showPopup {
-                    guard let popupPos = popupMgr.popupPosition, let popupSize = popupMgr.popupSize else {continue}
-                    let popupOrigin = CGPoint(x: (popupPos.x - popupSize.width / 2), y: (popupPos.y - popupSize.height / 2))
-                    let popupFrame = CGRect(origin: popupOrigin, size: popupSize)
-                    let touchLocation = touch.location(in: self)
-                    isTouchBeganInsidePopup = popupFrame.contains(touchLocation)
-                    print("began inside pop \(isTouchBeganInsidePopup)")
-                }
-            }
-            
-            for touch in touches where touch.phase == .moved || touch.phase == .ended || touch.phase == .cancelled {
-                // Do something with the touch
-                print("Touch detected at \(touch.location(in: self))")
-                if popupMgr.showPopup {
-                    guard let popupPos = popupMgr.popupPosition, let popupSize = popupMgr.popupSize else {continue}
-                    let popupOrigin = CGPoint(x: (popupPos.x - popupSize.width / 2), y: (popupPos.y - popupSize.height / 2))
-                    let popupFrame = CGRect(origin: popupOrigin, size: popupSize)
-                    let touchLocation = touch.location(in: self)
-                    print("popFrame \(popupFrame)")
-                    if !popupFrame.contains(touchLocation) && !isTouchBeganInsidePopup {
-                        popupMgr.hidePopup(reason: "moved OutSide Popup")
-                    }
-                }
-                
-            }
-            
-        }
-         */
+        
         super.sendEvent(event)
     }
 }

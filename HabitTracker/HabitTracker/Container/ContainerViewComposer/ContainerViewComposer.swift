@@ -8,11 +8,8 @@
 import UIKit
 
 final class ContainerViewComposer {
-    @MainActor static func makeContainer() -> ContainerViewController {
-        let homeViewController = HomeViewController(rootView: RootView())
-        let settingsViewController = SettingsViewController(rootView: RootView())
-        let aboutViewController = AboutViewController()
-        let myAccountViewController = MyAccountViewController()
+    @MainActor static var sharedContainerVC = makeContainer()
+    @MainActor static private func makeContainer() -> ContainerViewController {
         let sideMenuItems = [
             SideMenuItem(icon: UIImage(systemName: "house.fill"),
                          name: "All Habits",
@@ -35,8 +32,9 @@ final class ContainerViewComposer {
                          viewController: .modal(myAccountViewController))
              */
         ]
-        let sideMenuViewController = SideMenuViewController(sideMenuItems: sideMenuItems)
-        let container = ContainerViewController(sideMenuViewController: sideMenuViewController,
+        let sideMenuViewController = SideMenuViewController()
+        let bottomSheetViewController = BottomSheetViewController()
+        let container = ContainerViewController(sideMenuViewController: sideMenuViewController, bottomSheetViewController: bottomSheetViewController,
                                                 rootViewController: rootViewController)
 
         return container

@@ -11,9 +11,6 @@ import UIKit
 
 let TAB_BAR_HEIGHT: CGFloat = 88
 
-@MainActor
-let LEFT_SIDE_BAR_WIDTH: CGFloat = UIScreen.main.bounds.width - 70
-
 //let backgroundGradientStart = Color(hex: 0xba5370).lighter(by: 30)
 //let backgroundGradientEnd = Color(hex: 0xf4e2d8)
 
@@ -94,7 +91,6 @@ struct RootView: View {
     private var items: FetchedResults<Item>
  */
     @StateObject var viewModel = TaskMasterViewModel.shared
-    @StateObject var leftSideBarViewModel = LeftSideBarViewModel.shared
     //@Environment(\.scenePhase) var scenePhase
     @State private var tabIndex: AppTabShowType = .goals {
         
@@ -156,6 +152,7 @@ struct RootView: View {
         }
     }
     @State private var zoomBg: Bool = true
+    @State var isPresentHabitSheet = false
     //Controls the create form
     let pub = NotificationCenter.default
         .publisher(for: NSNotification.Name.NSCalendarDayChanged)
@@ -167,87 +164,82 @@ struct RootView: View {
         
         
         ZStack {
-            HStack {
-                VStack{}.frame(maxWidth: LEFT_SIDE_BAR_WIDTH, maxHeight: .infinity)
-                    .background(backgroundGradientStart.opacity(0.4))
-                    .background(LinearGradient(colors: [.gray.darker(by: 35), .gray.darker(by: 25)], startPoint: .leading, endPoint: .trailing))
-                Spacer()
-            }.ignoresSafeArea()
             ZStack{
-                ZStack{
-                    DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg).drawingGroup().ignoresSafeArea()
+                DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg).drawingGroup().ignoresSafeArea()
+                    //.blur(radius: tabIndex != .checkIn ? 10 : 0.0, opaque: true).animation(.easeIn(duration: 0.2), value: tabIndex)
+                //VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().background(.white.opacity(0.2))
+                    
+                //VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().background(.ultraThinMaterial).opacity(tabIndex != .checkIn ? 1.0 : 0.0).animation(.easeIn(duration: 0.2), value: tabIndex).saturation(1.8)
+                
+                VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().background(.regularMaterial).opacity(tabIndex == .statistical ? 1.0 : 0.0).animation(.easeIn(duration: 0.2), value: tabIndex)
+                
+                
+                
+                TabView_Wrapper().ignoresSafeArea()
+                //.animation(.easeInOut(duration: 0.3), value: tabIndex)
+                
+                VStack(spacing: 0) {
+                    Spacer()
+                    Divider()
+                    //Bottom Tab View
+                    HStack{
+                        Button{
+                            hideCurrentVCAndShowNext(target: .goals)
+                            zoomBg = true
+                        } label: {Text("projects")}
+                        Button{
+                            hideCurrentVCAndShowNext(target: .habits)
+                            //tabIndex = .initial
+                            zoomBg = true
+                            
+                        } label: {Text("habits")}
+                        Button{
+                            hideCurrentVCAndShowNext(target: .checkIn)
+                            //tabIndex = .checkIn
+                            zoomBg = false
+                        } label: {Text("check in")}
                         
-                    
-                    VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().background(.regularMaterial).opacity(tabIndex == .statistical ? 1.0 : 0.0).animation(.easeIn(duration: 0.2), value: tabIndex)
-                    
-                    
-                
-                    TabView_Wrapper().ignoresSafeArea()
-                    //.animation(.easeInOut(duration: 0.3), value: tabIndex)
-                    
-                    VStack(spacing: 0) {
-                        Spacer()
-                        Divider()
-                        //Bottom Tab View
-                        HStack{
-                            Button{
-                                hideCurrentVCAndShowNext(target: .goals)
-                                zoomBg = true
-                            } label: {Text("projects")}
-                            Button{
-                                hideCurrentVCAndShowNext(target: .habits)
-                                //tabIndex = .initial
-                                zoomBg = true
-                                
-                            } label: {Text("habits")}
-                            Button{
-                                hideCurrentVCAndShowNext(target: .checkIn)
-                                //tabIndex = .checkIn
-                                zoomBg = false
-                            } label: {Text("check in")}
-                            
-                            Button{
-                                hideCurrentVCAndShowNext(target: .statistical)
-                                //tabIndex = .statistical
-                                //zoomBg = true
-                            } label: {Text("statistics")}
-                            
-                            Button{
-                                hideCurrentVCAndShowNext(target: .setting)
-                                //tabIndex = .setting
-                                zoomBg = true
-                            } label: {Text("setting")}
-                        }
-                        .padding()
-                        .frame(height: TAB_BAR_HEIGHT)
-                        .frame(maxWidth: .infinity)
-                        .background(tabIndex == .habits ? backgroundGradientEnd.opacity(0.6) : Color(red: 235.0 / 255, green: 235.0 / 255, blue: 235.0 / 255).opacity(0.6))
-                        .background(.ultraThinMaterial)
-                        .frame(alignment: .bottom)
-                        .animation(.easeInOut(duration: 1.0), value: tabIndex)
+                        Button{
+                            hideCurrentVCAndShowNext(target: .statistical)
+                            //tabIndex = .statistical
+                            //zoomBg = true
+                        } label: {Text("statistics")}
+                        
+                        Button{
+                            hideCurrentVCAndShowNext(target: .setting)
+                            //tabIndex = .setting
+                            zoomBg = true
+                        } label: {Text("setting")}
                     }
-                    
-                    //.cornerRadius(40, corners: [.topLeft, .topRight])
-                    //.shadow(color: Color("Shadow"), radius: 5, x: 0, y: 1)
-                    
-                }.zIndex(1)
-                    .ignoresSafeArea(edges: [.bottom])
-                    .onReceive(pub) { (output) in
-                        viewModel.refreshDate()
-                    }
-                //.blur(radius: viewModel.blurEverything ? 20.0 : 0.0)
-                    .disabled(viewModel.blurEverything ? true : false)
-                VStack {
-                    PopupView()
-                }.zIndex(2)
+                    .padding()
+                    .frame(height: TAB_BAR_HEIGHT)
+                    .frame(maxWidth: .infinity)
+                    .background(tabIndex == .habits ? backgroundGradientEnd.opacity(0.6) : Color(red: 235.0 / 255, green: 235.0 / 255, blue: 235.0 / 255).opacity(0.6))
+                    .background(.ultraThinMaterial)
+                    .frame(alignment: .bottom)
+                    .animation(.easeInOut(duration: 1.0), value: tabIndex)
+                }
                 
-                GlobalPopupView().zIndex(3)
-            }
-            .offset(x: leftSideBarViewModel.isShowLeftSideBar ? LEFT_SIDE_BAR_WIDTH : 0, y: 0)
-            .animation(.linear(duration: 0.2), value: leftSideBarViewModel.isShowLeftSideBar)
-        }.animation(.easeInOut(duration: 1.0), value: tabIndex)
-            .animation(.easeInOut(duration: POPUP_ANIMATION_DURATION), value: viewModel.blurEverything)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                //.cornerRadius(40, corners: [.topLeft, .topRight])
+                //.shadow(color: Color("Shadow"), radius: 5, x: 0, y: 1)
+                
+            }.zIndex(1)
+                .ignoresSafeArea(edges: [.bottom])
+                .onReceive(pub) { (output) in
+                    viewModel.refreshDate()
+                }
+            //.blur(radius: viewModel.blurEverything ? 20.0 : 0.0)
+                .disabled(viewModel.blurEverything ? true : false)
+            VStack {
+                PopupView()
+            }.zIndex(2)
+            
+            GlobalPopupView().zIndex(3)
+        }
+        .animation(.easeInOut(duration: 1.0), value: tabIndex)
+        .animation(.easeInOut(duration: POPUP_ANIMATION_DURATION), value: viewModel.blurEverything)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        
     }
     
                         /*.onChange(of: scenePhase) { scenePhase in

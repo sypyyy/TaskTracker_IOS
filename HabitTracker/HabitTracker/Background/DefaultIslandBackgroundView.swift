@@ -366,7 +366,7 @@ struct DefaultIslandBackgroundView: View {
                     } symbols: {
                         Rectangle().fill(LinearGradient(colors: [Color(UIColor(Self.water).lighter(by: 55)), Color(UIColor(Self.water).lighter(by: 55))], startPoint: .topTrailing, endPoint: .bottomLeading)).tag(2)
                         
-                    }.offset(x: zoom ? -60 * metric.size.width / 320.0 : 0, y: zoom ? 70 : 0).scaleEffect(zoom ? 2.5 : 1.0)
+                    }.offset(x: zoom ? -85 * metric.size.width / 320.0 : 0, y: zoom ? 70 : 0).scaleEffect(zoom ? 2.5 : 1.0)
                     
                     
                     TimelineView(.periodic(from: .now, by: zoom ? 10 : 0.03)) { timeline in
@@ -457,7 +457,7 @@ struct DefaultIslandBackgroundView: View {
                         } symbols: {
                             
                             BoatWave(strength: 50.0, frequency: 10, phase: z*3).stroke(LinearGradient(colors: [DefaultIslandBackgroundView.wave.opacity(1.0),DefaultIslandBackgroundView.wave.opacity(0.0)], startPoint: .leading, endPoint: .trailing), lineWidth: 90).tag(1).rotation3DEffect(.degrees(0), axis: (x:0, y:0, z:1))
-                        }.offset(x: zoom ? -60 * metric.size.width / 320.0 : 0, y: zoom ? 80 * 320.0 / metric.size.width : 0).scaleEffect(zoom ? 2.5 : 1.0)
+                        }.offset(x: zoom ? -85 * metric.size.width / 320.0 : 0, y: zoom ? 80 * 320.0 / metric.size.width : 0).scaleEffect(zoom ? 2.5 : 1.0)
                     }
                 }
             }
@@ -477,10 +477,18 @@ private func getY(_ x: Int, _ y: Int) -> Int {
 
 
 
-struct SwiftUIViewForDrawTest_Previews: PreviewProvider {
+struct SwiftUIViewForDrawTest_Previews1: PreviewProvider {
     @State static var t: AppTabShowType = .habits
     @State static var zoom: Bool = false
     static var previews: some View {
         DefaultIslandBackgroundView(tabIndex: $t, zoom: $zoom)
+    }
+}
+
+struct SwiftUIViewForDrawTest_Previews2: PreviewProvider {
+    @State static var t: AppTabShowType = .habits
+    @State static var zoom: Bool = false
+    static var previews: some View {
+        RootView()
     }
 }

@@ -123,7 +123,7 @@ extension HabitViewModel {
                     habit.numberProgress = 0
                     break
                 }
-                habit.numberProgress = records[habit.id]?.numberProgress
+                habit.numberProgress = records[habit.id]?.numberProgress ?? 0
                 habit.done = habit.numberProgress == habit.numberTarget
             case .time:
                 habit.timeTarget = latestTarget?.timeTarget
@@ -131,14 +131,14 @@ extension HabitViewModel {
                     habit.timeProgress = "0:00"
                     break
                 }
-                habit.timeProgress = records[habit.id]?.timeProgress
+                habit.timeProgress = records[habit.id]?.timeProgress  ?? "0:00"
                 habit.done = habit.timeProgress?.timeToMinutes() == habit.timeTarget?.timeToMinutes()
             case .simple:
                 if habit.cycle == .daily && records[habit.id]?.date?.compareToByDay(selectedDate) != 0 {
                     habit.done = false
                     break
                 }
-                habit.done = records[habit.id]?.done
+                habit.done = records[habit.id]?.done ?? false
                 
             }
             print("\(records[habit.id])")

@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "subtask1.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Vector 20.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

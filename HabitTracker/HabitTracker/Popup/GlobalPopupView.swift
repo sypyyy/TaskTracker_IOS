@@ -31,6 +31,7 @@ struct GlobalPopupView: View {
             VStack {
                 if let popupPosition = popupMgr.popupPosition, let srcPosition = popupMgr.sourceFrame?.origin {
                     popupMgr.popupView
+                        
                         .background(.thinMaterial)
                         .clipShape(RoundedRectangle(cornerRadius: 18))
                         .shadow(color: .gray.opacity(0.4), radius: 48)

@@ -9,6 +9,7 @@ import UIKit
 
 final class ContainerViewController: UIViewController {
     private var sideMenuViewController: SideMenuViewController!
+    private var bottomSheetViewController: BottomSheetViewController!
     private var navigator: UINavigationController!
     private var rootViewController: ContentViewController! {
         didSet {
@@ -17,8 +18,9 @@ final class ContainerViewController: UIViewController {
         }
     }
 
-    convenience init(sideMenuViewController: SideMenuViewController, rootViewController: ContentViewController) {
+    convenience init(sideMenuViewController: SideMenuViewController, bottomSheetViewController: BottomSheetViewController, rootViewController: ContentViewController) {
         self.init()
+        self.bottomSheetViewController = bottomSheetViewController
         self.sideMenuViewController = sideMenuViewController
         self.rootViewController = rootViewController
         self.navigator = UINavigationController(rootViewController: rootViewController)
@@ -32,6 +34,7 @@ final class ContainerViewController: UIViewController {
 
     private func configureView() {
         addChildViewControllers()
+        configureConstraints()
         configureDelegates()
         configureGestures()
     }
@@ -82,10 +85,26 @@ final class ContainerViewController: UIViewController {
         addChild(navigator)
         view.addSubview(navigator.view)
         navigator.didMove(toParent: self)
-
+        
+        addChild(bottomSheetViewController)
+        view.addSubview(bottomSheetViewController.view)
+        bottomSheetViewController.didMove(toParent: self)
+        
         addChild(sideMenuViewController)
         view.addSubview(sideMenuViewController.view)
         sideMenuViewController.didMove(toParent: self)
+    }
+    
+    private func configureConstraints() {
+        NSLayoutConstraint.activate([
+            
+        ])
+    }
+}
+
+extension ContainerViewController {
+    func showBottomSheet(snapPoints: [CGFloat], background: BSBackground = .blur(style: .systemUltraThinMaterialLight), viewType: BSPresentView) {
+        bottomSheetViewController.show(snapPoints: snapPoints, background: background, viewType: viewType)
     }
 }
 
@@ -94,7 +113,7 @@ extension ContainerViewController: SideMenuDelegate {
         sideMenuViewController.show()
     }
 
-    func itemSelected(item: ContentViewControllerPresentation) {
+    func itemSelected(item: SideMenuTappedActions) {
         switch item {
         case let .embed(viewController):
             updateRootViewController(viewController)

@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-
+//This file is deprecated for now, but kept because components may be useful
 struct HabitDetailView: View{
     var habit: HabitModel {
         didSet {
-            print("syppppppppppdsdsefe\(habit)")
         }
     }
     let spacing: CGFloat = 10

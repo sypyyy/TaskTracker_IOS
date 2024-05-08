@@ -252,6 +252,12 @@ var fmt12 : DateFormatter {
     return fmt
 }
 
+var fmt_timeStamp: DateFormatter {
+    let fmt = DateFormatter()
+    fmt.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+    return fmt
+}
+
 extension Date {
     static func combineDates(date: Date, time: Date) -> Date {
         // Assuming you have two Date objects

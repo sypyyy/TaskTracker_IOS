@@ -22,17 +22,17 @@ class GlobalPopupManager : ObservableObject{
 }
 
 extension GlobalPopupManager {
-    @MainActor func showPopup(view: AnyView, sourceFrame: CGRect, center: Bool = false) {
+    @MainActor func showPopup(view: AnyView, sourceFrame: CGRect, center: Bool = false, preferredSide: PopupSide? = .down, padding: EdgeInsets = .init(top: 0, leading: Task_Card_Horizontal_Padding, bottom: TAB_BAR_HEIGHT, trailing: Task_Card_Horizontal_Padding)) {
         print("showing pop")
-        popupView = view
+        popupView = AnyView(view.id(UUID()))
         self.sourceFrame = sourceFrame
         if(!center) {
             //MARK: I added a padding here because the PopupView has this padding as well, I need to make sure the size is precise.
             let hostingController = UIHostingController(rootView: view)
             popupSize = hostingController.view.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
-            popupPosition = getPopupPosition()
+            popupPosition = getPopupPosition(preferredSide: preferredSide, padding: padding)
         } else {
-            popupPosition = CGPoint(x: screenSize.midX, y: screenSize.midY - screenSize.height * 0.1)
+            popupPosition = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY - UIScreen.main.bounds.height * 0.1)
             popupSide = .center
         }
         showPopup = true
@@ -53,12 +53,29 @@ extension GlobalPopupManager {
         containerFrame = frame
     }
     
-    @MainActor func getPopupPosition() -> CGPoint? {
+    @MainActor func getPopupPosition(preferredSide: PopupSide?, padding: EdgeInsets) -> CGPoint? {
         guard let sourceFrame = sourceFrame, let popupSize = popupSize,
               containerFrame != .zero else { return nil }
         var popside = PopupSide.down
         let srcPosY = sourceFrame.midY
-        popside = (srcPosY < containerFrame.midY) ? .down : .up
+        if(preferredSide == nil) {
+            popside = (srcPosY < containerFrame.midY) ? .down : .up
+        }
+        if let preferSide = preferredSide {
+            popside = preferSide
+            switch preferSide {
+            case .down:
+                if(sourceFrame.maxY + padding.bottom) > containerFrame.maxY {
+                    popside = .up
+                }
+                
+            case .up:
+                if(sourceFrame.minY - padding.top) < containerFrame.minY {
+                    popside = .down
+                }
+            default: break
+            }
+        }
         var popPos = CGPoint.zero
         
         if popside == .up {
@@ -70,11 +87,11 @@ extension GlobalPopupManager {
         }
         
         popPos.x = sourceFrame.midX
-        if(popPos.x + popupSize.width / 2 > (containerFrame.maxX - POPUP_PADDING)) {
-            popPos.x = containerFrame.maxX - POPUP_PADDING - popupSize.width / 2
+        if(popPos.x + popupSize.width / 2 > (containerFrame.maxX - padding.trailing)) {
+            popPos.x = containerFrame.maxX - padding.trailing - popupSize.width / 2
         }
-        else if(popPos.x - popupSize.width / 2 < (containerFrame.minX + POPUP_PADDING)) {
-            popPos.x = containerFrame.minX + POPUP_PADDING + popupSize.width / 2
+        else if(popPos.x - popupSize.width / 2 < (containerFrame.minX + padding.leading)) {
+            popPos.x = containerFrame.minX + padding.leading + popupSize.width / 2
         }
         return popPos
     }

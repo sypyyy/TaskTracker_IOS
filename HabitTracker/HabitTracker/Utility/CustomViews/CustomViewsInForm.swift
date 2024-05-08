@@ -100,7 +100,7 @@ struct inputFieldPrototype : View {
             TextField("\(title)", text: $text)
                 .font(.system(size: 16, weight: .bold, design: .rounded))
                 .submitLabel(.done)
-                .padding(.vertical)
+                .padding(.vertical, 12)
                 .focused($isFocused)
             Text(" ")
         }

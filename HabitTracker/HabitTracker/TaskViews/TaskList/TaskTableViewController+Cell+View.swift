@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 
 @MainActor
-let Task_Card_Vertical_Padding: CGFloat = 10
+let Task_Card_Vertical_Padding: CGFloat = 8
 
 @MainActor
 let Task_Card_Horizontal_Padding: CGFloat = 12
@@ -141,7 +141,8 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         timeLineView.allowsSelection = false
         timeLineView.showsVerticalScrollIndicator = false
         // Set transparent background for the UITableView
-        timeLineView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        timeLineView.backgroundColor = .clear
+        
         
         //tableView.frame.size.height = frame.height
         self.view.addSubview(timeLineView)
@@ -149,12 +150,22 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         timelineLeadingConstraint = timeLineView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         timelineLeadingConstraint?.isActive = true
         NSLayoutConstraint.activate([
+            timeLineView.topAnchor.constraint(equalTo: taskTableView.topAnchor),
             timeLineView.widthAnchor.constraint(equalToConstant: TIME_LINE_TABLE_WIDTH),
-            timeLineView.topAnchor.constraint(equalTo: view.topAnchor),
             timeLineView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Table_Bottom_Padding),
             
         ])
-       
+        let blurEffect = UIBlurEffect(style: .systemMaterialLight)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.alpha = 0.5
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.insertSubview(blurEffectView, belowSubview: timeLineView)
+        NSLayoutConstraint.activate([
+            blurEffectView.leadingAnchor.constraint(equalTo: timeLineView.leadingAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: timeLineView.trailingAnchor),
+            blurEffectView.topAnchor.constraint(equalTo: timeLineView.topAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: timeLineView.bottomAnchor),
+        ])
     }
     fileprivate func updateData(rowMovedDeletedInserted: Bool, sortBy: TaskTableSortBy, reloadDirectly: Bool = false, expandAllHeaders: Bool, shouldScrollToTop: Bool, useFadeAnimationOnly: Bool = false) {
         //????
@@ -449,17 +460,20 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
             res.frame.size.height = HEADER_HEIGHT
             res.backgroundColor = .clear
             sectionView.translatesAutoresizingMaskIntoConstraints = false
+            sectionView.layer.cornerRadius = 12
             res.contentView.addSubview(sectionView)
+            
             NSLayoutConstraint.activate([
                 sectionView.topAnchor.constraint(equalTo: res.contentView.topAnchor),
-                sectionView.bottomAnchor.constraint(equalTo: res.contentView.bottomAnchor),
-                sectionView.leadingAnchor.constraint(equalTo: res.contentView.leadingAnchor),
-                sectionView.trailingAnchor.constraint(equalTo: res.contentView.trailingAnchor),
+                sectionView.heightAnchor.constraint(equalToConstant: HEADER_HEIGHT),
+                sectionView.leadingAnchor.constraint(equalTo: res.contentView.leadingAnchor, constant: Task_Card_Horizontal_Padding),
+                sectionView.trailingAnchor.constraint(equalTo: res.contentView.trailingAnchor, constant: -Task_Card_Horizontal_Padding),
             ])
             return res
             
         }
     }
+
 
     // MARK: - TableView Delegate
 
@@ -472,10 +486,18 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
             if(taskId != masterViewModel.tappedTaskId) {
                 Estimated_Task_Card_Folded_Height = res
             }
+           
             return res
         } else {
+            if shouldHeaderHaveBottomPadding(indexPath: indexPath) {
+                return HEADER_HEIGHT + 2 * Task_Card_Vertical_Padding
+            }
             return HEADER_HEIGHT
         }
+    }
+    
+    private func shouldHeaderHaveBottomPadding(indexPath: IndexPath) -> Bool {
+        return indexPath2TaskIdMapping[IndexPath(row: indexPath.row + 1, section: 0)] != nil
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -528,20 +550,19 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
             taskTableTopConstraint?.constant = clamp(value: newConstant, minimum: 0.0001, maximum: SEGMENTEDCONTROL_HEIGHT - 0.0001)
             taskTableView.contentOffset.y = 0
         }
-        if(scrollView == self.taskTableView) {
-            if let constant = taskTableTopConstraint?.constant {
-                print("constant IS \(constant)")
-                if constant > 0.001 && constant < SEGMENTEDCONTROL_HEIGHT - 0.001 {
+        if let constant = taskTableTopConstraint?.constant {
+            print("constant IS \(constant)")
+            if constant > 0.001 && constant < SEGMENTEDCONTROL_HEIGHT - 0.001 {
+                adjustTableTopConstraint(constant: constant)
+            } else {
+                if constant > SEGMENTEDCONTROL_HEIGHT / 2 && taskTableView.contentOffset.y > 0 {
                     adjustTableTopConstraint(constant: constant)
-                } else {
-                    if constant > SEGMENTEDCONTROL_HEIGHT / 2 && taskTableView.contentOffset.y > 0 {
-                        adjustTableTopConstraint(constant: constant)
-                    } else if constant < SEGMENTEDCONTROL_HEIGHT / 2 && taskTableView.contentOffset.y < 0 {
-                        adjustTableTopConstraint(constant: constant)
-                    }
+                } else if constant < SEGMENTEDCONTROL_HEIGHT / 2 && taskTableView.contentOffset.y < 0 {
+                    adjustTableTopConstraint(constant: constant)
                 }
             }
-            
+        }
+        if(scrollView == self.taskTableView) {
             print("bug: taskTableTopConstraint \(taskTableTopConstraint?.constant)")
             timeLineView.contentOffset = taskTableView.contentOffset
         } else {
@@ -555,37 +576,28 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UITableVie
         willDecelerate decelerate: Bool
     ) {
         if !decelerate {
-            print("setting! 3")
-            if scrollView == taskTableView {
-                UIView.animate(withDuration: 0.2) {
-                    if self.taskTableTopConstraint?.constant ?? 0 > self.SEGMENTEDCONTROL_HEIGHT / 2 {
-                        print("setting! 1")
-                        self.taskTableTopConstraint?.constant = self.SEGMENTEDCONTROL_HEIGHT - 0.0001
-                    } else {
-                        print("setting! 2")
-                        self.taskTableTopConstraint?.constant = 0.0001
-                    }
-                    self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.2) {
+                if self.taskTableTopConstraint?.constant ?? 0 > self.SEGMENTEDCONTROL_HEIGHT / 2 {
+                    self.taskTableTopConstraint?.constant = self.SEGMENTEDCONTROL_HEIGHT - 0.0001
+                } else {
+                    self.taskTableTopConstraint?.constant = 0.0001
                 }
+                self.view.layoutIfNeeded()
             }
         }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("setting! 3")
-        if scrollView == taskTableView {
             UIView.animate(withDuration: 0.2) {
                 if self.taskTableTopConstraint?.constant ?? 0 > self.SEGMENTEDCONTROL_HEIGHT / 2 {
-                    print("setting! 1")
                     self.taskTableTopConstraint?.constant = self.SEGMENTEDCONTROL_HEIGHT - 0.0001
                 } else {
-                    print("setting! 2")
                     self.taskTableTopConstraint?.constant = 0.0001
                 }
                 self.view.layoutIfNeeded()
             }
             
-        }
+        
     }
 }
 
@@ -731,8 +743,8 @@ class TaskTableCell: UITableViewCell {
             contentView.addSubview(bgView)
             bgView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                bgView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Task_Card_Vertical_Padding),
-                bgView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Task_Card_Vertical_Padding),
+                bgView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+                bgView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -(2 * Task_Card_Vertical_Padding)),
                 bgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
                 bgView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             ])
@@ -873,9 +885,17 @@ struct TaskTableCellView: View {
             if let task = tableViewDelegate?.taskId2TaskModelMapping[taskId]{
                 TaskCardView(taskType: task.taskType, habit: convertTaskToHabitModel(task), todo: convertTaskToToDoModel(task))
                     .onTapGesture {
-                        
-                        masterViewModel.selectTask(taskId: task.taskId)
-                        
+                        switch task.taskType {
+                        case .habit:
+                            if let habit = task as? HabitModel {
+                                ContainerViewComposer.sharedContainerVC.showBottomSheet(snapPoints: [0.8], background: .blur(style: .systemUltraThinMaterial), viewType: .swiftUI(view: AnyView(HabitProgressModifyBottomSheet(habit: habit).padding().ignoresSafeArea())))
+                            }
+                        case .todo:
+                            if let todo = task as? TodoModel {
+                                ContainerViewComposer.sharedContainerVC.showBottomSheet(snapPoints: [0.8], background: .blur(style: .systemUltraThinMaterial), viewType: .viewController(TodoFastCreatViewController()))
+                            }
+                        }
+                        //masterViewModel.selectTask(taskId: task.taskId)
                     }
             }
         }

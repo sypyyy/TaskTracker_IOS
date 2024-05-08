@@ -8,10 +8,9 @@
 import SwiftUI
 
 
-
 struct TaskCardView: View {
+    @State var isSheetPresent = false
     @StateObject var masterViewModel = TaskMasterViewModel.shared
-    
     let taskType: TaskType
     let habit: HabitModel
     let todo: TodoModel
@@ -47,25 +46,61 @@ struct TaskCardView: View {
             
 
             if(tappedOne == habit.id) {
-                HabitDetailView(habit: habit).onTapGesture {
-                }
+                //HabitDetailView(habit: habit).onTapGesture {}
             }
             //Spacer()
-            
+            /*
+            PSButton(
+                isPresenting: $isSheetPresent,
+                label: {
+                    Text("Display the Partial Sheet")
+                })
+             */
         }
         
+        /*
+        .partialSheet(isPresented: $isSheetPresent,type: .scrollView(height: 300, showsIndicators: false),  iPhoneStyle: .init(background: .blur(.ultraThin), handleBarStyle: .solid(backgroundGradientStart.darker(by: 24)), cover: .enabled(.black.opacity(0.05)), cornerRadius: 12)) {
+            CreatTaskForm(viewModel: HabitViewModel.shared)
+        }
+         */
+        //.attachPartialSheetToRoot()
         .padding(.vertical, 6)
         .padding(.horizontal, 10)
         //.background(.white.opacity(0.6))
-        .padding(.vertical, Task_Card_Vertical_Padding)
+        .padding(.bottom, 2 * Task_Card_Vertical_Padding)
         .padding(.horizontal, Task_Card_Horizontal_Padding)
         
     }
 }
 
+struct ScrollableSheetView: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            HStack {
+                Spacer()
+                Text("Privacy Policy")
+                    .font(.headline)
+                Spacer()
+            }
+            Text("Vestibulum iaculis sagittis sem, vel hendrerit ex. ")
+                .font(.body)
+                .lineLimit(2)
+            Divider()
+            Text("""
+                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum porttitor ligula quis faucibus. Maecenas auctor tincidunt maximus. Donec lectus dui, fermentum sed orci gravida, porttitor porta dui.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum porttitor ligula quis faucibus. Maecenas auctor tincidunt maximus. Donec lectus dui, fermentum sed orci gravida, porttitor porta dui.
+                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum porttitor ligula quis faucibus. Maecenas auctor tincidunt maximus. Donec lectus dui, fermentum sed orci gravida, porttitor porta dui.
+""")
+            Spacer()
+                .frame(height: 50)
+        }
+        .padding(.horizontal, 10)
+    }
+}
+
 struct TaskCardDigestView: View {
+
     @StateObject var masterViewModel = TaskMasterViewModel.shared
-    
     let taskType: TaskType
     let habit: HabitModel
     let todo: TodoModel
@@ -117,7 +152,30 @@ struct TaskCardDigestView: View {
                     Text("\(habit.cycle.rawValue)")
                     if habit.type == .number {
                         Text("|").font(.system(size: 18, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.6))
-                        Text("\(habit.numberProgress ?? 0)\(habit.numberTarget == nil ? "" : " / \(habit.numberTarget ?? 0)") \(habit.unit)").font(.system(size: 18, weight: .regular, design: .rounded)).foregroundColor(.primary.opacity(0.6))
+                        MeasuredButton(action: { frame in
+                            
+                            let popMgr = GlobalPopupManager.shared
+                            if(popMgr.showPopup) {
+                                popMgr.hidePopup(reason: "touched button again")
+                                return
+                            }
+                            let view = HabitProgressModifyControlPanel(isEditing: .constant(false), size: .smallPopover, habit: habit).padding(6)
+                            popMgr.showPopup(view: AnyView(view), sourceFrame: frame, center: false)
+                             
+                        }) {
+                            HStack(spacing: 2) {
+                                Text("\(habit.numberProgress ?? 0)")
+                                    .contentTransition(.numericText())
+                                    .animation(GlobalPopupManager.shared.showPopup ? .default : .none, value: habit.numberProgress)
+                                Text("/")
+                                    
+                                Text("\(habit.numberTarget ?? 0)")
+                                Text(" \(habit.unit)")
+                                    .foregroundColor(.primary.opacity(0.6))
+                                    .font(.system(size: 14, weight: .regular, design: .rounded))
+                            }
+                            .font(.system(size: 16, weight: .regular, design: .rounded)).foregroundColor(.primary.opacity(0.6)).padding(4).background(RoundedRectangle(cornerRadius: 6).foregroundStyle(backgroundGradientStart.opacity(0.3)))
+                        }
                     }
                     
                     if habit.type == .time {
@@ -146,6 +204,7 @@ struct TaskCardDigestView: View {
                 
         }
         .contentShape(Rectangle())
+        
     }
 }
 

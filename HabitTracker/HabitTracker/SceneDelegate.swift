@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-@MainActor var screenSize: CGRect = .zero
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -34,10 +34,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             SideMenuController.preferences.basic.shouldRespectLanguageDirection = true
              */
             //window.rootViewController = SideMenuController(contentViewController: rootViewController,menuViewController: UIViewController())
-            window.rootViewController = ContainerViewComposer.makeContainer()
+            window.rootViewController = ContainerViewComposer.sharedContainerVC
             self.window = window
             window.makeKeyAndVisible()
-            screenSize = windowScene.screen.bounds
         }
     }
 

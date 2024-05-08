@@ -16,6 +16,8 @@ class PersistenceController {
         var habits = result.getAllHabits()
         var todos = result.getAllTodos()
         var projects = result.getAllProjects()
+        var folders = result.getAllRootFolders()
+        var lists = result.getAllRootLists()
         
         for habit in habits {
             viewContext.delete(habit)
@@ -29,15 +31,73 @@ class PersistenceController {
             viewContext.delete(project)
         }
         
-        saveChanges(viewContext: viewContext)
-       
-        print("deleted")
-        let testTodo = TodoModel()
-        testTodo.name = "Basketball with Michael"
-        testTodo.priority = 1
-        testTodo.executionTime = .from(area: .morning, startEnd: nil)
+        for folder in folders {
+            viewContext.delete(folder)
+        }
         
-        result.createTodo(dataModel: testTodo)
+        for list in lists {
+            viewContext.delete(list)
+        }
+        
+        saveChanges(viewContext: viewContext)
+        
+        for i in 1...5 {
+            if(i == 1) {
+                let testFolder = FolderModel(name: "Work", id: UUID().uuidString, children: [], isExpanded: false, parent: nil, level: 0, orderIdx: i)
+                let parentID = result.createFolder(dataModel: testFolder)
+                let testFolderChild = FolderModel(name: "Reading", id: UUID().uuidString, children: [], isExpanded: false, parent: nil, level: 1, orderIdx: i)
+                let childId = result.createFolder(dataModel: testFolderChild)
+                result.addFolderToParent(parentID: parentID, childID: childId)
+            } else if(i == 2) {
+                let testFolder = FolderModel(name: "Entertainment", id: UUID().uuidString, children: [], isExpanded: false, parent: nil, level: 0, orderIdx: i)
+                result.createFolder(dataModel: testFolder)
+            } else if(i == 3) {
+                let testFolder = FolderModel(name: "Workout", id: UUID().uuidString, children: [], isExpanded: false, parent: nil, level: 0, orderIdx: i)
+                result.createFolder(dataModel: testFolder)
+            }
+        }
+        
+        for i in 1...5 {
+            if(i == 1) {
+                let testTodo = TodoModel()
+                testTodo.name = "Basketball with Michael"
+                testTodo.priority = 1
+                testTodo.executionTime = .from(area: .morning, startEnd: nil)
+                result.createTodo(dataModel: testTodo)
+            } else if(i == 2) {
+                let testTodo = TodoModel()
+                testTodo.name = "Wash Dished"
+                testTodo.startDate = Date().addByDay(1)
+                testTodo.priority = 1
+                testTodo.executionTime = .from(area: .morning, startEnd: nil)
+                result.createTodo(dataModel: testTodo)
+            } else if(i == 3) {
+                let testTodo = TodoModel()
+                testTodo.name = "Go shopping"
+                testTodo.startDate = Date().addByDay(-1)
+                testTodo.priority = 1
+                testTodo.executionTime = .from(area: .morning, startEnd: nil)
+                result.createTodo(dataModel: testTodo)
+            } else if(i == 4) {
+                let testTodo = TodoModel()
+                testTodo.name = "Go Fishing"
+                testTodo.startDate = Date().addByDay(-1)
+                testTodo.priority = 1
+                testTodo.executionTime = .from(area: .morning, startEnd: nil)
+                result.createTodo(dataModel: testTodo)
+            } else if(i == 5) {
+                let testTodo = TodoModel()
+                testTodo.name = "Go Crazy"
+                testTodo.startDate = Date().addByDay(-1)
+                testTodo.priority = 1
+                testTodo.executionTime = .from(area: .morning, startEnd: nil)
+                result.createTodo(dataModel: testTodo)
+            }
+        }
+        print("deleted")
+        
+        
+        
         var testProject = ProjectModel()
         for i in 1...5 {
             if(i == 1) {
