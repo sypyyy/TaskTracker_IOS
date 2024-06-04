@@ -46,7 +46,7 @@ let backgroundGradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 12
         //res.view.isHidden = false
         return res}()
 
-    let checkInView = Text("checkIn")
+    let checkInView = Text("")
     @MainActor
     let checkInView_hostingController =  {
         let res = CustomHostingViewController(rootView: checkInView)
@@ -233,12 +233,11 @@ struct RootView: View {
             VStack {
                 PopupView()
             }.zIndex(2)
-            
-            GlobalPopupView().zIndex(3)
         }
         .animation(.easeInOut(duration: 1.0), value: tabIndex)
         .animation(.easeInOut(duration: POPUP_ANIMATION_DURATION), value: viewModel.blurEverything)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        
         
     }
     

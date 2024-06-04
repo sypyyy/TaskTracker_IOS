@@ -9,8 +9,8 @@ import Foundation
 
 let POPUP_ANIMATION_DURATION = 0.4
 
-class PopupManager : ObservableObject{
-    static var shared = PopupManager()
+class OldPopupManager : ObservableObject{
+    static var shared = OldPopupManager()
     var showPopup = false {
         didSet {
             TaskMasterViewModel.shared.blurEverything = showPopup
@@ -45,7 +45,7 @@ enum PopupType {
 }
 
 
-extension PopupManager {
+extension OldPopupManager {
     
     class PopupCallback {
     }

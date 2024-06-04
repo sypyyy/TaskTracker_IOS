@@ -96,7 +96,6 @@
         <attribute name="reminderDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="subTasks" optional="YES" attributeType="String"/>
-        <attribute name="willExpire" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaskList" inverseName="todos" inverseEntity="TaskList"/>
         <relationship name="projects" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="todos" inverseEntity="Project"/>
         <fetchIndex name="byStartDate">

@@ -97,13 +97,12 @@ extension TodoModel {
         res.startDate = startDate
         res.hasReminder = hasReminder
         res.reminderDate = reminderDate
-        res.willExpire = willExpire
         res.expireDate = expireDate
         res.note = note
         res.parentTaskId = parentTaskId
         res.subTasks = subTaskString
         res.done = done
-        res.priority = Int16(priority)
+        res.priority = Int16(priority.rawValue)
         res.executionTime = executionTime
         res.project = project
         return res

@@ -106,11 +106,7 @@ struct DateSwipeBar : View {
                     Button(action: {
                         //viewModel.showCreateForm.toggle()
                         //LeftSideBarViewModel.shared.isShowLeftSideBar.toggle()
-                        if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
-                            if let containerViewController: ContainerViewController = (window.rootViewController as? ContainerViewController) {
-                                containerViewController.menuButtonTapped()
-                            }
-                        }
+                        SideMenuViewController.shared.show()
                     }) {
                         Image(systemName: "line.3.horizontal").font(.system(size: 16, weight: .heavy, design: .rounded))
                     }
@@ -139,6 +135,7 @@ struct DateSwipeBar : View {
                             .padding(.horizontal)
                     }
                     .sheet(isPresented: $viewModel.showCreateForm){
+                        //Text("just testing")
                         BottomSheetView{CreatTaskForm(viewModel: HabitViewModel.shared)}
                     }
                 }.foregroundColor(.primary.opacity(0.6))

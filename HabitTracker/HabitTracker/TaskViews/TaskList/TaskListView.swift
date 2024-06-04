@@ -30,7 +30,6 @@ struct TaskListView : View {
         ZStack {
             GeometryReader{ metric in
                     taskTable_Wrapper(metric: metric.frame(in: .global))
-                        
                    
                 }.font(.title)
             /*

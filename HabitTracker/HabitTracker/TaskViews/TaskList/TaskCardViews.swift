@@ -73,33 +73,8 @@ struct TaskCardView: View {
     }
 }
 
-struct ScrollableSheetView: View {
-    var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            HStack {
-                Spacer()
-                Text("Privacy Policy")
-                    .font(.headline)
-                Spacer()
-            }
-            Text("Vestibulum iaculis sagittis sem, vel hendrerit ex. ")
-                .font(.body)
-                .lineLimit(2)
-            Divider()
-            Text("""
-                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum porttitor ligula quis faucibus. Maecenas auctor tincidunt maximus. Donec lectus dui, fermentum sed orci gravida, porttitor porta dui.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum porttitor ligula quis faucibus. Maecenas auctor tincidunt maximus. Donec lectus dui, fermentum sed orci gravida, porttitor porta dui.
-                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum porttitor ligula quis faucibus. Maecenas auctor tincidunt maximus. Donec lectus dui, fermentum sed orci gravida, porttitor porta dui.
-""")
-            Spacer()
-                .frame(height: 50)
-        }
-        .padding(.horizontal, 10)
-    }
-}
-
 struct TaskCardDigestView: View {
-
+    @State var isEditingProgressUsingPopup = false
     @StateObject var masterViewModel = TaskMasterViewModel.shared
     let taskType: TaskType
     let habit: HabitModel
@@ -153,20 +128,15 @@ struct TaskCardDigestView: View {
                     if habit.type == .number {
                         Text("|").font(.system(size: 18, weight: .bold, design: .rounded)).foregroundColor(.primary.opacity(0.6))
                         MeasuredButton(action: { frame in
-                            
-                            let popMgr = GlobalPopupManager.shared
-                            if(popMgr.showPopup) {
-                                popMgr.hidePopup(reason: "touched button again")
-                                return
-                            }
-                            let view = HabitProgressModifyControlPanel(isEditing: .constant(false), size: .smallPopover, habit: habit).padding(6)
-                            popMgr.showPopup(view: AnyView(view), sourceFrame: frame, center: false)
+                            let view = HabitProgressModifyControlPanel(isEditing: .constant(false), size: .smallPopover, habit: habit)
+                            SwiftUIGlobalPopupManager.shared.showPopup(view: AnyView(view), sourceFrame: frame, center: false)
                              
                         }) {
                             HStack(spacing: 2) {
                                 Text("\(habit.numberProgress ?? 0)")
                                     .contentTransition(.numericText())
-                                    .animation(GlobalPopupManager.shared.showPopup ? .default : .none, value: habit.numberProgress)
+                                    .animation(.default, value: habit.numberProgress)
+                                    
                                 Text("/")
                                     
                                 Text("\(habit.numberTarget ?? 0)")
@@ -176,6 +146,11 @@ struct TaskCardDigestView: View {
                             }
                             .font(.system(size: 16, weight: .regular, design: .rounded)).foregroundColor(.primary.opacity(0.6)).padding(4).background(RoundedRectangle(cornerRadius: 6).foregroundStyle(backgroundGradientStart.opacity(0.3)))
                         }
+                        //This id is neccessary because cell reuse causes unexpected animation:
+                        //eg. when u select date the number just animates from another cell's number to the correct one
+                        .id(habit.id)
+                        .scaleEffect(isEditingProgressUsingPopup ? 1.05 : 1)
+                        .animation(.spring, value: isEditingProgressUsingPopup)
                     }
                     
                     if habit.type == .time {

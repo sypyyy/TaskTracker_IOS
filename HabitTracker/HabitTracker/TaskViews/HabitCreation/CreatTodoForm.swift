@@ -126,13 +126,12 @@ struct CreatTodoForm: View {
         let todo = TodoModel()
         todo.name = name
         todo.note = detail
-        todo.priority = priority
+        todo.priority = TodoPriority(rawValue: priority) ?? .none
         todo.startDate = Date.combineDates(date: startDate, time: scheduleTime)
         todo.isTimeSpecific = hasScheduleTime
         todo.hasReminder = hasReminder
         todo.reminderDate = reminderTime
         
-        todo.willExpire = willExpire
         todo.expireDate = expirationDate
         
         todo.parentTaskId = ""

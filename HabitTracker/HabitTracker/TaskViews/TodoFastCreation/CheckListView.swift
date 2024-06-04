@@ -8,6 +8,7 @@
 import UIKit
 //Deprecated
 class CheckListView: UITableView, UITableViewDelegate, UITableViewDataSource {
+    weak var viewControllerAsDelegate: TodoFastCreatViewController?
     var items: [CheckItemModel] = []
     var modelToViewMapping: [CheckItemModel: CheckListItemView] = [:]
     
@@ -17,8 +18,9 @@ class CheckListView: UITableView, UITableViewDelegate, UITableViewDataSource {
         return res
     }()
     
-    override init(frame: CGRect, style: UITableView.Style) {
+    init(frame: CGRect, style: UITableView.Style, delegate: TodoFastCreatViewController) {
         super.init(frame: frame, style: style)
+        self.viewControllerAsDelegate = delegate
         self.delegate = self
         self.dataSource = self
         self.allowsSelection = false
@@ -158,76 +160,94 @@ extension CheckListView {
     }
 }
 
-class CheckListItemView: UIView, UITextFieldDelegate {
-    weak var buttonDelegate: CheckListView?
+class CheckListItemView: UIView {
+    weak var checkListAsDelegate: CheckListView?
+    weak var ownerViewContoller: TodoFastCreatViewController?
     let checkItemModel: CheckItemModel
     var level: Int {
         return checkItemModel.level
     }
+    static let CHECKBOX_SIZE: CGFloat = 25
     let checkBox = CheckBoxButton(checked: false)
     let textView = UITextField()
+    var expandButton: UIButton?
     var textViewHeightConstraint: NSLayoutConstraint?
-    
+    var hasChild: Bool {
+        return checkItemModel.children.count > 0
+    }
     let INDENT: CGFloat = 16
     var indentSpacing: CGFloat {
         return INDENT * CGFloat(level)
     }
+
         
     init(buttonDelegate: CheckListView, checkItemModel: CheckItemModel) {
-        self.buttonDelegate = buttonDelegate
+        self.checkListAsDelegate = buttonDelegate
+        self.ownerViewContoller = buttonDelegate.viewControllerAsDelegate
         self.checkItemModel = checkItemModel
         super.init(frame: .zero)
+        configureViews()
+        configureConstraints()
+        updateExpandButton()
         //self.translatesAutoresizingMaskIntoConstraints = false
+        
+       
+        //self.backgroundColor = .white
+    }
+    
+    private func configureViews() {
+        
         self.addSubview(checkBox)
         self.addSubview(textView)
         textView.text = checkItemModel.content
-        checkBox.translatesAutoresizingMaskIntoConstraints = false
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.delegate = self
-        textView.backgroundColor = .red
+        textView.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        textView.addTarget(self, action: #selector(textFieldDidStartEditing(_:)), for: .editingDidBegin)
+        textView.backgroundColor = .clear
         textViewHeightConstraint = textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 30)
         textViewHeightConstraint?.isActive = true
+    }
+    static var EXPAND_BUTTON_SIZE: CGFloat = 25
+    
+    private func updateExpandButton() {
+        
+        if hasChild {
+            expandButton = UIButton()
+        } else {
+            expandButton?.removeFromSuperview()
+        }
+        if hasChild, let expandButton = expandButton {
+            expandButton.setImage(UIImage(systemName: "chevron.down") ?? UIImage(), for: .normal)
+            expandButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)
+            self.addSubview(expandButton)
+            expandButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                expandButton.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: 4),
+            expandButton.widthAnchor.constraint(equalToConstant: CheckListItemView.EXPAND_BUTTON_SIZE),
+            ])
+        }
+    }
+    private func configureConstraints() {
+        checkBox.translatesAutoresizingMaskIntoConstraints = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        expandButton?.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            checkBox.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            checkBox.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
+            checkBox.widthAnchor.constraint(equalToConstant: CheckListItemView.CHECKBOX_SIZE),
             checkBox.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            textView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            textView.leadingAnchor.constraint(equalTo: checkBox.trailingAnchor, constant: 8),
             textView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             textView.topAnchor.constraint(equalTo: self.topAnchor),
             textView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.clipsToBounds = true
-        
-        let expandButton = UIButton()
-        stackView.addArrangedSubview(expandButton)
-        expandButton.setImage(UIImage(systemName: "chevron.down") ?? UIImage(), for: .normal)
-        expandButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)
-        
-        let addItemButton = UIButton()
-        stackView.addArrangedSubview(addItemButton)
-        addItemButton.setImage(UIImage(systemName: "plus") ?? UIImage(), for: .normal)
-        addItemButton.addTarget(self, action: #selector(addItem), for: .touchUpInside)
-        
-        self.addSubview(stackView)
-        NSLayoutConstraint.activate([
-            stackView.heightAnchor.constraint(equalToConstant: 30),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
-        ])
-        //self.backgroundColor = .white
+    }
+    
+    func addItem() {
+        checkListAsDelegate?.addCheckListItem(CheckItemModel(), below: self)
+        updateExpandButton()
     }
     
     @objc func expandButtonTapped() {
-       
-        buttonDelegate?.expandOrCollapseItem(view: self)
-        
-    }
-    
-    @objc func addItem() {
-     
-        buttonDelegate?.addCheckListItem(CheckItemModel(), below: self)
-        
+        checkListAsDelegate?.expandOrCollapseItem(view: self)
     }
         
     required init(coder: NSCoder) {
@@ -236,10 +256,15 @@ class CheckListItemView: UIView, UITextFieldDelegate {
 
 }
 
-extension CheckListItemView: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        checkItemModel.content = textView.text
+extension CheckListItemView {
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        checkItemModel.content = textField.text ?? ""
     }
+    
+    @objc func textFieldDidStartEditing(_ textField: UITextField) {
+        ownerViewContoller?.setEditingType(.subtodo(self))
+    }
+    
 }
 
 class CheckBoxButton: UIButton {

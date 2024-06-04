@@ -187,7 +187,8 @@ class TodoModel: TaskModel{
             taskId = id
         }
     }
-    var priority: Int
+    
+    var priority: TodoPriority
     
     var executionTime: String
     
@@ -206,7 +207,6 @@ class TodoModel: TaskModel{
         ""
     }
     
-    var willExpire: Bool
     var expireDate: Date = Date()
     
     
@@ -237,19 +237,17 @@ class TodoModel: TaskModel{
         
         self.hasReminder = todo.hasReminder
         self.reminderDate = todo.reminderDate ?? Date()
-        self.willExpire = todo.willExpire
-        if(willExpire) {
-            self.expireDate = todo.expireDate ?? Date()
-        }
+        self.expireDate = todo.expireDate ?? Date()
         self.note = todo.note ?? ""
         self.subTasks = TodoModel.getTaskModels(s: todo.subTasks ?? "")
         self.subTaskString = todo.subTasks ?? ""
         self.done = todo.done
         self.parentTaskId = todo.parentTaskId ?? ""
-        self.priority = Int(todo.priority)
+        self.priority = TodoPriority(rawValue: Int(todo.priority)) ?? .none
         self.executionTime = todo.executionTime ?? ""
         self.project = todo.project ?? ""
-        super.init(taskId: id, taskType: .todo, priority: priority, executionTime: executionTime, project: project)
+        super.init(taskId: id, taskType: .todo, priority: priority.rawValue, executionTime: executionTime, project: project)
+        
     }
     
     static func getTaskModels(s: String) -> [TodoModel] {
@@ -264,7 +262,6 @@ class TodoModel: TaskModel{
         self.startDate = Date()
         self.hasReminder = false
         self.reminderDate = Date()
-        self.willExpire = false
         self.expireDate = Date()
         self.note = ""
         self.subTasks = []
@@ -272,10 +269,10 @@ class TodoModel: TaskModel{
         self.done = false
         self.completeDate = Date()
         self.parentTaskId = ""
-        self.priority = 0
+        self.priority = .none
         self.executionTime = ""
         self.project = ""
-        super.init(taskId: id, taskType: .todo, priority: priority, executionTime: executionTime, project: project)
+        super.init(taskId: id, taskType: .todo, priority: priority.rawValue, executionTime: executionTime, project: project)
     }
     
 }

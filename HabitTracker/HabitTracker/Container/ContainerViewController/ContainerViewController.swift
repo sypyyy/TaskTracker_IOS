@@ -6,20 +6,22 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class ContainerViewController: UIViewController {
     private var sideMenuViewController: SideMenuViewController!
     private var bottomSheetViewController: BottomSheetViewController!
+    private var popupViewController: UIkitPopupViewController!
     private var navigator: UINavigationController!
     private var rootViewController: ContentViewController! {
         didSet {
-            rootViewController.delegate = self
             navigator.setViewControllers([rootViewController], animated: false)
         }
     }
 
-    convenience init(sideMenuViewController: SideMenuViewController, bottomSheetViewController: BottomSheetViewController, rootViewController: ContentViewController) {
+    convenience init(sideMenuViewController: SideMenuViewController, bottomSheetViewController: BottomSheetViewController, popupViewController: UIkitPopupViewController, rootViewController: ContentViewController) {
         self.init()
+        self.popupViewController = popupViewController
         self.bottomSheetViewController = bottomSheetViewController
         self.sideMenuViewController = sideMenuViewController
         self.rootViewController = rootViewController
@@ -35,13 +37,7 @@ final class ContainerViewController: UIViewController {
     private func configureView() {
         addChildViewControllers()
         configureConstraints()
-        configureDelegates()
         configureGestures()
-    }
-
-    private func configureDelegates() {
-        sideMenuViewController.delegate = self
-        rootViewController.delegate = self
     }
 
     private func configureGestures() {
@@ -93,6 +89,10 @@ final class ContainerViewController: UIViewController {
         addChild(sideMenuViewController)
         view.addSubview(sideMenuViewController.view)
         sideMenuViewController.didMove(toParent: self)
+        
+        addChild(popupViewController)
+        view.addSubview(popupViewController.view)
+        popupViewController.didMove(toParent: self)
     }
     
     private func configureConstraints() {
@@ -108,7 +108,8 @@ extension ContainerViewController {
     }
 }
 
-extension ContainerViewController: SideMenuDelegate {
+extension ContainerViewController {
+    /*
     func menuButtonTapped() {
         sideMenuViewController.show()
     }
@@ -128,4 +129,5 @@ extension ContainerViewController: SideMenuDelegate {
             callback()
         }
     }
+     */
 }

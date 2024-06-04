@@ -69,14 +69,16 @@ struct HabitNumberModifyPopup: View {
                 }.onTapGesture {
                     let newProgress = caculateNewProgress()
                     viewModel.createRecord(habitID: habit.id, habitType: .number, habitCycle: habit.cycle, numberProgress: newProgress)
-                    GlobalPopupManager.shared.hidePopup(reason: "user saved")
+                    keyboardFocused = false
+                    SwiftUIGlobalPopupManager.shared.hidePopup(reason: "user saved")
                     //number = ""
                     }
                 
                 RoundedRectangle(cornerRadius: 15).fill(.red.opacity(0.4)).frame(height: 45).overlay {
                     Image(systemName: "multiply").font(.system(size: 17, weight: .regular, design: .rounded))
                 }.onTapGesture {
-                    GlobalPopupManager.shared.hidePopup(reason: "user cancelled")
+                    keyboardFocused = false
+                    SwiftUIGlobalPopupManager.shared.hidePopup(reason: "user cancelled")
                     //number = ""
                     }
             }.padding()
@@ -147,6 +149,7 @@ enum PanelUseCase {
 }
 
 struct HabitProgressModifyControlPanel: View {
+    @State var test = false
     @Binding var isEditing: Bool
     var size: PanelUseCase
     var habit: HabitModel
@@ -154,96 +157,115 @@ struct HabitProgressModifyControlPanel: View {
     func caculateNewProgress(modifyType: ModifyType, number: Int) -> Int16 {
         switch modifyType {
         case .add:
-            return (habit.numberProgress ?? 0) + (Int16(number) ?? 0)
+            return (habit.numberProgress ?? 0) + (Int16(number))
         case .minus:
-            let res = (habit.numberProgress ?? 0) - (Int16(number) ?? 0)
+            let res = (habit.numberProgress ?? 0) - (Int16(number))
             return res < 0 ? 0 : res
         case .set:
-            return (Int16(number) ?? 0)
+            return (Int16(number))
         }
     }
     var body: some View {
-        HStack{
-            Button{
-                let newProgress = max(0, (habit.numberProgress ?? 0) - 1)
-                viewModel.createRecord(habitID: habit.id, habitType: .number, habitCycle: habit.cycle, numberProgress: newProgress)
-                habit.numberProgress? = newProgress
-                //GlobalPopupManager.shared.hidePopup(reason: "user saved")
-            } label: {
-                HStack(spacing: 0) {
-                    Image(systemName: "arrowtriangle.down.fill")
-                        .foregroundColor(.primary.opacity(0.5))
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
-                    Text("1")
-                        .font(.system(size: 18, weight: .regular, design: .rounded))
-                }.addControlPanelBackground(size: size)
+        
+        VStack {
+            
+            
+            HStack{
+                Button{
+                    let newProgress = max(0, (habit.numberProgress ?? 0) - 1)
+                    viewModel.createRecord(habitID: habit.id, habitType: .number, habitCycle: habit.cycle, numberProgress: newProgress)
+                    habit.numberProgress? = newProgress
+                    //GlobalPopupManager.shared.hidePopup(reason: "user saved")
+                } label: {
+                    HStack(spacing: 0) {
+                        Image(systemName: "arrowtriangle.down.fill")
+                            .foregroundColor(.primary.opacity(0.5))
+                            .font(.system(size: 12, weight: .regular, design: .rounded))
+                        Text("1")
+                            .font(.system(size: 18, weight: .regular, design: .rounded))
+                    }.addControlPanelBackground(size: size)
                     
-            }
-            /*
-            Button{
-                
-            } label: {
-                
-                Image(systemName: "arrowtriangle.down.fill")
-                    .foregroundColor(.primary.opacity(0.5))
-                    .addControlPanelBackground()
-            }
-            */
-          
-            Button{
-                isEditing = true
-                if !isEditing {
-                    let popMgr = GlobalPopupManager.shared
-                    popMgr.hidePopup(reason: "showing next popover")
-                    if(popMgr.showPopup) {
-                        popMgr.hidePopup(reason: "touched button again")
-                        return
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                        let view = HabitNumberModifyPopup(habit: habit, modifyType: .set).id(UUID())
-                        popMgr.showPopup(view: AnyView(view), sourceFrame: .zero, center: true)
-                    }
                 }
-            } label: {
-                Image(systemName: "pencil.line")
-                    .addControlPanelBackground(size: size)
-            }
-            /*
-            Button{
+                /*
+                 Button{
+                 
+                 } label: {
+                 
+                 Image(systemName: "arrowtriangle.down.fill")
+                 .foregroundColor(.primary.opacity(0.5))
+                 .addControlPanelBackground()
+                 }
+                 */
                 
-            } label: {
+                Button{
+                    isEditing = true
+                    if !isEditing {
+                        let popMgr = SwiftUIGlobalPopupManager.shared
+                        popMgr.hidePopup(reason: "showing next popover")
+                        if(popMgr.showPopup) {
+                            popMgr.hidePopup(reason: "touched button again")
+                            return
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                            let view = HabitNumberModifyPopup(habit: habit, modifyType: .set).id(UUID())
+                            popMgr.showPopup(view: AnyView(view), sourceFrame: .zero, center: true)
+                        }
+                    }
+                } label: {
+                    Image(systemName: "pencil.line")
+                        .addControlPanelBackground(size: size)
+                }
+                /*
+                 Button{
+                 
+                 } label: {
+                 
+                 Image(systemName: "arrowtriangle.up.fill")
+                 .foregroundColor(.primary.opacity(0.5))
+                 .addControlPanelBackground()
+                 }
+                 */
                 
-                Image(systemName: "arrowtriangle.up.fill")
-                    .foregroundColor(.primary.opacity(0.5))
-                    .addControlPanelBackground()
-            }
-            */
-            
-            Button{
-                let newProgress = min((habit.numberProgress ?? 0) + 1, Int16.max)
-                viewModel.createRecord(habitID: habit.id, habitType: .number, habitCycle: habit.cycle, numberProgress: newProgress)
-                habit.numberProgress? = newProgress
-            } label: {
-                HStack(spacing: 0) {
-                    Image(systemName: "arrowtriangle.up.fill")
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
-                        .foregroundColor(.primary.opacity(0.5))
-                    Text("1")
-                        .font(.system(size: 18, weight: .regular, design: .rounded))
-                }.addControlPanelBackground(size: size)
-                
-            }
-            
-            Button{
-                
-            } label: {
-                Image(systemName: "gobackward").addControlPanelBackground(color: .red.lighter(by: 50), size: size)
+                Button{
+                    let newProgress = min((habit.numberProgress ?? 0) + 1, Int16.max)
+                    viewModel.createRecord(habitID: habit.id, habitType: .number, habitCycle: habit.cycle, numberProgress: newProgress)
+                    habit.numberProgress? = newProgress
+                } label: {
+                    HStack(spacing: 0) {
+                        Image(systemName: "arrowtriangle.up.fill")
+                            .font(.system(size: 12, weight: .regular, design: .rounded))
+                            .foregroundColor(.primary.opacity(0.5))
+                        Text("1")
+                            .font(.system(size: 18, weight: .regular, design: .rounded))
+                    }.addControlPanelBackground(size: size)
                     
+                }
+                
+                Button{
+                    
+                } label: {
+                    Image(systemName: "gobackward").addControlPanelBackground(color: .red.lighter(by: 50), size: size)
+                    
+                }
+                Button{
+                    withAnimation {
+                        test.toggle()
+                    }
+                    
+                } label: {
+                    Text("test expansion")
+                    
+                }
+            }
+            .foregroundColor(.primary.opacity(0.6))
+            if(test) {
+                Text("cjksdkcvjfnjvd")
+                Text("cjksdkcvjfnjvd")
+                Text("cjksdkcvjfnjvd")
+                Text("cjksdkcvjfnjvd")
             }
         }
-        
-        .foregroundColor(.primary.opacity(0.6))
-        
+        //.animation(.default, value: test)
     }
 }
 

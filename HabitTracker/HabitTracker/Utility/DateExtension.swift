@@ -252,6 +252,14 @@ var fmt12 : DateFormatter {
     return fmt
 }
 
+var fmt_date_select_localized: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .none
+    formatter.locale = Locale.current
+    return formatter
+}
+
 var fmt_timeStamp: DateFormatter {
     let fmt = DateFormatter()
     fmt.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"

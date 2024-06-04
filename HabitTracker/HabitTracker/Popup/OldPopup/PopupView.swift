@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PopupView: View {
-    @StateObject var popupMgr = PopupManager.shared
+    @StateObject var popupMgr = OldPopupManager.shared
     var body: some View {
         if popupMgr.showPopup {
             VStack {
@@ -35,13 +35,13 @@ struct PopupView_Previews: PreviewProvider {
 
 
 struct numberPickerPopupWrapperView: View {
-    @StateObject var popupMgr = PopupManager.shared
+    @StateObject var popupMgr = OldPopupManager.shared
     @State private var number: Int = 1
     var body: some View {
         VStack {
             //Text("Add progress by")
             numberPickerPopupView(title: popupMgr.popupTitle, minimum: 0, number: $number, onDoneDidTap: {number in
-                (popupMgr.callback as? PopupManager.habitDetailNumberModify_CallBack)?.save(Int16(number))
+                (popupMgr.callback as? OldPopupManager.habitDetailNumberModify_CallBack)?.save(Int16(number))
                 popupMgr.closePopup()
             })
         }
@@ -50,14 +50,14 @@ struct numberPickerPopupWrapperView: View {
 }
 
 struct timePickerPopupWrapperView: View {
-    @StateObject var popupMgr = PopupManager.shared
+    @StateObject var popupMgr = OldPopupManager.shared
     @State private var hour: Int = 0
     @State private var minute: Int = 0
     var body: some View {
         VStack {
             //Text("Add progress by")
             timePickerPopupView(title: popupMgr.popupTitle, hour: $hour, minute: $minute, onDoneDidTap: {hour, minute in
-                (popupMgr.callback as? PopupManager.habitDetailTimeModify_CallBack)?.save(hour, minute)
+                (popupMgr.callback as? OldPopupManager.habitDetailTimeModify_CallBack)?.save(hour, minute)
                 popupMgr.closePopup()
             })
         }

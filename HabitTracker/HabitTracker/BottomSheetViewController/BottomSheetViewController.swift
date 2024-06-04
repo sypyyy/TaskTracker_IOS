@@ -21,6 +21,8 @@ enum BSPresentView {
 
 final class BottomSheetViewController: UIViewController {
     
+    static let shared = BottomSheetViewController()
+    
     private var bottomConstraint: NSLayoutConstraint!
     private var heightConstraint: NSLayoutConstraint!
     private var shadowColor: UIColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 0.05)

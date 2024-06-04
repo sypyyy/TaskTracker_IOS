@@ -61,35 +61,35 @@ class PersistenceController {
             if(i == 1) {
                 let testTodo = TodoModel()
                 testTodo.name = "Basketball with Michael"
-                testTodo.priority = 1
+                testTodo.priority = .high
                 testTodo.executionTime = .from(area: .morning, startEnd: nil)
                 result.createTodo(dataModel: testTodo)
             } else if(i == 2) {
                 let testTodo = TodoModel()
                 testTodo.name = "Wash Dished"
                 testTodo.startDate = Date().addByDay(1)
-                testTodo.priority = 1
+                testTodo.priority = .high
                 testTodo.executionTime = .from(area: .morning, startEnd: nil)
                 result.createTodo(dataModel: testTodo)
             } else if(i == 3) {
                 let testTodo = TodoModel()
                 testTodo.name = "Go shopping"
                 testTodo.startDate = Date().addByDay(-1)
-                testTodo.priority = 1
+                testTodo.priority = .high
                 testTodo.executionTime = .from(area: .morning, startEnd: nil)
                 result.createTodo(dataModel: testTodo)
             } else if(i == 4) {
                 let testTodo = TodoModel()
                 testTodo.name = "Go Fishing"
                 testTodo.startDate = Date().addByDay(-1)
-                testTodo.priority = 1
+                testTodo.priority = .high
                 testTodo.executionTime = .from(area: .morning, startEnd: nil)
                 result.createTodo(dataModel: testTodo)
             } else if(i == 5) {
                 let testTodo = TodoModel()
                 testTodo.name = "Go Crazy"
                 testTodo.startDate = Date().addByDay(-1)
-                testTodo.priority = 1
+                testTodo.priority = .high
                 testTodo.executionTime = .from(area: .morning, startEnd: nil)
                 result.createTodo(dataModel: testTodo)
             }

@@ -69,15 +69,19 @@ struct leadingLongTitle : View {
             Text("\(title)").font(.system(size: 16, weight: .heavy, design: .rounded))
             Spacer()
         }.foregroundColor(.primary.opacity(0.6))
-        .padding(.horizontal)
+        
     }
 }
 
 struct leadingTitle : View {
     let title: String
     var body: some View {
-        Text("\(title)").font(.system(size: 16, weight: .heavy, design: .rounded)).foregroundColor(.primary.opacity(0.6))
-        .padding(.leading)
+        HStack {
+            Text("\(title)").font(.system(size: 16, weight: .heavy, design: .rounded)).foregroundColor(.primary.opacity(0.6))
+            Spacer()
+        }
+        
+        
     }
 }
 
@@ -120,7 +124,7 @@ struct titleWithToggle : View {
             Spacer()
              Toggle("", isOn: $isOn)
                 .toggleStyle(.switch).frame(maxWidth: 50).tint(backgroundGradientStart).scaleEffect(0.8)
-        }.padding(.trailing)
+        }
     }
 }
 
@@ -183,6 +187,23 @@ struct CustomDivider: View {
             .padding(.horizontal)
             .padding(.leading, isSecondary ? 24 : 0)
         }
+    }
+}
+
+struct FormSection<Content: View>: View {
+    @ViewBuilder let content: () -> (Content)
+    var body: some View {
+        VStack{
+            content()
+        }
+        .padding(12)
+        .background {
+            RoundedRectangle(cornerRadius: 12.0, style: .continuous).fill(.white.opacity(0.5))
+        }
+        .clipped()
+        .padding(.vertical, 16)
+        .padding(.horizontal, 12)
+        
     }
 }
 

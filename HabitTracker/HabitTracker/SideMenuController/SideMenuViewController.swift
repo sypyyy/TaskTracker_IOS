@@ -11,6 +11,7 @@ enum SideMenuRowInfo: Equatable {
 }
 
 class SideMenuViewController: UIViewController {
+    static var shared: SideMenuViewController = SideMenuViewController()
     var activeRowInfo: SideMenuRowInfo = .defaultRow(.today)
     var activeRowId: String?
     
@@ -44,7 +45,6 @@ class SideMenuViewController: UIViewController {
 
     private var leadingConstraint: NSLayoutConstraint!
     private var shadowColor: UIColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 0.2)
-    weak var delegate: SideMenuDelegate?
     
     private var tableData: SideMenuTableViewDatas = SideMenuTableViewDatas()
     

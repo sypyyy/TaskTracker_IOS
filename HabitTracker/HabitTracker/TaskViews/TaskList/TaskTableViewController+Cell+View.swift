@@ -888,11 +888,11 @@ struct TaskTableCellView: View {
                         switch task.taskType {
                         case .habit:
                             if let habit = task as? HabitModel {
-                                ContainerViewComposer.sharedContainerVC.showBottomSheet(snapPoints: [0.8], background: .blur(style: .systemUltraThinMaterial), viewType: .swiftUI(view: AnyView(HabitProgressModifyBottomSheet(habit: habit).padding().ignoresSafeArea())))
+                                ContainerViewComposer.sharedContainerVC.showBottomSheet(snapPoints: [0.9], background: .blur(style: .systemUltraThinMaterial), viewType: .swiftUI(view: AnyView(HabitProgressModifyBottomSheet(habit: habit).padding().ignoresSafeArea())))
                             }
                         case .todo:
                             if let todo = task as? TodoModel {
-                                ContainerViewComposer.sharedContainerVC.showBottomSheet(snapPoints: [0.8], background: .blur(style: .systemUltraThinMaterial), viewType: .viewController(TodoFastCreatViewController()))
+                                ContainerViewComposer.sharedContainerVC.showBottomSheet(snapPoints: [0.9], background: .blur(style: .systemUltraThinMaterial), viewType: .viewController(TodoFastCreatViewController()))
                             }
                         }
                         //masterViewModel.selectTask(taskId: task.taskId)

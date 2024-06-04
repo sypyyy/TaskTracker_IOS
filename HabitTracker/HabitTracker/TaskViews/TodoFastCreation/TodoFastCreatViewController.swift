@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import SwiftUI
+
+enum EditingViewType {
+    case todo, subtodo(CheckListItemView), description
+}
 
 class InsetTextField: UITextField {
     // Define the inset values
@@ -27,11 +32,38 @@ class InsetTextField: UITextField {
     }
 }
 
-final class TodoFastCreatViewController: UIViewController, UITextViewDelegate {
+final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     let TEXT_FIELD_BACKGROUND_COLOR = UIColor.lightGray.withAlphaComponent(0.15)
     let SECTION_CORNER_RADIUS: CGFloat = 12
     let FORM_HORIZONTAL_PADDING: CGFloat = 14
     let TODO_DESCRIPTION_MIN_HEIGHT: CGFloat = 200
+    
+    var scrollView: UIScrollView = UIScrollView()
+    
+    var editingTodo: TodoModel?
+    
+    //related to accesssoryView
+    var accessoryView: AccessoryView? {
+        didSet {
+            //To prevent the accessory view from being dismissed when the accessoryView is tapped
+            accessoryView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: nil))
+        }
+    }
+    var shouldHideAccessoryForGood: Bool = false
+    var editingViewType: EditingViewType = .todo
+    var editingCheckListItem: CheckListItemView?
+    func setEditingType(_ type: EditingViewType) {
+        editingViewType = type
+        switch editingViewType {
+        case .todo:
+            break
+        case .subtodo(let checkListItemView):
+            editingCheckListItem = checkListItemView
+        case .description:
+            break
+        }
+    }
+    
     var todoDescriptView = UITextView()
     var todoNameView = {
         let res = InsetTextField()
@@ -41,7 +73,7 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate {
     
     //Sub Todo
     let SUB_TODO_MIN_HEIGHT: CGFloat = 200
-    var subTodoView = CheckListView(frame: .zero, style: .plain)
+    var subTodoView: CheckListView!
     var subTodoHeightConstraint: NSLayoutConstraint?
     var subTodoWrapper = UIView()
     var todoDescriptionHeightConstraint: NSLayoutConstraint!
@@ -54,6 +86,7 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        subTodoView = CheckListView(frame: .zero, style: .plain, delegate: self)
         configureViews()
         configureGestures()
     }
@@ -61,16 +94,19 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate {
     private func configureViews() {
         addSubviews()
         configureConstraints()
-        setupTodoAccessoryView()
+        //setupTodoAccessoryView()
+        configureAccessoryViews()
     }
     
     private func addSubviews() {
+        view.addSubview(scrollView)
         todoNameView.backgroundColor = TEXT_FIELD_BACKGROUND_COLOR
         todoNameView.layer.cornerRadius = SECTION_CORNER_RADIUS
         todoNameView.placeholder = "To-Do"
-        view.addSubview(todoNameView)
+        todoNameView.delegate = self
+        scrollView.addSubview(todoNameView)
         subTodoWrapper.backgroundColor = .clear
-        view.addSubview(subTodoWrapper)
+        scrollView.addSubview(subTodoWrapper)
         subTodoView.backgroundColor = TEXT_FIELD_BACKGROUND_COLOR
         subTodoView.layer.cornerRadius = SECTION_CORNER_RADIUS
         todoDescriptView.backgroundColor = TEXT_FIELD_BACKGROUND_COLOR
@@ -79,13 +115,18 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate {
         todoDescriptView.layer.cornerRadius = SECTION_CORNER_RADIUS
         todoDescriptView.delegate = self
         todoDescriptView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 0, right: 2)
-        view.addSubview(todoDescriptView)
+        scrollView.addSubview(todoDescriptView)
         
         
     }
 
     
     private func configureConstraints() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         todoNameView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             todoNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
@@ -108,15 +149,6 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate {
             todoDescriptView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -FORM_HORIZONTAL_PADDING),
         ])
         
-    }
-    
-    @objc func toggleSubTodoView(_ sender: UIButton) {
-        if !hasSubTodo {
-            insertSubTodoView()
-        } else {
-            removeSubTodoView()
-        }
-        (sender as? AccessoryButton)?.isActive = hasSubTodo
     }
     
    func insertSubTodoView() {
@@ -160,6 +192,10 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate {
         return true
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        setEditingType(.description)
+    }
+        
     func textViewDidChange(_ textView: UITextView) {
         if textView == todoDescriptView {
             let textHeight = todoDescriptView.sizeThatFits(.init(width: todoDescriptView.frame.width, height: .greatestFiniteMagnitude)).height + 5
@@ -167,35 +203,162 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate {
                 // This method is called every time the text changes.
                 print("Text view content changed: \(textView.text!)")
         }
+        /*
         if textView == subTodoView {
             let textHeight = subTodoView.sizeThatFits(.init(width: subTodoView.frame.width, height: .greatestFiniteMagnitude)).height + 5
             subTodoHeightConstraint?.constant = max(SUB_TODO_MIN_HEIGHT, textHeight)
                 // This method is called every time the text changes.
                 print("Text view content changed: \(textView.text!)")
         }
-        
+        */
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == todoNameView {
+            self.setEditingType(.todo)
+        }
     }
 }
 
+//User Action callbacks
 extension TodoFastCreatViewController {
+    @objc func toggleSubTodoView(_ sender: UIButton) {
+        if !hasSubTodo {
+            insertSubTodoView()
+        } else {
+            removeSubTodoView()
+        }
+        (sender as? AccessoryButton)?.isActive = hasSubTodo
+    }
+    
+    @objc func presentPriorityPopup(_ sender: UIButton) {
+        let sourceFrame = sender.convert(sender.bounds, to: sender.window)
+        print("sourceFrame: \(sourceFrame)")
+        SwiftUIGlobalPopupManager.shared.showPopup(view: AnyView(PriorityPopupView(editingTodo: editingTodo ?? TodoModel())), sourceFrame: sourceFrame, preferredSide: .up)
+    }
+    
+    @objc func presentDateAndTimeSheet(_ sender: UIButton) {
+        let sourceFrame = sender.convert(sender.bounds, to: sender.window)
+        print("sourceFrame: \(sourceFrame)")
+        let sheetViewController = UIHostingController(rootView: DateAndTimeSelectionView())
+                
+                // Present it w/o any adjustments so it uses the default sheet presentation.
+        present(sheetViewController, animated: true, completion: nil)
+    }
+}
+
+//MARK: Keyboard actions
+extension TodoFastCreatViewController {
+    func configureAccessoryViews() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            var accessoryViewWasShowing = accessoryView?.window != nil
+            shouldHideAccessoryForGood = !accessoryViewWasShowing
+            if accessoryViewWasShowing {
+                accessoryView?.removeFromSuperview()
+            }
+            switch editingViewType {
+            case .todo:
+                accessoryView = getTodoAccessoryView()
+            case .subtodo(_):
+                accessoryView = getSubTodoAccessoryView()
+            case .description:
+                accessoryView = getTodoAccessoryView()
+            }
+            if let accessoryView = self.accessoryView, let window = view.window {
+                view.addSubview(accessoryView)
+                
+                NSLayoutConstraint.activate([
+                    accessoryView.leadingAnchor.constraint(equalTo: window.leadingAnchor),
+                    accessoryView.widthAnchor.constraint(equalToConstant: window.bounds.width),
+                    //Using width anchor because there is a bug with trailing anchor, when keyboard is gone, the trailing anchor will be 0
+                    accessoryView.bottomAnchor.constraint(equalTo: window.bottomAnchor, constant: -keyboardHeight),
+                ])
+                print("viewFrame: \(self.view.frame)")
+                if !accessoryViewWasShowing {
+                    accessoryView.alpha = 0
+                    UIView.animate(withDuration: 0.3) {
+                        accessoryView.alpha = 1
+                    }
+                }
+            }
+        }
+    }
+        
+    @objc func keyboardWillHide(notification: NSNotification) {
+        shouldHideAccessoryForGood = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if !self.shouldHideAccessoryForGood {
+                return
+            }
+            else {
+                UIView.animate(withDuration: 0) {
+                    self.accessoryView?.alpha = 0
+                } completion: { _ in
+                    self.accessoryView?.removeFromSuperview()
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillChangeFrame(notification: NSNotification) {
+        if let accessoryView = accessoryView, accessoryView.window != nil {
+            accessoryView.removeFromSuperview()
+            view.addSubview(accessoryView)
+            
+            if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue, let window = view.window {
+                let keyboardHeight = keyboardFrame.cgRectValue.height
+                UIView.animate(withDuration: 0.1) {
+                    accessoryView.bottomAnchor.constraint(equalTo: window.bottomAnchor, constant: -keyboardHeight).isActive = true
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
+    }
+    
+    
+}
+
+extension TodoFastCreatViewController {
+    /*
     func setupTodoAccessoryView() {
         // Setup the custom input accessory view
         let todoAccessorySubView = UIView()
         todoAccessorySubView.translatesAutoresizingMaskIntoConstraints = false
         todoAccessorySubView.backgroundColor = .clear
-        todoNameView.inputAccessoryView = getTodoAccessoryView()
-        todoDescriptView.inputAccessoryView = getTodoAccessoryView()
+        //todoNameView.inputAccessoryView = getTodoAccessoryView()
+        //todoDescriptView.inputAccessoryView = getTodoAccessoryView()
     
     }
+     */
     
     func getTodoAccessoryView() -> AccessoryView {
         let listButton = AccessoryButton(isActive: hasSubTodo, activeImage: UIImage(systemName: "checklist") ?? UIImage(), activeColor: .systemBlue, inactiveImage: UIImage(systemName: "checklist") ?? UIImage(), inactiveColor: nil)
         listButton.addTarget(self, action: #selector(toggleSubTodoView(_:)), for: .touchUpInside)
-        let subTaskButton = AccessoryButton(isActive: true, activeImage: UIImage(resource: .subtask) ?? UIImage(), activeColor: .systemBlue, inactiveImage: UIImage(resource: .subtask) ?? UIImage(), inactiveColor: nil)
-        subTaskButton.addTarget(self, action: #selector(toggleSubTodoView(_:)), for: .touchUpInside)
-        return AccessoryView(buttons: [listButton, subTaskButton])
+        let priorityButton = AccessoryButton(isActive: false, activeImage: UIImage(systemName: "flag") ?? UIImage(), activeColor: .systemBlue, inactiveImage: UIImage(systemName: "flag") ?? UIImage(), inactiveColor: nil)
+        priorityButton.addTarget(self, action: #selector(presentPriorityPopup(_:)), for: .touchUpInside)
+        let dateAndTimeButton = AccessoryButton(isActive: false, activeImage: UIImage(systemName: "calendar.badge.clock") ?? UIImage(), activeColor: .systemBlue, inactiveImage: UIImage(systemName: "calendar.badge.clock") ?? UIImage(), inactiveColor: nil)
+        dateAndTimeButton.addTarget(self, action: #selector(presentDateAndTimeSheet(_:)), for: .touchUpInside)
+        return AccessoryView(buttons: [listButton, priorityButton, dateAndTimeButton])
     }
     
+    func getSubTodoAccessoryView() -> AccessoryView {
+        let subTaskButton = AccessoryButton(isActive: true, activeImage: UIImage(resource: .subtask) ?? UIImage(), activeColor: .systemBlue, inactiveImage: UIImage(resource: .subtask) ?? UIImage(), inactiveColor: nil)
+        subTaskButton.addTarget(self, action: #selector(addSubTodoItemToCurrentEditingItem), for: .touchUpInside)
+        return AccessoryView(buttons: [subTaskButton])
+    }
+    
+    @objc func addSubTodoItemToCurrentEditingItem() {
+        editingCheckListItem?.addItem()
+    }
+    
+    /*
     func getChecklistAccessoryView() -> AccessoryView {
         let listButton = AccessoryButton(isActive: hasSubTodo, activeImage: UIImage(systemName: "checklist") ?? UIImage(), activeColor: .systemBlue, inactiveImage: UIImage(systemName: "checklist") ?? UIImage(), inactiveColor: nil)
         listButton.addTarget(self, action: #selector(toggleSubTodoView(_:)), for: .touchUpInside)
@@ -203,12 +366,13 @@ extension TodoFastCreatViewController {
         subTaskButton.addTarget(self, action: #selector(toggleSubTodoView(_:)), for: .touchUpInside)
         return AccessoryView(buttons: [listButton, subTaskButton])
     }
+     */
 }
 
 
 class AccessoryView: UIView {
     //accessory
-    static let ACCESSORY_HEIGHT: CGFloat = 60
+    static let ACCESSORY_HEIGHT: CGFloat = 40
     //var accessoryHConstraint: NSLayoutConstraint?
     
     var backgroundView: UIView
@@ -216,13 +380,21 @@ class AccessoryView: UIView {
     var buttons: [AccessoryButton]
     
     init(buttons: [AccessoryButton]) {
+        
         self.backgroundView = UIView()
         self.stackView = AccessoryView.getAccessoryStackview()
         self.buttons = buttons
         super.init(frame: .zero)
         self.frame.size.height = AccessoryView.ACCESSORY_HEIGHT
+        self.autoresizingMask = [.flexibleHeight]
+        self.translatesAutoresizingMaskIntoConstraints = false
+        //self.isUserInteractionEnabled = false
+        NSLayoutConstraint.activate([
+            self.heightAnchor.constraint(equalToConstant: AccessoryView.ACCESSORY_HEIGHT)
+        ])
         configureViews()
         configureConstriants()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -253,7 +425,6 @@ class AccessoryView: UIView {
             stackView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor),
         ])
     }
-    
   
     static func getAccessoryStackview() -> UIStackView {
         let stackView = UIStackView()
@@ -267,6 +438,48 @@ class AccessoryView: UIView {
     }
 }
 
+/*
+class InputAccessoryView: UIView, UITextViewDelegate {
+    let textView = UITextView()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        // This is required to make the view grow vertically
+        self.autoresizingMask = UIView.AutoresizingMask.flexibleHeight
+
+        // Setup textView as needed
+        self.addSubview(self.textView)
+        self.textView.translatesAutoresizingMaskIntoConstraints = false
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[textView]|", options: [], metrics: nil, views: ["textView": self.textView]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[textView]|", options: [], metrics: nil, views: ["textView": self.textView]))
+
+        self.textView.delegate = self
+
+        // Disabling textView scrolling prevents some undesired effects,
+        // like incorrect contentOffset when adding new line,
+        // and makes the textView behave similar to Apple's Messages app
+        self.textView.isScrollEnabled = false
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override var intrinsicContentSize: CGSize {
+        // Calculate intrinsicContentSize that will fit all the text
+        let textSize = self.textView.sizeThatFits(CGSize(width: self.textView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        return CGSize(width: self.bounds.width, height: textSize.height)
+    }
+
+    // MARK: UITextViewDelegate
+
+    func textViewDidChange(_ textView: UITextView) {
+        // Re-calculate intrinsicContentSize when text changes
+        self.invalidateIntrinsicContentSize()
+    }
+
+}
+*/
 
 
 class AccessoryButton: UIButton {

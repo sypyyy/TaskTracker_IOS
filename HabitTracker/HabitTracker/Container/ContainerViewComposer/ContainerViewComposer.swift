@@ -32,9 +32,10 @@ final class ContainerViewComposer {
                          viewController: .modal(myAccountViewController))
              */
         ]
-        let sideMenuViewController = SideMenuViewController()
-        let bottomSheetViewController = BottomSheetViewController()
-        let container = ContainerViewController(sideMenuViewController: sideMenuViewController, bottomSheetViewController: bottomSheetViewController,
+        let sideMenuViewController = SideMenuViewController.shared
+        let bottomSheetViewController = BottomSheetViewController.shared
+        let popupViewController = UIkitPopupViewController.shared
+        let container = ContainerViewController(sideMenuViewController: sideMenuViewController, bottomSheetViewController: bottomSheetViewController, popupViewController: popupViewController,
                                                 rootViewController: rootViewController)
 
         return container

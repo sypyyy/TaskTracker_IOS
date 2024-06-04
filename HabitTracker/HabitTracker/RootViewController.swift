@@ -12,8 +12,6 @@ import UIKit
 let rootViewController = ContentViewController(rootView: RootView())
 
 class ContentViewController: UIHostingController<RootView> {
-    weak var delegate: SideMenuDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }

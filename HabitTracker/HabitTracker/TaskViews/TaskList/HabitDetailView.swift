@@ -37,7 +37,7 @@ struct HabitDetailView: View{
                         }
                          */
                         MeasuredButton(action: { frame in
-                            let popMgr = GlobalPopupManager.shared
+                            let popMgr = SwiftUIGlobalPopupManager.shared
                             if(popMgr.showPopup) {
                                 popMgr.hidePopup(reason: "touched button again")
                                 return
@@ -50,7 +50,7 @@ struct HabitDetailView: View{
                         
                         
                         MeasuredButton(action: { frame in
-                            let popMgr = GlobalPopupManager.shared
+                            let popMgr = SwiftUIGlobalPopupManager.shared
                             if(popMgr.showPopup) {
                                 popMgr.hidePopup(reason: "touched button again")
                                 return
@@ -68,7 +68,7 @@ struct HabitDetailView: View{
                         }
                          */
                         MeasuredButton(action: { frame in
-                            let popMgr = GlobalPopupManager.shared
+                            let popMgr = SwiftUIGlobalPopupManager.shared
                             if(popMgr.showPopup) {
                                 popMgr.hidePopup(reason: "touched button again")
                                 return
@@ -169,7 +169,7 @@ extension HabitDetailView {
             title = "Timer"
         }
         if habitType == .number {
-            PopupManager.shared.displayPopup(showType: .habitDetailNumberModify, title: title, callback: PopupManager.habitDetailNumberModify_CallBack(saveFunc: {numberInput in
+            OldPopupManager.shared.displayPopup(showType: .habitDetailNumberModify, title: title, callback: OldPopupManager.habitDetailNumberModify_CallBack(saveFunc: {numberInput in
                 var progress: Int16 = 0
                 if let number = habit.numberProgress {
                     progress = number
@@ -190,7 +190,7 @@ extension HabitDetailView {
             }))
         }
         else if habitType == .time {
-            PopupManager.shared.displayPopup(showType: .habitDetailTimeModify, title: title, callback: PopupManager.habitDetailTimeModify_CallBack(saveFunc: {hourInput, minuteInput in
+            OldPopupManager.shared.displayPopup(showType: .habitDetailTimeModify, title: title, callback: OldPopupManager.habitDetailTimeModify_CallBack(saveFunc: {hourInput, minuteInput in
                 var progress = 0
                 if let time = habit.timeProgress {
                     progress = time.timeToMinutes()

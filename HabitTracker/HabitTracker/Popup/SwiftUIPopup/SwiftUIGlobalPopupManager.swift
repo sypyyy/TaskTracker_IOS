@@ -8,12 +8,18 @@
 import SwiftUI
 import UIKit
 
-let POPUP_PADDING: CGFloat = 12
+let POPUP_PADDING: CGFloat = 6
 
-class GlobalPopupManager : ObservableObject{
-    static var shared = GlobalPopupManager()
+class SwiftUIGlobalPopupManager : ObservableObject{
+    static var shared = SwiftUIGlobalPopupManager()
     private(set) var containerFrame: CGRect = .zero
-    private(set) var showPopup = false
+    @MainActor
+    private(set) var showPopup = false {
+        didSet {
+            bindedViewController.switchInteraction(showPopup)
+        }
+    }
+    let bindedViewController = UIkitPopupViewController.shared
     var sourceFrame: CGRect?
     var popupSize: CGSize?
     var popupPosition: CGPoint?
@@ -21,16 +27,18 @@ class GlobalPopupManager : ObservableObject{
     var popupView: AnyView = AnyView(EmptyView())
 }
 
-extension GlobalPopupManager {
+extension SwiftUIGlobalPopupManager {
     @MainActor func showPopup(view: AnyView, sourceFrame: CGRect, center: Bool = false, preferredSide: PopupSide? = .down, padding: EdgeInsets = .init(top: 0, leading: Task_Card_Horizontal_Padding, bottom: TAB_BAR_HEIGHT, trailing: Task_Card_Horizontal_Padding)) {
         print("showing pop")
         popupView = AnyView(view.id(UUID()))
         self.sourceFrame = sourceFrame
         if(!center) {
             //MARK: I added a padding here because the PopupView has this padding as well, I need to make sure the size is precise.
-            let hostingController = UIHostingController(rootView: view)
+            let hostingController = UIHostingController(rootView: SwiftUIPopupWrapper{view})
             popupSize = hostingController.view.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
+            print("popup size: \(popupSize)")
             popupPosition = getPopupPosition(preferredSide: preferredSide, padding: padding)
+            print("popup pos: \(popupPosition)")
         } else {
             popupPosition = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY - UIScreen.main.bounds.height * 0.1)
             popupSide = .center
@@ -65,7 +73,7 @@ extension GlobalPopupManager {
             popside = preferSide
             switch preferSide {
             case .down:
-                if(sourceFrame.maxY + padding.bottom) > containerFrame.maxY {
+                if(sourceFrame.maxY + padding.bottom + popupSize.height + POPUP_PADDING) > containerFrame.maxY {
                     popside = .up
                 }
                 
@@ -79,6 +87,7 @@ extension GlobalPopupManager {
         var popPos = CGPoint.zero
         
         if popside == .up {
+            print("debuging \(sourceFrame), \(sourceFrame.minY), \(popupSize.height), \(containerFrame.maxY), \(containerFrame)")
             popPos.y = sourceFrame.minY - POPUP_PADDING - popupSize.height / 2
             self.popupSide = .up
         } else {
