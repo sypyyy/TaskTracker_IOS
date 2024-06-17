@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+
+struct CustomButton<T: View> : View {
+    var action: () -> Void
+    @ViewBuilder var content: () -> T
+    var body: some View {
+        Button(action: {
+            action()
+        }) {
+            content().padding(12).background(.gray.opacity(0.1)).clipShape(RoundedRectangle(cornerRadius: 15))
+        }
+    }
+}
+
 struct Button3D<T: Equatable> : View {
     let title: String
     let image: String
@@ -121,6 +134,20 @@ struct titleWithToggle : View {
     var body: some View {
         HStack(spacing: 0){
             leadingTitle(title: title)
+            Spacer()
+             Toggle("", isOn: $isOn)
+                .toggleStyle(.switch).frame(maxWidth: 50).tint(backgroundGradientStart).scaleEffect(0.8)
+        }
+    }
+}
+
+struct HeaderWithToggle<Content: View> : View {
+    @ViewBuilder var header: () -> Content
+    @Binding var isOn: Bool
+    var body: some View {
+        HStack(spacing: 0){
+            header()
+                .font(.system(size: 16, weight: .heavy, design: .rounded)).foregroundColor(.primary.opacity(0.6))
             Spacer()
              Toggle("", isOn: $isOn)
                 .toggleStyle(.switch).frame(maxWidth: 50).tint(backgroundGradientStart).scaleEffect(0.8)

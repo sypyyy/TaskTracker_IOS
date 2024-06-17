@@ -16,6 +16,9 @@
 		2F32C7702A10DD93008CDF7E /* CreatTaskForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F32C76F2A10DD93008CDF7E /* CreatTaskForm.swift */; };
 		2F373BC12C09898500E6C370 /* DateAndTimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F373BC02C09898400E6C370 /* DateAndTimeSelectionView.swift */; };
 		2F373BC42C0F73EA00E6C370 /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 2F373BC32C0F73EA00E6C370 /* SwipeActions */; };
+		2F373BD22C1FD91800E6C370 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F373BD12C1FD91800E6C370 /* SideMenuView.swift */; };
+		2F373BD42C1FDCCE00E6C370 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F373BD32C1FDCCE00E6C370 /* SideMenuViewModel.swift */; };
+		2F373BD62C1FE1EF00E6C370 /* SideMenuViewUIkit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F373BD52C1FE1EF00E6C370 /* SideMenuViewUIkit.swift */; };
 		2F3936B62A5A6B4E0092264E /* HabitStatisticFrequencyGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3936B52A5A6B4E0092264E /* HabitStatisticFrequencyGraph.swift */; };
 		2F3936B82A5EA42B0092264E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3936B72A5EA42B0092264E /* ColorExtension.swift */; };
 		2F39E0712A84C9C500161B23 /* UIView_Animation_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F39E0702A84C9C500161B23 /* UIView_Animation_Extension.swift */; };
@@ -56,8 +59,6 @@
 		2F63AE242A1FC39600BFBD5F /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F63AE232A1FC39600BFBD5F /* Shapes.swift */; };
 		2F6B039B2B92192F00974518 /* SideMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03972B92192F00974518 /* SideMenuItem.swift */; };
 		2F6B039C2B92192F00974518 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03982B92192F00974518 /* SideMenuViewController.swift */; };
-		2F6B039D2B92192F00974518 /* SideMenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03992B92192F00974518 /* SideMenuItemCell.swift */; };
-		2F6B039E2B92192F00974518 /* SideMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B039A2B92192F00974518 /* SideMenuDelegate.swift */; };
 		2F6B03A32B921BFD00974518 /* ContentViewControllerPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03A02B921BFD00974518 /* ContentViewControllerPresentation.swift */; };
 		2F6B03A42B921BFD00974518 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03A12B921BFD00974518 /* ContainerViewController.swift */; };
 		2F6B03B22B921FC700974518 /* ContainerViewComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03B12B921FC700974518 /* ContainerViewComposer.swift */; };
@@ -116,6 +117,9 @@
 		2F32C76C2A108F5E008CDF7E /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		2F32C76F2A10DD93008CDF7E /* CreatTaskForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatTaskForm.swift; sourceTree = "<group>"; };
 		2F373BC02C09898400E6C370 /* DateAndTimeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeSelectionView.swift; sourceTree = "<group>"; };
+		2F373BD12C1FD91800E6C370 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		2F373BD32C1FDCCE00E6C370 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
+		2F373BD52C1FE1EF00E6C370 /* SideMenuViewUIkit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewUIkit.swift; sourceTree = "<group>"; };
 		2F3936B52A5A6B4E0092264E /* HabitStatisticFrequencyGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatisticFrequencyGraph.swift; sourceTree = "<group>"; };
 		2F3936B72A5EA42B0092264E /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		2F39E0702A84C9C500161B23 /* UIView_Animation_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView_Animation_Extension.swift; sourceTree = "<group>"; };
@@ -161,8 +165,6 @@
 		2F63AE232A1FC39600BFBD5F /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		2F6B03972B92192F00974518 /* SideMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuItem.swift; sourceTree = "<group>"; };
 		2F6B03982B92192F00974518 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
-		2F6B03992B92192F00974518 /* SideMenuItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuItemCell.swift; sourceTree = "<group>"; };
-		2F6B039A2B92192F00974518 /* SideMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuDelegate.swift; sourceTree = "<group>"; };
 		2F6B03A02B921BFD00974518 /* ContentViewControllerPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewControllerPresentation.swift; sourceTree = "<group>"; };
 		2F6B03A12B921BFD00974518 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		2F6B03B12B921FC700974518 /* ContainerViewComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewComposer.swift; sourceTree = "<group>"; };
@@ -266,7 +268,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2F511F282A0CCE2900AC5328 /* TaskViews */ = {
+		2F511F282A0CCE2900AC5328 /* TaskTab */ = {
 			isa = PBXGroup;
 			children = (
 				2F5D86A32BB80255004AA466 /* TodoFastCreation */,
@@ -275,7 +277,7 @@
 				2F7381692B41B2FE000E767A /* HabitCreation */,
 				2FFDF1692A7F830700027AFE /* InitView.swift */,
 			);
-			path = TaskViews;
+			path = TaskTab;
 			sourceTree = "<group>";
 		};
 		2F5298F229F20E0A0018B8CA = {
@@ -316,7 +318,7 @@
 				2FCA285D2A13758C006AAD9B /* Background */,
 				2F9141B22A837C6300E53509 /* ViewControllerWrapper */,
 				2F5D9DA32B6E8B1000399975 /* ProjectViews */,
-				2F511F282A0CCE2900AC5328 /* TaskViews */,
+				2F511F282A0CCE2900AC5328 /* TaskTab */,
 				2F3936B42A5A6B130092264E /* StatisticViews */,
 				2F52990229F20E0E0018B8CA /* Assets.xcassets */,
 				2F52990729F20E0E0018B8CA /* Persistence.swift */,
@@ -428,12 +430,11 @@
 		2F6B03962B9218F100974518 /* SideMenuController */ = {
 			isa = PBXGroup;
 			children = (
-				2FB67A922BE76692003D9C71 /* New Group */,
-				2F6B039A2B92192F00974518 /* SideMenuDelegate.swift */,
 				2F6B03972B92192F00974518 /* SideMenuItem.swift */,
-				2F6B03992B92192F00974518 /* SideMenuItemCell.swift */,
 				2F6B03982B92192F00974518 /* SideMenuViewController.swift */,
 				2FB67A902BE66C0C003D9C71 /* SideMenuDefaultRows.swift */,
+				2F373BD12C1FD91800E6C370 /* SideMenuView.swift */,
+				2F373BD32C1FDCCE00E6C370 /* SideMenuViewModel.swift */,
 			);
 			path = SideMenuController;
 			sourceTree = "<group>";
@@ -531,13 +532,6 @@
 			path = TreeBasedTableUtils;
 			sourceTree = "<group>";
 		};
-		2FB67A922BE76692003D9C71 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		2FBC52E82A1468C700C4992E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,6 +558,7 @@
 			isa = PBXGroup;
 			children = (
 				2F32C76C2A108F5E008CDF7E /* BottomSheetView.swift */,
+				2F373BD52C1FE1EF00E6C370 /* SideMenuViewUIkit.swift */,
 			);
 			path = NotUsed;
 			sourceTree = "<group>";
@@ -705,6 +700,7 @@
 				2F5D9DBC2B85045900399975 /* TaskCardbackground.swift in Sources */,
 				2F5D86A52BB8028F004AA466 /* CheckListView.swift in Sources */,
 				2F7381652B411ACB000E767A /* NumberExtensions.swift in Sources */,
+				2F373BD42C1FDCCE00E6C370 /* SideMenuViewModel.swift in Sources */,
 				2F7381632B406B34000E767A /* TaskCardViews.swift in Sources */,
 				2F6B03B22B921FC700974518 /* ContainerViewComposer.swift in Sources */,
 				2FE538CF2A88D34600A03C26 /* StatisticalDetailView.swift in Sources */,
@@ -716,6 +712,7 @@
 				2FEF07132B4AD904002EB57D /* CustomViewsInForm.swift in Sources */,
 				2F52990829F20E0E0018B8CA /* Persistence.swift in Sources */,
 				2F5D9DA52B6E8B2700399975 /* ProjectViews.swift in Sources */,
+				2F373BD22C1FD91800E6C370 /* SideMenuView.swift in Sources */,
 				2F5BBC312A8C990F00579D5D /* CustomViewControllers.swift in Sources */,
 				2F4F563C2A3EB33300EC144D /* HabitDetailView.swift in Sources */,
 				2FB317062A117EB300B0D7DE /* TaskMasterViewModel.swift in Sources */,
@@ -767,7 +764,6 @@
 				2F3936B62A5A6B4E0092264E /* HabitStatisticFrequencyGraph.swift in Sources */,
 				2F177BA82BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift in Sources */,
 				2FB67A8F2BCC254E003D9C71 /* TreeBasedTableViewControllerProtocol.swift in Sources */,
-				2F6B039E2B92192F00974518 /* SideMenuDelegate.swift in Sources */,
 				2FB67A8A2BC2DA54003D9C71 /* Folder+List_Model.swift in Sources */,
 				2F39E0712A84C9C500161B23 /* UIView_Animation_Extension.swift in Sources */,
 				2FDAFFED2A0CCD75002AEA85 /* PersistenceController.swift in Sources */,
@@ -776,6 +772,7 @@
 				2F3936B82A5EA42B0092264E /* ColorExtension.swift in Sources */,
 				2F7551552B2D9EEA00DC0C19 /* ViewModifiers.swift in Sources */,
 				2F5D9DB52B77B20F00399975 /* SwiftUIGlobalPopupManager.swift in Sources */,
+				2F373BD62C1FE1EF00E6C370 /* SideMenuViewUIkit.swift in Sources */,
 				2FDA257729F47678005466AE /* HabitTrackerModel.swift in Sources */,
 				2F7072192A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift in Sources */,
 				2FBC52EA2A1468DF00C4992E /* ViewExtensions.swift in Sources */,
@@ -792,7 +789,6 @@
 				2FE2BAB12ABA26560045385E /* OldPopupManager.swift in Sources */,
 				2F5D86A72BB84464004AA466 /* CheckItemModel.swift in Sources */,
 				2FB67A832BBDA4AA003D9C71 /* TreeNodeProtocol.swift in Sources */,
-				2F6B039D2B92192F00974518 /* SideMenuItemCell.swift in Sources */,
 				2F8418A02A46CB2100F20BD0 /* Habits.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -927,6 +923,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HabitTracker/Info.plist;
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Your reminders can help you stay on track.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -964,6 +961,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HabitTracker/Info.plist;
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Your reminders can help you stay on track.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1040,8 +1038,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/costachung/neumorphic/";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

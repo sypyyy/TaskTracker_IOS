@@ -260,6 +260,14 @@ var fmt_date_select_localized: DateFormatter {
     return formatter
 }
 
+var fmt_time_select_localized: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .none
+    formatter.timeStyle = .short
+    formatter.locale = Locale.current
+    return formatter
+}
+
 var fmt_timeStamp: DateFormatter {
     let fmt = DateFormatter()
     fmt.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
