@@ -29,16 +29,17 @@ let backgroundGradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 12
         return res
     } ()
 
-    let projectView = ProjectViews()
+    let goalView = GoalView()
     @MainActor
     let goalView_hostingController =  {
-        let res = CustomHostingViewController(rootView: projectView)
+        let res = CustomHostingViewController(rootView: goalView)
         res.view.backgroundColor = .clear
         //res.view.isHidden = false
         return res
     }()
 
     let taskView = InitView()
+
     @MainActor
     let taskView_hostingController =  {
         let res = CustomHostingViewController(rootView: taskView)
@@ -53,8 +54,8 @@ let backgroundGradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 12
         res.view.backgroundColor = .clear
         //res.view.isHidden = false
         return res}()
-
-    let settingView = Text("setting")
+    @MainActor
+    let settingView = SettingView()
     @MainActor
     let settingView_hostingController =  {
         let res = CustomHostingViewController(rootView: settingView)
@@ -90,7 +91,7 @@ struct RootView: View {
         animation: .default)
     private var items: FetchedResults<Item>
  */
-    @StateObject var viewModel = TaskMasterViewModel.shared
+    @StateObject var viewModel = MasterViewModel.shared
     //@Environment(\.scenePhase) var scenePhase
     @State private var tabIndex: AppTabShowType = .goals {
         
@@ -320,7 +321,7 @@ extension RootView {
 
 
 struct ContentView_Previews: PreviewProvider {
-    static let overalViewModel = TaskMasterViewModel.shared
+    static let overalViewModel = MasterViewModel.shared
     static var previews: some View {
         //let overalViewModel = habitTrackerViewModel()
         RootView(viewModel : overalViewModel)//.environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

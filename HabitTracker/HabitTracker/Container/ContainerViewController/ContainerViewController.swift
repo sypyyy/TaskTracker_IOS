@@ -103,7 +103,7 @@ final class ContainerViewController: UIViewController {
 }
 
 extension ContainerViewController {
-    func showBottomSheet(snapPoints: [CGFloat], background: BSBackground = .blur(style: .systemUltraThinMaterialLight), viewType: BSPresentView) {
+    func showBottomSheet(snapPoints: [SnapPoint], background: BSBackground = .blur(style: .systemUltraThinMaterialLight), viewType: BSPresentView) {
         bottomSheetViewController.show(snapPoints: snapPoints, background: background, viewType: viewType)
     }
 }

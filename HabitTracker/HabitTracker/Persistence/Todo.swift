@@ -87,6 +87,37 @@ extension PersistenceController  {
             return []
         }
     }
+    
+    func getTodoById(id: String) -> Todo? {
+        let request: NSFetchRequest<Todo> = Todo.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", "\(id)")
+        do {
+            let res = try container.viewContext.fetch(request)
+            return res.first
+        }
+        catch {
+            print("error fetching")
+            return nil
+        }
+    }
+    
+    func setGoalForTodo(goalId: String, todoId: String) {
+        if let todo = getTodoById(id: todoId) {
+            let goal = getGoalById(id: goalId)
+            let viewContext = self.container.viewContext
+            todo.goal = goal
+            saveChanges(viewContext: viewContext)
+        }
+    }
+    
+    func resetGoalForTodo(todoId: String) {
+        if let todo = getTodoById(id: todoId) {
+            let viewContext = self.container.viewContext
+            todo.goal = nil
+            saveChanges(viewContext: viewContext)
+        }
+        
+    }
 }
 
 
@@ -104,20 +135,12 @@ extension TodoModel {
         res.done = done
         res.priority = Int16(priority.rawValue)
         res.executionTime = executionTime
-        res.project = project
         return res
     }
 }
 
 extension TodoModel {
     func calculateId() -> String {
-        //Calculate id based on the name and scheduledDate
-        var formatter: DateFormatter {
-            let fmt = DateFormatter()
-            fmt.dateFormat = self.isTimeSpecific ? "yyyy/MM/dd/HH:mm" : "yyyy/MM/dd"
-            return fmt
-        }
-        let id = "\(self.name)<#$>\(formatter.string(from: self.startDate))<#$>\(TaskType.todo.rawValue)"
-        return id
+        return "\(fmt_timeStamp.string(from: Date()))<#$>\(UUID().uuidString)"
     }
 }

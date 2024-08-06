@@ -73,6 +73,6 @@ struct CustomSegmentedControl<T: View>: View {
 struct CustomViews_Previews: PreviewProvider {
     
     static var previews: some View {
-        RootView(viewModel: TaskMasterViewModel.shared)
+        RootView(viewModel: MasterViewModel.shared)
     }
 }

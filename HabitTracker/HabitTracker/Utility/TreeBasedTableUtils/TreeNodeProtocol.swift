@@ -7,14 +7,7 @@
 
 import Foundation
 
-class AnyTreeNode: Hashable {
-    static func == (lhs: AnyTreeNode, rhs: AnyTreeNode) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
+class AnyTreeNode {
     
     var subTypeInfo: TreeNodeSubclassInfo
     
@@ -63,6 +56,10 @@ class AnyTreeNode: Hashable {
     
     func removeAllChildren() {
         children.removeAll()
+    }
+    
+    func getSearchKeyWord() -> String {
+        return ""
     }
 }
 

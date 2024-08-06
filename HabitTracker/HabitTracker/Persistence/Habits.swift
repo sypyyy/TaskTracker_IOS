@@ -16,7 +16,7 @@ extension PersistenceController {
     
     func creatNewHabit(habit: HabitModel) throws {
         let viewContext = self.container.viewContext
-        let IdToBe = "\(fmt_timeStamp.string(from: Date()))<#$>\(UUID().uuidString)"
+        let IdToBe = habit.calculateId()
         let isNameUnique = checkHabitIdIsUnique(IdToBe: IdToBe)
         if !isNameUnique {
             throw PersistenceError.duplicateId
@@ -96,10 +96,16 @@ extension HabitModel {
         newHabit.isTargetSet = true
         newHabit.numberUnit = unit
         newHabit.priority = priority
-        newHabit.project = project
         newHabit.executionTime = executionTime
         return newHabit
     }
+    
+    
+   
+    func calculateId() -> String {
+        return "\(fmt_timeStamp.string(from: Date()))<#$>\(UUID().uuidString)"
+    }
+    
 }
 
 

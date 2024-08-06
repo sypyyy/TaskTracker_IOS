@@ -6,11 +6,11 @@
 //
 
 import Foundation
-
+@MainActor
 class TodoViewModel : ObservableObject{
    
     static var shared = TodoViewModel()
-    private var parentModel = TaskMasterViewModel.shared
+    private var parentModel = MasterViewModel.shared
     private var persistenceModel : PersistenceController = PersistenceController.preview
     public var selectedDate: Date = Date()
     

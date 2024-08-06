@@ -8,6 +8,8 @@
 import UIKit
 import SwiftUI
 
+
+
 enum BSBackground {
     case blur(style: UIBlurEffect.Style)
     case color(color: UIColor)
@@ -19,16 +21,62 @@ enum BSPresentView {
     case UIView(UIView)
 }
 
+enum SnapPoint: Double {
+    case AlmostFull = 0.93
+    case top = 0.8
+    case middle = 0.5
+    case low = 0.3
+}
+
+
+/*
+ 目前这个类只支持单个snappoint，有强需要再植入多个的逻辑吧
+ */
+
+
+class BottomSheetHandleView: UIView {
+    static let paddingVertical: CGFloat = 6
+    static let width: CGFloat = 40
+    static let height: CGFloat = 6
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    private func setupView() {
+        // Set the background color to gray
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        
+        // Apply rounded corners
+        self.layer.cornerRadius = 3
+        self.layer.masksToBounds = true
+    }
+}
+
 final class BottomSheetViewController: UIViewController {
     
     static let shared = BottomSheetViewController()
     
+    static let defaultSnapPoint = SnapPoint.top
+    
+    static let defaultDragOffset: CGFloat = 180
+    
+    private var isMovingSheetThroughScrollviewDrag = false
+    private var isScrollViewDragging = false
+    private var snapPoints = [SnapPoint]()
+    private var currentSnapPoint: SnapPoint = BottomSheetViewController.defaultSnapPoint
     private var bottomConstraint: NSLayoutConstraint!
     private var heightConstraint: NSLayoutConstraint!
     private var shadowColor: UIColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 0.05)
     private var sheetView = UIView()
-    private var tempViews = [UIView]()
-    private var blurSheetBackgroundView: UIView?
+    private var handleView = BottomSheetHandleView()
+    private var backgroundViews = [UIView]()
     
     var screenHeight: CGFloat {
         view.frame.height
@@ -45,9 +93,18 @@ final class BottomSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        
        //MARK: So far no use case to escape keyboard
         //NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let scrollView = findScrollView(in: self.view) {
+            scrollView.delegate = self
+        }
+    }
+    
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -58,12 +115,6 @@ final class BottomSheetViewController: UIViewController {
                 self.view.layoutIfNeeded()
             }
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        //sheetView.roundTopCorners(cornerRadius: 12)
-        //blurSheetBackgroundView?.roundTopCorners(cornerRadius: 12)
     }
 
     private func configureView() {
@@ -76,14 +127,12 @@ final class BottomSheetViewController: UIViewController {
 
     private func addSubviews() {
         sheetView.translatesAutoresizingMaskIntoConstraints = false
+        handleView.translatesAutoresizingMaskIntoConstraints = false
         sheetView.backgroundColor = .clear
         view.addSubview(sheetView)
+        view.addSubview(handleView)
     }
     
-    private func addMaterialBackgroundToSheet() {
-       
-    }
-
     private func configureConstraints() {
         bottomConstraint = sheetView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: screenHeight)
         bottomConstraint.isActive = true
@@ -92,6 +141,12 @@ final class BottomSheetViewController: UIViewController {
         NSLayoutConstraint.activate([
             sheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+        NSLayoutConstraint.activate([
+            handleView.bottomAnchor.constraint(equalTo: sheetView.topAnchor, constant: BottomSheetHandleView.paddingVertical),
+            handleView.heightAnchor.constraint(equalToConstant: BottomSheetHandleView.height),
+            handleView.widthAnchor.constraint(equalToConstant: BottomSheetHandleView.width),
+            handleView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
@@ -105,8 +160,9 @@ final class BottomSheetViewController: UIViewController {
         hide()
     }
         
-    func show(snapPoints: [CGFloat], background: BSBackground = .blur(style: .systemUltraThinMaterialLight), viewType: BSPresentView) {
+    func show(snapPoints: [SnapPoint], background: BSBackground = .blur(style: .systemUltraThinMaterialLight), viewType: BSPresentView) {
         self.view.frame.origin.y = 0
+        
         switch viewType {
         case .swiftUI(let view):
             let hostingController = BottomSheetContentHostingController(rootView: view)
@@ -143,10 +199,9 @@ final class BottomSheetViewController: UIViewController {
             blurView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
             blurView.clipsToBounds = true
             view.insertSubview(blurView, at: 0)
-            tempViews.append(blurView)
-            blurSheetBackgroundView = blurView
+            backgroundViews.append(blurView)
             NSLayoutConstraint.activate([
-                blurView.topAnchor.constraint(equalTo: sheetView.topAnchor),
+                blurView.topAnchor.constraint(equalTo: handleView.topAnchor, constant: -BottomSheetHandleView.paddingVertical),
                 //I did this because there is a bug that UIHostingViewController does not follow NSLayoutConstraints(bottom), leading to sheetView's bottom changed, so I put up this ugly fix for now. which is, tie the blur view bottom to root view's bottom. And a extra 10 to avoid conflict when sheet is disappearing.
                 blurView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: screenHeight),
                 blurView.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
@@ -156,10 +211,17 @@ final class BottomSheetViewController: UIViewController {
             sheetView.backgroundColor = color
         }
         self.view.layoutIfNeeded()
+        
+        self.snapPoints = snapPoints.sorted(by: { $0.rawValue < $1.rawValue })
+        if let currentSnapPoint = snapPoints.first {
+            self.currentSnapPoint = currentSnapPoint
+        }
+        let maxSnapPoint = snapPoints.last ?? BottomSheetViewController.defaultSnapPoint
+        let sheetHeight = (maxSnapPoint.rawValue) * self.screenHeight
         UIView.animate(withDuration: 0.35) {
             self.view.backgroundColor = self.shadowColor
-            self.bottomConstraint.constant = 0
-            self.heightConstraint.constant = (snapPoints.first ?? 0.5) * self.screenHeight
+            self.bottomConstraint.constant = (maxSnapPoint.rawValue - self.currentSnapPoint.rawValue) * self.screenHeight
+            self.heightConstraint.constant = sheetHeight
             self.view.layoutIfNeeded()
         }
     }
@@ -176,7 +238,7 @@ final class BottomSheetViewController: UIViewController {
                 $0.removeFromSuperview()
             }
             self.children.forEach { $0.removeFromParent() }
-            self.tempViews.forEach {
+            self.backgroundViews.forEach {
                 $0.removeFromSuperview()
             }
             self.view.frame.origin.y = self.screenHeight
@@ -198,9 +260,63 @@ final class BottomSheetViewController: UIViewController {
    */
     
     func onSwipeEnded() {
-       
-        
+        print("Swipe ended")
+        let bottomConstraint = self.bottomConstraint.constant
+        if bottomConstraint >= BottomSheetViewController.defaultDragOffset {
+            hide()
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.bottomConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            } completion: { success in
+                
+            }
+        }
     }
+}
+
+extension BottomSheetViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isScrollViewDragging = true
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let y = scrollView.contentOffset.y
+        //finger moving down
+        if((y < 0) && isScrollViewDragging) {
+            print("the contentOffset is\(y)")
+            isMovingSheetThroughScrollviewDrag = true
+        }
+
+        if isMovingSheetThroughScrollviewDrag && isScrollViewDragging {
+            scrollView.contentOffset.y = 0
+            let newBottomConstriant = self.bottomConstraint.constant - y
+            if(newBottomConstriant < 0) {
+                self.bottomConstraint.constant = 0
+                isMovingSheetThroughScrollviewDrag = false
+            } else {
+                self.bottomConstraint.constant -= y
+            }
+        }
+    }
+    
+    
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        isScrollViewDragging = false
+        if(isMovingSheetThroughScrollviewDrag) {
+            let currentOffset = scrollView.contentOffset
+            scrollView.setContentOffset(currentOffset, animated: false)
+        }
+        isMovingSheetThroughScrollviewDrag = false
+        self.onSwipeEnded()
+    }
+    
+     /*
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        //self.onSwipeEnded()
+    }
+      */
 }
 
 extension BottomSheetViewController: UIGestureRecognizerDelegate {

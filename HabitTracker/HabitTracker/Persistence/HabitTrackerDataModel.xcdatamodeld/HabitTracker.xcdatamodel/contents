@@ -5,9 +5,44 @@
         <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="orderIdx" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="childFolders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Folder" inverseName="parentFolder" inverseEntity="Folder"/>
-        <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskList" inverseName="parentFolder" inverseEntity="TaskList"/>
-        <relationship name="parentFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="childFolders" inverseEntity="Folder"/>
+        <relationship name="taskList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskList" inverseName="parentFolder" inverseEntity="TaskList"/>
+    </entity>
+    <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="class">
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isFinished" optional="YES" attributeType="Boolean" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isRoot" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="childGoals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="parentGoal" inverseEntity="Goal"/>
+        <relationship name="habits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Habit" inverseName="goal" inverseEntity="Habit"/>
+        <relationship name="interval" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GoalIntervalInfo" inverseName="goal" inverseEntity="GoalIntervalInfo"/>
+        <relationship name="measurement" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GoalMeasurement" inverseName="goal" inverseEntity="GoalMeasurement"/>
+        <relationship name="parentGoal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="childGoals" inverseEntity="Goal"/>
+        <relationship name="todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Todo" inverseName="goal" inverseEntity="Todo"/>
+    </entity>
+    <entity name="GoalIntervalInfo" representedClassName="GoalIntervalInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="intervalType" optional="YES" attributeType="String"/>
+        <attribute name="month" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="interval" inverseEntity="Goal"/>
+    </entity>
+    <entity name="GoalMeasurement" representedClassName="GoalMeasurement" syncable="YES" codeGenerationType="class">
+        <attribute name="allowDecimal" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="startValue" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="targetValue" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="unit" optional="YES" attributeType="String"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="measurement" inverseEntity="Goal"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GoalMeasurementRecord" inverseName="goalMeasurement" inverseEntity="GoalMeasurementRecord"/>
+    </entity>
+    <entity name="GoalMeasurementRecord" representedClassName="GoalMeasurementRecord" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="goalMeasurement" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GoalMeasurement" inverseName="records" inverseEntity="GoalMeasurement"/>
+        <fetchIndex name="byDateIndex">
+            <fetchIndexElement property="date" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Habit" representedClassName="Habit" syncable="YES" codeGenerationType="class">
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -20,11 +55,10 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="numberUnit" optional="YES" attributeType="String"/>
         <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="project" optional="YES" attributeType="String"/>
         <attribute name="stoppedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="habits" inverseEntity="Goal"/>
         <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaskList" inverseName="habits" inverseEntity="TaskList"/>
-        <relationship name="projects" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="habits" inverseEntity="Project"/>
     </entity>
     <entity name="HabitRecord" representedClassName="HabitRecord" syncable="YES" codeGenerationType="class">
         <attribute name="cycle" optional="YES" attributeType="String"/>
@@ -41,16 +75,6 @@
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-    </entity>
-    <entity name="Project" representedClassName="Project" syncable="YES" codeGenerationType="class">
-        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="isFinished" optional="YES" attributeType="Boolean" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="isPaused" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="habits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Habit" inverseName="projects" inverseEntity="Habit"/>
-        <relationship name="todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Todo" inverseName="projects" inverseEntity="Todo"/>
     </entity>
     <entity name="StopCheckPoint" representedClassName="StopCheckPoint" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -77,7 +101,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="orderIdx" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="habits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Habit" inverseName="list" inverseEntity="Habit"/>
-        <relationship name="parentFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="lists" inverseEntity="Folder"/>
+        <relationship name="parentFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="taskList" inverseEntity="Folder"/>
         <relationship name="todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Todo" inverseName="list" inverseEntity="Todo"/>
     </entity>
     <entity name="Todo" representedClassName="Todo" syncable="YES" codeGenerationType="class">
@@ -92,12 +116,11 @@
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="parentTaskId" optional="YES" attributeType="String"/>
         <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="project" optional="YES" attributeType="String"/>
         <attribute name="reminderDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="subTasks" optional="YES" attributeType="String"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="todos" inverseEntity="Goal"/>
         <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaskList" inverseName="todos" inverseEntity="TaskList"/>
-        <relationship name="projects" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="todos" inverseEntity="Project"/>
         <fetchIndex name="byStartDate">
             <fetchIndexElement property="startDate" type="Binary" order="ascending"/>
         </fetchIndex>

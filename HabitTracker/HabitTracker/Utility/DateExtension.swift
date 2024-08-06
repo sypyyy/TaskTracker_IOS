@@ -50,22 +50,6 @@ extension Date {
         }
     }
     
-    /*
-    func startOfWeek() -> Date {
-        guard let thisWeek = Calendar.current.dateInterval(of: .weekOfYear, for: Date()) else {return Date()}
-        return thisWeek.start
-    }
-    */ 
-    func startOfMonth() -> Date {
-        guard let thisMonth = Calendar.current.dateInterval(of: .month, for: self) else {return Date()}
-        return thisMonth.start
-    }
-    
-    func startOfYear() -> Date {
-        guard let thisYear = Calendar.current.dateInterval(of: .year, for: self) else {return Date()}
-        return thisYear.start
-    }
-    
     func endOfWeek() -> Date {
         let dayOfWeek = fmt6.string(from: self)
         switch dayOfWeek {
@@ -86,6 +70,22 @@ extension Date {
         default:
             return self
         }
+    }
+    
+    /*
+    func startOfWeek() -> Date {
+        guard let thisWeek = Calendar.current.dateInterval(of: .weekOfYear, for: Date()) else {return Date()}
+        return thisWeek.start
+    }
+    */ 
+    func startOfMonth() -> Date {
+        guard let thisMonth = Calendar.current.dateInterval(of: .month, for: self) else {return Date()}
+        return thisMonth.start
+    }
+    
+    func startOfYear() -> Date {
+        guard let thisYear = Calendar.current.dateInterval(of: .year, for: self) else {return Date()}
+        return thisYear.start
     }
     
     func endOfMonth() -> Date {
@@ -134,6 +134,10 @@ extension Date {
         return Calendar.current.date(byAdding: .hour, value: by, to: self) ?? self
     }
     
+    func addByMinute(_ by: Int) -> Date {
+        return Calendar.current.date(byAdding: .minute, value: by, to: self) ?? self
+    }
+    
     func compareToByDay(_ date: Date) -> Int {
         let result = Calendar.current.compare(self, to: date, toGranularity: .day)
         switch result {
@@ -169,6 +173,7 @@ extension Date {
     func isSameWeek(_ date: Date) -> Bool {
         return fmt9.string(from: self) == fmt9.string(from: date)
     }
+
 }
 
 var fmt : DateFormatter {
@@ -298,5 +303,90 @@ extension Date {
             print("Error creating combined date.")
             return Date()
         }
+    }
+}
+
+enum Weekday: Int, CaseIterable, Codable {
+    case sunday = 1, monday = 2, tuesday = 3, wednesday = 4, thursday = 5, friday = 6, saturday = 7
+    var localizedName: String {
+        let formatter = DateFormatter()
+        return formatter.weekdaySymbols[self.rawValue - 1]
+    }
+}
+/*
+func getWeek(for date: Date, startOfWeek: Weekday) -> (startDate: Date, endDate: Date)? {
+    var calendar = Calendar.current
+    calendar.firstWeekday = startOfWeek.rawValue
+
+    // Find the weekday component of the given date
+    let components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
+    guard let weekStartDate = calendar.date(from: components) else { return nil }
+    
+    // Calculate the end date of the week
+    let weekEndDate = calendar.date(byAdding: .day, value: 6, to: weekStartDate)!
+    
+    return (startDate: weekStartDate, endDate: weekEndDate)
+}
+
+//If the user have stored week with old preference of start of week, when we present in view, we infer the week for conformance.
+func inferWeekFromOldPreference(from startDate: Date, to endDate: Date, startOfWeek: Weekday) -> (startDate: Date, endDate: Date)? {
+    var calendar = Calendar.current
+    calendar.firstWeekday = startOfWeek.rawValue
+    
+    var weekCount: [String: Int] = [:]
+    var currentDate = startDate
+    
+    while currentDate <= endDate {
+        if let week = getWeek(for: currentDate, startOfWeek: startOfWeek) {
+            let weekKey = "\(week.startDate)-\(week.endDate)"
+            weekCount[weekKey, default: 0] += 1
+        }
+        
+        currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+    }
+    
+    // Find the week with the highest count
+    let mostFrequentWeekKey = weekCount.max { a, b in a.value < b.value }?.key
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    
+    if let weekKey = mostFrequentWeekKey,
+       let startDate = dateFormatter.date(from: String(weekKey.split(separator: "-")[0])),
+       let endDate = dateFormatter.date(from: String(weekKey.split(separator: "-")[1])) {
+        return (startDate, endDate)
+    }
+    
+    return nil
+}
+*/
+
+
+extension Date {
+    func getMonth() -> Month {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month], from: self)
+        
+        guard let year = components.year, let month = components.month else {
+            return Month(month: 12, year: 1970)
+        }
+        
+        return Month(month: month, year: year)
+    }
+    
+    func getYear() -> Year {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month], from: self)
+        
+        guard let year = components.year else {
+            return Year(year: 1970)
+        }
+        return Year(year: year)
+    }
+    
+    func getWeek(startOfWeek: Weekday) -> Week {
+        var calendar = Calendar.current
+        calendar.firstWeekday = startOfWeek.rawValue
+        var currentWeek = calendar.dateInterval(of: .weekOfYear, for: Date())!
+        return Week(startDate: currentWeek.start, endDate: currentWeek.end.addByMinute(-1))
     }
 }

@@ -19,6 +19,20 @@ extension PersistenceController  {
         return newFolder.id ?? ""
     }
     
+    func getAllFolders() -> [Folder] {
+        let request: NSFetchRequest<Folder> = Folder.fetchRequest()
+        //"start >= %@ && ((willExpire && expireDate < %@) || !willExpire)"
+        request.sortDescriptors = [NSSortDescriptor(key: "orderIdx", ascending: true)]
+        do {
+            let res = try container.viewContext.fetch(request)
+            return res
+        }
+        catch {
+            print("error fetching")
+            return []
+        }
+    }
+    
     func getAllRootFolders() -> [Folder] {
         let request: NSFetchRequest<Folder> = Folder.fetchRequest()
         //"start >= %@ && ((willExpire && expireDate < %@) || !willExpire)"
@@ -34,6 +48,7 @@ extension PersistenceController  {
         }
     }
     
+    /*
     func addFolderToParent(parentID: String, childID: String) {
         do {
             let request: NSFetchRequest<Folder> = Folder.fetchRequest()
@@ -64,6 +79,7 @@ extension PersistenceController  {
             return
         }
     }
+     */
 }
 
 

@@ -8,12 +8,12 @@
 import Foundation
 
 let POPUP_ANIMATION_DURATION = 0.4
-
+@MainActor
 class OldPopupManager : ObservableObject{
     static var shared = OldPopupManager()
     var showPopup = false {
         didSet {
-            TaskMasterViewModel.shared.blurEverything = showPopup
+            MasterViewModel.shared.blurEverything = showPopup
         }
     }
     var showType: PopupType = .habitDetailNumberModify
@@ -22,7 +22,7 @@ class OldPopupManager : ObservableObject{
     public func displayPopup(showType: PopupType, title: String = "", callback: PopupCallback) {
         popupTitle = title
         showPopup = true
-        TaskMasterViewModel.shared.blurEverything = showPopup
+        MasterViewModel.shared.blurEverything = showPopup
         self.showType = showType
         self.callback = callback
         objectWillChange.send()
@@ -30,7 +30,7 @@ class OldPopupManager : ObservableObject{
     
     public func closePopup() {
         showPopup = false
-        TaskMasterViewModel.shared.blurEverything = showPopup
+        MasterViewModel.shared.blurEverything = showPopup
         self.callback = nil
         objectWillChange.send()
     }

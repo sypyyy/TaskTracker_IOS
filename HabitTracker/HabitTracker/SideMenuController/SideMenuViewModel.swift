@@ -6,25 +6,35 @@
 //
 
 import SwiftUI
-/*
+
 class SideMenuViewModel: ObservableObject, TreeBasedTableViewController {
     var dummyRootNode: AnyTreeNode = AnyTreeNode()
+    @MainActor
     static let shared = SideMenuViewModel()
     @Published var isShowing = false
     var activeRowInfo: SideMenuRowInfo = .defaultRow(.today)
     var activeRowId: String?
     
-    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.preview
 
     private var leadingConstraint: NSLayoutConstraint!
     private var shadowColor: UIColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 0.2)
     
     private var tableData: SideMenuTableViewDatas = SideMenuTableViewDatas()
     
-    internal var nodeArray: [AnyTreeNode] = []
+    internal var nodeArray: [AnyTreeNode] = [] {
+        didSet {
+            print("nodeArrayCount: \(nodeArray.count)")
+        }
+    }
     
     @MainActor
-    private func loadData() {
+    init() {
+        loadDataAndUpdate()
+    }
+    
+    @MainActor
+    private func loadDataAndUpdate() {
         dummyRootNode.removeAllChildren()
         nodeArray = []
         //Put default rows in (Today, inbox blablabla)
@@ -39,9 +49,12 @@ class SideMenuViewModel: ObservableObject, TreeBasedTableViewController {
         } + rootLists.map{ list in
             ListModel(list: list, parent: dummyRootNode)
         })
+        updateNodeArray()
+        /*
         for node in dummyRootNode.children {
             traverse(node: node)
         }
+        objectWillChange.send()
         func traverse(node: AnyTreeNode) {
             nodeArray.append(node)
             if(node.isExpanded) {
@@ -50,38 +63,23 @@ class SideMenuViewModel: ObservableObject, TreeBasedTableViewController {
                 }
             }
         }
-    }
-
-    @objc private func tapped() {
-        hide()
-    }
-    
-    func translateLeft(by: CGFloat) {
-        if(leadingConstraint.constant - by > 0) {
-            leadingConstraint.constant = 0
-            return
-        }
-        leadingConstraint.constant -= by
-    }
-    
-    func onSwipeEnded() {
-        if(leadingConstraint.constant < -100) {
-            self.hide()
-        } else {
-            show()
-        }
-        
+         */
     }
 }
 
 extension SideMenuViewModel {
     
-    private func updateTableView() {
+    @MainActor
+    private func updateNodeArray() {
         let oldNodeArr = nodeArray
+        print("oldNodeArr: \(oldNodeArr.last?.id)")
         let newNodeArr = self.getNewNodeArray()
+        print("newNodeArr: \(newNodeArr.last?.id)")
         nodeArray = newNodeArr
+        objectWillChange.send()
     }
     
+    @MainActor
     func expandOrCollapseFolder(nodeId: String) {
         guard let folder = nodeArray.first(where: {
             $0.id == nodeId
@@ -89,6 +87,7 @@ extension SideMenuViewModel {
             return
         }
         folder.isExpanded = !folder.isExpanded
+        updateNodeArray()
     }
 }
 
@@ -101,9 +100,6 @@ extension SideMenuViewModel {
             case .sideMenuRow(let info):
                 if info == row {
                     activeRowId = node.id
-                    (tableView.cellForRow(at: IndexPath(row: idx, section: 0)) as? SideMenuItemCell)?.highlight()
-                } else {
-                    (tableView.cellForRow(at: IndexPath(row: idx, section: 0)) as? SideMenuItemCell)?.unHighlight()
                 }
             default:
                 break
@@ -112,16 +108,9 @@ extension SideMenuViewModel {
     }
     
     func didTapRow(nodeId: String) {
-        nodeArray.enumerated().forEach { (idx, node) in
-            if node.id == nodeId {
-                activeRowId = node.id
-                (tableView.cellForRow(at: IndexPath(row: idx, section: 0)) as? SideMenuItemCell)?.highlight()
-            } else {
-                (tableView.cellForRow(at: IndexPath(row: idx, section: 0)) as? SideMenuItemCell)?.unHighlight()
-            }
-        }
-
+        activeRowId = nodeId
+        objectWillChange.send()
     }
 }
 
-*/
+

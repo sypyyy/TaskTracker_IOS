@@ -188,7 +188,7 @@ struct PopupBackground_Wrapper: UIViewControllerRepresentable {
 }
 
 struct GlobalPopupView_Previews: PreviewProvider {
-    static let overalViewModel = TaskMasterViewModel.shared
+    static let overalViewModel = MasterViewModel.shared
     static var previews: some View {
         //let overalViewModel = habitTrackerViewModel()
         RootView(viewModel : overalViewModel)//.environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

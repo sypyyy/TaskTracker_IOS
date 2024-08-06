@@ -21,6 +21,19 @@ extension PersistenceController  {
         return ""
     }
     
+    func getAllLists() -> [TaskList] {
+        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "orderIdx", ascending: true)]
+        do {
+            let res = try container.viewContext.fetch(request)
+            return res
+        }
+        catch {
+            print("error fetching")
+            return []
+        }
+    }
+    
     func getAllRootLists() -> [TaskList] {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "orderIdx", ascending: true)]

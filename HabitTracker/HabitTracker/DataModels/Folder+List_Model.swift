@@ -8,23 +8,16 @@
 import Foundation
 import CoreData
 
-enum TreeNodeSubclassInfo {
-    case sideMenuRow(info: SideMenuRowInfo)
-}
-
 //MARK: 项目/目标
 class FolderModel: AnyTreeNode {
     var name: String
     
     init(folder: Folder, parent: AnyTreeNode? = nil) {
         self.name = folder.name ?? ""
-        let childFolders: [FolderModel] = (folder.childFolders?.allObjects as? [Folder] ?? []).map({
-            FolderModel(folder: $0)
-        })
-        let childLists: [ListModel] = (folder.lists?.allObjects as? [TaskList] ?? []).map({
+        let childLists: [ListModel] = (folder.taskList?.allObjects as? [TaskList] ?? []).map({
             ListModel(list: $0)
         })
-        let childFoldersAndLists: [AnyTreeNode] = childFolders + childLists
+        let childFoldersAndLists: [AnyTreeNode] = childLists
         super.init(id: folder.id ?? "", children: childFoldersAndLists, isExpanded: false, parent: parent, level: Int(folder.level), originalType: TreeNodeSubclassInfo.sideMenuRow(info: .Folder(id: folder.id ?? "")), orderIdx: Int(folder.orderIdx))
     }
     

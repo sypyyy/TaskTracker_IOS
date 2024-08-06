@@ -16,7 +16,7 @@ class SideMenuViewController: UIViewController {
     var activeRowInfo: SideMenuRowInfo = .defaultRow(.today)
     var activeRowId: String?
     
-    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.preview
     //一个可以放头像之类的section，现在没用，是空的
 
     private var sideMenuView: UIView = {
@@ -169,7 +169,7 @@ extension SideMenuViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         guard let view = touch.view else { return false }
         if view === sideMenuView || view.isDescendant(of: sideMenuView) {
-            return false
+            return true
         }
         return true
     }

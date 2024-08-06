@@ -9,7 +9,6 @@ import CoreData
 
 extension PersistenceController {
     
-    
     func getTargetSeries(habitID: String) -> [TargetCheckPoint] {
         if(!Thread.isMainThread) {
             print("Bad thread for coreData!!!!!!!!!!!! getTargetSeries")

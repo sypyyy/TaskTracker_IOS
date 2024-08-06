@@ -7,10 +7,10 @@
 
 import Foundation
 
-
+@MainActor
 class HabitViewModel: ObservableObject {
     static var shared = HabitViewModel()
-    private var parentModel = TaskMasterViewModel.shared
+    private var parentModel = MasterViewModel.shared
     private var persistenceModel : PersistenceController = PersistenceController.preview
     
     private var selectedDate: Date = Date()

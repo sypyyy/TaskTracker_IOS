@@ -155,6 +155,17 @@ struct HeaderWithToggle<Content: View> : View {
     }
 }
 
+struct HeaderRegular<Content: View> : View {
+    @ViewBuilder var header: () -> Content
+    var body: some View {
+        HStack(spacing: 0){
+            header()
+                .font(.system(size: 16, weight: .heavy, design: .rounded)).foregroundColor(.primary.opacity(0.6))
+            Spacer()
+        }
+    }
+}
+
 struct customDatePicker : View {
     @Binding var date: Date
     let isHourAndMin: Bool
@@ -233,6 +244,17 @@ struct FormSection<Content: View>: View {
         
     }
 }
+
+
+struct GradientBackgroundInForm: View {
+    var body: some View {
+        Color.white
+        LinearGradient(colors: [backgroundGradientStart, backgroundGradientEnd], startPoint: .top, endPoint: .bottom)
+            .opacity(0.3)
+            .ignoresSafeArea()
+    }
+}
+
 
 
 

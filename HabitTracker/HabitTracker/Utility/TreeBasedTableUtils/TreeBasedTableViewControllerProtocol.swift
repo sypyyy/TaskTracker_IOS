@@ -47,15 +47,18 @@ extension TreeBasedTableViewController {
         return res
     }
     
-    @MainActor func getNewNodeArray() -> [AnyTreeNode] {
+    @MainActor func getNewNodeArray(expandedStatesToRestore: [String:Bool]? = nil) -> [AnyTreeNode] {
         var newModelArray = [AnyTreeNode]()
         func traverseChildren(node: AnyTreeNode) {
-            if let parent = node.parent, parent.isExpanded {
-                newModelArray.append(node)
-            }
             node.level = (node.parent?.level ?? 0) + 1
-            node.children.forEach { child in
-                traverseChildren(node: child)
+            newModelArray.append(node)
+            if let expandedStatesToRestore = expandedStatesToRestore {
+                node.isExpanded = expandedStatesToRestore[node.id] ?? false
+            }
+            if node.isExpanded {
+                node.children.forEach { child in
+                    traverseChildren(node: child)
+                }
             }
         }
         
@@ -63,6 +66,34 @@ extension TreeBasedTableViewController {
             traverseChildren(node: node)
         }
         return newModelArray
+    }
+    
+    @MainActor func revealPathToNode(nodeId: String) -> [AnyTreeNode] {
+        var res = [AnyTreeNode]()
+        func traverseChildren(node: AnyTreeNode) -> Bool {
+            if node.id == nodeId {
+                res.append(node)
+                return true
+            }
+            
+            for child in node.children {
+                if traverseChildren(node: child) {
+                    node.isExpanded = true
+                    res.append(node)
+                    return true
+                } else {
+                    node.isExpanded = false
+                }
+            }
+            
+            return false
+        }
+        self.dummyRootNode.children.forEach { node in
+            if traverseChildren(node: node) {
+                return
+            }
+        }
+        return res.reversed()
     }
     
     //MARK: Usage: inside performBatchUpdate, first call getNewNodeArray, set nodeArray to the new array, then call this function
@@ -73,7 +104,6 @@ extension TreeBasedTableViewController {
             tableView.moveRow(at: rowToMove.0, to: rowToMove.1)
         }
         tableView.insertRows(at: changes.rowsToInsert, with: .fade)
-
     }
 }
 
