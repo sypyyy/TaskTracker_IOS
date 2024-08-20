@@ -8,7 +8,8 @@
 import SwiftUI
 import Combine
 
-struct HabitProgressModifyBottomSheet: View {
+struct HabitDetailBottomSheet: View {
+    static let CONTENT_HORIZONTAL_PADDING: CGFloat = 12
     @State var isEditing = false
     @State var editingNumber = ""
     @FocusState var editingKeyboardFocued
@@ -34,6 +35,7 @@ struct HabitProgressModifyBottomSheet: View {
             VStack{
                
                 HabitNameAndDetailView(habit: habit)
+                    .padding(.horizontal, HabitDetailBottomSheet.CONTENT_HORIZONTAL_PADDING)
                 HabitDetailSection{
                     VStack{
                         HStack{
@@ -108,7 +110,30 @@ struct HabitProgressModifyBottomSheet: View {
                         .opacity(isEditing ? 0.8 : 1)
                         .disabled(isEditing)
                         .padding(.bottom, 20)
-                    
+                }
+                
+                HabitDetailSection {
+                    LazyVStack{
+                        ForEach(1..<2) {i in
+                            HStack {
+                                Text("Recent Records")
+                                Spacer()
+                            }
+                            
+                        }
+                    }.frame(maxWidth: .infinity)
+                }
+                
+                HabitDetailSection {
+                    LazyVStack{
+                        ForEach(1..<12) {i in
+                            HStack {
+                                Text("Check in \(i)")
+                                Spacer()
+                            }
+                            
+                        }
+                    }.frame(maxWidth: .infinity)
                 }
                 
             }.animation(.default, value: isEditing)
@@ -151,7 +176,7 @@ struct HabitDetailSection<Content: View>: View {
         }
         .clipped()
         .padding(.vertical, 6)
-        .padding(.horizontal, 12)
+        .padding(.horizontal, HabitDetailBottomSheet.CONTENT_HORIZONTAL_PADDING)
         
     }
 }
@@ -164,7 +189,7 @@ struct HabitProgressModifyBottomSheet_Previews: PreviewProvider {
             VStack{
                 Spacer()
                 VStack{
-                    HabitProgressModifyBottomSheet(habit: HabitViewModel.shared.getOngoingHabitViewModels().first!)
+                    HabitDetailBottomSheet(habit: HabitViewModel.shared.getOngoingHabitViewModels().first!)
                         //.background(.blue.opacity(0.2))
                         //.padding()
                 }

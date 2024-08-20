@@ -57,7 +57,7 @@
 		2F5CF99D2A6B7EC000BA9826 /* StatisticalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5CF99C2A6B7EC000BA9826 /* StatisticalView.swift */; };
 		2F5D86952BB1AAD5004AA466 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 2F5D86942BB1AAD5004AA466 /* PartialSheet */; };
 		2F5D86982BB2779C004AA466 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D86972BB2779C004AA466 /* BottomSheetViewController.swift */; };
-		2F5D869E2BB54D26004AA466 /* HabitProgressModifyPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D869D2BB54D26004AA466 /* HabitProgressModifyPopup.swift */; };
+		2F5D869E2BB54D26004AA466 /* HabitDetailBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D869D2BB54D26004AA466 /* HabitDetailBottomSheet.swift */; };
 		2F5D86A02BB59821004AA466 /* TodoFastCreatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D869F2BB59821004AA466 /* TodoFastCreatViewController.swift */; };
 		2F5D86A52BB8028F004AA466 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D86A42BB8028F004AA466 /* CheckListView.swift */; };
 		2F5D86A72BB84464004AA466 /* CheckItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D86A62BB84464004AA466 /* CheckItemModel.swift */; };
@@ -127,6 +127,9 @@
 		2FEA90EB2B68006200B45650 /* WeeklyCalendarBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEA90EA2B68006200B45650 /* WeeklyCalendarBar.swift */; };
 		2FEF07132B4AD904002EB57D /* CustomViewsInForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF07122B4AD904002EB57D /* CustomViewsInForm.swift */; };
 		2FF2C2462B4F03E000A81325 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF2C2452B4F03E000A81325 /* SceneDelegate.swift */; };
+		2FF757E62C68CA540025780B /* TodoCheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF757E52C68CA540025780B /* TodoCheckListView.swift */; };
+		2FF757E82C6E79DA0025780B /* TodoEditOrCreateNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF757E72C6E79DA0025780B /* TodoEditOrCreateNavBarView.swift */; };
+		2FF757EB2C6EAA570025780B /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF757EA2C6EAA570025780B /* Themes.swift */; };
 		2FFDF16A2A7F830700027AFE /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFDF1692A7F830700027AFE /* InitView.swift */; };
 /* End PBXBuildFile section */
 
@@ -197,7 +200,7 @@
 		2F5CC1B32B88A7C50032F09B /* TaskViewSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewSegmentedControl.swift; sourceTree = "<group>"; };
 		2F5CF99C2A6B7EC000BA9826 /* StatisticalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalView.swift; sourceTree = "<group>"; };
 		2F5D86972BB2779C004AA466 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
-		2F5D869D2BB54D26004AA466 /* HabitProgressModifyPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitProgressModifyPopup.swift; sourceTree = "<group>"; };
+		2F5D869D2BB54D26004AA466 /* HabitDetailBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailBottomSheet.swift; sourceTree = "<group>"; };
 		2F5D869F2BB59821004AA466 /* TodoFastCreatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoFastCreatViewController.swift; sourceTree = "<group>"; };
 		2F5D86A42BB8028F004AA466 /* CheckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListView.swift; sourceTree = "<group>"; };
 		2F5D86A62BB84464004AA466 /* CheckItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckItemModel.swift; sourceTree = "<group>"; };
@@ -266,6 +269,9 @@
 		2FEA90EA2B68006200B45650 /* WeeklyCalendarBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarBar.swift; sourceTree = "<group>"; };
 		2FEF07122B4AD904002EB57D /* CustomViewsInForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewsInForm.swift; sourceTree = "<group>"; };
 		2FF2C2452B4F03E000A81325 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2FF757E52C68CA540025780B /* TodoCheckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCheckListView.swift; sourceTree = "<group>"; };
+		2FF757E72C6E79DA0025780B /* TodoEditOrCreateNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditOrCreateNavBarView.swift; sourceTree = "<group>"; };
+		2FF757EA2C6EAA570025780B /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		2FFDF1692A7F830700027AFE /* InitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -391,6 +397,7 @@
 		2F5298FD29F20E0A0018B8CA /* HabitTracker */ = {
 			isa = PBXGroup;
 			children = (
+				2FF757E92C6EAA3C0025780B /* Theme */,
 				2F3B83C72C512DAE00BCDE01 /* SettingsAndPreferences */,
 				2FB67A882BC2DA06003D9C71 /* DataModels */,
 				2F5D86962BB2776E004AA466 /* BottomSheetViewController */,
@@ -464,11 +471,13 @@
 		2F5D86A32BB80255004AA466 /* TodoFastCreation */ = {
 			isa = PBXGroup;
 			children = (
+				2FF757E42C68CA340025780B /* Deprecated */,
 				2F5D869F2BB59821004AA466 /* TodoFastCreatViewController.swift */,
-				2F5D86A42BB8028F004AA466 /* CheckListView.swift */,
-				2F5D86A62BB84464004AA466 /* CheckItemModel.swift */,
 				2FC79CFE2C04CCC9009800C6 /* PriorityPopupView.swift */,
 				2F373BC02C09898400E6C370 /* DateAndTimeSelectionView.swift */,
+				2F5D86A62BB84464004AA466 /* CheckItemModel.swift */,
+				2FF757E52C68CA540025780B /* TodoCheckListView.swift */,
+				2FF757E72C6E79DA0025780B /* TodoEditOrCreateNavBarView.swift */,
 			);
 			path = TodoFastCreation;
 			sourceTree = "<group>";
@@ -601,6 +610,15 @@
 			path = UIkitPopup;
 			sourceTree = "<group>";
 		};
+		2F84821D2C6480BD00E8447E /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D9DB82B7DDB8E00399975 /* Popups */,
+				2F4F563B2A3EB33300EC144D /* HabitDetailView.swift */,
+			);
+			path = Deprecated;
+			sourceTree = "<group>";
+		};
 		2F9141B22A837C6300E53509 /* ViewControllerWrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -676,11 +694,10 @@
 		2FCBC5C72B46BDD2003D946E /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
-				2F5D9DB82B7DDB8E00399975 /* Popups */,
+				2F84821D2C6480BD00E8447E /* Deprecated */,
 				2FEA90E52B65734C00B45650 /* ImageResources.swift */,
 				2FCBC5C82B46BE45003D946E /* TaskTableViewController+Cell+View.swift */,
-				2F4F563B2A3EB33300EC144D /* HabitDetailView.swift */,
-				2F5D869D2BB54D26004AA466 /* HabitProgressModifyPopup.swift */,
+				2F5D869D2BB54D26004AA466 /* HabitDetailBottomSheet.swift */,
 				2F511F292A0CCFD400AC5328 /* TaskListView.swift */,
 				2F7381622B406B34000E767A /* TaskCardViews.swift */,
 				2F5D9DBB2B85045900399975 /* TaskCardbackground.swift */,
@@ -723,6 +740,22 @@
 				2FEA90EA2B68006200B45650 /* WeeklyCalendarBar.swift */,
 			);
 			path = CalendarViews;
+			sourceTree = "<group>";
+		};
+		2FF757E42C68CA340025780B /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D86A42BB8028F004AA466 /* CheckListView.swift */,
+			);
+			path = Deprecated;
+			sourceTree = "<group>";
+		};
+		2FF757E92C6EAA3C0025780B /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				2FF757EA2C6EAA570025780B /* Themes.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -882,10 +915,12 @@
 				2F3B83CD2C52000E00BCDE01 /* WeekPickerView.swift in Sources */,
 				2F5D9DB72B7C645100399975 /* RootViewController.swift in Sources */,
 				2FEA90EB2B68006200B45650 /* WeeklyCalendarBar.swift in Sources */,
+				2FF757E82C6E79DA0025780B /* TodoEditOrCreateNavBarView.swift in Sources */,
 				2F373BDE2C258AB100E6C370 /* GoalView.swift in Sources */,
 				2FC79CFB2BF65FAE009800C6 /* SelfSizingHostingController.swift in Sources */,
 				2F3B83D12C5A653E00BCDE01 /* YearPickerView.swift in Sources */,
 				2F5D9DA72B6F755000399975 /* Goals.swift in Sources */,
+				2FF757E62C68CA540025780B /* TodoCheckListView.swift in Sources */,
 				2FD676582C31CE4000ECD2A9 /* GoalPickingView.swift in Sources */,
 				2F32C76D2A108F5E008CDF7E /* BottomSheetView.swift in Sources */,
 				2F6B039B2B92192F00974518 /* SideMenuItem.swift in Sources */,
@@ -915,7 +950,7 @@
 				2F8418A22A472F3B00F20BD0 /* HabitTarget.swift in Sources */,
 				2F5D9DAB2B712B7E00399975 /* CreatProjectForm.swift in Sources */,
 				2FF2C2462B4F03E000A81325 /* SceneDelegate.swift in Sources */,
-				2F5D869E2BB54D26004AA466 /* HabitProgressModifyPopup.swift in Sources */,
+				2F5D869E2BB54D26004AA466 /* HabitDetailBottomSheet.swift in Sources */,
 				2F3B83D32C5BC39200BCDE01 /* GoalMesurementSectionViews.swift in Sources */,
 				2F7637B22BF10BAD005E327D /* UIkitGlobalPopupViewController.swift in Sources */,
 				2F2493242A30D4590009E651 /* PickerPopupView.swift in Sources */,
@@ -924,6 +959,7 @@
 				2F5D86A72BB84464004AA466 /* CheckItemModel.swift in Sources */,
 				2FB67A832BBDA4AA003D9C71 /* TreeNodeProtocol.swift in Sources */,
 				2F8418A02A46CB2100F20BD0 /* Habits.swift in Sources */,
+				2FF757EB2C6EAA570025780B /* Themes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

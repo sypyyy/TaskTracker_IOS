@@ -265,7 +265,7 @@ struct HabitNumberProgressModifyControlPanelPreview: PreviewProvider {
             VStack{
                 Spacer()
                 VStack{
-                    HabitProgressModifyBottomSheet(habit: HabitViewModel.shared.getOngoingHabitViewModels().first!)
+                    HabitDetailBottomSheet(habit: HabitViewModel.shared.getOngoingHabitViewModels().first!)
                         //.background(.blue.opacity(0.2))
                         .padding()
                 }
@@ -290,7 +290,7 @@ struct HabitTimeProgressModifyControlPanelPreview: PreviewProvider {
             VStack{
                 Spacer()
                 VStack{
-                    HabitProgressModifyBottomSheet(habit: HabitViewModel.shared.getOngoingHabitViewModels().first(where: {
+                    HabitDetailBottomSheet(habit: HabitViewModel.shared.getOngoingHabitViewModels().first(where: {
                         $0.type == .time
                     }) ?? HabitModel())
                         //.background(.blue.opacity(0.2))

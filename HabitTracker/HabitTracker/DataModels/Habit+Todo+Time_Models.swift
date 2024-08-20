@@ -178,6 +178,9 @@ class HabitModel: TaskModel {
 
 
 class TodoModel: TaskModel{
+    static func getInitialTodoModel() -> TodoModel {
+        return TodoModel()
+    }
     var name: String
     var note : String
     var priority: TodoPriority

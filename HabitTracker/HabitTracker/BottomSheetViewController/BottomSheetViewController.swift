@@ -35,7 +35,7 @@ enum SnapPoint: Double {
 
 
 class BottomSheetHandleView: UIView {
-    static let paddingVertical: CGFloat = 6
+   // static let paddingVertical: CGFloat = 6
     static let width: CGFloat = 40
     static let height: CGFloat = 6
     
@@ -62,7 +62,6 @@ class BottomSheetHandleView: UIView {
 final class BottomSheetViewController: UIViewController {
     
     static let shared = BottomSheetViewController()
-    
     static let defaultSnapPoint = SnapPoint.top
     
     static let defaultDragOffset: CGFloat = 180
@@ -75,7 +74,7 @@ final class BottomSheetViewController: UIViewController {
     private var heightConstraint: NSLayoutConstraint!
     private var shadowColor: UIColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 0.05)
     private var sheetView = UIView()
-    private var handleView = BottomSheetHandleView()
+    //private var handleView = BottomSheetHandleView()
     private var backgroundViews = [UIView]()
     
     var screenHeight: CGFloat {
@@ -127,10 +126,10 @@ final class BottomSheetViewController: UIViewController {
 
     private func addSubviews() {
         sheetView.translatesAutoresizingMaskIntoConstraints = false
-        handleView.translatesAutoresizingMaskIntoConstraints = false
+        //handleView.translatesAutoresizingMaskIntoConstraints = false
         sheetView.backgroundColor = .clear
         view.addSubview(sheetView)
-        view.addSubview(handleView)
+        //view.addSubview(handleView)
     }
     
     private func configureConstraints() {
@@ -142,12 +141,14 @@ final class BottomSheetViewController: UIViewController {
             sheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+        /*
         NSLayoutConstraint.activate([
             handleView.bottomAnchor.constraint(equalTo: sheetView.topAnchor, constant: BottomSheetHandleView.paddingVertical),
             handleView.heightAnchor.constraint(equalToConstant: BottomSheetHandleView.height),
             handleView.widthAnchor.constraint(equalToConstant: BottomSheetHandleView.width),
             handleView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+         */
     }
 
     private func configureTapGesture() {
@@ -201,7 +202,7 @@ final class BottomSheetViewController: UIViewController {
             view.insertSubview(blurView, at: 0)
             backgroundViews.append(blurView)
             NSLayoutConstraint.activate([
-                blurView.topAnchor.constraint(equalTo: handleView.topAnchor, constant: -BottomSheetHandleView.paddingVertical),
+                blurView.topAnchor.constraint(equalTo: sheetView.topAnchor),
                 //I did this because there is a bug that UIHostingViewController does not follow NSLayoutConstraints(bottom), leading to sheetView's bottom changed, so I put up this ugly fix for now. which is, tie the blur view bottom to root view's bottom. And a extra 10 to avoid conflict when sheet is disappearing.
                 blurView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: screenHeight),
                 blurView.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),

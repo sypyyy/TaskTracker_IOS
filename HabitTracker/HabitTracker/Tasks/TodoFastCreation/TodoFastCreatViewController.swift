@@ -43,7 +43,7 @@ extension TodoFastCreatViewController: ChangeListener {
     func didUpdate(msg: ChangeMessage) {
         switch msg {
         case .taskGoalSet:
-            if let todo = PersistenceController.preview.getTodoById(id: editingTodo?.id ?? "") {
+            if let todo = persistenceController.getTodoById(id: editingTodo.id) {
                 editingTodo = TodoModel(todo: todo)
             }
         default:
@@ -52,21 +52,38 @@ extension TodoFastCreatViewController: ChangeListener {
     }
 }
 
+enum TodoCreationMode {
+    case create, edit(todo: TodoModel)
+}
+
 @MainActor
 final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
-    
+    let mode: TodoCreationMode
+    let persistenceController = PersistenceController.preview
     var listenerID = UUID().uuidString
     let TEXT_FIELD_BACKGROUND_COLOR = UIColor.lightGray.withAlphaComponent(0.15)
     let SECTION_CORNER_RADIUS: CGFloat = 12
     let FORM_HORIZONTAL_PADDING: CGFloat = 14
     let TODO_DESCRIPTION_MIN_HEIGHT: CGFloat = 200
     
-    var scrollView: UIScrollView = UIScrollView()
+    var scrollView: UIScrollView = {
+        let res = UIScrollView()
+        res.alwaysBounceVertical = true
+        return res
+    }()
+    var navController: UIHostingController<TodoEditOrCreateNavBarView>? = nil
+    var scrollContentView: UIView = UIView()
     
-    var editingTodo: TodoModel?
+    var editingTodo: TodoModel
     
-    init(editingTodo: TodoModel? = nil) {
-        self.editingTodo = editingTodo
+    init(mode: TodoCreationMode = .create) {
+        self.mode = mode
+        switch mode {
+        case .create:
+            self.editingTodo = TodoModel.getInitialTodoModel()
+        case .edit(let todo):
+            self.editingTodo = todo
+        }
         super.init(nibName: nil, bundle: nil)
         MasterViewModel.shared.registerListener(listener: self)
     }
@@ -91,7 +108,7 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
     var shouldHideAccessoryForGood: Bool = false
     var editingViewType: EditingViewType = .todo
     var editingCheckListItem: CheckListItemView?
-    func setEditingType(_ type: EditingViewType) {
+    func setEditingSectionType(_ type: EditingViewType) {
         editingViewType = type
         switch editingViewType {
         case .todo:
@@ -111,41 +128,54 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
     }()
     
     //Sub Todo
-    let SUB_TODO_MIN_HEIGHT: CGFloat = 200
-    var subTodoView: CheckListView!
+    var subTodoView: TodoCheckListView!
     var subTodoHeightConstraint: NSLayoutConstraint?
     var subTodoWrapper = UIView()
     var todoDescriptionHeightConstraint: NSLayoutConstraint!
+    
     //States
     var hasSubTodo: Bool {
         get {
             subTodoView.superview != nil
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
-        subTodoView = CheckListView(frame: .zero, style: .plain, delegate: self)
+        subTodoView = TodoCheckListView(frame: .zero, style: .plain, delegate: self)
         configureViews()
         configureGestures()
     }
     
     private func configureViews() {
+        addNavBar()
         addSubviews()
         configureConstraints()
         //setupTodoAccessoryView()
         configureAccessoryViews()
     }
     
+    private func addNavBar() {
+        let navController = UIHostingController(rootView: TodoEditOrCreateNavBarView())
+        navController.view.backgroundColor = .clear
+        self.navController = navController
+        addChild(navController)
+        view.addSubview(navController.view)
+        
+        navController.didMove(toParent: self)
+    }
+    
     private func addSubviews() {
         view.addSubview(scrollView)
+        scrollView.addSubview(scrollContentView)
         todoNameView.backgroundColor = TEXT_FIELD_BACKGROUND_COLOR
         todoNameView.layer.cornerRadius = SECTION_CORNER_RADIUS
         todoNameView.placeholder = "To-Do"
         todoNameView.delegate = self
-        scrollView.addSubview(todoNameView)
+        scrollContentView.addSubview(todoNameView)
         subTodoWrapper.backgroundColor = .clear
-        scrollView.addSubview(subTodoWrapper)
+        scrollContentView.addSubview(subTodoWrapper)
         subTodoView.backgroundColor = TEXT_FIELD_BACKGROUND_COLOR
         subTodoView.layer.cornerRadius = SECTION_CORNER_RADIUS
         todoDescriptView.backgroundColor = TEXT_FIELD_BACKGROUND_COLOR
@@ -154,39 +184,62 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
         todoDescriptView.layer.cornerRadius = SECTION_CORNER_RADIUS
         todoDescriptView.delegate = self
         todoDescriptView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 0, right: 2)
-        scrollView.addSubview(todoDescriptView)
+        scrollContentView.addSubview(todoDescriptView)
         
         
     }
 
     
     private func configureConstraints() {
+        navController?.view.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        if let navController = navController {
+            NSLayoutConstraint.activate([
+                navController.view.topAnchor.constraint(equalTo: view.topAnchor),
+                navController.view.heightAnchor.constraint(equalToConstant: TodoEditOrCreateNavBarView.HEIGHT),
+                navController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: FORM_HORIZONTAL_PADDING),
+                navController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -FORM_HORIZONTAL_PADDING),
+                scrollView.topAnchor.constraint(equalTo: navController.view.bottomAnchor)
+            ])
+        }
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+        
+        scrollContentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scrollContentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            scrollContentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            scrollContentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            scrollContentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            scrollContentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),  // for vertical scrolling
+            // contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),  // for horizontal scrolling
+        ])
         todoNameView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            todoNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            todoNameView.topAnchor.constraint(equalTo: scrollContentView.topAnchor),
             todoNameView.heightAnchor.constraint(equalToConstant: 40),
-            todoNameView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: FORM_HORIZONTAL_PADDING),
-            todoNameView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -FORM_HORIZONTAL_PADDING),
+            todoNameView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: FORM_HORIZONTAL_PADDING),
+            todoNameView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -FORM_HORIZONTAL_PADDING),
         ])
         subTodoWrapper.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             subTodoWrapper.topAnchor.constraint(equalTo: todoNameView.bottomAnchor, constant: 0),
-            subTodoWrapper.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: FORM_HORIZONTAL_PADDING),
-            subTodoWrapper.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -FORM_HORIZONTAL_PADDING),
+            subTodoWrapper.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: FORM_HORIZONTAL_PADDING),
+            subTodoWrapper.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -FORM_HORIZONTAL_PADDING),
         ])
         todoDescriptView.translatesAutoresizingMaskIntoConstraints = false
         todoDescriptionHeightConstraint = todoDescriptView.heightAnchor.constraint(equalToConstant: TODO_DESCRIPTION_MIN_HEIGHT)
         todoDescriptionHeightConstraint.isActive = true
         NSLayoutConstraint.activate([
             todoDescriptView.topAnchor.constraint(equalTo: subTodoWrapper.bottomAnchor, constant: 20),
-            todoDescriptView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: FORM_HORIZONTAL_PADDING),
-            todoDescriptView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -FORM_HORIZONTAL_PADDING),
+            todoDescriptView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: FORM_HORIZONTAL_PADDING),
+            todoDescriptView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -FORM_HORIZONTAL_PADDING),
+            todoDescriptView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -20),
         ])
+        //scrollContentView.backgroundColor = .red
         
     }
     
@@ -197,8 +250,9 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
             subTodoView.alpha = 1
             subTodoWrapper.addSubview(subTodoView)
             subTodoView.translatesAutoresizingMaskIntoConstraints = false
+            subTodoHeightConstraint = subTodoView.heightAnchor.constraint(equalToConstant: CheckListItemView.ROW_HEIGHT)
+            subTodoHeightConstraint?.isActive = true
             NSLayoutConstraint.activate([
-                subTodoView.heightAnchor.constraint(equalToConstant: 300),
                 subTodoView.topAnchor.constraint(equalTo: subTodoWrapper.topAnchor, constant: 20),
                 subTodoView.leadingAnchor.constraint(equalTo: subTodoWrapper.leadingAnchor),
                 subTodoView.trailingAnchor.constraint(equalTo: subTodoWrapper.trailingAnchor),
@@ -232,7 +286,7 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        setEditingType(.description)
+        setEditingSectionType(.description)
     }
         
     func textViewDidChange(_ textView: UITextView) {
@@ -254,7 +308,7 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == todoNameView {
-            self.setEditingType(.todo)
+            self.setEditingSectionType(.todo)
         }
     }
 }
@@ -288,13 +342,12 @@ extension TodoFastCreatViewController {
     @objc func presentGoalPickingSheet(_ sender: UIButton) {
         let sourceFrame = sender.convert(sender.bounds, to: sender.window)
         print("sourceFrame: \(sourceFrame)")
-        if let editingTodo = self.editingTodo {
             print("the goal is currently \(editingTodo.goal?.name)")
             let sheetViewController = UIHostingController(rootView: TaskGoalPickingSheetView(preselectedGoal: editingTodo.goal, mode: .todo(todo: editingTodo)))
             
             // Present it w/o any adjustments so it uses the default sheet presentation.
             present(sheetViewController, animated: true, completion: nil)
-        }
+        
     }
     
 }
@@ -325,7 +378,6 @@ extension TodoFastCreatViewController {
             }
             if let accessoryView = self.accessoryView, let window = view.window {
                 view.addSubview(accessoryView)
-                
                 NSLayoutConstraint.activate([
                     accessoryView.leadingAnchor.constraint(equalTo: window.leadingAnchor),
                     accessoryView.widthAnchor.constraint(equalToConstant: window.bounds.width),
@@ -424,6 +476,11 @@ extension TodoFastCreatViewController {
         return AccessoryView(buttons: [listButton, subTaskButton])
     }
      */
+    
+    func updateSubTodoHeight() {
+        subTodoHeightConstraint?.constant = subTodoView.contentSize.height
+        self.view.layoutIfNeeded()
+    }
 }
 
 

@@ -896,11 +896,11 @@ struct TaskTableCellView: View {
                         switch task.taskType {
                         case .habit:
                             if let habit = task as? HabitModel {
-                                ContainerViewComposer.sharedContainerVC.showBottomSheet(snapPoints: [.AlmostFull], background: .blur(style: .systemThinMaterialLight), viewType: .swiftUI(view: AnyView(HabitProgressModifyBottomSheet(habit: habit))))
+                                ContainerViewComposer.sharedContainerVC.showBottomSheet(snapPoints: [.AlmostFull], background: .blur(style: .systemThinMaterialLight), viewType: .swiftUI(view: AnyView(HabitDetailBottomSheet(habit: habit))))
                             }
                         case .todo:
                             if let todo = task as? TodoModel {
-                                ContainerViewComposer.sharedContainerVC.showBottomSheet(snapPoints: [.AlmostFull], background: .blur(style: .systemThinMaterialLight), viewType: .viewController(TodoFastCreatViewController(editingTodo: todo)))
+                                ContainerViewComposer.sharedContainerVC.showBottomSheet(snapPoints: [.AlmostFull], background: .blur(style: .systemThinMaterialLight), viewType: .viewController(TodoFastCreatViewController(mode: .edit(todo: todo))))
                             }
                         }
                         //masterViewModel.selectTask(taskId: task.taskId)
