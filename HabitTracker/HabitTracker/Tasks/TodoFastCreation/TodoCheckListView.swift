@@ -6,22 +6,18 @@
 //
 
 import UIKit
-//Deprecated
-class TodoCheckListView: UITableView, UITableViewDelegate, UITableViewDataSource {
+import SwiftUI
+
+class TodoCheckListView: UIStackView {
     weak var viewControllerAsDelegate: TodoFastCreatViewController?
-    var items: [CheckItemModel] = [CheckItemModel()]
-    var cellHeights: [(Bool, CGFloat)] = [(true, CheckListItemView.ROW_HEIGHT)]
     
     init(frame: CGRect, style: UITableView.Style, delegate: TodoFastCreatViewController) {
-        super.init(frame: frame, style: style)
+        super.init(frame: frame)
+        self.alignment = .fill
+        self.distribution = .equalSpacing
+        self.axis = .vertical
         self.viewControllerAsDelegate = delegate
-        self.isScrollEnabled = false
-        //self.panGestureRecognizer.isEnabled = false
-        self.delegate = self
-        self.dataSource = self
-        self.allowsSelection = false
-        self.register(CheckListItemCell.self, forCellReuseIdentifier: "CheckListItemCell")
-        self.separatorStyle = .none
+        addCheckListItem(below: nil)
     }
     
     
@@ -29,54 +25,73 @@ class TodoCheckListView: UITableView, UITableViewDelegate, UITableViewDataSource
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addCheckListItem(below itemview: CheckListItemView) {
-        let insertIndex = (items.firstIndex(of: itemview.checkItemModel) ?? items.count) + 1
-        self.performBatchUpdates{
-            items.insert(CheckItemModel(), at: insertIndex)
-            cellHeights.insert((true, CheckListItemView.ROW_HEIGHT), at: insertIndex)
-            self.insertRows(at: [IndexPath(row: insertIndex, section: 0)], with: .fade)
-        } completion: { _ in
-            UIView.animate(withDuration: 0.1) {
-                self.viewControllerAsDelegate?.updateSubTodoHeight()
+    func addCheckListItem(below itemview: CheckListItemView?) {
+        if let itemview = itemview {
+            let arrangedSubviews = self.arrangedSubviews
+            if let insertIndex = self.arrangedSubviews.firstIndex(of: itemview) {
+                addCheckListItem(insertIndex: insertIndex + 1)
             }
+        } else {
+            addCheckListItem(insertIndex: 0)
+        }
+        
+        func addCheckListItem(insertIndex: Int) {
+            let newModel = CheckItemModel()
+            let newView = CheckListItemView(buttonDelegate: self, checkItemModel: newModel)
+            
+            newView.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(newView)
+            NSLayoutConstraint.activate([
+                newView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            ])
+            var initialTopConstraint: NSLayoutConstraint? = nil
+            if insertIndex > 0 {
+                initialTopConstraint = newView.topAnchor.constraint(equalTo: self.arrangedSubviews[insertIndex - 1].topAnchor)
+                initialTopConstraint?.isActive = true
+            }
+            newView.alpha = 0
+            self.layoutIfNeeded()
+            UIView.animate(withDuration: 0.15) {
+                initialTopConstraint?.isActive = false
+                self.insertArrangedSubview(newView, at: insertIndex)
+                newView.alpha = 1
+                self.viewControllerAsDelegate?.view.layoutIfNeeded()
+                newView.textView.becomeFirstResponder()
+            } completion: { _ in
+                
+            }
+            
+        }
+        
+        
+        
+    }
+    
+    func removeCheckListItem(item itemView: CheckListItemView) {
+        if(self.arrangedSubviews.count > 1) {
+            itemView.textView.resignFirstResponder()
+            let arrangedSubviews = self.arrangedSubviews
+            self.removeArrangedSubview(itemView)
+            itemView.removeFromSuperview()
+            self.layoutIfNeeded()
         }
     }
 }
 
-extension TodoCheckListView {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListItemCell", for: indexPath) as! CheckListItemCell
-        let item = items[indexPath.row]
-        cell.configure(with: item, delegate: self)
-        cell.backgroundColor = .clear
-        cell.contentView.backgroundColor = .clear
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row < cellHeights.count && cellHeights[indexPath.row].0 {
-            return cellHeights[indexPath.row].1
-        }
-        if let cell = tableView.cellForRow(at: indexPath) as? CheckListItemCell {
-            if let textView = cell.checkItemView?.textView {
-                return textView.sizeThatFits(.init(width: textView.frame.width, height: .greatestFiniteMagnitude)).height
-            }
-        }
-        return CheckListItemView.ROW_HEIGHT
-    }
-}
 
 class CheckListItemView: UIView {
     weak var checkListAsDelegate: TodoCheckListView?
     weak var ownerViewContoller: TodoFastCreatViewController?
     let checkItemModel: CheckItemModel
-    static let CHECKBOX_SIZE: CGFloat = 25
     let checkBox = CheckBoxButton(checked: false)
-    let textView = UITextView()
+    static let FONT_SIZE: CGFloat = 16
+    static let HORI_MARGIN: CGFloat = 10
+    let textView: UITextView = {
+        let res = UITextView()
+        res.font = UIFont.systemFont(ofSize: FONT_SIZE)
+        res.textColor = UIColor(Color.primary.lighter(by: 24))
+        return res
+    }()
     var deleteButton = UIButton()
     var textViewHeightConstraint: NSLayoutConstraint?
         
@@ -88,14 +103,12 @@ class CheckListItemView: UIView {
         configureViews()
         configureConstraints()
         //self.translatesAutoresizingMaskIntoConstraints = false
-        
-       
         //self.backgroundColor = .white
     }
     
     private func setDeleteButton() {
         deleteButton.setImage(UIImage(systemName: "xmark") ?? UIImage(), for: .normal)
-        deleteButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(attemptToRemoveItem), for: .touchUpInside)
     }
     
     private func configureViews() {
@@ -111,8 +124,15 @@ class CheckListItemView: UIView {
         textView.backgroundColor = .clear
         
     }
-    static let BUTTON_SIZE: CGFloat = 25
-    static let ROW_HEIGHT: CGFloat = 30
+    static let ROW_HEIGHT: CGFloat = {
+        let lineHeight = UIFont.systemFont(ofSize: FONT_SIZE).lineHeight
+        let defaultTextView = UITextView()
+        defaultTextView.font = UIFont.systemFont(ofSize: FONT_SIZE)
+        let textContainerInsets = defaultTextView.textContainerInset
+        let lineFragmentPadding = defaultTextView.textContainer.lineFragmentPadding
+        let totalVerticalPadding = textContainerInsets.top + textContainerInsets.bottom
+        return lineHeight + totalVerticalPadding
+    }()
     
     private func configureConstraints() {
         checkBox.translatesAutoresizingMaskIntoConstraints = false
@@ -120,9 +140,10 @@ class CheckListItemView: UIView {
         textViewHeightConstraint = textView.heightAnchor.constraint(equalToConstant: CheckListItemView.ROW_HEIGHT)
         textViewHeightConstraint?.isActive = true
         NSLayoutConstraint.activate([
-            checkBox.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            checkBox.widthAnchor.constraint(equalToConstant: CheckListItemView.CHECKBOX_SIZE),
-            checkBox.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            checkBox.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CheckListItemView.HORI_MARGIN),
+            checkBox.widthAnchor.constraint(equalToConstant: UIFont.systemFont(ofSize: CheckListItemView.FONT_SIZE).lineHeight),
+            checkBox.heightAnchor.constraint(equalToConstant: UIFont.systemFont(ofSize: CheckListItemView.FONT_SIZE).lineHeight),
+            checkBox.topAnchor.constraint(equalTo: self.topAnchor, constant: textView.textContainerInset.top),
             textView.leadingAnchor.constraint(equalTo: checkBox.trailingAnchor, constant: 2),
             textView.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor),
             textView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -131,8 +152,11 @@ class CheckListItemView: UIView {
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             //deleteButton.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 4),
-            deleteButton.widthAnchor.constraint(equalToConstant: CheckListItemView.BUTTON_SIZE),
-            deleteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+            deleteButton.widthAnchor.constraint(equalToConstant: UIFont.systemFont(ofSize: CheckListItemView.FONT_SIZE).lineHeight),
+            deleteButton.heightAnchor.constraint(equalToConstant: UIFont.systemFont(ofSize: CheckListItemView.FONT_SIZE).lineHeight),
+            deleteButton.topAnchor.constraint(equalTo: self.topAnchor, constant: textView.textContainerInset.top),
+            deleteButton.widthAnchor.constraint(equalToConstant: CheckListItemView.ROW_HEIGHT),
+            deleteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -CheckListItemView.HORI_MARGIN),
         ])
     }
     
@@ -140,8 +164,8 @@ class CheckListItemView: UIView {
         checkListAsDelegate?.addCheckListItem(below: self)
     }
     
-    @objc func expandButtonTapped() {
-       
+    @objc func attemptToRemoveItem() {
+        checkListAsDelegate?.removeCheckListItem(item: self)
     }
         
     required init(coder: NSCoder) {
@@ -161,22 +185,32 @@ extension CheckListItemView: UITextViewDelegate {
         textViewHeightConstraint?.constant = max(CheckListItemView.ROW_HEIGHT, textHeight)
         
          */
-        let index = checkListAsDelegate?.items.firstIndex(of: checkItemModel) ?? 0
-        let newHeight = textView.sizeThatFits(.init(width: textView.frame.width, height: .greatestFiniteMagnitude)).height
-        checkListAsDelegate?.cellHeights[index].1 = newHeight
-        textViewHeightConstraint?.constant = newHeight
-        self.checkListAsDelegate?.performBatchUpdates {
-            
-        } completion: {_ in
-            UIView.animate(withDuration: 0.1) {
-                self.ownerViewContoller?.updateSubTodoHeight()
-            }
-        }
         
+        let newHeight = textView.sizeThatFits(.init(width: textView.frame.width, height: .greatestFiniteMagnitude)).height
+        textViewHeightConstraint?.constant = newHeight
         // This method is called every time the text changes.
         print("Text view content changed: \(textView.text!)")
         
         
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // Check if the replacement text is the "Enter" key (Return key)
+        if text == "\n" {
+            // Handle the "Enter" key press (e.g., dismiss the keyboard)
+            addItem()
+            return false // Prevents adding a newline character in the textView
+        }
+        /*
+        if text.isEmpty {
+            // Check if the UITextView is already empty
+            if textView.text.isEmpty {
+                attemptToRemoveItem()
+                return false
+            }
+        }
+         */
+        return true
     }
 }
 
@@ -205,38 +239,4 @@ class CheckBoxButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-
-class CheckListItemCell: UITableViewCell {
-    var checkItemModel: CheckItemModel?
-    var checkItemView: CheckListItemView?
-    // Add UI components (e.g., checkBox, textView) and layout constraints
-    
-    func configure(with model: CheckItemModel, delegate: TodoCheckListView) {
-        self.checkItemModel = model
-        if let view = checkItemView {
-            view.removeFromSuperview()
-        }
-        checkItemView = CheckListItemView(buttonDelegate: delegate, checkItemModel: model)
-        checkItemView?.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(checkItemView ?? UIView())
-        NSLayoutConstraint.activate([
-            checkItemView?.leadingAnchor.constraint(equalTo: contentView.leadingAnchor) ?? NSLayoutConstraint(),
-            checkItemView?.trailingAnchor.constraint(equalTo: contentView.trailingAnchor) ?? NSLayoutConstraint(),
-            checkItemView?.topAnchor.constraint(equalTo: contentView.topAnchor) ?? NSLayoutConstraint(),
-            checkItemView?.bottomAnchor.constraint(equalTo: contentView.bottomAnchor) ?? NSLayoutConstraint()
-        ])
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        // Setup UI components
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // Add functions to handle UI updates
 }

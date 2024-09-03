@@ -92,6 +92,7 @@
 		2F7637B22BF10BAD005E327D /* UIkitGlobalPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7637B12BF10BAD005E327D /* UIkitGlobalPopupViewController.swift */; };
 		2F8418A02A46CB2100F20BD0 /* Habits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F84189F2A46CB2100F20BD0 /* Habits.swift */; };
 		2F8418A22A472F3B00F20BD0 /* HabitTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8418A12A472F3B00F20BD0 /* HabitTarget.swift */; };
+		2F89FBE22C78633200D402FE /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89FBE12C78633200D402FE /* KeyboardAvoiding.swift */; };
 		2F9141B42A837DE100E53509 /* ViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9141B32A837DE100E53509 /* ViewControllerWrapper.swift */; };
 		2FAFDC412A86787200AFD31E /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAFDC402A86787200AFD31E /* CustomSegmentedControl.swift */; };
 		2FB317042A1021E800B0D7DE /* DateSwipeBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB317032A1021E800B0D7DE /* DateSwipeBarView.swift */; };
@@ -235,6 +236,7 @@
 		2F7637B12BF10BAD005E327D /* UIkitGlobalPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIkitGlobalPopupViewController.swift; sourceTree = "<group>"; };
 		2F84189F2A46CB2100F20BD0 /* Habits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habits.swift; sourceTree = "<group>"; };
 		2F8418A12A472F3B00F20BD0 /* HabitTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTarget.swift; sourceTree = "<group>"; };
+		2F89FBE12C78633200D402FE /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
 		2F9141B32A837DE100E53509 /* ViewControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapper.swift; sourceTree = "<group>"; };
 		2FAFDC402A86787200AFD31E /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		2FB317032A1021E800B0D7DE /* DateSwipeBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSwipeBarView.swift; sourceTree = "<group>"; };
@@ -653,7 +655,7 @@
 		2FBC52E82A1468C700C4992E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				2FC79CF92BF39D10009800C6 /* NotUsed */,
+				2FC79CF92BF39D10009800C6 /* Deprecated */,
 				2FC79CF72BF39CC1009800C6 /* FramePreferenceKey.swift */,
 				2FB67A8D2BCC2525003D9C71 /* TreeBasedTableUtils */,
 				2F7381662B416657000E767A /* CustomViews */,
@@ -668,17 +670,18 @@
 				2F7551542B2D9EEA00DC0C19 /* ViewModifiers.swift */,
 				2F7381642B411ACB000E767A /* NumberExtensions.swift */,
 				2FC79CFA2BF65FAE009800C6 /* SelfSizingHostingController.swift */,
+				2F89FBE12C78633200D402FE /* KeyboardAvoiding.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		2FC79CF92BF39D10009800C6 /* NotUsed */ = {
+		2FC79CF92BF39D10009800C6 /* Deprecated */ = {
 			isa = PBXGroup;
 			children = (
 				2F32C76C2A108F5E008CDF7E /* BottomSheetView.swift */,
 				2F373BD52C1FE1EF00E6C370 /* SideMenuViewUIkit.swift */,
 			);
-			path = NotUsed;
+			path = Deprecated;
 			sourceTree = "<group>";
 		};
 		2FCA285D2A13758C006AAD9B /* Background */ = {
@@ -956,6 +959,7 @@
 				2F2493242A30D4590009E651 /* PickerPopupView.swift in Sources */,
 				2F5F9A772B37D7D300CBCFEF /* Habit+Todo+Time_Models.swift in Sources */,
 				2FE2BAB12ABA26560045385E /* OldPopupManager.swift in Sources */,
+				2F89FBE22C78633200D402FE /* KeyboardAvoiding.swift in Sources */,
 				2F5D86A72BB84464004AA466 /* CheckItemModel.swift in Sources */,
 				2FB67A832BBDA4AA003D9C71 /* TreeNodeProtocol.swift in Sources */,
 				2F8418A02A46CB2100F20BD0 /* Habits.swift in Sources */,

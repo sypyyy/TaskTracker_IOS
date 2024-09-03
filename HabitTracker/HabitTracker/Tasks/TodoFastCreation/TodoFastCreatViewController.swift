@@ -76,6 +76,8 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
     
     var editingTodo: TodoModel
     
+    var keyBoardHeight: CGFloat = 0
+    
     init(mode: TodoCreationMode = .create) {
         self.mode = mode
         switch mode {
@@ -129,7 +131,6 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
     
     //Sub Todo
     var subTodoView: TodoCheckListView!
-    var subTodoHeightConstraint: NSLayoutConstraint?
     var subTodoWrapper = UIView()
     var todoDescriptionHeightConstraint: NSLayoutConstraint!
     
@@ -180,7 +181,7 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
         subTodoView.layer.cornerRadius = SECTION_CORNER_RADIUS
         todoDescriptView.backgroundColor = TEXT_FIELD_BACKGROUND_COLOR
         todoDescriptView.isEditable = true
-        todoDescriptView.isScrollEnabled = false
+        //todoDescriptView.isScrollEnabled = false
         todoDescriptView.layer.cornerRadius = SECTION_CORNER_RADIUS
         todoDescriptView.delegate = self
         todoDescriptView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 0, right: 2)
@@ -250,8 +251,6 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
             subTodoView.alpha = 1
             subTodoWrapper.addSubview(subTodoView)
             subTodoView.translatesAutoresizingMaskIntoConstraints = false
-            subTodoHeightConstraint = subTodoView.heightAnchor.constraint(equalToConstant: CheckListItemView.ROW_HEIGHT)
-            subTodoHeightConstraint?.isActive = true
             NSLayoutConstraint.activate([
                 subTodoView.topAnchor.constraint(equalTo: subTodoWrapper.topAnchor, constant: 20),
                 subTodoView.leadingAnchor.constraint(equalTo: subTodoWrapper.leadingAnchor),
@@ -286,16 +285,24 @@ final class TodoFastCreatViewController: UIViewController, UITextViewDelegate, U
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == todoDescriptView {
+            todoDescriptionHeightConstraint.constant = TODO_DESCRIPTION_MIN_HEIGHT
+            todoDescriptView.isScrollEnabled = true
+        }
         setEditingSectionType(.description)
     }
         
     func textViewDidChange(_ textView: UITextView) {
+        
         if textView == todoDescriptView {
             let textHeight = todoDescriptView.sizeThatFits(.init(width: todoDescriptView.frame.width, height: .greatestFiniteMagnitude)).height + 5
-            todoDescriptionHeightConstraint.constant = max(TODO_DESCRIPTION_MIN_HEIGHT, textHeight)
+            todoDescriptionHeightConstraint.constant = min(TODO_DESCRIPTION_MIN_HEIGHT, textHeight)
                 // This method is called every time the text changes.
                 print("Text view content changed: \(textView.text!)")
         }
+         
+        
+        
         /*
         if textView == subTodoView {
             let textHeight = subTodoView.sizeThatFits(.init(width: subTodoView.frame.width, height: .greatestFiniteMagnitude)).height + 5
@@ -355,14 +362,15 @@ extension TodoFastCreatViewController {
 //MARK: Keyboard actions
 extension TodoFastCreatViewController {
     func configureAccessoryViews() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardDidShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
+            self.keyBoardHeight = keyboardHeight + AccessoryView.ACCESSORY_HEIGHT
             var accessoryViewWasShowing = accessoryView?.window != nil
             shouldHideAccessoryForGood = !accessoryViewWasShowing
             if accessoryViewWasShowing {
@@ -384,15 +392,22 @@ extension TodoFastCreatViewController {
                     //Using width anchor because there is a bug with trailing anchor, when keyboard is gone, the trailing anchor will be 0
                     accessoryView.bottomAnchor.constraint(equalTo: window.bottomAnchor, constant: -keyboardHeight),
                 ])
+                //let accessoryViewBottomConstraint = accessoryView.bottomAnchor.constraint(equalTo: window.bottomAnchor, constant: 0)
+                //accessoryViewBottomConstraint.isActive = true
                 print("viewFrame: \(self.view.frame)")
                 if !accessoryViewWasShowing {
                     accessoryView.alpha = 0
+                    self.view.layoutIfNeeded()
                     UIView.animate(withDuration: 0.3) {
                         accessoryView.alpha = 1
+                       // accessoryViewBottomConstraint.constant = -keyboardHeight
+                       // self.view.layoutIfNeeded()
                     }
                 }
             }
+            
         }
+        //letResponderEscapeKeyboard()
     }
         
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -420,14 +435,24 @@ extension TodoFastCreatViewController {
             
             if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue, let window = view.window {
                 let keyboardHeight = keyboardFrame.cgRectValue.height
+                self.keyBoardHeight = keyboardHeight + AccessoryView.ACCESSORY_HEIGHT
                 UIView.animate(withDuration: 0.1) {
                     accessoryView.bottomAnchor.constraint(equalTo: window.bottomAnchor, constant: -keyboardHeight).isActive = true
                     self.view.layoutIfNeeded()
                 }
+                
             }
         }
     }
     
+    private func letResponderEscapeKeyboard() {
+        //self.view.findFirstResponder()
+        UIView.animate(withDuration: 0.2) {
+            //self.scrollView.contentInset.bottom = self.keyBoardHeight
+            //self.view.layoutIfNeeded()
+        }
+        
+    }
     
 }
 
@@ -476,11 +501,6 @@ extension TodoFastCreatViewController {
         return AccessoryView(buttons: [listButton, subTaskButton])
     }
      */
-    
-    func updateSubTodoHeight() {
-        subTodoHeightConstraint?.constant = subTodoView.contentSize.height
-        self.view.layoutIfNeeded()
-    }
 }
 
 
