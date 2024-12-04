@@ -78,8 +78,8 @@
             filePath = "HabitTracker/ViewControllerWrapper/ViewControllerWrapper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "updateUIViewController(_:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "HabitTracker/RootView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "tabIndex"
             landmarkType = "24">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "HabitTracker/RootView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "RootView"
             landmarkType = "14">
          </BreakpointContent>
@@ -130,38 +130,6 @@
             endingLineNumber = "17"
             landmarkName = "HabitStatisticFrequencyGraph"
             landmarkType = "14">
-            <Locations>
-               <Location
-                  uuid = "9FE62BFA-0DED-4DED-BB16-BA2EE5F7AF53 - 9e5a53d3e07af234"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "default argument 3 of HabitTracker.HabitStatisticFrequencyGraph.init(data: Swift.Array&lt;(Swift.Int, SwiftUI.Color)&gt;, habit: HabitTracker.HabitModel, blockParameters: (width: CoreGraphics.CGFloat, height: CoreGraphics.CGFloat, spacing: CoreGraphics.CGFloat), viewModel: HabitTracker.HabitTrackerStatisticViewModel, masterModel: HabitTracker.HabitTrackerViewModel) -&gt; HabitTracker.HabitStatisticFrequencyGraph"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/HabitStatisticFrequencyGraph.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  uuid = "9FE62BFA-0DED-4DED-BB16-BA2EE5F7AF53 - b5e61b4b71572c72"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "default argument 3 of HabitTracker.HabitStatisticFrequencyGraph.init(data: Swift.Array&lt;(Swift.Int, SwiftUI.Color)&gt;, habit: HabitTracker.HabitModel, blockParameters: (width: CoreGraphics.CGFloat, height: CoreGraphics.CGFloat, spacing: CoreGraphics.CGFloat), viewModel: HabitTracker.HabitTrackerStatisticViewModel, masterModel: HabitTracker.HabitViewModel) -&gt; HabitTracker.HabitStatisticFrequencyGraph"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/HabitStatisticFrequencyGraph.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -274,53 +242,6 @@
             endingLineNumber = "57"
             landmarkName = "getIntervalRecords(startDate:endDate:habitID:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B74E9786-E263-4808-BC58-3ED46C846856 - e539045ebafbf630"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.HabitController.getIntervalRecords(startDate: Foundation.Date, endDate: Foundation.Date, habitID: Swift.Optional&lt;Swift.String&gt;) -&gt; Swift.Array&lt;HabitTracker.HabitRecord&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/HabitRecord.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "648">
-               </Location>
-               <Location
-                  uuid = "B74E9786-E263-4808-BC58-3ED46C846856 - 36cd839e433736a4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.getIntervalRecords(startDate: Foundation.Date, endDate: Foundation.Date, habitID: Swift.Optional&lt;Swift.String&gt;) -&gt; Swift.Array&lt;HabitTracker.HabitRecord&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/HabitRecord.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "628">
-               </Location>
-               <Location
-                  uuid = "B74E9786-E263-4808-BC58-3ED46C846856 - 36cd839e433736a4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.getIntervalRecords(startDate: Foundation.Date, endDate: Foundation.Date, habitID: Swift.Optional&lt;Swift.String&gt;) -&gt; Swift.Array&lt;HabitTracker.HabitRecord&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/HabitRecord.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "688">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -401,38 +322,6 @@
             endingLineNumber = "27"
             landmarkName = "preview"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "B9828DDC-AB9E-4477-8C1D-FAA72EA8B4F4 - 28e971932d796a52"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; HabitTracker.HabitController in variable initialization expression of static HabitTracker.HabitController.preview : HabitTracker.HabitController"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/HabitController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "1184">
-               </Location>
-               <Location
-                  uuid = "B9828DDC-AB9E-4477-8C1D-FAA72EA8B4F4 - 28e971932d796a52"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; HabitTracker.HabitController in variable initialization expression of static HabitTracker.HabitController.preview : HabitTracker.HabitController"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/HabitController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "1608">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -462,38 +351,6 @@
             endingLineNumber = "40"
             landmarkName = "getDaySpecificTodos(date:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D2A6310F-2D8E-49D7-83D6-B45812BB1311 - f766388a5f3181fd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (HabitTracker.Todo) -&gt; HabitTracker.ToDoModel in HabitTracker.TodoViewModel.getDaySpecificTodos(date: Foundation.Date) -&gt; Swift.Array&lt;HabitTracker.ToDoModel&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/TodoViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  uuid = "D2A6310F-2D8E-49D7-83D6-B45812BB1311 - 6aa08ff363b081dd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (HabitTracker.Todo) -&gt; HabitTracker.TodoModel in HabitTracker.TodoViewModel.getDaySpecificTodos(date: Foundation.Date) -&gt; Swift.Array&lt;HabitTracker.TodoModel&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/TodoViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -510,38 +367,6 @@
             endingLineNumber = "29"
             landmarkName = "createTodo(dataModel:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0D37CB24-50E8-4118-AFC1-0D7CB56E0474 - 497bffdad5cca8e2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.createTodo(dataModel: HabitTracker.ToDoModel) -&gt; HabitTracker.CreateTodoResult"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Todo.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "324">
-               </Location>
-               <Location
-                  uuid = "0D37CB24-50E8-4118-AFC1-0D7CB56E0474 - 497bffdad5cca8e2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.createTodo(dataModel: HabitTracker.TodoModel) -&gt; HabitTracker.CreateTodoResult"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Todo.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "348">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -558,38 +383,6 @@
             endingLineNumber = "87"
             landmarkName = "getAllTodos()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0B9A8FEE-A170-4B8A-AE37-3D9FC28577BF - 9ad30f0df0852370"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.getAllTodos() -&gt; Swift.Array&lt;HabitTracker.Todo&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Todo.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "88"
-                  endingLineNumber = "88"
-                  offsetFromSymbolStart = "244">
-               </Location>
-               <Location
-                  uuid = "0B9A8FEE-A170-4B8A-AE37-3D9FC28577BF - 9ad30f0df0852351"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.getAllTodos() -&gt; Swift.Array&lt;HabitTracker.Todo&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Todo.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "472">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -606,38 +399,6 @@
             endingLineNumber = "312"
             landmarkName = "layoutSubviews()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "82F68266-3E7A-4D07-B91F-0AED2D4A92FB - f23117eb96378346"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.CGSize) -&gt; () in HabitTracker.SwiftUIHostingTableViewCell.hostSwiftUIView(task: HabitTracker.TaskModel, index: Swift.Int, tableViewDelegate: __C.UITableViewDelegate, tableView: __C.UITableView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/HabitViews/TaskListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "312"
-                  endingLineNumber = "312"
-                  offsetFromSymbolStart = "376">
-               </Location>
-               <Location
-                  uuid = "82F68266-3E7A-4D07-B91F-0AED2D4A92FB - ffb37ecd8cd0d03e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.SwiftUIHostingTableViewCell.hostSwiftUIView(task: HabitTracker.TaskModel, index: Swift.Int, tableViewDelegate: __C.UITableViewDelegate, tableView: __C.UITableView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/HabitViews/TaskListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "312"
-                  endingLineNumber = "312"
-                  offsetFromSymbolStart = "2600">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -654,38 +415,6 @@
             endingLineNumber = "301"
             landmarkName = "hostSwiftUIView(task:tableViewDelegate:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C4319C92-6B01-46F7-840B-E1C34B35AB80 - ffb37ecd8cd0d2ab"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.SwiftUIHostingTableViewCell.hostSwiftUIView(task: HabitTracker.TaskModel, index: Swift.Int, tableViewDelegate: __C.UITableViewDelegate, tableView: __C.UITableView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/HabitViews/TaskListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "301"
-                  endingLineNumber = "301"
-                  offsetFromSymbolStart = "2176">
-               </Location>
-               <Location
-                  uuid = "C4319C92-6B01-46F7-840B-E1C34B35AB80 - ffb37ecd8cd0d2ab"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.SwiftUIHostingTableViewCell.hostSwiftUIView(task: HabitTracker.TaskModel, index: Swift.Int, tableViewDelegate: __C.UITableViewDelegate, tableView: __C.UITableView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/HabitViews/TaskListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "301"
-                  endingLineNumber = "301"
-                  offsetFromSymbolStart = "808">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -730,117 +459,10 @@
             filePath = "HabitTracker/RootView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "1B2C7305-0C43-4DA8-97C0-D42861758B6C - f1d99c44ae5a49"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #4 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.disabled(Swift.Bool) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in HabitTracker.RootView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "209"
-                  endingLineNumber = "209"
-                  offsetFromSymbolStart = "212">
-               </Location>
-               <Location
-                  uuid = "1B2C7305-0C43-4DA8-97C0-D42861758B6C - 2fe2d02f9ee75c06"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; SwiftUI.Text in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #4 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.disabled(Swift.Bool) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in HabitTracker.RootView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "209"
-                  endingLineNumber = "209"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  uuid = "1B2C7305-0C43-4DA8-97C0-D42861758B6C - b0b743574f80f861"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #3 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.partialSheet&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, type: PartialSheet.PSType, iPhoneStyle: PartialSheet.PSIphoneStyle, iPadMacStyle: PartialSheet.PSIpadMacStyle, slideAnimation: Swift.Optional&lt;PartialSheet.PSSlideAnimation&gt;, onDismiss: Swift.Optional&lt;() -&gt; ()&gt;, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.disabled(Swift.Bool) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in HabitTracker.RootView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "208"
-                  endingLineNumber = "208"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "1B2C7305-0C43-4DA8-97C0-D42861758B6C - b3201c6fe7f0f5f1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.disabled(Swift.Bool) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in HabitTracker.RootView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "204"
-                  endingLineNumber = "204"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "1B2C7305-0C43-4DA8-97C0-D42861758B6C - b33df18c60b6e02b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.disabled(Swift.Bool) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in HabitTracker.RootView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "205"
-                  endingLineNumber = "205"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "1B2C7305-0C43-4DA8-97C0-D42861758B6C - b3201c6fe7f0f5d2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.disabled(Swift.Bool) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in HabitTracker.RootView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "205"
-                  endingLineNumber = "205"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "1B2C7305-0C43-4DA8-97C0-D42861758B6C - 2fe938e553137c6d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Divider, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.disabled(Swift.Bool) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.zIndex(Swift.Double) -&gt; some&gt;&gt;.0)&gt; in HabitTracker.RootView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "197"
-                  endingLineNumber = "197"
-                  offsetFromSymbolStart = "84">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -857,53 +479,6 @@
             endingLineNumber = "28"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "15C5250E-6003-403C-ABC4-835BF64905A2 - 656871231ef4f80"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SwiftUI.GeometryProxy) -&gt; Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.onChangeCustom&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, _: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in HabitTracker.StatisticalDetailView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "1196">
-               </Location>
-               <Location
-                  uuid = "15C5250E-6003-403C-ABC4-835BF64905A2 - 656871231ef4f80"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SwiftUI.GeometryProxy) -&gt; Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.onChangeCustom&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, _: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in HabitTracker.StatisticalDetailView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "1452">
-               </Location>
-               <Location
-                  uuid = "15C5250E-6003-403C-ABC4-835BF64905A2 - 656871231ef4f80"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SwiftUI.GeometryProxy) -&gt; Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.onChangeCustom&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, _: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in HabitTracker.StatisticalDetailView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "1228">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -920,488 +495,6 @@
             endingLineNumber = "34"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "9F4455C1-6087-4609-BC76-230F9F5F00BE - 656871231ef4c3e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SwiftUI.GeometryProxy) -&gt; Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.onChangeCustom&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, _: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in HabitTracker.StatisticalDetailView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "1392">
-               </Location>
-               <Location
-                  uuid = "9F4455C1-6087-4609-BC76-230F9F5F00BE - 5f6d269ce886178c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(_: &#x3c4;_1_0, ignoresSafeAreaEdges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.ScrollView&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;)&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.position(x: CoreGraphics.CGFloat, y: CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0)&gt; in closure #1 (SwiftUI.GeometryProxy) -&gt; Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.onChangeCustom&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, _: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in HabitTracker.StatisticalDetailView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "1384">
-               </Location>
-               <Location
-                  uuid = "9F4455C1-6087-4609-BC76-230F9F5F00BE - 656871231ef4c3e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SwiftUI.GeometryProxy) -&gt; Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.onChangeCustom&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, _: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in HabitTracker.StatisticalDetailView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "1648">
-               </Location>
-               <Location
-                  uuid = "9F4455C1-6087-4609-BC76-230F9F5F00BE - 5f6d269ce886178c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(_: &#x3c4;_1_0, ignoresSafeAreaEdges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.ScrollView&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;)&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.position(x: CoreGraphics.CGFloat, y: CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0)&gt; in closure #1 (SwiftUI.GeometryProxy) -&gt; Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.onChangeCustom&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, _: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in HabitTracker.StatisticalDetailView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "1732">
-               </Location>
-               <Location
-                  uuid = "9F4455C1-6087-4609-BC76-230F9F5F00BE - 656871231ef4cba"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SwiftUI.GeometryProxy) -&gt; Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.onChangeCustom&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, _: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in HabitTracker.StatisticalDetailView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "2756">
-               </Location>
-               <Location
-                  uuid = "9F4455C1-6087-4609-BC76-230F9F5F00BE - 5f6d269ce8861708"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(_: &#x3c4;_1_0, ignoresSafeAreaEdges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.ScrollView&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.animation&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(_: Swift.Optional&lt;SwiftUI.Animation&gt;, value: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;)&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.position(x: CoreGraphics.CGFloat, y: CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0)&gt; in closure #1 (SwiftUI.GeometryProxy) -&gt; Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.onChangeCustom&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, _: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in HabitTracker.StatisticalDetailView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/StatisticViews/StatisticalDetail/StatisticalDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "1384">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7B6D64D1-ECDB-4851-98AE-EDC16066540A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HabitTracker/RootView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
-            landmarkName = "hideCurrentVCAndShowNext(target:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "7B6D64D1-ECDB-4851-98AE-EDC16066540A - b566753fa0168c7e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "305"
-                  endingLineNumber = "305"
-                  offsetFromSymbolStart = "2004">
-               </Location>
-               <Location
-                  uuid = "7B6D64D1-ECDB-4851-98AE-EDC16066540A - c87e09ac16e4af61"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "306"
-                  endingLineNumber = "306"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "7B6D64D1-ECDB-4851-98AE-EDC16066540A - c87e09ac16e4af23"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "304"
-                  endingLineNumber = "304"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "7B6D64D1-ECDB-4851-98AE-EDC16066540A - c87e09ac16e4af00"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "305"
-                  endingLineNumber = "305"
-                  offsetFromSymbolStart = "100">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "80126710-06D3-453D-9AAA-07E462E205A7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HabitTracker/RootView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
-            landmarkName = "hideCurrentVCAndShowNext(target:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "80126710-06D3-453D-9AAA-07E462E205A7 - b566753fa0168cfa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "309"
-                  endingLineNumber = "309"
-                  offsetFromSymbolStart = "2432">
-               </Location>
-               <Location
-                  uuid = "80126710-06D3-453D-9AAA-07E462E205A7 - 997648496f1d71e4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "310"
-                  endingLineNumber = "310"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "80126710-06D3-453D-9AAA-07E462E205A7 - 997648496f1d71a6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "308"
-                  endingLineNumber = "308"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "80126710-06D3-453D-9AAA-07E462E205A7 - 997648496f1d7185"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "309"
-                  endingLineNumber = "309"
-                  offsetFromSymbolStart = "100">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6F503EFF-D97D-4F01-B8B6-D5FADB2486CE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HabitTracker/RootView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
-            landmarkName = "hideCurrentVCAndShowNext(target:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6F503EFF-D97D-4F01-B8B6-D5FADB2486CE - b566753fa0168c7e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "305"
-                  endingLineNumber = "305"
-                  offsetFromSymbolStart = "1148">
-               </Location>
-               <Location
-                  uuid = "6F503EFF-D97D-4F01-B8B6-D5FADB2486CE - 2a4e97f9e6747363"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "306"
-                  endingLineNumber = "306"
-                  offsetFromSymbolStart = "100">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "89887141-3E64-42CC-941F-A2E14AE04D55"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HabitTracker/RootView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
-            landmarkName = "hideCurrentVCAndShowNext(target:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "89887141-3E64-42CC-941F-A2E14AE04D55 - fb46d6873eac049e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "302"
-                  endingLineNumber = "302"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "89887141-3E64-42CC-941F-A2E14AE04D55 - b566753fa0168dbc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "303"
-                  endingLineNumber = "303"
-                  offsetFromSymbolStart = "2004">
-               </Location>
-               <Location
-                  uuid = "89887141-3E64-42CC-941F-A2E14AE04D55 - c87e09ac16e4af23"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "304"
-                  endingLineNumber = "304"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "89887141-3E64-42CC-941F-A2E14AE04D55 - b566753fa0168c5d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "304"
-                  endingLineNumber = "304"
-                  offsetFromSymbolStart = "2004">
-               </Location>
-               <Location
-                  uuid = "89887141-3E64-42CC-941F-A2E14AE04D55 - c87e09ac16e4af00"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "305"
-                  endingLineNumber = "305"
-                  offsetFromSymbolStart = "100">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "82261D53-2041-4B98-8A0D-17F1D43673E3"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HabitTracker/RootView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
-            landmarkName = "hideCurrentVCAndShowNext(target:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "82261D53-2041-4B98-8A0D-17F1D43673E3 - c87e09ac16e4af61"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "306"
-                  endingLineNumber = "306"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "82261D53-2041-4B98-8A0D-17F1D43673E3 - b566753fa0168c38"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "307"
-                  endingLineNumber = "307"
-                  offsetFromSymbolStart = "2432">
-               </Location>
-               <Location
-                  uuid = "82261D53-2041-4B98-8A0D-17F1D43673E3 - 997648496f1d71a6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "308"
-                  endingLineNumber = "308"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "82261D53-2041-4B98-8A0D-17F1D43673E3 - b566753fa0168cd9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "308"
-                  endingLineNumber = "308"
-                  offsetFromSymbolStart = "2432">
-               </Location>
-               <Location
-                  uuid = "82261D53-2041-4B98-8A0D-17F1D43673E3 - 997648496f1d7185"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in HabitTracker.RootView.hideCurrentVCAndShowNext(target: HabitTracker.AppTabShowType) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/RootView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "309"
-                  endingLineNumber = "309"
-                  offsetFromSymbolStart = "100">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1418,83 +511,6 @@
             endingLineNumber = "726"
             landmarkName = "tableView(_:dragPreviewParametersForRowAt:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D22DD49D-6F52-4F21-87BD-5071A8C34B02 - f5da5bc5059063e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "716"
-                  endingLineNumber = "716"
-                  offsetFromSymbolStart = "148">
-               </Location>
-               <Location
-                  uuid = "D22DD49D-6F52-4F21-87BD-5071A8C34B02 - f5da5bc5059063e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "716"
-                  endingLineNumber = "716"
-                  offsetFromSymbolStart = "168">
-               </Location>
-               <Location
-                  uuid = "D22DD49D-6F52-4F21-87BD-5071A8C34B02 - f5da5bc505904b2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "704"
-                  endingLineNumber = "704"
-                  offsetFromSymbolStart = "148">
-               </Location>
-               <Location
-                  uuid = "D22DD49D-6F52-4F21-87BD-5071A8C34B02 - f5da5bc5059067c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "714"
-                  endingLineNumber = "714"
-                  offsetFromSymbolStart = "148">
-               </Location>
-               <Location
-                  uuid = "D22DD49D-6F52-4F21-87BD-5071A8C34B02 - f5da5bc505901e8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "726"
-                  endingLineNumber = "726"
-                  offsetFromSymbolStart = "148">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1511,83 +527,6 @@
             endingLineNumber = "721"
             landmarkName = "tableView(_:dragPreviewParametersForRowAt:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "EAE9325F-9489-49D7-B19D-7873E08230F4 - f5da5bc505907ba"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "712"
-                  endingLineNumber = "712"
-                  offsetFromSymbolStart = "124">
-               </Location>
-               <Location
-                  uuid = "EAE9325F-9489-49D7-B19D-7873E08230F4 - f5da5bc505907ba"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "712"
-                  endingLineNumber = "712"
-                  offsetFromSymbolStart = "144">
-               </Location>
-               <Location
-                  uuid = "EAE9325F-9489-49D7-B19D-7873E08230F4 - f5da5bc5059040e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "700"
-                  endingLineNumber = "700"
-                  offsetFromSymbolStart = "124">
-               </Location>
-               <Location
-                  uuid = "EAE9325F-9489-49D7-B19D-7873E08230F4 - f5da5bc505907f8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "710"
-                  endingLineNumber = "710"
-                  offsetFromSymbolStart = "124">
-               </Location>
-               <Location
-                  uuid = "EAE9325F-9489-49D7-B19D-7873E08230F4 - f5da5bc50590164"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "722"
-                  endingLineNumber = "722"
-                  offsetFromSymbolStart = "124">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1604,83 +543,6 @@
             endingLineNumber = "722"
             landmarkName = "tableView(_:dragPreviewParametersForRowAt:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "84C1800B-A2EE-4F25-8275-4347F232E868 - f5da5bc505907ba"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "712"
-                  endingLineNumber = "712"
-                  offsetFromSymbolStart = "124">
-               </Location>
-               <Location
-                  uuid = "84C1800B-A2EE-4F25-8275-4347F232E868 - f5da5bc505907ba"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "712"
-                  endingLineNumber = "712"
-                  offsetFromSymbolStart = "144">
-               </Location>
-               <Location
-                  uuid = "84C1800B-A2EE-4F25-8275-4347F232E868 - f5da5bc5059040e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "700"
-                  endingLineNumber = "700"
-                  offsetFromSymbolStart = "124">
-               </Location>
-               <Location
-                  uuid = "84C1800B-A2EE-4F25-8275-4347F232E868 - f5da5bc505907f8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "710"
-                  endingLineNumber = "710"
-                  offsetFromSymbolStart = "124">
-               </Location>
-               <Location
-                  uuid = "84C1800B-A2EE-4F25-8275-4347F232E868 - f5da5bc50590164"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TaskTableViewController.tableView(_: __C.UITableView, dragPreviewParametersForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UIDragPreviewParameters&gt;"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/TaskTableViewController+Cell+View.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "722"
-                  endingLineNumber = "722"
-                  offsetFromSymbolStart = "124">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1713,38 +575,6 @@
             endingLineNumber = "197"
             landmarkName = "createRecord(habitID:habitType:habitCycle:numberProgress:timeProgress:done:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "284D52B8-36B0-41FE-A209-EC02D9421BEA - 2dd3dfe083bea7a1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.HabitViewModel.createRecord(habitID: Swift.String, habitType: HabitTracker.HabitType, habitCycle: HabitTracker.HabitCycle, numberProgress: Swift.Int16, timeProgress: Swift.String, done: Swift.Bool) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/HabitViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "197"
-                  endingLineNumber = "197"
-                  offsetFromSymbolStart = "428">
-               </Location>
-               <Location
-                  uuid = "284D52B8-36B0-41FE-A209-EC02D9421BEA - 2dd3dfe083bea7a1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.HabitViewModel.createRecord(habitID: Swift.String, habitType: HabitTracker.HabitType, habitCycle: HabitTracker.HabitCycle, numberProgress: Swift.Int16, timeProgress: Swift.String, done: Swift.Bool) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/HabitViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "197"
-                  endingLineNumber = "197"
-                  offsetFromSymbolStart = "456">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1761,38 +591,6 @@
             endingLineNumber = "200"
             landmarkName = "createRecord(habitID:habitType:habitCycle:numberProgress:timeProgress:done:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5C92FC10-9EDE-4CA1-9689-44EB9645AAB1 - 2dd3dfe083bea7c4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.HabitViewModel.createRecord(habitID: Swift.String, habitType: HabitTracker.HabitType, habitCycle: HabitTracker.HabitCycle, numberProgress: Swift.Int16, timeProgress: Swift.String, done: Swift.Bool) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/HabitViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "200"
-                  endingLineNumber = "200"
-                  offsetFromSymbolStart = "912">
-               </Location>
-               <Location
-                  uuid = "5C92FC10-9EDE-4CA1-9689-44EB9645AAB1 - 2dd3dfe083bea7c4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.HabitViewModel.createRecord(habitID: Swift.String, habitType: HabitTracker.HabitType, habitCycle: HabitTracker.HabitCycle, numberProgress: Swift.Int16, timeProgress: Swift.String, done: Swift.Bool) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/HabitViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "200"
-                  endingLineNumber = "200"
-                  offsetFromSymbolStart = "940">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1809,38 +607,6 @@
             endingLineNumber = "199"
             landmarkName = "createRecord(habitID:habitType:habitCycle:numberProgress:timeProgress:done:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5119D2D1-498C-44DD-BFA8-8249764A3D87 - 2dd3dfe083bea7e7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.HabitViewModel.createRecord(habitID: Swift.String, habitType: HabitTracker.HabitType, habitCycle: HabitTracker.HabitCycle, numberProgress: Swift.Int16, timeProgress: Swift.String, done: Swift.Bool) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/HabitViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "199"
-                  endingLineNumber = "199"
-                  offsetFromSymbolStart = "832">
-               </Location>
-               <Location
-                  uuid = "5119D2D1-498C-44DD-BFA8-8249764A3D87 - 2dd3dfe083bea7e7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.HabitViewModel.createRecord(habitID: Swift.String, habitType: HabitTracker.HabitType, habitCycle: HabitTracker.HabitCycle, numberProgress: Swift.Int16, timeProgress: Swift.String, done: Swift.Bool) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/HabitViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "199"
-                  endingLineNumber = "199"
-                  offsetFromSymbolStart = "860">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1857,38 +623,6 @@
             endingLineNumber = "120"
             landmarkName = "makeUIViewController(context:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "615CCB00-019E-4B4F-9DF1-09666C53DA08 - e11e1713eda87d98"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PopupBackground_Wrapper.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;HabitTracker.PopupBackground_Wrapper&gt;) -&gt; __C.UIViewController"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/GlobalPopupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  uuid = "615CCB00-019E-4B4F-9DF1-09666C53DA08 - e11e1713eda87dbb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PopupBackground_Wrapper.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;HabitTracker.PopupBackground_Wrapper&gt;) -&gt; __C.UIViewController"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/GlobalPopupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "92">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1905,38 +639,6 @@
             endingLineNumber = "121"
             landmarkName = "makeUIViewController(context:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "60CBC86A-67FD-4E07-8CF1-85596C68B921 - e11e1713eda87dbb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PopupBackground_Wrapper.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;HabitTracker.PopupBackground_Wrapper&gt;) -&gt; __C.UIViewController"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/GlobalPopupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "328">
-               </Location>
-               <Location
-                  uuid = "60CBC86A-67FD-4E07-8CF1-85596C68B921 - e11e1713eda87dda"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PopupBackground_Wrapper.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;HabitTracker.PopupBackground_Wrapper&gt;) -&gt; __C.UIViewController"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/GlobalPopupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "121"
-                  endingLineNumber = "121"
-                  offsetFromSymbolStart = "328">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1985,38 +687,6 @@
             endingLineNumber = "106"
             landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1DC7A4D7-72F9-4417-BA04-840AB7785793 - 161a2a496f050149"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PopupBackgroundViewController.touchesBegan(_: Swift.Set&lt;__C.UITouch&gt;, with: Swift.Optional&lt;__C.UIEvent&gt;) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/GlobalPopupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "1DC7A4D7-72F9-4417-BA04-840AB7785793 - 161a2a496f05012e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PopupBackgroundViewController.touchesBegan(_: Swift.Set&lt;__C.UITouch&gt;, with: Swift.Optional&lt;__C.UIEvent&gt;) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/GlobalPopupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "106"
-                  endingLineNumber = "106"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2033,38 +703,6 @@
             endingLineNumber = "108"
             landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "3C950734-1186-43AA-A60A-825715F4F0AD - 161a2a496f05010f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PopupBackgroundViewController.touchesBegan(_: Swift.Set&lt;__C.UITouch&gt;, with: Swift.Optional&lt;__C.UIEvent&gt;) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/GlobalPopupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "112">
-               </Location>
-               <Location
-                  uuid = "3C950734-1186-43AA-A60A-825715F4F0AD - 161a2a496f0502ec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PopupBackgroundViewController.touchesBegan(_: Swift.Set&lt;__C.UITouch&gt;, with: Swift.Optional&lt;__C.UIEvent&gt;) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/GlobalPopupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108"
-                  offsetFromSymbolStart = "112">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2081,38 +719,6 @@
             endingLineNumber = "149"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "80882AD1-896A-43BA-97D0-C48DEDBCC399 - bc39356aab3dad21"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "147"
-                  endingLineNumber = "147"
-                  offsetFromSymbolStart = "356">
-               </Location>
-               <Location
-                  uuid = "80882AD1-896A-43BA-97D0-C48DEDBCC399 - bc39356aab3dade3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "149"
-                  endingLineNumber = "149"
-                  offsetFromSymbolStart = "356">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2129,53 +735,6 @@
             endingLineNumber = "150"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C8706E50-C409-45D0-A685-E9927D0141BD - bc39356aab3dadc2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "148"
-                  endingLineNumber = "148"
-                  offsetFromSymbolStart = "496">
-               </Location>
-               <Location
-                  uuid = "C8706E50-C409-45D0-A685-E9927D0141BD - bc39356aab3dadc2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "148"
-                  endingLineNumber = "148"
-                  offsetFromSymbolStart = "500">
-               </Location>
-               <Location
-                  uuid = "C8706E50-C409-45D0-A685-E9927D0141BD - bc39356aab3dad84"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "150"
-                  endingLineNumber = "150"
-                  offsetFromSymbolStart = "500">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2192,38 +751,6 @@
             endingLineNumber = "225"
             landmarkName = "expandButtonTapped()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "3489DA88-5E95-4D25-8ADF-6ADFC84BA359 - e84b5e4d873acb79"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListItemView.expandButtonTapped() -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "223"
-                  endingLineNumber = "223"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  uuid = "3489DA88-5E95-4D25-8ADF-6ADFC84BA359 - e84b5e4d873acb3b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListItemView.expandButtonTapped() -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "225"
-                  endingLineNumber = "225"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2240,38 +767,6 @@
             endingLineNumber = "50"
             landmarkName = "expandOrCollapseItem(view:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "E71978EC-039D-4BF5-AFC1-ECAE697DBA47 - e116242c7ec0274b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.expandOrCollapseItem(view: HabitTracker.CheckListItemView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "E71978EC-039D-4BF5-AFC1-ECAE697DBA47 - e116242c7ec0274b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.expandOrCollapseItem(view: HabitTracker.CheckListItemView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "140">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2288,38 +783,6 @@
             endingLineNumber = "51"
             landmarkName = "expandOrCollapseItem(view:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F41307D1-BD70-4C2E-827D-EDB9D86D647B - e116242c7ec024aa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.expandOrCollapseItem(view: HabitTracker.CheckListItemView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "124">
-               </Location>
-               <Location
-                  uuid = "F41307D1-BD70-4C2E-827D-EDB9D86D647B - e116242c7ec024aa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.expandOrCollapseItem(view: HabitTracker.CheckListItemView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "188">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2336,38 +799,6 @@
             endingLineNumber = "53"
             landmarkName = "expandOrCollapseItem(view:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CF9E8F57-C8CE-4C22-B2B0-0046457CD735 - e116242c7ec024e8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.expandOrCollapseItem(view: HabitTracker.CheckListItemView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "136">
-               </Location>
-               <Location
-                  uuid = "CF9E8F57-C8CE-4C22-B2B0-0046457CD735 - e116242c7ec024e8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.expandOrCollapseItem(view: HabitTracker.CheckListItemView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "200">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2384,38 +815,6 @@
             endingLineNumber = "55"
             landmarkName = "expandOrCollapseItem(view:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C811BB3D-D30C-4C54-BDF3-84CC130E5C8A - e116242c7ec0242e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.expandOrCollapseItem(view: HabitTracker.CheckListItemView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "55"
-                  endingLineNumber = "55"
-                  offsetFromSymbolStart = "164">
-               </Location>
-               <Location
-                  uuid = "C811BB3D-D30C-4C54-BDF3-84CC130E5C8A - e116242c7ec0242e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListView.expandOrCollapseItem(view: HabitTracker.CheckListItemView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/TaskList/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "55"
-                  endingLineNumber = "55"
-                  offsetFromSymbolStart = "256">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2432,53 +831,6 @@
             endingLineNumber = "96"
             landmarkName = "animateTransition(using:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "72FDCF0D-6AA5-4C0A-B4CF-73DA2CE28DED - 4fc4b35f065144d9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CustomPresentationAnimator.animateTransition(using: __C.UIViewControllerContextTransitioning) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/UIkitPopup/CustomPresentationController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
-                  offsetFromSymbolStart = "1940">
-               </Location>
-               <Location
-                  uuid = "72FDCF0D-6AA5-4C0A-B4CF-73DA2CE28DED - f9b930c7b0793d1e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Bool) -&gt; () in HabitTracker.CustomPresentationAnimator.animateTransition(using: __C.UIViewControllerContextTransitioning) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/UIkitPopup/CustomPresentationController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
-                  offsetFromSymbolStart = "72">
-               </Location>
-               <Location
-                  uuid = "72FDCF0D-6AA5-4C0A-B4CF-73DA2CE28DED - f9b930c7b0793ddc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Bool) -&gt; () in HabitTracker.CustomPresentationAnimator.animateTransition(using: __C.UIViewControllerContextTransitioning) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/UIkitPopup/CustomPresentationController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "96"
-                  endingLineNumber = "96"
-                  offsetFromSymbolStart = "72">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2495,53 +847,6 @@
             endingLineNumber = "45"
             landmarkName = "gestureRecognizer(_:shouldReceive:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "3B55BF6B-226A-417F-9968-94E2EEF8A536 - c9401cc22f4b3c81"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.UIkitPopupViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/UIkitPopup/UIkitGlobalPopupViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "3B55BF6B-226A-417F-9968-94E2EEF8A536 - 9068bde1b5e6b72a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.UIkitPopupViewController.gestureRecognizer(_: __C.UIGestureRecognizer, shouldReceive: __C.UITouch) -&gt; Swift.Bool"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/UIkitPopup/UIkitGlobalPopupViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "112">
-               </Location>
-               <Location
-                  uuid = "3B55BF6B-226A-417F-9968-94E2EEF8A536 - 9068bde1b5e6b48f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.UIkitPopupViewController.gestureRecognizer(_: __C.UIGestureRecognizer, shouldReceive: __C.UITouch) -&gt; Swift.Bool"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Popup/UIkitPopup/UIkitGlobalPopupViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "112">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2558,53 +863,6 @@
             endingLineNumber = "268"
             landmarkName = "keyboardWillShow(notification:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F26A70DB-1668-41CC-8B49-93290943152D - 7ff86542775969d8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.keyboardWillShow(notification: __C.NSNotification) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "249"
-                  endingLineNumber = "249"
-                  offsetFromSymbolStart = "1428">
-               </Location>
-               <Location
-                  uuid = "F26A70DB-1668-41CC-8B49-93290943152D - 7ff86542775969f9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.keyboardWillShow(notification: __C.NSNotification) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "248"
-                  endingLineNumber = "248"
-                  offsetFromSymbolStart = "1236">
-               </Location>
-               <Location
-                  uuid = "F26A70DB-1668-41CC-8B49-93290943152D - 7ff86542775968f1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.keyboardWillShow(notification: __C.NSNotification) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "256"
-                  endingLineNumber = "256"
-                  offsetFromSymbolStart = "1236">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2621,53 +879,6 @@
             endingLineNumber = "270"
             landmarkName = "keyboardWillShow(notification:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "551F77EF-BB2E-4D46-9F42-00F538A13EC0 - 7ff865427759691a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.keyboardWillShow(notification: __C.NSNotification) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "251"
-                  endingLineNumber = "251"
-                  offsetFromSymbolStart = "1644">
-               </Location>
-               <Location
-                  uuid = "551F77EF-BB2E-4D46-9F42-00F538A13EC0 - 7ff865427759693b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.keyboardWillShow(notification: __C.NSNotification) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "250"
-                  endingLineNumber = "250"
-                  offsetFromSymbolStart = "1332">
-               </Location>
-               <Location
-                  uuid = "551F77EF-BB2E-4D46-9F42-00F538A13EC0 - 7ff8654277596833"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.keyboardWillShow(notification: __C.NSNotification) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "258"
-                  endingLineNumber = "258"
-                  offsetFromSymbolStart = "1264">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2684,53 +895,6 @@
             endingLineNumber = "272"
             landmarkName = "keyboardWillShow(notification:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2C1EA41A-62CB-460E-A12E-04AFFF67235E - 7ff8654277596975"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.keyboardWillShow(notification: __C.NSNotification) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "252"
-                  endingLineNumber = "252"
-                  offsetFromSymbolStart = "1900">
-               </Location>
-               <Location
-                  uuid = "2C1EA41A-62CB-460E-A12E-04AFFF67235E - 7ff8654277596975"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.keyboardWillShow(notification: __C.NSNotification) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "252"
-                  endingLineNumber = "252"
-                  offsetFromSymbolStart = "1428">
-               </Location>
-               <Location
-                  uuid = "2C1EA41A-62CB-460E-A12E-04AFFF67235E - 7ff865427759684d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.keyboardWillShow(notification: __C.NSNotification) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "260"
-                  endingLineNumber = "260"
-                  offsetFromSymbolStart = "1292">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2747,38 +911,6 @@
             endingLineNumber = "265"
             landmarkName = "textFieldDidStartEditing(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "45FB07A9-C6B2-4798-B794-C86E139202E6 - 28942ab18a82826c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListItemView.textFieldDidChange(__C.UITextField) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "265"
-                  endingLineNumber = "265"
-                  offsetFromSymbolStart = "392">
-               </Location>
-               <Location
-                  uuid = "45FB07A9-C6B2-4798-B794-C86E139202E6 - 16770f3248b98dc2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.CheckListItemView.textFieldDidStartEditing(__C.UITextField) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/CheckListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "265"
-                  endingLineNumber = "265"
-                  offsetFromSymbolStart = "40">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2811,53 +943,6 @@
             endingLineNumber = "200"
             landmarkName = "textViewDidChange(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "7FC30DEA-89C2-44F4-83EC-4F95238EE2B8 - 78261e6f817d8daf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.textViewDidChange(__C.UITextView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "208"
-                  endingLineNumber = "208"
-                  offsetFromSymbolStart = "904">
-               </Location>
-               <Location
-                  uuid = "7FC30DEA-89C2-44F4-83EC-4F95238EE2B8 - 78261e6f817d8d88"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.textViewDidChange(__C.UITextView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "207"
-                  endingLineNumber = "207"
-                  offsetFromSymbolStart = "196">
-               </Location>
-               <Location
-                  uuid = "7FC30DEA-89C2-44F4-83EC-4F95238EE2B8 - 78261e6f817d8e90"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.textViewDidChange(__C.UITextView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/TaskViews/BottomSheets/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "215"
-                  endingLineNumber = "215"
-                  offsetFromSymbolStart = "196">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2874,68 +959,6 @@
             endingLineNumber = "106"
             landmarkName = "addGoalToParent(parentID:childID:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "E4116B52-1757-48DB-A1E0-99C60BD6E9A0 - 6a5dc3695cfcf11f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.addGoalToParent(parentID: Swift.String, childID: Swift.String) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Goals.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "1384">
-               </Location>
-               <Location
-                  uuid = "E4116B52-1757-48DB-A1E0-99C60BD6E9A0 - 6a5dc3695cfcf36b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.addGoalToParent(parentID: Swift.String, childID: Swift.String) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Goals.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "1384">
-               </Location>
-               <Location
-                  uuid = "E4116B52-1757-48DB-A1E0-99C60BD6E9A0 - 6a5dc3695cfcf3b4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.addGoalToParent(parentID: Swift.String, childID: Swift.String) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Goals.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "512">
-               </Location>
-               <Location
-                  uuid = "E4116B52-1757-48DB-A1E0-99C60BD6E9A0 - 6a5dc3695cfcf242"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.PersistenceController.addGoalToParent(parentID: Swift.String, childID: Swift.String) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/Goals.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108"
-                  offsetFromSymbolStart = "512">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2952,38 +975,6 @@
             endingLineNumber = "42"
             landmarkName = "updateNodeArray()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D43FB79A-4583-4BAA-8315-473A181D094E - ee35dd4d72136eec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.GoalPickingViewModel.updateNodeArray() -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Tasks/TodoFastCreation/GoalPicking/GoalPickingViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "1204">
-               </Location>
-               <Location
-                  uuid = "D43FB79A-4583-4BAA-8315-473A181D094E - ee35dd4d72136e12"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.GoalPickingViewModel.updateNodeArray() -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Tasks/TodoFastCreation/GoalPicking/GoalPickingViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "41"
-                  endingLineNumber = "41"
-                  offsetFromSymbolStart = "1204">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3000,38 +991,6 @@
             endingLineNumber = "43"
             landmarkName = "updateNodeArray()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "ECFFC72F-79CC-4E8E-A761-B97C3E6D75FB - ee35dd4d72136ecd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.GoalPickingViewModel.updateNodeArray() -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Tasks/TodoFastCreation/GoalPicking/GoalPickingViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "1228">
-               </Location>
-               <Location
-                  uuid = "ECFFC72F-79CC-4E8E-A761-B97C3E6D75FB - ee35dd4d72136e73"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.GoalPickingViewModel.updateNodeArray() -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Tasks/TodoFastCreation/GoalPicking/GoalPickingViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "1228">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3064,38 +1023,6 @@
             endingLineNumber = "261"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "FD7D8543-ECA8-4658-AD44-71D10C490C2A - 9200b2f205c47983"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #2 () -&gt; () in HabitTracker.GoalPickingRowView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Tasks/TodoFastCreation/GoalPicking/GoalPickingView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "260"
-                  endingLineNumber = "260"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "FD7D8543-ECA8-4658-AD44-71D10C490C2A - 9200b2f205c479a0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #2 () -&gt; () in HabitTracker.GoalPickingRowView.body.getter : some"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Tasks/TodoFastCreation/GoalPicking/GoalPickingView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "261"
-                  endingLineNumber = "261"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3112,53 +1039,6 @@
             endingLineNumber = "53"
             landmarkName = "updateNodeArray(shouldRememberExpandedState:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "891D5675-69C1-4EA4-8611-0989FAF8B80D - 3cd2baa3a5dc9377"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.GoalViewModel.updateNodeArray() -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/GoalViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "1228">
-               </Location>
-               <Location
-                  uuid = "891D5675-69C1-4EA4-8611-0989FAF8B80D - 5fb218ca28f78d0f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.GoalViewModel.updateNodeArray(shouldRememberExpandedState: Swift.Bool) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/GoalViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "1488">
-               </Location>
-               <Location
-                  uuid = "891D5675-69C1-4EA4-8611-0989FAF8B80D - 5fb218ca28f78d2c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.GoalViewModel.updateNodeArray(shouldRememberExpandedState: Swift.Bool) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/ViewModel/GoalViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "1488">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3175,83 +1055,6 @@
             endingLineNumber = "55"
             landmarkName = "init(goal:traverseTasks:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5C383110-19D0-47F7-9696-83EE33C86303 - 305e63e275630283"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 (HabitTracker.Todo) -&gt; HabitTracker.TodoModel in HabitTracker.GoalModel.init(goal: HabitTracker.Goal, parent: Swift.Optional&lt;HabitTracker.AnyTreeNode&gt;, traverseTasks: Swift.Bool) -&gt; HabitTracker.GoalModel"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/DataModels/Goal_Models.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "5C383110-19D0-47F7-9696-83EE33C86303 - 305e63e2756302c1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 (HabitTracker.Todo) -&gt; HabitTracker.TodoModel in HabitTracker.GoalModel.init(goal: HabitTracker.Goal, parent: Swift.Optional&lt;HabitTracker.AnyTreeNode&gt;, traverseTasks: Swift.Bool) -&gt; HabitTracker.GoalModel"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/DataModels/Goal_Models.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "5C383110-19D0-47F7-9696-83EE33C86303 - 305e63e27563026c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 (HabitTracker.Todo) -&gt; HabitTracker.TodoModel in HabitTracker.GoalModel.init(goal: HabitTracker.Goal, parent: Swift.Optional&lt;HabitTracker.AnyTreeNode&gt;, traverseTasks: Swift.Bool) -&gt; HabitTracker.GoalModel"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/DataModels/Goal_Models.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "5C383110-19D0-47F7-9696-83EE33C86303 - 414121c8acd8406b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 (HabitTracker.Todo) -&gt; HabitTracker.TodoModel in HabitTracker.GoalModel.init(goal: HabitTracker.Goal, traverseTasks: Swift.Bool) -&gt; HabitTracker.GoalModel"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/DataModels/Goal_Models.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "5C383110-19D0-47F7-9696-83EE33C86303 - 414121c8acd84008"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 (HabitTracker.Todo) -&gt; HabitTracker.TodoModel in HabitTracker.GoalModel.init(goal: HabitTracker.Goal, traverseTasks: Swift.Bool) -&gt; HabitTracker.GoalModel"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/DataModels/Goal_Models.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "55"
-                  endingLineNumber = "55"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3268,53 +1071,6 @@
             endingLineNumber = "162"
             landmarkName = "preview"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "88A024DF-04C4-4BF5-9DCF-F75EA973A84A - 84703203c0aa88d7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; HabitTracker.PersistenceController in variable initialization expression of static HabitTracker.PersistenceController.preview : HabitTracker.PersistenceController"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/PersistenceController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "10120">
-               </Location>
-               <Location
-                  uuid = "88A024DF-04C4-4BF5-9DCF-F75EA973A84A - 84703203c0aa88d7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; HabitTracker.PersistenceController in variable initialization expression of static HabitTracker.PersistenceController.preview : HabitTracker.PersistenceController"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/PersistenceController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "10084">
-               </Location>
-               <Location
-                  uuid = "88A024DF-04C4-4BF5-9DCF-F75EA973A84A - 84703203c0aa88d7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; HabitTracker.PersistenceController in variable initialization expression of static HabitTracker.PersistenceController.preview : HabitTracker.PersistenceController"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Persistence/PersistenceController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "10276">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3379,53 +1135,6 @@
             endingLineNumber = "293"
             landmarkName = "textViewDidBeginEditing(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "AA763981-6CA7-4B87-ADF1-A28A97D28BAA - ac9076a724e3513"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.textViewDidBeginEditing(__C.UITextView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Tasks/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "291"
-                  endingLineNumber = "291"
-                  offsetFromSymbolStart = "664">
-               </Location>
-               <Location
-                  uuid = "AA763981-6CA7-4B87-ADF1-A28A97D28BAA - ac9076a724e3513"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.textViewDidBeginEditing(__C.UITextView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Tasks/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "291"
-                  endingLineNumber = "291"
-                  offsetFromSymbolStart = "540">
-               </Location>
-               <Location
-                  uuid = "AA763981-6CA7-4B87-ADF1-A28A97D28BAA - ac9076a724e35ad"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HabitTracker.TodoFastCreatViewController.textViewDidBeginEditing(__C.UITextView) -&gt; ()"
-                  moduleName = "HabitTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shiyanpei/Downloads/pleaseGod/HabitTrackerApp3/HabitTracker/HabitTracker/Tasks/TodoFastCreation/TodoFastCreatViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "293"
-                  endingLineNumber = "293"
-                  offsetFromSymbolStart = "540">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

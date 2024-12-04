@@ -121,7 +121,7 @@ struct inputFieldPrototype : View {
                 .focused($isFocused)
             Text(" ")
         }
-        .innerShadow(using: RoundedRectangle(cornerRadius: 10), color: .black.opacity(0.3),width: 2, blur: 2)
+        .innerShadow(using: RoundedRectangle(cornerRadius: 10), color: .black.opacity(0.15),width: 1.5, blur: 1.5)
         .onTapGesture {
             isFocused = true
         }

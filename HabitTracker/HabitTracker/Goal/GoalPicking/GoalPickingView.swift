@@ -42,6 +42,7 @@ struct TaskGoalPickingSheetView: View {
                     ToolbarItemGroup(placement: .topBarLeading) {
                         
                         HStack {
+                            
                             Group {
                                 Text("Goal:")
                                 //.foregroundStyle(Color.primary.lighter(by: 32))
@@ -126,41 +127,63 @@ fileprivate struct GoalPickingListView: View {
     let mode: GoalPickingMode
     
     var body: some View {
-        Group {
-            if !isSearchFocused {
-                GoalPickingPageView(mode: mode, viewModel: viewModel)
-            } else {
-                ScrollView {
-                    //Not searching
-                    
-                    LazyVStack {
-                        ForEach(viewModel.allGoals, id: \.id) { goalNode in
-                            let x = print(goalNode.id)
-                            if goalNode.getSearchKeyWord().contains(searchText.lowercased()), let goalModel = goalNode as? GoalModel  {
-                                Button {
-                                    
-                                    withAnimation {
-                                        //isSearchFocused = false
-                                        //searchText = ""
-                                        viewModel.commitPick(goal: goalModel, mode: mode)
-                                        presentPickedMessage(goalName: goalModel.name)
+        VStack {
+            HStack {
+                // Custom search bar
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray.opacity(0.7))
+                    TextField("Search goals", text: $searchText)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .focused($isSearchFocused)
+                }
+                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
+                .background(Color(.systemBackground).opacity(0.5))
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                )
+                
+                // Cancel button
+                if isSearchFocused {
+                    Button("Cancel") {
+                        searchText = ""
+                        isSearchFocused = false
+                    }
+                    .foregroundColor(.blue)
+                    .transition(.move(edge: .trailing).combined(with: .opacity))
+                }
+            }
+            .padding(.horizontal)
+            .animation(.default, value: isSearchFocused)
+
+            Group {
+                if !isSearchFocused {
+                    GoalPickingPageView(mode: mode, viewModel: viewModel)
+                } else {
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(viewModel.allGoals, id: \.id) { goalNode in
+                                if goalNode.getSearchKeyWord().contains(searchText.lowercased()), let goalModel = goalNode as? GoalModel  {
+                                    Button {
+                                        withAnimation {
+                                            viewModel.commitPick(goal: goalModel, mode: mode)
+                                            presentPickedMessage(goalName: goalModel.name)
+                                        }
+                                    } label: {
+                                        GoalPickingSearchRowView(viewModel: viewModel, goal: goalModel)
                                     }
-                                } label: {
-                                    GoalPickingSearchRowView(viewModel: viewModel, goal: goalModel)
+                                    .buttonStyle(SearchRowButtonStyle())
+                                    .padding(.horizontal, 16)
                                 }
-                                .buttonStyle(SearchRowButtonStyle())
-                                .padding(.horizontal, 16)
                             }
                         }
-                        
                     }
-                    
                 }
-                
             }
-            
         }
-        .searchable(text: $searchText, placement: .toolbar)
         .onChangeCustom(of: searchText) {
             print("the search: \(searchText)")
         }

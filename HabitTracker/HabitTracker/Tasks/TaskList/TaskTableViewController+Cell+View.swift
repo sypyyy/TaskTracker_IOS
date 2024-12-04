@@ -664,6 +664,7 @@ extension TaskTableViewController {
         taskTableTopConstraint?.addObserver(self, forKeyPath: "constant", options: [.old, .new], context: nil)
 
     }
+
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "constant", let newConstant = change?[.newKey] as? CGFloat {
             // Handle the content offset change

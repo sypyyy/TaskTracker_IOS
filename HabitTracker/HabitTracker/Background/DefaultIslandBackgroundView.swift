@@ -161,8 +161,9 @@ struct DefaultIslandBackgroundView: View {
                             let height = 130 * IslandHeightFraction
                             let width = height * (283 / 130.0)
                             let rect = CGRect(x:0, y:0, width: width, height: height).insetBy(dx: 0, dy: 0)
+                            let offY: CGFloat = size.height + 54 - IslandHeightOffSet + Double(IslandHeightFraction - 1.0) * 54
                             var context = context
-                            context.translateBy(x: 0 , y: size.height + 54 - IslandHeightOffSet + (IslandHeightFraction - 1.0) * 54) // ???????????????
+                            context.translateBy(x: 0 , y: offY) // ???????????????
                             context.fill(IslandShape().path(in: rect), with: GraphicsContext.Shading.color(DefaultIslandBackgroundView.islandBottom))
                             
                         }
@@ -408,7 +409,7 @@ struct DefaultIslandBackgroundView: View {
                                 let width = height * (288 / 42.54)
                                 let rect = CGRect(x:0, y:0, width: width, height: height).insetBy(dx: 0, dy: 0)
                                 var context = context
-                                context.translateBy(x: 0 , y: size.height + 103  - IslandHeightOffSet + (IslandHeightFraction - 1.0) * (103) )
+                                context.translateBy(x: 0 , y: size.height + 103  - IslandHeightOffSet + (IslandHeightFraction - 1.0) * Double(103) )
                                 context.fill(WhiteWave().path(in: rect, x: x, y: y), with: GraphicsContext.Shading.color(DefaultIslandBackgroundView.wave))
                                 
                             }

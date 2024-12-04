@@ -30,6 +30,24 @@ struct TabView_Wrapper: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIViewController
 }
 
+struct iOS18_TabView_Wrapper: UIViewControllerRepresentable {
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        return iOS18_tab_controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        //uiViewController.view.isHidden = HabitTrackerViewModel.shared.tabIndex != .initial
+        //tabView_hostingController.present(initView_hostingController, animated: true)
+    }
+    
+    static func dismantleUIViewController(_ uiViewController: UIViewController, coordinator: ()) {
+        //tabView_hostingController.view.isHidden = true
+    }
+    
+    typealias UIViewControllerType = UIViewController
+}
+
 
 
 struct InitView_Wrapper: UIViewControllerRepresentable {

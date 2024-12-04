@@ -5,6 +5,8 @@
 //  Created by 施炎培 on 2024/7/22.
 //
 
+// 
+
 import SwiftUI
 
 struct GoalCreationView: View {
@@ -20,6 +22,7 @@ struct GoalCreationView: View {
                             Text("Goal")
                         }
                         inputFieldPrototype(title: "", text: $viewModel.goalName)
+                            //.shadow(color: Color.black.opacity(12), radius: 2, x: 0, y: 2) // Adjust these values
                     }
                     
                     FormSection {

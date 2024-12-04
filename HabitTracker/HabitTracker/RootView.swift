@@ -23,11 +23,18 @@ let backgroundGradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 12
         let res = UITabBarController()
         
         res.setViewControllers([goalView_hostingController, taskView_hostingController, checkInView_hostingController, statisticalView_hostingNavigationController,
-                                settingView_hostingController], animated: true)
+                                settingView_hostingController], animated: false)
         res.selectedIndex = 0
         res.tabBar.isHidden = true
         return res
     } ()
+    @MainActor
+let iOS18_tab_controller = iOS18_TabViewController(views: [AnyView(GoalView()),
+                                                         AnyView(InitView()),
+                                                         AnyView(Text("fjkds")),
+                                                         AnyView(StatisticalView()),
+                                                         AnyView(SettingView()),
+                                                        ])
 
     let goalView = GoalView()
     @MainActor
@@ -96,6 +103,7 @@ struct RootView: View {
     @State private var tabIndex: AppTabShowType = .goals {
         
         didSet {
+            print("ddidSET!!!!!!!")
             if tabIndex == .goals {
                 tabView_hostingController.selectedIndex = 0
             }
@@ -166,17 +174,23 @@ struct RootView: View {
         
         ZStack {
             ZStack{
-                DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg).drawingGroup().ignoresSafeArea()
-                    //.blur(radius: tabIndex != .checkIn ? 10 : 0.0, opaque: true).animation(.easeIn(duration: 0.2), value: tabIndex)
-                //VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().background(.white.opacity(0.2))
-                    
-                //VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().background(.ultraThinMaterial).opacity(tabIndex != .checkIn ? 1.0 : 0.0).animation(.easeIn(duration: 0.2), value: tabIndex).saturation(1.8)
+                DefaultIslandBackgroundView(tabIndex: $tabIndex, zoom: $zoomBg)
+                    .ignoresSafeArea()
+                    //.drawingGroup()
+            
                 
                 VStack{}.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().background(.regularMaterial).opacity(tabIndex == .statistical ? 1.0 : 0.0).animation(.easeIn(duration: 0.2), value: tabIndex)
                 
+                if #available(iOS 18, *) {
+                    
+                    // Content Area
+                    iOS18_TabView_Wrapper()
+                    .ignoresSafeArea()
+                } else {
+                    TabView_Wrapper().ignoresSafeArea()
+                }
                 
                 
-                TabView_Wrapper().ignoresSafeArea()
                 //.animation(.easeInOut(duration: 0.3), value: tabIndex)
                 
                 VStack(spacing: 0) {
@@ -285,14 +299,23 @@ struct RootView: View {
 
 extension RootView {
     func hideCurrentVCAndShowNext(target: AppTabShowType) {
+        if #available(iOS 18, *) {
+            iOS18_tab_controller.setTabIndex(target.rawValue)
+            tabIndex = target
+            return
+        }
+        
         if tabIndex == target {
             return
         }
         switch tabIndex {
         case .goals:
+            
             goalView_hostingController.view.transitionView(hidden: true, completion: {
                 tabIndex = target
             })
+             
+            
         case .habits:
             taskView_hostingController.view.transitionView(hidden: true, completion: {
                 tabIndex = target
@@ -312,6 +335,7 @@ extension RootView {
             
             
         }
+         
     }
 }
 
