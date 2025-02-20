@@ -104,9 +104,6 @@
 		2FB317062A117EB300B0D7DE /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB317052A117EB300B0D7DE /* MasterViewModel.swift */; };
 		2FB384212A1692CC00822E46 /* TestAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB384202A1692CC00822E46 /* TestAnimation.swift */; };
 		2FB67A832BBDA4AA003D9C71 /* TreeNodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB67A822BBDA4AA003D9C71 /* TreeNodeProtocol.swift */; };
-		2FB67A852BC2D97D003D9C71 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB67A842BC2D97D003D9C71 /* Folder.swift */; };
-		2FB67A8A2BC2DA54003D9C71 /* Folder+List_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB67A892BC2DA54003D9C71 /* Folder+List_Model.swift */; };
-		2FB67A8C2BCBBF92003D9C71 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB67A8B2BCBBF92003D9C71 /* List.swift */; };
 		2FB67A8F2BCC254E003D9C71 /* TreeBasedTableViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB67A8E2BCC254E003D9C71 /* TreeBasedTableViewControllerProtocol.swift */; };
 		2FB67A912BE66C0C003D9C71 /* SideMenuDefaultRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB67A902BE66C0C003D9C71 /* SideMenuDefaultRows.swift */; };
 		2FBC52EA2A1468DF00C4992E /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBC52E92A1468DF00C4992E /* ViewExtensions.swift */; };
@@ -253,9 +250,6 @@
 		2FB317052A117EB300B0D7DE /* MasterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewModel.swift; sourceTree = "<group>"; };
 		2FB384202A1692CC00822E46 /* TestAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAnimation.swift; sourceTree = "<group>"; };
 		2FB67A822BBDA4AA003D9C71 /* TreeNodeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNodeProtocol.swift; sourceTree = "<group>"; };
-		2FB67A842BC2D97D003D9C71 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
-		2FB67A892BC2DA54003D9C71 /* Folder+List_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+List_Model.swift"; sourceTree = "<group>"; };
-		2FB67A8B2BCBBF92003D9C71 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		2FB67A8E2BCC254E003D9C71 /* TreeBasedTableViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeBasedTableViewControllerProtocol.swift; sourceTree = "<group>"; };
 		2FB67A902BE66C0C003D9C71 /* SideMenuDefaultRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuDefaultRows.swift; sourceTree = "<group>"; };
 		2FBC52E92A1468DF00C4992E /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -665,7 +659,6 @@
 			children = (
 				2FC79D002C04D1F6009800C6 /* TodoPriority.swift */,
 				2F5F9A762B37D7D300CBCFEF /* Habit+Todo+Time_Models.swift */,
-				2FB67A892BC2DA54003D9C71 /* Folder+List_Model.swift */,
 				2F373BE22C25DCD500E6C370 /* Goal_Models.swift */,
 				2F373BE42C28763600E6C370 /* TreeNodeSubClassInfo.swift */,
 				2F3B83C52C50F0A200BCDE01 /* WeekMonthYear.swift */,
@@ -759,8 +752,6 @@
 				2F70F27C2A5467AC002C4A17 /* HabitRecord.swift */,
 				2F5F9A782B3884DA00CBCFEF /* Todo.swift */,
 				2F5D9DA62B6F755000399975 /* Goals.swift */,
-				2FB67A842BC2D97D003D9C71 /* Folder.swift */,
-				2FB67A8B2BCBBF92003D9C71 /* List.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -923,7 +914,6 @@
 				2F7381682B41AE20000E767A /* CreatHabitForm.swift in Sources */,
 				2F9141B42A837DE100E53509 /* ViewControllerWrapper.swift in Sources */,
 				2F373BE52C28763700E6C370 /* TreeNodeSubClassInfo.swift in Sources */,
-				2FB67A852BC2D97D003D9C71 /* Folder.swift in Sources */,
 				2F3B83CB2C512DDD00BCDE01 /* SettingViewModel.swift in Sources */,
 				2F373BD82C2043AC00E6C370 /* SideMenuRowView.swift in Sources */,
 				2FAFDC412A86787200AFD31E /* CustomSegmentedControl.swift in Sources */,
@@ -933,7 +923,6 @@
 				2F5CC1B42B88A7C50032F09B /* TaskViewSegmentedControl.swift in Sources */,
 				2F5298FF29F20E0A0018B8CA /* HabitTrackerApp.swift in Sources */,
 				2F6B03A42B921BFD00974518 /* ContainerViewController.swift in Sources */,
-				2FB67A8C2BCBBF92003D9C71 /* List.swift in Sources */,
 				2FEA90E62B65734C00B45650 /* ImageResources.swift in Sources */,
 				2F73816B2B41B649000E767A /* CreatTodoForm.swift in Sources */,
 				2F4C395C2D19DD9800E17904 /* CreateNewOptionPopup.swift in Sources */,
@@ -968,7 +957,6 @@
 				2F3936B62A5A6B4E0092264E /* HabitStatisticFrequencyGraph.swift in Sources */,
 				2F177BA82BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift in Sources */,
 				2FB67A8F2BCC254E003D9C71 /* TreeBasedTableViewControllerProtocol.swift in Sources */,
-				2FB67A8A2BC2DA54003D9C71 /* Folder+List_Model.swift in Sources */,
 				2F39E0712A84C9C500161B23 /* UIView_Extension.swift in Sources */,
 				2FDAFFED2A0CCD75002AEA85 /* PersistenceController.swift in Sources */,
 				2FC79CF42BF25642009800C6 /* CustomPresentationController.swift in Sources */,

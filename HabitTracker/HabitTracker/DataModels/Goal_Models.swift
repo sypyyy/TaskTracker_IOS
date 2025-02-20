@@ -26,7 +26,7 @@ class GoalModel: AnyTreeNode {
         self.isFinished = isFinished
         self.createDate = createDate
         self.isRoot = isRoot
-        super.init(id: id, children: [], isExpanded: false, parent: nil, level: 0, originalType: TreeNodeSubclassInfo.sideMenuRow(info: .Folder(id: id)), orderIdx: 0)
+        super.init(id: id, children: [], isExpanded: false, parent: nil, level: 0, originalType: TreeNodeSubclassInfo.goal, orderIdx: 0)
     }
     
     

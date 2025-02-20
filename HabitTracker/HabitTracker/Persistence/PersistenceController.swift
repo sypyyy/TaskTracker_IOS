@@ -16,8 +16,7 @@ class PersistenceController {
         var habits = result.getAllHabits()
         var todos = result.getAllTodos()
         var projects = result.getAllGoals()
-        var folders = result.getAllFolders()
-        var lists = result.getAllLists()
+        
         
         for habit in habits {
             viewContext.delete(habit)
@@ -31,33 +30,9 @@ class PersistenceController {
             viewContext.delete(project)
         }
         
-        for folder in folders {
-            viewContext.delete(folder)
-        }
-        
-        for list in lists {
-            viewContext.delete(list)
-        }
-        
+       
         saveChanges(viewContext: viewContext)
-        
-        for i in 1...5 {
-            if(i == 1) {
-                let testFolder = FolderModel(name: "Work", id: UUID().uuidString, children: [], isExpanded: false, parent: nil, level: 0, orderIdx: i)
-                let parentID = result.createFolder(dataModel: testFolder)
                 
-                /*
-                result.addFolderToParent(parentID: parentID, childID: childId)
-                 */
-            } else if(i == 2) {
-                let testFolder = FolderModel(name: "Entertainment", id: UUID().uuidString, children: [], isExpanded: false, parent: nil, level: 0, orderIdx: i)
-                result.createFolder(dataModel: testFolder)
-            } else if(i == 3) {
-                let testFolder = FolderModel(name: "Workout", id: UUID().uuidString, children: [], isExpanded: false, parent: nil, level: 0, orderIdx: i)
-                result.createFolder(dataModel: testFolder)
-            }
-        }
-        
         for i in 1...5 {
             if(i == 1) {
                 let testTodo = TodoModel()

@@ -5,8 +5,7 @@ import SwiftUI
 
 enum SideMenuRowInfo: Equatable {
     case defaultRow(SideMenuDefaultRowType)
-    case Folder(id: String)
-    case List(id: String)
+  
     case CustomFilter(id: String)
     case Label(id: String)
 }
@@ -51,14 +50,7 @@ class SideMenuViewController: UIViewController {
         defaultSideMenuRows.forEach {node in
             dummyRootNode.addChild(node)
         }
-        //Put folders in
-        let rootFolders = persistenceController.getAllRootFolders()
-        let rootLists = persistenceController.getAllRootLists()
-        dummyRootNode.addChildren(rootFolders.map{ folder in
-            FolderModel(folder: folder, parent: dummyRootNode)
-        } + rootLists.map{ list in
-            ListModel(list: list, parent: dummyRootNode)
-        })
+        
         for node in dummyRootNode.children {
             traverse(node: node)
         }

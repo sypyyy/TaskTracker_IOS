@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Folder" representedClassName="Folder" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="orderIdx" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="taskList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskList" inverseName="parentFolder" inverseEntity="TaskList"/>
-    </entity>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24B83" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="class">
         <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="String"/>
@@ -58,7 +51,6 @@
         <attribute name="stoppedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="habits" inverseEntity="Goal"/>
-        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaskList" inverseName="habits" inverseEntity="TaskList"/>
     </entity>
     <entity name="HabitRecord" representedClassName="HabitRecord" syncable="YES" codeGenerationType="class">
         <attribute name="cycle" optional="YES" attributeType="String"/>
@@ -95,15 +87,6 @@
             <fetchIndexElement property="date" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <entity name="TaskList" representedClassName="TaskList" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="orderIdx" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="habits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Habit" inverseName="list" inverseEntity="Habit"/>
-        <relationship name="parentFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="taskList" inverseEntity="Folder"/>
-        <relationship name="todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Todo" inverseName="list" inverseEntity="Todo"/>
-    </entity>
     <entity name="Todo" representedClassName="Todo" syncable="YES" codeGenerationType="class">
         <attribute name="completeDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -120,7 +103,6 @@
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="subTasks" optional="YES" attributeType="String"/>
         <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="todos" inverseEntity="Goal"/>
-        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaskList" inverseName="todos" inverseEntity="TaskList"/>
         <fetchIndex name="byStartDate">
             <fetchIndexElement property="startDate" type="Binary" order="ascending"/>
         </fetchIndex>
