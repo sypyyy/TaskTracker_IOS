@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct InitView: View {
-    @State var shown = true
+    @State var shown = false
     var body: some View {
         VStack(spacing: 0) {
-            DateSwipeBar().offset(x: 0, y: shown ? 0 : 20)
+            DateSwipeBar().offset(x: 0, y: shown ? 0 : -20)
                 .opacity(shown ? 1.0 : 0.3)
             TaskListView().offset(x: 0, y: shown ? 0 : 50)
                 .opacity(shown ? 1.0 : 0.3)
             Spacer().frame(width:300, height: TAB_BAR_HEIGHT)
         }.onAppear {
             //For now let's don't use this animation
-            //shown = true
+            shown = true
         }
         .ignoresSafeArea(edges: .bottom)
-        .animation(.default, value: shown)
+        .animation(.spring(), value: shown)
     }
 }
 

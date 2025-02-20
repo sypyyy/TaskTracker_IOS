@@ -37,6 +37,15 @@ struct CreatTaskForm: View {
         BottomSheetView{
             ZStack{
                 VStack{
+                    MeasuredButton(action: {frame in
+                        let view = CreateNewOptionPopup()
+                        print("source frame\(frame)")
+                        SwiftUIGlobalPopupManager.shared.showPopup(view: AnyView(view), sourceFrame: frame, center: false)
+                    }) {
+                        Image(systemName: "plus").navBarSystemImageButtonModifier()
+                            
+                    
+                    }
                     VStack{
                         RoundedRectangle(cornerRadius: 5)
                             .frame(width:60,height:6).padding(.top, 12)

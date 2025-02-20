@@ -90,8 +90,6 @@ class TaskModel: AnyTreeNode {
         }
         super.init(id: taskId, children: [], isExpanded: false, parent: nil, level: levelAsTreeNode, originalType: taskType == .habit ? TreeNodeSubclassInfo.habit : .todo, orderIdx: 0)
     }
-    
-    
 }
 
 enum HabitType: String {

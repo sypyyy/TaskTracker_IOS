@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TodoEditOrCreateNavBarView: View {
+    weak var todoCreatController: TodoFastCreatViewController?
     @State var formStyle: FormStyle = FormStyle()
     let isCreating: Bool = true
     static let HEIGHT: CGFloat = 44
@@ -24,6 +25,7 @@ struct TodoEditOrCreateNavBarView: View {
                 Spacer()
                 
                 Button {
+                    todoCreatController?.saveNewTodo()
                     BottomSheetViewController.shared.hide()
                 } label: {
                     Text("Save")

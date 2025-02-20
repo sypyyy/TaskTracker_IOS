@@ -108,26 +108,3 @@ extension ContainerViewController {
     }
 }
 
-extension ContainerViewController {
-    /*
-    func menuButtonTapped() {
-        sideMenuViewController.show()
-    }
-
-    func itemSelected(item: SideMenuTappedActions) {
-        switch item {
-        case let .embed(viewController):
-            updateRootViewController(viewController)
-            sideMenuViewController.hide()
-        case let .push(viewController):
-            sideMenuViewController.hide()
-            navigator.pushViewController(viewController, animated: true)
-        case let .modal(viewController):
-            sideMenuViewController.hide()
-            navigator.present(viewController, animated: true, completion: nil)
-        case let .callback(callback):
-            callback()
-        }
-    }
-     */
-}

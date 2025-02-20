@@ -8,7 +8,7 @@
 import Foundation
 
 enum TreeNodeSubclassInfo {
-    case goal, habit, todo, folder, label, taskList
+    case goal, habit, todo
     case sideMenuRow(info: SideMenuRowInfo)
     case goalRow(info: GoalRowInfo)
 }

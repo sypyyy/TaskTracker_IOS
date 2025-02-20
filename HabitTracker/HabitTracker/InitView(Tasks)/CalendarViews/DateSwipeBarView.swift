@@ -116,26 +116,32 @@ struct DateSwipeBar : View {
                     //.overlay(
                         //RoundedRectangle(cornerRadius: 15).stroke(.white.opacity(0.6), lineWidth: 1).offset(y :1).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 15))
                     //)
-                    .padding(.horizontal)
+                    .padding(.leading, 12)
+                    .padding(.trailing, 4)
                     Spacer()
-                    Text("\(getTopDateText(chosenDate))").font(.system(size: 16, weight: .heavy, design: .rounded))
+                    //Text("\(getTopDateText(chosenDate))").font(.system(size: 16, weight: .heavy, design: .rounded))
                     Spacer()
                     Button(action: {viewModel.showCreateForm.toggle()}) {
-                        Text("...").font(.system(size: 16, weight: .heavy, design: .rounded))
-                            .padding(.horizontal)
-                            .padding(.vertical, 6.0)
-                            .background(.regularMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
-                            .shadow(color: Color("Shadow"), radius: 2, x: 0, y: 0)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 15).stroke(.white.opacity(1), lineWidth: 1).offset(y :1).blur(radius: 0).mask(RoundedRectangle(cornerRadius: 15))
-                            )
-                            .padding(.horizontal)
+                        Image(systemName: "plus").navBarSystemImageButtonModifier()
+                            
+                    
                     }
+                    .padding(.horizontal,4)
                     .sheet(isPresented: $viewModel.showCreateForm){
                         //Text("just testing")
                         BottomSheetView{CreatTaskForm(viewModel: HabitViewModel.shared)}
                     }
+                    MeasuredButton(action: {frame in
+                        let view = CreateNewOptionPopup()
+                        print("source frame\(frame)")
+                        SwiftUIGlobalPopupManager.shared.showPopup(view: AnyView(view), sourceFrame: frame, center: false)
+                    }) {
+                        Image(systemName: "plus").navBarSystemImageButtonModifier()
+                            
+                    
+                    }
+                    .padding(.trailing, 12)
+                    
                 }.foregroundColor(.primary.opacity(0.6))
                 HStack{
                     if loaded {
@@ -183,10 +189,12 @@ struct DateSwipeBar : View {
                                         .onTapGesture {
                                             let x = date.startOfWeek()
                                             let y = date.endOfWeek()
+                                            /*
                                             print("dsdsddsede\(fmt5.string(from: x))")
                                             print("dsdsddsede\(fmt6.string(from: x))")
                                             print("dsdsddsede\(fmt5.string(from: y))")
                                             print("dsdsddsede\(fmt6.string(from: y))")
+                                             */
                                             //print("animation2")
                                             withAnimation(){
                                                 v.scrollTo(date, anchor: .center)

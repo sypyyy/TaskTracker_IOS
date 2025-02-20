@@ -148,13 +148,23 @@ struct MeasuredButton<Content: View>: View {
         .background(
             GeometryReader { geo in
                 Color.clear
-                    .preference(key: FramePreferenceKey.self,
-                                value: geo.frame(in: CoordinateSpace.global))
+                    //.preference(key: FramePreferenceKey.self, value: geo.frame(in: CoordinateSpace.global))
+                    .onAppear {
+                        self.frame = geo.frame(in: CoordinateSpace.global)
+                       
+                    }
+                    .onChangeCustom(of: geo.frame(in: .global)) {
+                        self.frame = geo.frame(in: CoordinateSpace.global)
+                    }
             }
         )
+        /*
         .onPreferenceChange(FramePreferenceKey.self) { value in
+           
             self.frame = value
+            
         }
+        */
     }
 }
 

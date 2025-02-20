@@ -155,17 +155,6 @@ struct HabitProgressModifyControlPanel: View {
     var size: PanelUseCase
     var habit: HabitModel
     let viewModel = HabitViewModel.shared
-    func caculateNewProgress(modifyType: ModifyType, number: Int) -> Int16 {
-        switch modifyType {
-        case .add:
-            return (habit.numberProgress ?? 0) + (Int16(number))
-        case .minus:
-            let res = (habit.numberProgress ?? 0) - (Int16(number))
-            return res < 0 ? 0 : res
-        case .set:
-            return (Int16(number))
-        }
-    }
     var body: some View {
         
         VStack {

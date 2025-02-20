@@ -26,6 +26,10 @@ enum AppTabShowType: Int {
     case goals = 0, habits = 1, checkIn = 2, statistical = 3, setting = 4
 }
 
+enum TaskTabFilterMode {
+    case inbox, schedule, habit, goals, labels
+}
+
 @MainActor
 class MasterViewModel: ObservableObject{
     @MainActor
@@ -46,9 +50,15 @@ class MasterViewModel: ObservableObject{
     private var showCreateHabitForm : Bool = false
     
     public var tabIndex: AppTabShowType = .habits
+    
+    public var currentTaskFilterMode: TaskTabFilterMode = .schedule
+    
     public var selectedDate: Date = Date()
     
+    //这个可能可以删除了
     public var tappedTaskId: String?
+    
+    
     
     @MainActor func selectTask(taskId: String) {
         if tappedTaskId == taskId {
@@ -61,6 +71,7 @@ class MasterViewModel: ObservableObject{
         self.didReceiveChangeMessage(msg: .taskSelected)
         
     }
+    
     //MARK: sort by
     public var sortBy = TaskTableSortBy.time
     
@@ -95,6 +106,7 @@ class MasterViewModel: ObservableObject{
         }
     }
 }
+
 
 //更新有关的Listener
 extension MasterViewModel {

@@ -7,7 +7,7 @@
 
 import CoreData
 
-
+@MainActor
 class PersistenceController {
     //static let shared = PersistenceController()
     static var preview: PersistenceController = {
@@ -61,7 +61,8 @@ class PersistenceController {
         for i in 1...5 {
             if(i == 1) {
                 let testTodo = TodoModel()
-                testTodo.name = "Basketball with Michael"
+                testTodo.name = "Ba"
+                testTodo.note = "dshjdhjsdhsejh后继乏人时候损人害己回复角色回复黄金时间恢复后是否会是如何发挥是如何发挥是封建社会冯绍峰会是如何发挥是人间繁华和杀人放火监护人杀鸡儆猴发损人害己粉红色减肥开始看就非常技术日渐繁荣时代就分开的借口"
                 testTodo.priority = .high
                 testTodo.executionTime = .from(area: .morning, startEnd: nil)
                 result.createTodo(dataModel: testTodo)

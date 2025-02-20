@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F066AB82D54304E00C98920 /* TodoCombinedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F066AB72D54304400C98920 /* TodoCombinedTextView.swift */; };
+		2F066ABA2D5430D300C98920 /* TodoAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F066AB92D5430C700C98920 /* TodoAccessoryView.swift */; };
+		2F066ABC2D5435BF00C98920 /* TodoMetaDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F066ABB2D5433F600C98920 /* TodoMetaDataView.swift */; };
 		2F0DE3232A57140F00E73D47 /* HabitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0DE3222A57140F00E73D47 /* HabitExtension.swift */; };
 		2F177BA82BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F177BA72BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift */; };
 		2F2493242A30D4590009E651 /* PickerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2493232A30D4590009E651 /* PickerPopupView.swift */; };
@@ -43,6 +46,8 @@
 		2F3B83D52C5BC6B700BCDE01 /* ParentGoalChooseSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3B83D42C5BC6B700BCDE01 /* ParentGoalChooseSectionView.swift */; };
 		2F3B83D72C5E28C400BCDE01 /* TestChartLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3B83D62C5E28C400BCDE01 /* TestChartLine.swift */; };
 		2F430E5B2A500665005DC88D /* HabitTrackerStatisticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F430E5A2A500665005DC88D /* HabitTrackerStatisticViewModel.swift */; };
+		2F4C39572D19DBFD00E17904 /* CreateOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4C39562D19DBE100E17904 /* CreateOptions.swift */; };
+		2F4C395C2D19DD9800E17904 /* CreateNewOptionPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4C395B2D19DD8900E17904 /* CreateNewOptionPopup.swift */; };
 		2F4F563C2A3EB33300EC144D /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F563B2A3EB33300EC144D /* HabitDetailView.swift */; };
 		2F511F2A2A0CCFD400AC5328 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F511F292A0CCFD400AC5328 /* TaskListView.swift */; };
 		2F5298FF29F20E0A0018B8CA /* HabitTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5298FE29F20E0A0018B8CA /* HabitTrackerApp.swift */; };
@@ -63,7 +68,6 @@
 		2F5D86A72BB84464004AA466 /* CheckItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D86A62BB84464004AA466 /* CheckItemModel.swift */; };
 		2F5D9DA52B6E8B2700399975 /* ProjectViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DA42B6E8B2700399975 /* ProjectViews.swift */; };
 		2F5D9DA72B6F755000399975 /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DA62B6F755000399975 /* Goals.swift */; };
-		2F5D9DA92B6FEA7400399975 /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DA82B6FEA7400399975 /* GoalViewModel.swift */; };
 		2F5D9DAB2B712B7E00399975 /* CreatProjectForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DAA2B712B7E00399975 /* CreatProjectForm.swift */; };
 		2F5D9DAE2B712C6100399975 /* CreatProjectFormContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DAD2B712C6100399975 /* CreatProjectFormContent.swift */; };
 		2F5D9DB32B77746300399975 /* SwiftUIGlobalPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D9DB22B77746300399975 /* SwiftUIGlobalPopupView.swift */; };
@@ -83,6 +87,7 @@
 		2F6B03A42B921BFD00974518 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03A12B921BFD00974518 /* ContainerViewController.swift */; };
 		2F6B03B22B921FC700974518 /* ContainerViewComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B03B12B921FC700974518 /* ContainerViewComposer.swift */; };
 		2F7072192A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7072182A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift */; };
+		2F70E5C32D66C28500D1E0F6 /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70E5C22D66C28400D1E0F6 /* GoalViewModel.swift */; };
 		2F70F27D2A5467AC002C4A17 /* HabitRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F27C2A5467AC002C4A17 /* HabitRecord.swift */; };
 		2F7381632B406B34000E767A /* TaskCardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7381622B406B34000E767A /* TaskCardViews.swift */; };
 		2F7381652B411ACB000E767A /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7381642B411ACB000E767A /* NumberExtensions.swift */; };
@@ -148,6 +153,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2F066AB72D54304400C98920 /* TodoCombinedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCombinedTextView.swift; sourceTree = "<group>"; };
+		2F066AB92D5430C700C98920 /* TodoAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAccessoryView.swift; sourceTree = "<group>"; };
+		2F066ABB2D5433F600C98920 /* TodoMetaDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoMetaDataView.swift; sourceTree = "<group>"; };
 		2F0DE3222A57140F00E73D47 /* HabitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitExtension.swift; sourceTree = "<group>"; };
 		2F177BA72BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCreationFormFullScreen.swift; sourceTree = "<group>"; };
 		2F2493232A30D4590009E651 /* PickerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerPopupView.swift; sourceTree = "<group>"; };
@@ -183,6 +191,8 @@
 		2F3B83D62C5E28C400BCDE01 /* TestChartLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartLine.swift; sourceTree = "<group>"; };
 		2F3DC6C32AED400B00C78BE6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		2F430E5A2A500665005DC88D /* HabitTrackerStatisticViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerStatisticViewModel.swift; sourceTree = "<group>"; };
+		2F4C39562D19DBE100E17904 /* CreateOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOptions.swift; sourceTree = "<group>"; };
+		2F4C395B2D19DD8900E17904 /* CreateNewOptionPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewOptionPopup.swift; sourceTree = "<group>"; };
 		2F4F563B2A3EB33300EC144D /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 		2F511F292A0CCFD400AC5328 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		2F5298FB29F20E0A0018B8CA /* HabitTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,7 +217,6 @@
 		2F5D86A62BB84464004AA466 /* CheckItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckItemModel.swift; sourceTree = "<group>"; };
 		2F5D9DA42B6E8B2700399975 /* ProjectViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViews.swift; sourceTree = "<group>"; };
 		2F5D9DA62B6F755000399975 /* Goals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
-		2F5D9DA82B6FEA7400399975 /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoalViewModel.swift; path = ../ViewModel/GoalViewModel.swift; sourceTree = "<group>"; };
 		2F5D9DAA2B712B7E00399975 /* CreatProjectForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatProjectForm.swift; sourceTree = "<group>"; };
 		2F5D9DAD2B712C6100399975 /* CreatProjectFormContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatProjectFormContent.swift; sourceTree = "<group>"; };
 		2F5D9DB22B77746300399975 /* SwiftUIGlobalPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIGlobalPopupView.swift; sourceTree = "<group>"; };
@@ -227,6 +236,7 @@
 		2F6B03A12B921BFD00974518 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		2F6B03B12B921FC700974518 /* ContainerViewComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewComposer.swift; sourceTree = "<group>"; };
 		2F7072182A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerStatisticalDetailViewModel.swift; sourceTree = "<group>"; };
+		2F70E5C22D66C28400D1E0F6 /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		2F70F27C2A5467AC002C4A17 /* HabitRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRecord.swift; sourceTree = "<group>"; };
 		2F7381622B406B34000E767A /* TaskCardViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardViews.swift; sourceTree = "<group>"; };
 		2F7381642B411ACB000E767A /* NumberExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
@@ -301,7 +311,7 @@
 			path = OldPopup;
 			sourceTree = "<group>";
 		};
-		2F32C76E2A10DD54008CDF7E /* ViewModel */ = {
+		2F32C76E2A10DD54008CDF7E /* TaskViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				2FB317052A117EB300B0D7DE /* MasterViewModel.swift */,
@@ -309,7 +319,7 @@
 				2F5F9A7A2B3C6CDE00CBCFEF /* TodoViewModel.swift */,
 				2FDA257629F47678005466AE /* HabitTrackerModel.swift */,
 			);
-			path = ViewModel;
+			path = TaskViewModel;
 			sourceTree = "<group>";
 		};
 		2F373BE12C258B4900E6C370 /* Deprecated */ = {
@@ -365,16 +375,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2F511F282A0CCE2900AC5328 /* Tasks */ = {
+		2F4C395A2D19DD2A00E17904 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				2F5D86A32BB80255004AA466 /* TodoFastCreation */,
+				2F4C39562D19DBE100E17904 /* CreateOptions.swift */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
+		2F4C395D2D19E1C400E17904 /* CreateNew */ = {
+			isa = PBXGroup;
+			children = (
+				2F4C395B2D19DD8900E17904 /* CreateNewOptionPopup.swift */,
+				2F4C395A2D19DD2A00E17904 /* DataModels */,
+			);
+			path = CreateNew;
+			sourceTree = "<group>";
+		};
+		2F511F282A0CCE2900AC5328 /* InitView(Tasks) */ = {
+			isa = PBXGroup;
+			children = (
+				2FFDF1692A7F830700027AFE /* InitView.swift */,
+				2F5D86A32BB80255004AA466 /* TodoCreationAndEdit */,
 				2FEA90E92B68003D00B45650 /* CalendarViews */,
 				2FCBC5C72B46BDD2003D946E /* TaskList */,
 				2F7381692B41B2FE000E767A /* HabitCreation */,
-				2FFDF1692A7F830700027AFE /* InitView.swift */,
 			);
-			path = Tasks;
+			path = "InitView(Tasks)";
 			sourceTree = "<group>";
 		};
 		2F5298F229F20E0A0018B8CA = {
@@ -411,13 +438,13 @@
 				2F52990029F20E0A0018B8CA /* RootView.swift */,
 				2F5D9DB12B77744B00399975 /* Popup */,
 				2F63AE222A1FC38400BFBD5F /* Shapes */,
-				2F32C76E2A10DD54008CDF7E /* ViewModel */,
+				2F32C76E2A10DD54008CDF7E /* TaskViewModel */,
 				2FDAFFAD2A0C9878002AEA85 /* Persistence */,
 				2FBC52E82A1468C700C4992E /* Utility */,
 				2FCA285D2A13758C006AAD9B /* Background */,
 				2F9141B22A837C6300E53509 /* ViewControllerWrapper */,
 				2F5D9DA32B6E8B1000399975 /* Goal */,
-				2F511F282A0CCE2900AC5328 /* Tasks */,
+				2F511F282A0CCE2900AC5328 /* InitView(Tasks) */,
 				2F3936B42A5A6B130092264E /* HabitStatisticViews */,
 				2F52990229F20E0E0018B8CA /* Assets.xcassets */,
 				2F52990729F20E0E0018B8CA /* Persistence.swift */,
@@ -470,18 +497,21 @@
 			path = BottomSheetViewController;
 			sourceTree = "<group>";
 		};
-		2F5D86A32BB80255004AA466 /* TodoFastCreation */ = {
+		2F5D86A32BB80255004AA466 /* TodoCreationAndEdit */ = {
 			isa = PBXGroup;
 			children = (
-				2FF757E42C68CA340025780B /* Deprecated */,
+				2F066ABB2D5433F600C98920 /* TodoMetaDataView.swift */,
+				2F066AB92D5430C700C98920 /* TodoAccessoryView.swift */,
 				2F5D869F2BB59821004AA466 /* TodoFastCreatViewController.swift */,
+				2F066AB72D54304400C98920 /* TodoCombinedTextView.swift */,
+				2FF757E42C68CA340025780B /* Deprecated */,
 				2FC79CFE2C04CCC9009800C6 /* PriorityPopupView.swift */,
 				2F373BC02C09898400E6C370 /* DateAndTimeSelectionView.swift */,
 				2F5D86A62BB84464004AA466 /* CheckItemModel.swift */,
 				2FF757E52C68CA540025780B /* TodoCheckListView.swift */,
 				2FF757E72C6E79DA0025780B /* TodoEditOrCreateNavBarView.swift */,
 			);
-			path = TodoFastCreation;
+			path = TodoCreationAndEdit;
 			sourceTree = "<group>";
 		};
 		2F5D9DA32B6E8B1000399975 /* Goal */ = {
@@ -491,7 +521,7 @@
 				2F3B83BE2C4EA7C400BCDE01 /* GoalCreation */,
 				2F373BE12C258B4900E6C370 /* Deprecated */,
 				2F373BDD2C258AB100E6C370 /* GoalView.swift */,
-				2F5D9DA82B6FEA7400399975 /* GoalViewModel.swift */,
+				2F70E5C22D66C28400D1E0F6 /* GoalViewModel.swift */,
 			);
 			path = Goal;
 			sourceTree = "<group>";
@@ -738,6 +768,7 @@
 		2FEA90E92B68003D00B45650 /* CalendarViews */ = {
 			isa = PBXGroup;
 			children = (
+				2F4C395D2D19E1C400E17904 /* CreateNew */,
 				2FEA90E72B66A7E300B45650 /* CustomCalendarView.swift */,
 				2FB317032A1021E800B0D7DE /* DateSwipeBarView.swift */,
 				2FEA90EA2B68006200B45650 /* WeeklyCalendarBar.swift */,
@@ -852,6 +883,7 @@
 				2F3B83C02C4EA7D600BCDE01 /* GoalCreationView.swift in Sources */,
 				2F373BD42C1FDCCE00E6C370 /* SideMenuViewModel.swift in Sources */,
 				2F373BDA2C23CE4700E6C370 /* Test.swift in Sources */,
+				2F066ABC2D5435BF00C98920 /* TodoMetaDataView.swift in Sources */,
 				2F7381632B406B34000E767A /* TaskCardViews.swift in Sources */,
 				2F6B03B22B921FC700974518 /* ContainerViewComposer.swift in Sources */,
 				2FE538CF2A88D34600A03C26 /* StatisticalDetailView.swift in Sources */,
@@ -873,6 +905,7 @@
 				2FB317062A117EB300B0D7DE /* MasterViewModel.swift in Sources */,
 				2FCA285F2A1375B9006AAD9B /* drawTest.swift in Sources */,
 				2F430E5B2A500665005DC88D /* HabitTrackerStatisticViewModel.swift in Sources */,
+				2F066AB82D54304E00C98920 /* TodoCombinedTextView.swift in Sources */,
 				2F52990B29F20E0E0018B8CA /* HabitTrackerDataModel.xcdatamodeld in Sources */,
 				2FC79CF82BF39CC1009800C6 /* FramePreferenceKey.swift in Sources */,
 				2F52990129F20E0A0018B8CA /* RootView.swift in Sources */,
@@ -903,14 +936,15 @@
 				2FB67A8C2BCBBF92003D9C71 /* List.swift in Sources */,
 				2FEA90E62B65734C00B45650 /* ImageResources.swift in Sources */,
 				2F73816B2B41B649000E767A /* CreatTodoForm.swift in Sources */,
+				2F4C395C2D19DD9800E17904 /* CreateNewOptionPopup.swift in Sources */,
 				2F3B83C42C50E57200BCDE01 /* GoalIntervalSelectionViews.swift in Sources */,
 				2F61D46C2A5888A200535919 /* timeExtension.swift in Sources */,
 				2F373BDC2C24778D00E6C370 /* Test2.swift in Sources */,
-				2F5D9DA92B6FEA7400399975 /* GoalViewModel.swift in Sources */,
 				2F5D86A02BB59821004AA466 /* TodoFastCreatViewController.swift in Sources */,
 				2F5D9DAE2B712C6100399975 /* CreatProjectFormContent.swift in Sources */,
 				2F32C7702A10DD93008CDF7E /* CreatTaskForm.swift in Sources */,
 				2F5D86982BB2779C004AA466 /* BottomSheetViewController.swift in Sources */,
+				2F70E5C32D66C28500D1E0F6 /* GoalViewModel.swift in Sources */,
 				2F5D9DB32B77746300399975 /* SwiftUIGlobalPopupView.swift in Sources */,
 				2FCB0FCC2A3EFDFE007DBA4E /* StopCheckPoint.swift in Sources */,
 				2FCBC5C92B46BE45003D946E /* TaskTableViewController+Cell+View.swift in Sources */,
@@ -930,6 +964,7 @@
 				2FFDF16A2A7F830700027AFE /* InitView.swift in Sources */,
 				2FC79CFF2C04CCC9009800C6 /* PriorityPopupView.swift in Sources */,
 				2F63AE242A1FC39600BFBD5F /* Shapes.swift in Sources */,
+				2F4C39572D19DBFD00E17904 /* CreateOptions.swift in Sources */,
 				2F3936B62A5A6B4E0092264E /* HabitStatisticFrequencyGraph.swift in Sources */,
 				2F177BA82BA0ABC6005A4704 /* TodoCreationFormFullScreen.swift in Sources */,
 				2FB67A8F2BCC254E003D9C71 /* TreeBasedTableViewControllerProtocol.swift in Sources */,
@@ -945,6 +980,7 @@
 				2FDA257729F47678005466AE /* HabitTrackerModel.swift in Sources */,
 				2F3B83C22C4EAA4000BCDE01 /* GoalCreationViewModel.swift in Sources */,
 				2F7072192A8B1BB30054702F /* HabitTrackerStatisticalDetailViewModel.swift in Sources */,
+				2F066ABA2D5430D300C98920 /* TodoAccessoryView.swift in Sources */,
 				2FBC52EA2A1468DF00C4992E /* ViewExtensions.swift in Sources */,
 				2F3B83D52C5BC6B700BCDE01 /* ParentGoalChooseSectionView.swift in Sources */,
 				2FC79D012C04D1F6009800C6 /* TodoPriority.swift in Sources */,

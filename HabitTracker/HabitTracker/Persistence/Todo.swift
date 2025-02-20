@@ -28,6 +28,14 @@ extension PersistenceController  {
         saveChanges(viewContext: viewContext)
         return .Success
     }
+    
+    func modifyTodo(dataModel: TodoModel) {
+        if let todo = getTodoById(id: dataModel.id) {
+            let viewContext = self.container.viewContext
+            dataModel.updateStorageModel(todo: todo)
+            saveChanges(viewContext: viewContext)
+        }
+    }
     /*
     private func getUniqueHabitID() -> Int64 {
         while true {
@@ -124,18 +132,23 @@ extension PersistenceController  {
 extension TodoModel {
     func convertToStorageModel(context: NSManagedObjectContext) -> Todo {
         let res = Todo.init(context: context)
-        res.name = name
-        res.startDate = startDate
-        res.hasReminder = hasReminder
-        res.reminderDate = reminderDate
-        res.expireDate = expireDate
-        res.note = note
-        res.parentTaskId = parentTaskId
-        res.subTasks = subTaskString
-        res.done = done
-        res.priority = Int16(priority.rawValue)
-        res.executionTime = executionTime
+        updateStorageModel(todo: res)
         return res
+    }
+    
+    func updateStorageModel(todo: Todo) {
+        todo.name = name
+        todo.startDate = startDate
+        todo.hasReminder = hasReminder
+        todo.reminderDate = reminderDate
+        todo.expireDate = expireDate
+        todo.note = note
+        todo.goal = goal?.storageModel
+        todo.parentTaskId = parentTaskId
+        todo.subTasks = subTaskString
+        todo.done = done
+        todo.priority = Int16(priority.rawValue)
+        todo.executionTime = executionTime
     }
 }
 

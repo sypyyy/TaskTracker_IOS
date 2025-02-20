@@ -72,7 +72,7 @@ extension HabitViewModel {
     }
     
     func getAllHabits() -> [Habit] {
-        if var all = allHabits {
+        if let all = allHabits {
             return all
         }
         let res = persistenceModel.getAllHabits()
@@ -98,6 +98,7 @@ extension HabitViewModel {
                 }
             }
         }
+        print("fsrjkjfrsjkfjrs\(res.count)")
         return res
     }
     
@@ -121,18 +122,31 @@ extension HabitViewModel {
                 //This check is because record also return dates of start of month and week.
                 if habit.cycle == .daily && records[habit.id]?.date?.compareToByDay(selectedDate) != 0 {
                     habit.numberProgress = 0
+                    habit.done = false
                     break
                 }
                 habit.numberProgress = records[habit.id]?.numberProgress ?? 0
-                habit.done = habit.numberProgress == habit.numberTarget
+                if let numberTarget = habit.numberTarget, let numberProgress = habit.numberProgress {
+                    habit.done = numberProgress >= numberTarget
+                }
+                    else {habit.done = false}
+                
+                
+                
             case .time:
                 habit.timeTarget = latestTarget?.timeTarget
                 if habit.cycle == .daily && records[habit.id]?.date?.compareToByDay(selectedDate) != 0 {
                     habit.timeProgress = "0:00"
+                    habit.done = false
                     break
                 }
                 habit.timeProgress = records[habit.id]?.timeProgress  ?? "0:00"
-                habit.done = habit.timeProgress?.timeToMinutes() == habit.timeTarget?.timeToMinutes()
+                if let timeTarget = habit.timeTarget, let timeProgress = habit.timeProgress {
+                    habit.done = timeProgress.timeToMinutes() >= timeTarget.timeToMinutes()
+                }
+                    else {habit.done = false}
+                
+                
             case .simple:
                 if habit.cycle == .daily && records[habit.id]?.date?.compareToByDay(selectedDate) != 0 {
                     habit.done = false
@@ -141,8 +155,12 @@ extension HabitViewModel {
                 habit.done = records[habit.id]?.done ?? false
                 
             }
-            print("\(records[habit.id])")
+            
+        
+            
         }
+        
+        
         
         return habits
     }

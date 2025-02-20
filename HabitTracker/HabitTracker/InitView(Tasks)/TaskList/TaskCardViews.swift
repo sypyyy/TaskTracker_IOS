@@ -76,6 +76,8 @@ struct TaskCardView: View {
 struct TaskCardDigestView: View {
     @State var isEditingProgressUsingPopup = false
     @StateObject var masterViewModel = MasterViewModel.shared
+    let habitViewModel = HabitViewModel.shared
+    let persistenceController = PersistenceController.preview
     let taskType: TaskType
     let habit: HabitModel
     let todo: TodoModel
@@ -86,9 +88,9 @@ struct TaskCardDigestView: View {
     func getTaskName() -> String {
         switch taskType {
         case .habit:
-            habit.name
+            return habit.name
         case .todo:
-            todo.name
+            return todo.name
         }
     }
     
@@ -109,15 +111,38 @@ struct TaskCardDigestView: View {
                 .fill(backgroundGradientStart.opacity(0.6))
                 .frame(width: 28, height: 28)
                 .onTapGesture {
-                    
+                    switch taskType {
+                    case .habit:
+                        guard let done = habit.done else {return}
+                        switch habit.type {
+                        case .number:
+                            let newProgress = done ? 0 : Int16(habit.numberTarget ?? 0)
+                            habitViewModel.createRecord(habitID: habit.id, habitType: .number, habitCycle: habit.cycle, numberProgress: newProgress)
+                            
+                        case .time:
+                            if let newProgress = done ? "0:00" : habit.timeTarget {
+                                habitViewModel.createRecord(habitID: habit.id, habitType: .time, habitCycle: habit.cycle, timeProgress: newProgress)
+                            }
+                        case .simple:
+                            habitViewModel.createRecord(habitID: habit.id, habitType: .simple, habitCycle: habit.cycle, done: !done)
+                        }
+                        
+                        break
+                    case .todo:
+                        todo.done.toggle()
+                        persistenceController.modifyTodo(dataModel: todo)
+                        masterViewModel.didReceiveChangeMessage(msg: .taskStateChanged)
+                    }
                 }
                 /*
                     .softOuterShadow(darkShadow: Color(uiColor: UIColor(red: 252 / 255, green: 236 / 255, blue: 232 / 255, alpha: 1)).darker(by: 8).opacity(1), lightShadow: Color(uiColor: UIColor(red: 252 / 255, green: 236 / 255, blue: 232 / 255, alpha: 1)).lighter(by: 8).opacity(1), offset: 1.2, radius: 1)
                 */
                 
                 
-                    
-                //CheckMarkShape().foregroundColor( .pink.opacity(0.5)).frame(width: 26, height: 21).offset(x: -1, y: 0).mask(Circle().frame(width: 28, height: 28))
+                if(isTaskDone()) {
+                    CheckMarkShape().foregroundColor( .pink.opacity(0.3)).frame(width: 24, height: 18).offset(x: -1, y: 0).mask(Circle().frame(width: 28, height: 28))
+                }
+                
             }
             VStack(spacing: 1) {
                 
